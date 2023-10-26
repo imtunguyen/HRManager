@@ -73,13 +73,17 @@ namespace HR_Manager
         {
             textBox2.PasswordChar = checkBox1.Checked ? '\0' : '*';
         }
+
+        private void labelForgot_Click(object sender, EventArgs e)
+        {
+            ForgotPassword forgotPassword = new ForgotPassword();
+            forgotPassword.ShowDialog();
+        }
         private void button1_Click(object sender, EventArgs e)
         {
             MainForm mainForm = new MainForm();
             mainForm.Show();
             this.Hide();
         }
-
-
     }
 }
