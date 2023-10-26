@@ -37,11 +37,10 @@
             label2 = new Label();
             textBox1 = new TextBox();
             label3 = new Label();
-            tableLayoutPanel3 = new TableLayoutPanel();
+            labelForgot = new Label();
             button1 = new Button();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
-            tableLayoutPanel3.SuspendLayout();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -81,19 +80,21 @@
             tableLayoutPanel2.Controls.Add(label2, 0, 1);
             tableLayoutPanel2.Controls.Add(textBox1, 0, 2);
             tableLayoutPanel2.Controls.Add(label3, 0, 3);
-            tableLayoutPanel2.Controls.Add(tableLayoutPanel3, 0, 6);
+            tableLayoutPanel2.Controls.Add(labelForgot, 0, 7);
+            tableLayoutPanel2.Controls.Add(button1, 0, 6);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(265, 2);
             tableLayoutPanel2.Margin = new Padding(3, 2, 3, 2);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
-            tableLayoutPanel2.RowCount = 7;
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 25.9788857F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 7.897581F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 8.32987F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 7.897581F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 8.32987F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 10.3915539F));
-            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 31.1746616F));
+            tableLayoutPanel2.RowCount = 8;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 23.4216652F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5856152F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 6.825128F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5856152F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 6.825128F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5856152F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5856152F));
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 12.5856152F));
             tableLayoutPanel2.Size = new Size(390, 446);
             tableLayoutPanel2.TabIndex = 2;
             // 
@@ -104,7 +105,7 @@
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label1.Location = new Point(3, 0);
             label1.Name = "label1";
-            label1.Size = new Size(180, 115);
+            label1.Size = new Size(180, 104);
             label1.TabIndex = 0;
             label1.Text = "Login Account";
             label1.TextAlign = ContentAlignment.MiddleLeft;
@@ -112,9 +113,9 @@
             // checkBox1
             // 
             checkBox1.Dock = DockStyle.Fill;
-            checkBox1.Location = new Point(3, 262);
+            checkBox1.Location = new Point(3, 279);
             checkBox1.Name = "checkBox1";
-            checkBox1.Size = new Size(307, 40);
+            checkBox1.Size = new Size(307, 50);
             checkBox1.TabIndex = 4;
             checkBox1.Text = "Show password";
             checkBox1.UseVisualStyleBackColor = true;
@@ -123,18 +124,18 @@
             // textBox2
             // 
             textBox2.Dock = DockStyle.Fill;
-            textBox2.Location = new Point(3, 225);
+            textBox2.Location = new Point(3, 249);
             textBox2.Multiline = true;
             textBox2.Name = "textBox2";
             textBox2.PasswordChar = '*';
-            textBox2.Size = new Size(307, 31);
+            textBox2.Size = new Size(307, 24);
             textBox2.TabIndex = 5;
             // 
             // label2
             // 
             label2.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label2.AutoSize = true;
-            label2.Location = new Point(3, 135);
+            label2.Location = new Point(3, 145);
             label2.Name = "label2";
             label2.Size = new Size(33, 15);
             label2.TabIndex = 1;
@@ -143,49 +144,42 @@
             // textBox1
             // 
             textBox1.Dock = DockStyle.Fill;
-            textBox1.Location = new Point(3, 153);
+            textBox1.Location = new Point(3, 163);
             textBox1.Multiline = true;
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(307, 31);
+            textBox1.Size = new Size(307, 24);
             textBox1.TabIndex = 5;
             // 
             // label3
             // 
             label3.Anchor = AnchorStyles.Bottom | AnchorStyles.Left;
             label3.AutoSize = true;
-            label3.Location = new Point(3, 207);
+            label3.Location = new Point(3, 231);
             label3.Name = "label3";
             label3.Size = new Size(60, 15);
             label3.TabIndex = 2;
             label3.Text = "Password:";
             // 
-            // tableLayoutPanel3
+            // labelForgot
             // 
-            tableLayoutPanel3.ColumnCount = 3;
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333321F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
-            tableLayoutPanel3.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.3333359F));
-            tableLayoutPanel3.Controls.Add(button1, 0, 0);
-            tableLayoutPanel3.Dock = DockStyle.Fill;
-            tableLayoutPanel3.Location = new Point(3, 307);
-            tableLayoutPanel3.Margin = new Padding(3, 2, 3, 2);
-            tableLayoutPanel3.Name = "tableLayoutPanel3";
-            tableLayoutPanel3.RowCount = 2;
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 46.71533F));
-            tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 53.28467F));
-            tableLayoutPanel3.Size = new Size(307, 137);
-            tableLayoutPanel3.TabIndex = 6;
+            labelForgot.Anchor = AnchorStyles.None;
+            labelForgot.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            labelForgot.Location = new Point(79, 403);
+            labelForgot.Name = "labelForgot";
+            labelForgot.Size = new Size(155, 27);
+            labelForgot.TabIndex = 11;
+            labelForgot.Text = "Forgot  Password?";
+            labelForgot.TextAlign = ContentAlignment.MiddleCenter;
+            labelForgot.Click += labelForgot_Click;
             // 
             // button1
             // 
+            button1.Anchor = AnchorStyles.None;
             button1.BackColor = Color.CornflowerBlue;
-            button1.Dock = DockStyle.Fill;
-            button1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button1.ForeColor = Color.Transparent;
-            button1.Location = new Point(3, 3);
+            button1.Location = new Point(100, 338);
             button1.Name = "button1";
-            button1.Size = new Size(96, 58);
-            button1.TabIndex = 9;
+            button1.Size = new Size(112, 44);
+            button1.TabIndex = 12;
             button1.Text = "LOGIN";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
@@ -201,7 +195,6 @@
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
-            tableLayoutPanel3.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -215,7 +208,7 @@
         private Label label2;
         private TextBox textBox1;
         private Label label3;
-        private TableLayoutPanel tableLayoutPanel3;
+        private Label labelForgot;
         private Button button1;
     }
 }
