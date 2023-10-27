@@ -15,6 +15,7 @@ namespace HR_Manager
         public MainForm()
         {
             InitializeComponent();
+            showUserControl(employee1);
         }
 
         private void MainForm_Load(object sender, EventArgs e)
@@ -24,24 +25,18 @@ namespace HR_Manager
 
         private void button1_Click(object sender, EventArgs e)
         {
-            department1.Visible = true;
-            employee1.Visible = false;
-            salary1.Visible = false;
+            showUserControl(payroll1);
 
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            department1.Visible = false;
-            employee1.Visible = true;
-            salary1.Visible = false;
+            showUserControl(employee1);
         }
 
         private void button3_Click(object sender, EventArgs e)
         {
-            department1.Visible = false;
-            employee1.Visible = false;
-            salary1.Visible = true;
+            showUserControl(dashboard1);
         }
 
         private void button4_Click(object sender, EventArgs e)
@@ -49,6 +44,25 @@ namespace HR_Manager
             this.Close();
             Login login = new Login();
             login.Visible = true;
+        }
+
+        private void HideAllUserControl()
+        {
+            payroll1.Visible = false;
+            recruitment1.Visible = false;
+            employee1.Visible = false;
+            dashboard1.Visible = false;
+        }
+
+        private void showUserControl(UserControl userControl)
+        {
+            HideAllUserControl();
+            userControl.Visible = true;
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            showUserControl(recruitment1);
         }
     }
 

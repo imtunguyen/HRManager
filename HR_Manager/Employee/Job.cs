@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace HR_Manager
 {
-    public partial class Salary : UserControl
+    public partial class Job : UserControl
     {
-        public Salary()
+        public Job()
         {
             InitializeComponent();
         }
