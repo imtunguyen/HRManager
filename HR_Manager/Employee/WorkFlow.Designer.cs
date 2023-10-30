@@ -1,6 +1,6 @@
 ﻿namespace HR_Manager.Employee
 {
-    partial class Recruitment
+    partial class WorkFlow
     {
         /// <summary> 
         /// Required designer variable.
@@ -30,12 +30,12 @@
         {
             SuspendLayout();
             // 
-            // Recruitment
+            // WorkFlow
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Name = "Recruitment";
-            Size = new Size(481, 428);
+            Name = "WorkFlow";
+            Size = new Size(416, 343);
             ResumeLayout(false);
         }
 

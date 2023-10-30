@@ -73,9 +73,39 @@ namespace HR_Manager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap department {
+            get {
+                object obj = ResourceManager.GetObject("department", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap employees {
             get {
                 object obj = ResourceManager.GetObject("employees", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap gallery {
+            get {
+                object obj = ResourceManager.GetObject("gallery", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap incorporation {
+            get {
+                object obj = ResourceManager.GetObject("incorporation", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -93,9 +123,9 @@ namespace HR_Manager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap recruitment {
+        internal static System.Drawing.Bitmap salary {
             get {
-                object obj = ResourceManager.GetObject("recruitment", resourceCulture);
+                object obj = ResourceManager.GetObject("salary", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
@@ -103,9 +133,9 @@ namespace HR_Manager.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
-        internal static System.Drawing.Bitmap salary {
+        internal static System.Drawing.Bitmap workflow {
             get {
-                object obj = ResourceManager.GetObject("salary", resourceCulture);
+                object obj = ResourceManager.GetObject("workflow", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

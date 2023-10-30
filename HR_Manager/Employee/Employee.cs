@@ -17,16 +17,20 @@ namespace HR_Manager.Employee
             InitializeComponent();
         }
 
-        private void btnSua_Click(object sender, EventArgs e)
-        {
-            UpdateEmployee updateEmployee = new UpdateEmployee();
-            updateEmployee.Show();
-        }
-
-        private void btnThem_Click(object sender, EventArgs e)
+        private void button1_Click(object sender, EventArgs e)
         {
             AddEmployee addEmployee = new AddEmployee();
-            addEmployee.Show();
+            addEmployee.ShowDialog();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void pictureBox1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -37,7 +37,6 @@ namespace HR_Manager
             employee1 = new Employee.Employee();
             dashboard1 = new DashBoard();
             payroll1 = new Payroll.Payroll();
-            recruitment1 = new Recruitment();
             tableLayoutPanel1 = new TableLayoutPanel();
             button5 = new Button();
             tableLayoutPanel1.SuspendLayout();
@@ -121,13 +120,6 @@ namespace HR_Manager
             payroll1.Size = new Size(1000, 600);
             payroll1.TabIndex = 3;
             // 
-            // recruitment1
-            // 
-            recruitment1.Location = new Point(206, 0);
-            recruitment1.Name = "recruitment1";
-            recruitment1.Size = new Size(1000, 600);
-            recruitment1.TabIndex = 3;
-            // 
             // tableLayoutPanel1
             // 
             tableLayoutPanel1.ColumnCount = 1;
@@ -152,13 +144,13 @@ namespace HR_Manager
             // 
             button5.Anchor = AnchorStyles.None;
             button5.BackColor = Color.White;
-            button5.Image = Properties.Resources.recruitment;
+            button5.Image = Properties.Resources.workflow;
             button5.ImageAlign = ContentAlignment.MiddleLeft;
             button5.Location = new Point(6, 199);
             button5.Name = "button5";
             button5.Size = new Size(188, 50);
             button5.TabIndex = 1;
-            button5.Text = "RECUITMENT";
+            button5.Text = "WORKFLOW";
             button5.UseVisualStyleBackColor = false;
             button5.Click += button5_Click;
             // 
@@ -170,7 +162,6 @@ namespace HR_Manager
             Controls.Add(tableLayoutPanel1);
             Controls.Add(employee1);
             Controls.Add(payroll1);
-            Controls.Add(recruitment1);
             Controls.Add(dashboard1);
             Name = "MainForm";
             Text = "Form1";
@@ -186,7 +177,6 @@ namespace HR_Manager
         private Button button4;
         private DashBoard dashboard1;
         private Employee.Employee employee1;
-        private Recruitment recruitment1;
         private HR_Manager.Payroll.Payroll payroll1;
         private TableLayoutPanel tableLayoutPanel1;
         private Button button5;

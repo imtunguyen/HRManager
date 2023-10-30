@@ -13,13 +13,15 @@ namespace DTO
         public int Skill_ID { get; set; }
         public int Level_ID { get; set; }
         public int Employee_ID { get; set; }
+        public string description { get; set; }
 
-        public Employee_Skills(int ID, int Skill_ID, int Level_ID, int Employee_ID)
+        public Employee_Skills(int ID, int Skill_ID, int Level_ID, string description, int Employee_ID)
         {
             this.ID = ID;
             this.Skill_ID = Skill_ID;
             this.Level_ID = Level_ID;
             this.Employee_ID = Employee_ID;
+            this.description = description;
         }
     }
 }

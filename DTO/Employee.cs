@@ -17,6 +17,8 @@ namespace DTO
         public int Phone { get; set; }
         public int Status { get; set; }
         public string Email { get; set; }
+        public string img_path { get; set; }
+        public float base_pay { get; set; }
 
         public Employee()
         {
@@ -24,7 +26,7 @@ namespace DTO
         }
 
         public Employee(int ID, string Name, string Gender, DateOnly Date_of_Birth, DateOnly Day_Joined, DateOnly Day_Left, int Phone,
-            string Email, int Status)
+            string Email, int Status, string img_path, float base_pay)
         {
             this.ID = ID;
             this.Name = Name;
@@ -35,6 +37,8 @@ namespace DTO
             this.Day_Joined = Day_Joined;
             this.Day_Left = Day_Left;
             this.Phone = Phone;
+            this.img_path = img_path;
+            this.base_pay = base_pay;
         }
     }
 }

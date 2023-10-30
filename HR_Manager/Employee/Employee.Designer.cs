@@ -29,34 +29,33 @@
         #endregion
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Employee));
             tabPage1 = new TabPage();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
-            btnXoa = new Button();
-            btnSua = new Button();
-            btnThem = new Button();
-            txtTimkiem = new TextBox();
-            btnTimkiem = new Button();
-            dataGridView1 = new DataGridView();
-            Column1 = new DataGridViewTextBoxColumn();
-            Column2 = new DataGridViewTextBoxColumn();
-            Column3 = new DataGridViewTextBoxColumn();
-            Column4 = new DataGridViewTextBoxColumn();
-            Column5 = new DataGridViewTextBoxColumn();
-            Column6 = new DataGridViewTextBoxColumn();
-            Column7 = new DataGridViewTextBoxColumn();
-            Column8 = new DataGridViewTextBoxColumn();
+            button1 = new Button();
+            textBox1 = new TextBox();
+            flowLayoutPanel1 = new FlowLayoutPanel();
+            panel4 = new Panel();
             tabControl1 = new TabControl();
             tabPage3 = new TabPage();
             department = new Department();
             tabPage2 = new TabPage();
+            pictureBox1 = new PictureBox();
+            button2 = new Button();
+            button3 = new Button();
+            label1 = new Label();
+            label2 = new Label();
+            label3 = new Label();
+            label4 = new Label();
+            label5 = new Label();
             tabPage1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            flowLayoutPanel1.SuspendLayout();
+            panel4.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage3.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
             // tabPage1
@@ -75,166 +74,78 @@
             tableLayoutPanel1.ColumnCount = 1;
             tableLayoutPanel1.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50F));
             tableLayoutPanel1.Controls.Add(tableLayoutPanel2, 0, 0);
-            tableLayoutPanel1.Controls.Add(dataGridView1, 0, 1);
+            tableLayoutPanel1.Controls.Add(flowLayoutPanel1, 0, 1);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(3, 3);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
             tableLayoutPanel1.RowCount = 2;
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 19.9646645F));
-            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 80.03534F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 12.769784F));
+            tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 87.23022F));
             tableLayoutPanel1.Size = new Size(986, 556);
             tableLayoutPanel1.TabIndex = 0;
             // 
             // tableLayoutPanel2
             // 
-            tableLayoutPanel2.ColumnCount = 5;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 50.625F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 49.375F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 104F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 567F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 117F));
-            tableLayoutPanel2.Controls.Add(btnXoa, 2, 0);
-            tableLayoutPanel2.Controls.Add(btnSua, 1, 0);
-            tableLayoutPanel2.Controls.Add(btnThem, 0, 0);
-            tableLayoutPanel2.Controls.Add(txtTimkiem, 3, 0);
-            tableLayoutPanel2.Controls.Add(btnTimkiem, 4, 0);
-            tableLayoutPanel2.Dock = DockStyle.Fill;
-            tableLayoutPanel2.Location = new Point(0, 0);
-            tableLayoutPanel2.Margin = new Padding(0);
+            tableLayoutPanel2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 31.44654F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 68.55346F));
+            tableLayoutPanel2.Controls.Add(button1, 0, 0);
+            tableLayoutPanel2.Controls.Add(textBox1, 1, 0);
+            tableLayoutPanel2.Location = new Point(665, 3);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
-            tableLayoutPanel2.Size = new Size(986, 111);
-            tableLayoutPanel2.TabIndex = 0;
+            tableLayoutPanel2.Size = new Size(318, 65);
+            tableLayoutPanel2.TabIndex = 2;
             // 
-            // btnXoa
+            // button1
             // 
-            btnXoa.BackColor = Color.White;
-            btnXoa.Dock = DockStyle.Fill;
-            btnXoa.FlatAppearance.BorderSize = 0;
-            btnXoa.FlatStyle = FlatStyle.Flat;
-            btnXoa.Image = (Image)resources.GetObject("btnXoa.Image");
-            btnXoa.Location = new Point(200, 3);
-            btnXoa.Name = "btnXoa";
-            btnXoa.Size = new Size(98, 105);
-            btnXoa.TabIndex = 4;
-            btnXoa.Text = "Xóa";
-            btnXoa.TextAlign = ContentAlignment.BottomCenter;
-            btnXoa.UseVisualStyleBackColor = false;
+            button1.BackColor = Color.White;
+            button1.Dock = DockStyle.Fill;
+            button1.Image = Properties.Resources.incorporation;
+            button1.Location = new Point(3, 3);
+            button1.Name = "button1";
+            button1.Size = new Size(94, 59);
+            button1.TabIndex = 0;
+            button1.TextAlign = ContentAlignment.MiddleRight;
+            button1.UseVisualStyleBackColor = false;
+            button1.Click += button1_Click;
             // 
-            // btnSua
+            // textBox1
             // 
-            btnSua.BackColor = Color.White;
-            btnSua.Dock = DockStyle.Fill;
-            btnSua.FlatAppearance.BorderSize = 0;
-            btnSua.FlatStyle = FlatStyle.Flat;
-            btnSua.Image = (Image)resources.GetObject("btnSua.Image");
-            btnSua.Location = new Point(103, 3);
-            btnSua.Name = "btnSua";
-            btnSua.Size = new Size(91, 105);
-            btnSua.TabIndex = 3;
-            btnSua.Text = "Sửa";
-            btnSua.TextAlign = ContentAlignment.BottomCenter;
-            btnSua.UseVisualStyleBackColor = false;
+            textBox1.Anchor = AnchorStyles.None;
+            textBox1.Location = new Point(118, 21);
+            textBox1.Name = "textBox1";
+            textBox1.Size = new Size(181, 23);
+            textBox1.TabIndex = 1;
+            textBox1.UseWaitCursor = true;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
-            // btnThem
+            // flowLayoutPanel1
             // 
-            btnThem.BackColor = Color.White;
-            btnThem.Dock = DockStyle.Fill;
-            btnThem.FlatAppearance.BorderSize = 0;
-            btnThem.FlatStyle = FlatStyle.Flat;
-            btnThem.Image = (Image)resources.GetObject("btnThem.Image");
-            btnThem.Location = new Point(3, 3);
-            btnThem.Name = "btnThem";
-            btnThem.Size = new Size(94, 105);
-            btnThem.TabIndex = 0;
-            btnThem.Text = "Thêm";
-            btnThem.TextAlign = ContentAlignment.BottomCenter;
-            btnThem.UseVisualStyleBackColor = false;
-            btnThem.Click += btnThem_Click;
+            flowLayoutPanel1.AutoScroll = true;
+            flowLayoutPanel1.Controls.Add(panel4);
+            flowLayoutPanel1.Dock = DockStyle.Fill;
+            flowLayoutPanel1.Location = new Point(3, 74);
+            flowLayoutPanel1.Name = "flowLayoutPanel1";
+            flowLayoutPanel1.Size = new Size(980, 479);
+            flowLayoutPanel1.TabIndex = 3;
             // 
-            // txtTimkiem
+            // panel4
             // 
-            txtTimkiem.Dock = DockStyle.Bottom;
-            txtTimkiem.Font = new Font("Segoe UI", 14.25F, FontStyle.Regular, GraphicsUnit.Point);
-            txtTimkiem.Location = new Point(304, 75);
-            txtTimkiem.Multiline = true;
-            txtTimkiem.Name = "txtTimkiem";
-            txtTimkiem.PlaceholderText = "Tìm kiếm thông tin ";
-            txtTimkiem.Size = new Size(561, 33);
-            txtTimkiem.TabIndex = 2;
-            // 
-            // btnTimkiem
-            // 
-            btnTimkiem.BackColor = Color.Silver;
-            btnTimkiem.Dock = DockStyle.Bottom;
-            btnTimkiem.FlatStyle = FlatStyle.Flat;
-            btnTimkiem.Location = new Point(871, 75);
-            btnTimkiem.Name = "btnTimkiem";
-            btnTimkiem.Size = new Size(112, 33);
-            btnTimkiem.TabIndex = 5;
-            btnTimkiem.Text = "Tìm kiếm";
-            btnTimkiem.UseVisualStyleBackColor = false;
-            // 
-            // dataGridView1
-            // 
-            dataGridView1.BackgroundColor = SystemColors.InactiveBorder;
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Columns.AddRange(new DataGridViewColumn[] { Column1, Column2, Column3, Column4, Column5, Column6, Column7, Column8 });
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(3, 114);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(980, 439);
-            dataGridView1.TabIndex = 1;
-            // 
-            // Column1
-            // 
-            Column1.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column1.HeaderText = "ID";
-            Column1.Name = "Column1";
-            // 
-            // Column2
-            // 
-            Column2.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column2.HeaderText = "Tên";
-            Column2.Name = "Column2";
-            // 
-            // Column3
-            // 
-            Column3.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column3.HeaderText = "Ngày Sinh";
-            Column3.Name = "Column3";
-            // 
-            // Column4
-            // 
-            Column4.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column4.HeaderText = "Giới Tính";
-            Column4.Name = "Column4";
-            // 
-            // Column5
-            // 
-            Column5.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column5.HeaderText = "Day Joined";
-            Column5.Name = "Column5";
-            // 
-            // Column6
-            // 
-            Column6.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column6.HeaderText = "Day Left";
-            Column6.Name = "Column6";
-            // 
-            // Column7
-            // 
-            Column7.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column7.HeaderText = "Phone";
-            Column7.Name = "Column7";
-            // 
-            // Column8
-            // 
-            Column8.AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-            Column8.HeaderText = "Email";
-            Column8.Name = "Column8";
+            panel4.Controls.Add(label5);
+            panel4.Controls.Add(label4);
+            panel4.Controls.Add(label3);
+            panel4.Controls.Add(label2);
+            panel4.Controls.Add(label1);
+            panel4.Controls.Add(button3);
+            panel4.Controls.Add(button2);
+            panel4.Controls.Add(pictureBox1);
+            panel4.Location = new Point(3, 3);
+            panel4.Name = "panel4";
+            panel4.Size = new Size(400, 219);
+            panel4.TabIndex = 1;
             // 
             // tabControl1
             // 
@@ -252,10 +163,10 @@
             // tabPage3
             // 
             tabPage3.Controls.Add(department);
-            tabPage3.Location = new Point(4, 24);
+            tabPage3.Location = new Point(4, 34);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(192, 72);
+            tabPage3.Size = new Size(992, 562);
             tabPage3.TabIndex = 5;
             tabPage3.Text = "Department";
             tabPage3.UseVisualStyleBackColor = true;
@@ -278,6 +189,79 @@
             tabPage2.Text = "Reporting";
             tabPage2.UseVisualStyleBackColor = true;
             // 
+            // pictureBox1
+            // 
+            pictureBox1.Image = Properties.Resources.gallery;
+            pictureBox1.Location = new Point(3, 3);
+            pictureBox1.Name = "pictureBox1";
+            pictureBox1.Size = new Size(113, 151);
+            pictureBox1.TabIndex = 0;
+            pictureBox1.TabStop = false;
+            pictureBox1.Click += pictureBox1_Click;
+            // 
+            // button2
+            // 
+            button2.Location = new Point(241, 193);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 1;
+            button2.Text = "button2";
+            button2.UseVisualStyleBackColor = true;
+            // 
+            // button3
+            // 
+            button3.Location = new Point(322, 193);
+            button3.Name = "button3";
+            button3.Size = new Size(75, 23);
+            button3.TabIndex = 2;
+            button3.Text = "button3";
+            button3.UseVisualStyleBackColor = true;
+            // 
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Location = new Point(228, 12);
+            label1.Name = "label1";
+            label1.Size = new Size(38, 15);
+            label1.TabIndex = 3;
+            label1.Text = "label1";
+            // 
+            // label2
+            // 
+            label2.AutoSize = true;
+            label2.Location = new Point(233, 71);
+            label2.Name = "label2";
+            label2.Size = new Size(38, 15);
+            label2.TabIndex = 4;
+            label2.Text = "label2";
+            // 
+            // label3
+            // 
+            label3.AutoSize = true;
+            label3.Location = new Point(228, 139);
+            label3.Name = "label3";
+            label3.Size = new Size(38, 15);
+            label3.TabIndex = 5;
+            label3.Text = "label3";
+            // 
+            // label4
+            // 
+            label4.AutoSize = true;
+            label4.Location = new Point(233, 102);
+            label4.Name = "label4";
+            label4.Size = new Size(38, 15);
+            label4.TabIndex = 6;
+            label4.Text = "label4";
+            // 
+            // label5
+            // 
+            label5.AutoSize = true;
+            label5.Location = new Point(228, 44);
+            label5.Name = "label5";
+            label5.Size = new Size(38, 15);
+            label5.TabIndex = 7;
+            label5.Text = "label5";
+            // 
             // Employee
             // 
             Controls.Add(tabControl1);
@@ -287,32 +271,33 @@
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            flowLayoutPanel1.ResumeLayout(false);
+            panel4.ResumeLayout(false);
+            panel4.PerformLayout();
             tabControl1.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             ResumeLayout(false);
         }
 
         private TabPage tabPage1;
         private TabControl tabControl1;
         private TableLayoutPanel tableLayoutPanel1;
-        private TableLayoutPanel tableLayoutPanel2;
-        private Button btnThem;
-        private TextBox txtTimkiem;
-        private Button btnXoa;
-        private Button btnSua;
-        private Button btnTimkiem;
-        private DataGridView dataGridView1;
-        private DataGridViewTextBoxColumn Column1;
-        private DataGridViewTextBoxColumn Column2;
-        private DataGridViewTextBoxColumn Column3;
-        private DataGridViewTextBoxColumn Column4;
-        private DataGridViewTextBoxColumn Column5;
-        private DataGridViewTextBoxColumn Column6;
-        private DataGridViewTextBoxColumn Column7;
-        private DataGridViewTextBoxColumn Column8;
         private TabPage tabPage3;
         private Department department;
         private TabPage tabPage2;
+        private TableLayoutPanel tableLayoutPanel2;
+        private Button button1;
+        private TextBox textBox1;
+        private FlowLayoutPanel flowLayoutPanel1;
+        private Panel panel4;
+        private PictureBox pictureBox1;
+        private Label label5;
+        private Label label4;
+        private Label label3;
+        private Label label2;
+        private Label label1;
+        private Button button3;
+        private Button button2;
     }
 }

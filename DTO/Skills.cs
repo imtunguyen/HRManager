@@ -11,11 +11,13 @@ namespace DTO
         public Skills() { }
         public int ID { get; set; }
         public string Skills_Name { get; set; }
+        public string description { get; set; }
 
-        public Skills(int ID, string Skills_Name)
+        public Skills(int ID, string Skills_Name, string description)
         {
-            this.ID= ID;
+            this.ID = ID;
             this.Skills_Name = Skills_Name;
+            this.description = description;
         }
     }
 }
