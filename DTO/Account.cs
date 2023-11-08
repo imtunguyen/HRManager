@@ -11,14 +11,14 @@ namespace DTO
         public string Username {  get; set; }
         public string Password { get; set; }
         public int Employee_ID { get; set; }
-        public DateOnly Create_Date { get; set; }
+        public DateTime Create_Date { get; set; }
 
         public Account()
         {
             
         }
 
-        public Account(string Username, string Password, DateOnly Create_Date, int Employee_ID)
+        public Account(string Username, string Password, DateTime Create_Date, int Employee_ID)
         {
             this.Username = Username;
             this.Password = Password;

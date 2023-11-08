@@ -33,12 +33,12 @@
             tableLayoutPanel2 = new TableLayoutPanel();
             label1 = new Label();
             checkBox1 = new CheckBox();
-            textBox2 = new TextBox();
+            txtPassword = new TextBox();
             label2 = new Label();
-            textBox1 = new TextBox();
+            txtUserName = new TextBox();
             label3 = new Label();
             labelForgot = new Label();
-            button1 = new Button();
+            btnLogin = new Button();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             SuspendLayout();
@@ -76,12 +76,12 @@
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 19.74359F));
             tableLayoutPanel2.Controls.Add(label1, 0, 0);
             tableLayoutPanel2.Controls.Add(checkBox1, 0, 5);
-            tableLayoutPanel2.Controls.Add(textBox2, 0, 4);
+            tableLayoutPanel2.Controls.Add(txtPassword, 0, 4);
             tableLayoutPanel2.Controls.Add(label2, 0, 1);
-            tableLayoutPanel2.Controls.Add(textBox1, 0, 2);
+            tableLayoutPanel2.Controls.Add(txtUserName, 0, 2);
             tableLayoutPanel2.Controls.Add(label3, 0, 3);
             tableLayoutPanel2.Controls.Add(labelForgot, 0, 7);
-            tableLayoutPanel2.Controls.Add(button1, 0, 6);
+            tableLayoutPanel2.Controls.Add(btnLogin, 0, 6);
             tableLayoutPanel2.Dock = DockStyle.Fill;
             tableLayoutPanel2.Location = new Point(265, 2);
             tableLayoutPanel2.Margin = new Padding(3, 2, 3, 2);
@@ -121,15 +121,15 @@
             checkBox1.UseVisualStyleBackColor = true;
             checkBox1.CheckedChanged += checkBox1_CheckedChanged;
             // 
-            // textBox2
+            // txtPassword
             // 
-            textBox2.Dock = DockStyle.Fill;
-            textBox2.Location = new Point(3, 249);
-            textBox2.Multiline = true;
-            textBox2.Name = "textBox2";
-            textBox2.PasswordChar = '*';
-            textBox2.Size = new Size(307, 24);
-            textBox2.TabIndex = 5;
+            txtPassword.Dock = DockStyle.Fill;
+            txtPassword.Location = new Point(3, 249);
+            txtPassword.Multiline = true;
+            txtPassword.Name = "txtPassword";
+            txtPassword.PasswordChar = '*';
+            txtPassword.Size = new Size(307, 24);
+            txtPassword.TabIndex = 5;
             // 
             // label2
             // 
@@ -141,14 +141,14 @@
             label2.TabIndex = 1;
             label2.Text = "User:";
             // 
-            // textBox1
+            // txtUserName
             // 
-            textBox1.Dock = DockStyle.Fill;
-            textBox1.Location = new Point(3, 163);
-            textBox1.Multiline = true;
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(307, 24);
-            textBox1.TabIndex = 5;
+            txtUserName.Dock = DockStyle.Fill;
+            txtUserName.Location = new Point(3, 163);
+            txtUserName.Multiline = true;
+            txtUserName.Name = "txtUserName";
+            txtUserName.Size = new Size(307, 24);
+            txtUserName.TabIndex = 5;
             // 
             // label3
             // 
@@ -172,17 +172,17 @@
             labelForgot.TextAlign = ContentAlignment.MiddleCenter;
             labelForgot.Click += labelForgot_Click;
             // 
-            // button1
+            // btnLogin
             // 
-            button1.Anchor = AnchorStyles.None;
-            button1.BackColor = Color.CornflowerBlue;
-            button1.Location = new Point(100, 338);
-            button1.Name = "button1";
-            button1.Size = new Size(112, 44);
-            button1.TabIndex = 12;
-            button1.Text = "LOGIN";
-            button1.UseVisualStyleBackColor = false;
-            button1.Click += button1_Click;
+            btnLogin.Anchor = AnchorStyles.None;
+            btnLogin.BackColor = Color.CornflowerBlue;
+            btnLogin.Location = new Point(100, 338);
+            btnLogin.Name = "btnLogin";
+            btnLogin.Size = new Size(112, 44);
+            btnLogin.TabIndex = 12;
+            btnLogin.Text = "LOGIN";
+            btnLogin.UseVisualStyleBackColor = false;
+            btnLogin.Click += btnLogin_Click;
             // 
             // Login
             // 
@@ -204,11 +204,11 @@
         private TableLayoutPanel tableLayoutPanel2;
         private Label label1;
         private CheckBox checkBox1;
-        private TextBox textBox2;
+        private TextBox txtPassword;
         private Label label2;
-        private TextBox textBox1;
+        private TextBox txtUserName;
         private Label label3;
         private Label labelForgot;
-        private Button button1;
+        private Button btnLogin;
     }
 }

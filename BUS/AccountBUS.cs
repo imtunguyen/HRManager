@@ -30,5 +30,13 @@ namespace BUS
                 return "Add Fail";
             }
         }
+        public int GetIdByUsername(string  username)
+        {
+            return accountDAO.GetIdByUsername(username);
+        }
+        public Account GetById(int id)
+        {
+            return accountDAO.GetById(id);
+        }
     }
 }
