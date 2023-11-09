@@ -35,15 +35,6 @@
             button1 = new Button();
             textBox1 = new TextBox();
             flowLayoutPanel1 = new FlowLayoutPanel();
-            panel4 = new Panel();
-            label5 = new Label();
-            label4 = new Label();
-            label3 = new Label();
-            label2 = new Label();
-            label1 = new Label();
-            button3 = new Button();
-            button2 = new Button();
-            pictureBox1 = new PictureBox();
             tabControl1 = new TabControl();
             tabPage3 = new TabPage();
             department = new Department();
@@ -51,9 +42,6 @@
             tabPage1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
-            flowLayoutPanel1.SuspendLayout();
-            panel4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             tabControl1.SuspendLayout();
             tabPage3.SuspendLayout();
             SuspendLayout();
@@ -125,100 +113,11 @@
             // flowLayoutPanel1
             // 
             flowLayoutPanel1.AutoScroll = true;
-            flowLayoutPanel1.Controls.Add(panel4);
             flowLayoutPanel1.Dock = DockStyle.Fill;
             flowLayoutPanel1.Location = new Point(3, 74);
             flowLayoutPanel1.Name = "flowLayoutPanel1";
             flowLayoutPanel1.Size = new Size(980, 479);
             flowLayoutPanel1.TabIndex = 3;
-            // 
-            // panel4
-            // 
-            panel4.Controls.Add(label5);
-            panel4.Controls.Add(label4);
-            panel4.Controls.Add(label3);
-            panel4.Controls.Add(label2);
-            panel4.Controls.Add(label1);
-            panel4.Controls.Add(button3);
-            panel4.Controls.Add(button2);
-            panel4.Controls.Add(pictureBox1);
-            panel4.Location = new Point(3, 3);
-            panel4.Name = "panel4";
-            panel4.Size = new Size(400, 219);
-            panel4.TabIndex = 1;
-            // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(228, 44);
-            label5.Name = "label5";
-            label5.Size = new Size(38, 15);
-            label5.TabIndex = 7;
-            label5.Text = "label5";
-            // 
-            // label4
-            // 
-            label4.AutoSize = true;
-            label4.Location = new Point(233, 102);
-            label4.Name = "label4";
-            label4.Size = new Size(38, 15);
-            label4.TabIndex = 6;
-            label4.Text = "label4";
-            // 
-            // label3
-            // 
-            label3.AutoSize = true;
-            label3.Location = new Point(228, 139);
-            label3.Name = "label3";
-            label3.Size = new Size(38, 15);
-            label3.TabIndex = 5;
-            label3.Text = "label3";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(233, 71);
-            label2.Name = "label2";
-            label2.Size = new Size(38, 15);
-            label2.TabIndex = 4;
-            label2.Text = "label2";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(228, 12);
-            label1.Name = "label1";
-            label1.Size = new Size(38, 15);
-            label1.TabIndex = 3;
-            label1.Text = "label1";
-            // 
-            // button3
-            // 
-            button3.Location = new Point(309, 183);
-            button3.Name = "button3";
-            button3.Size = new Size(88, 33);
-            button3.TabIndex = 2;
-            button3.Text = "button3";
-            button3.UseVisualStyleBackColor = true;
-            // 
-            // button2
-            // 
-            button2.Location = new Point(205, 183);
-            button2.Name = "button2";
-            button2.Size = new Size(83, 33);
-            button2.TabIndex = 1;
-            button2.Text = "button2";
-            button2.UseVisualStyleBackColor = true;
-            // 
-            // pictureBox1
-            // 
-            pictureBox1.Image = Properties.Resources.gallery;
-            pictureBox1.Location = new Point(3, 3);
-            pictureBox1.Name = "pictureBox1";
-            pictureBox1.Size = new Size(113, 151);
-            pictureBox1.TabIndex = 0;
-            pictureBox1.TabStop = false;
-            pictureBox1.Click += pictureBox1_Click;
             // 
             // tabControl1
             // 
@@ -271,10 +170,6 @@
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();
-            flowLayoutPanel1.ResumeLayout(false);
-            panel4.ResumeLayout(false);
-            panel4.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
             tabControl1.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
             ResumeLayout(false);

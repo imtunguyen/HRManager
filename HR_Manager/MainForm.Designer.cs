@@ -36,6 +36,7 @@ namespace HR_Manager
             button1 = new Button();
             employee1 = new Employee.Employee();
             dashboard1 = new DashBoard();
+            WorkEntry = new WorkEntry();
             payroll1 = new Payroll.Payroll();
             tableLayoutPanel1 = new TableLayoutPanel();
             button5 = new Button();
@@ -105,6 +106,13 @@ namespace HR_Manager
             employee1.Size = new Size(1000, 562);
             employee1.TabIndex = 3;
             // 
+            // work entry
+            // 
+            WorkEntry.Location = new Point(206, 0);
+            WorkEntry.Name = "workentry";
+            WorkEntry.Size = new Size(1000, 600);
+            WorkEntry.TabIndex = 3;
+            // 
             // dashboard1
             // 
             dashboard1.BackColor = SystemColors.ButtonHighlight;
@@ -152,7 +160,7 @@ namespace HR_Manager
             button5.Name = "button5";
             button5.Size = new Size(188, 50);
             button5.TabIndex = 1;
-            button5.Text = "WORKFLOW";
+            button5.Text = "WORK ENTRY";
             button5.UseVisualStyleBackColor = false;
             button5.Click += button5_Click;
             // 
@@ -165,6 +173,7 @@ namespace HR_Manager
             Controls.Add(employee1);
             Controls.Add(payroll1);
             Controls.Add(dashboard1);
+            Controls.Add(WorkEntry);
             Name = "MainForm";
             Text = "Form1";
             Load += MainForm_Load;
@@ -180,6 +189,7 @@ namespace HR_Manager
         private DashBoard dashboard1;
         private Employee.Employee employee1;
         private HR_Manager.Payroll.Payroll payroll1;
+        private WorkEntry WorkEntry;
         private TableLayoutPanel tableLayoutPanel1;
         private Button button5;
     }
