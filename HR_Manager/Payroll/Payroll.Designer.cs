@@ -29,9 +29,10 @@
 		private void InitializeComponent()
 		{
 			tabPage3 = new TabPage();
-			Contract = new TabPage();
 			tabControl1 = new TabControl();
 			tabPage1 = new TabPage();
+			Contract = new TabPage();
+			ContractPanel = new ContractUserControl();
 			tabControl1.SuspendLayout();
 			SuspendLayout();
 			// 
@@ -45,17 +46,6 @@
 			tabPage3.TabIndex = 2;
 			tabPage3.Text = "Reporting";
 			tabPage3.UseVisualStyleBackColor = true;
-			// 
-			// Contract
-			// 
-			Contract.Location = new Point(4, 29);
-			Contract.Margin = new Padding(3, 4, 3, 4);
-			Contract.Name = "Contract";
-			Contract.Padding = new Padding(3, 4, 3, 4);
-			Contract.Size = new Size(1135, 717);
-			Contract.TabIndex = 1;
-			Contract.Text = "Contract";
-			Contract.UseVisualStyleBackColor = true;
 			// 
 			// tabControl1
 			// 
@@ -81,6 +71,21 @@
 			tabPage1.Text = "Payroll";
 			tabPage1.UseVisualStyleBackColor = true;
 			// 
+			// Contract
+			// 
+			Contract.Location = new Point(4, 29);
+			Contract.Margin = new Padding(3, 4, 3, 4);
+			Contract.Name = "Contract";
+			Contract.Padding = new Padding(3, 4, 3, 4);
+			Contract.Size = new Size(1135, 717);
+			Contract.TabIndex = 1;
+			Contract.Text = "Contract";
+			Contract.UseVisualStyleBackColor = true;
+			//
+			//ContractPanel
+			//
+			Contract.Controls.Add(ContractPanel);
+			// 
 			// Payroll
 			// 
 			AutoScaleDimensions = new SizeF(8F, 20F);
@@ -96,8 +101,9 @@
 		#endregion
 
 		private TabPage tabPage3;
-		private TabPage Contract;
 		private TabControl tabControl1;
 		private TabPage tabPage1;
+		private TabPage Contract;
+		private ContractUserControl ContractPanel;
 	}
 }
