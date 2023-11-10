@@ -132,6 +132,7 @@
 			btnThemContract.TabIndex = 4;
 			btnThemContract.Text = "New";
 			btnThemContract.UseVisualStyleBackColor = false;
+			btnThemContract.Click += btnThemContract_Click;
 			// 
 			// flowLayoutPanel1
 			// 

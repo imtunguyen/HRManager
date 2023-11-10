@@ -89,7 +89,10 @@ namespace HR_Manager.Payroll
 			throw new NotImplementedException();
 		}
 
-
-
+		private void btnThemContract_Click(object sender, EventArgs e)
+		{
+			fCRUDContract f = new fCRUDContract();
+			f.Visible = true;
+		}
 	}
 }
