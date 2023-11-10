@@ -1,4 +1,5 @@
-﻿using System;
+﻿using HR_Manager.Employee;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,6 +13,7 @@ namespace HR_Manager.Payroll
 {
     public partial class UserControlDay : UserControl
     {
+        public static int static_day;
         public UserControlDay()
         {
             InitializeComponent();
@@ -24,8 +26,19 @@ namespace HR_Manager.Payroll
 
         public void days(int numday)
         {
+            DateTime dt = DateTime.Now;
             label1.Text = numday + "";
+            if(WorkEntry.static_year == dt.Year && WorkEntry.static_month == dt.Month && numday== dt.Day)
+            {
+                BackColor = Color.YellowGreen;
+            }
         }
 
+        private void UserControlDay_Click(object sender, EventArgs e)
+        {
+            static_day = Convert.ToInt32(label1.Text);
+            WorkEntryForm workEntry = new WorkEntryForm();
+            workEntry.ShowDialog();
+        }
     }
 }

@@ -15,10 +15,10 @@ namespace DTO
         public DateOnly Day_Joined { get; set; }
         public DateOnly Day_Left { get; set; }
         public int Phone { get; set; }
-        public int Status { get; set; }
+        public string Status { get; set; }
         public string Email { get; set; }
         public string img_path { get; set; }
-        public float base_pay { get; set; }
+        public double base_pay { get; set; }
 
         public Employee()
         {
@@ -26,7 +26,7 @@ namespace DTO
         }
 
         public Employee(int ID, string Name, string Gender, DateOnly Date_of_Birth, DateOnly Day_Joined, DateOnly Day_Left, int Phone,
-            string Email, int Status, string img_path, float base_pay)
+            string Email, string Status, string img_path, double base_pay)
         {
             this.ID = ID;
             this.Name = Name;

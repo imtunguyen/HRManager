@@ -15,6 +15,7 @@ namespace HR_Manager.Employee
     public partial class WorkEntry : UserControl
     {
         int month, year;
+        public static int static_month, static_year;
         public WorkEntry()
         {
             InitializeComponent();
@@ -33,6 +34,9 @@ namespace HR_Manager.Employee
 
             string monthname = DateTimeFormatInfo.CurrentInfo.GetMonthName(month);
             lblDate.Text = monthname + " " + year;
+
+            static_month = month;
+            static_year = year;
 
             DateTime startOfTheMonth = new DateTime(year, month, 1);
 
@@ -68,6 +72,9 @@ namespace HR_Manager.Employee
             string monthname = DateTimeFormatInfo.CurrentInfo.GetMonthName(month);
             lblDate.Text = monthname + " " + year;
 
+            static_month = month;
+            static_year = year;
+
             DateTime startOfTheMonth = new DateTime(year, month, 1);
 
             int days = DateTime.DaysInMonth(year, month);
@@ -101,6 +108,9 @@ namespace HR_Manager.Employee
 
             string monthname = DateTimeFormatInfo.CurrentInfo.GetMonthName(month);
             lblDate.Text = monthname + " " + year;
+
+            static_month = month;
+            static_year = year;
 
             DateTime startOfTheMonth = new DateTime(year, month, 1);
 
