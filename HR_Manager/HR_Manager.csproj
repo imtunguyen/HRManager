@@ -28,6 +28,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\DTO\DTO.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\BUS\BUS.csproj" />
   </ItemGroup>
 

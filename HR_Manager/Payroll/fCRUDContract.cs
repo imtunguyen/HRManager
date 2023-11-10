@@ -1,5 +1,4 @@
-﻿using DTO;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -11,12 +10,12 @@ using System.Windows.Forms;
 
 namespace HR_Manager.Payroll
 {
-	public partial class Payroll : UserControl
+	public partial class fCRUDContract : Form
 	{
-		private int count = 1;
-		public Payroll()
+		public fCRUDContract()
 		{
 			InitializeComponent();
 		}
+
 	}
 }

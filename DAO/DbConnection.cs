@@ -11,7 +11,7 @@ namespace DAO
     {
         public static SqlConnection GetSqlConnection()
         {
-            string connectionsString = "Data Source=DESKTOP-BUDB9JC;Initial Catalog=HRM;Integrated Security=True";
+            string connectionsString = "Data Source=DESKTOP-DEUC54I;Initial Catalog=HRM;Integrated Security=True";
 
             var sqlConn = new SqlConnection(connectionsString);
             if (sqlConn.State == System.Data.ConnectionState.Closed)
