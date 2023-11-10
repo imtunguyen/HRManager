@@ -8,13 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HR_Manager.Employee
+namespace HR_Manager.Payroll
 {
-    public partial class WorkFlow : UserControl
-    {
-        public WorkFlow()
-        {
-            InitializeComponent();
-        }
-    }
+	public partial class fCRUDContract : Form
+	{
+		public fCRUDContract()
+		{
+			InitializeComponent();
+		}
+
+	}
 }

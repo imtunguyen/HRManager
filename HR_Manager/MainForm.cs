@@ -48,6 +48,7 @@ namespace HR_Manager
 
         private void HideAllUserControl()
         {
+            WorkEntry.Visible = false;
             payroll1.Visible = false;
             employee1.Visible = false;
             dashboard1.Visible = false;
@@ -61,7 +62,7 @@ namespace HR_Manager
 
         private void button5_Click(object sender, EventArgs e)
         {
-
+            showUserControl(WorkEntry);
         }
     }
 
