@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAO;
+using DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,16 @@ using System.Threading.Tasks;
 
 namespace BUS
 {
-    internal class EmployeeBUS
+    public class EmployeeBUS
     {
+        EmployeeDAO edao;
+        public EmployeeBUS() {
+            edao = EmployeeDAO.getInstance();
+        }
+        public List<EmployeeDTO> GetAll()
+        {
+            return edao.GetAll();
+        }
     }
+
 }
