@@ -33,6 +33,7 @@
 			tabPage1 = new TabPage();
 			Contract = new TabPage();
 			ContractPanel = new ContractUserControl();
+			PaySlipPanel = new PaySlip();
 			tabControl1.SuspendLayout();
 			SuspendLayout();
 			// 
@@ -70,6 +71,7 @@
 			tabPage1.TabIndex = 0;
 			tabPage1.Text = "Payroll";
 			tabPage1.UseVisualStyleBackColor = true;
+			tabPage1.Controls.Add(PaySlipPanel);
 			// 
 			// Contract
 			// 
@@ -105,5 +107,6 @@
 		private TabPage tabPage1;
 		private TabPage Contract;
 		private ContractUserControl ContractPanel;
+		private PaySlip PaySlipPanel;
 	}
 }
