@@ -1,4 +1,5 @@
 ﻿using BUS;
+using DTO;
 using HR_Manager.Payroll;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,7 @@ namespace HR_Manager.Employee
 {
     public partial class WorkEntryForm : Form
     {
-        private List<DTO.Employee> employees;
+        private List<EmployeeDTO> employees;
         private WorkEntryBUS workEntryBUS;
         private EmployeeBUS employeeBUS;
         private string date = WorkEntry.static_year + "-" + WorkEntry.static_month + "-" + UserControlDay.static_day;
@@ -33,7 +34,7 @@ namespace HR_Manager.Employee
 
             workEntryBUS = new WorkEntryBUS();
             employeeBUS = new EmployeeBUS();
-            employees = employeeBUS.getAll();
+            employees = employeeBUS.GetAll();
 
             for (int i = 0; i < employees.Count; i++)
             {

@@ -61,7 +61,7 @@ namespace HR_Manager.Employee
                 dt.Rows.Add(row);
                 stt++;
             }
-            dgvEmployees.DataSource = dt;
+            //dgvEmployees.DataSource = dt;
 
         }
         private void dgvEmployees_CellClick(object sender, DataGridViewCellEventArgs e)
