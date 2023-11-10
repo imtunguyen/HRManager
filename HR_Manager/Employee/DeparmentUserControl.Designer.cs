@@ -1,7 +1,7 @@
 ﻿namespace HR_Manager
 {
-    partial class Department
-    {
+    partial class DepartmentUserControl
+	{
         /// <summary> 
         /// Required designer variable.
         /// </summary>

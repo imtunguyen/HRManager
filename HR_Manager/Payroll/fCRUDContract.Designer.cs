@@ -37,11 +37,11 @@
 			label7 = new Label();
 			dateTimePicker1 = new DateTimePicker();
 			dateTimePicker2 = new DateTimePicker();
-			comboBox1 = new ComboBox();
-			comboBox2 = new ComboBox();
+			cbJob = new ComboBox();
+			cbDepartment = new ComboBox();
 			cbEmployee = new ComboBox();
 			textBox1 = new TextBox();
-			comboBox4 = new ComboBox();
+			cbStatus = new ComboBox();
 			lblTitle = new Label();
 			tabControl1 = new TabControl();
 			tabPage1 = new TabPage();
@@ -144,25 +144,28 @@
 			dateTimePicker2.Size = new Size(250, 27);
 			dateTimePicker2.TabIndex = 2;
 			// 
-			// comboBox1
+			// cbJob
 			// 
-			comboBox1.FormattingEnabled = true;
-			comboBox1.Location = new Point(814, 221);
-			comboBox1.Name = "comboBox1";
-			comboBox1.Size = new Size(151, 28);
-			comboBox1.TabIndex = 3;
+			cbJob.FormattingEnabled = true;
+			cbJob.ItemHeight = 20;
+			cbJob.Location = new Point(814, 221);
+			cbJob.Name = "cbJob";
+			cbJob.Size = new Size(228, 28);
+			cbJob.TabIndex = 3;
 			// 
-			// comboBox2
+			// cbDepartment
 			// 
-			comboBox2.FormattingEnabled = true;
-			comboBox2.Location = new Point(814, 167);
-			comboBox2.Name = "comboBox2";
-			comboBox2.Size = new Size(151, 28);
-			comboBox2.TabIndex = 3;
+			cbDepartment.FormattingEnabled = true;
+			cbDepartment.ItemHeight = 20;
+			cbDepartment.Location = new Point(814, 167);
+			cbDepartment.Name = "cbDepartment";
+			cbDepartment.Size = new Size(228, 28);
+			cbDepartment.TabIndex = 3;
 			// 
 			// cbEmployee
 			// 
 			cbEmployee.FormattingEnabled = true;
+			cbEmployee.ItemHeight = 20;
 			cbEmployee.Location = new Point(205, 162);
 			cbEmployee.Name = "cbEmployee";
 			cbEmployee.Size = new Size(250, 28);
@@ -175,13 +178,13 @@
 			textBox1.Size = new Size(250, 27);
 			textBox1.TabIndex = 4;
 			// 
-			// comboBox4
+			// cbStatus
 			// 
-			comboBox4.FormattingEnabled = true;
-			comboBox4.Location = new Point(814, 285);
-			comboBox4.Name = "comboBox4";
-			comboBox4.Size = new Size(151, 28);
-			comboBox4.TabIndex = 3;
+			cbStatus.FormattingEnabled = true;
+			cbStatus.Location = new Point(814, 285);
+			cbStatus.Name = "cbStatus";
+			cbStatus.Size = new Size(228, 28);
+			cbStatus.TabIndex = 3;
 			// 
 			// lblTitle
 			// 
@@ -314,9 +317,9 @@
 			Controls.Add(lblTitle);
 			Controls.Add(textBox1);
 			Controls.Add(cbEmployee);
-			Controls.Add(comboBox2);
-			Controls.Add(comboBox4);
-			Controls.Add(comboBox1);
+			Controls.Add(cbDepartment);
+			Controls.Add(cbStatus);
+			Controls.Add(cbJob);
 			Controls.Add(dateTimePicker2);
 			Controls.Add(dateTimePicker1);
 			Controls.Add(label7);
@@ -348,11 +351,11 @@
 		private Label label7;
 		private DateTimePicker dateTimePicker1;
 		private DateTimePicker dateTimePicker2;
-		private ComboBox comboBox1;
-		private ComboBox comboBox2;
+		private ComboBox cbJob;
+		private ComboBox cbDepartment;
 		private ComboBox cbEmployee;
 		private TextBox textBox1;
-		private ComboBox comboBox4;
+		private ComboBox cbStatus;
 		private Label lblTitle;
 		private TabControl tabControl1;
 		private TabPage tabPage1;

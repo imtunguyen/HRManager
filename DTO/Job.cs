@@ -10,8 +10,8 @@ namespace DTO
     {
         public int ID {  get; set; }
         public string Job_Name { get; set; }
-        public string role { get; set; }
-        public string description { get; set; }
+        public string Role { get; set; }
+        public string Description { get; set; }
         public Job()
         {
             
@@ -21,8 +21,8 @@ namespace DTO
         {
             this.ID = ID;
             this.Job_Name = Job_Name;
-            this.role = role;
-            this.description = description;
+            this.Role = role;
+            this.Description = description;
         }
     }
 }

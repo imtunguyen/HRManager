@@ -61,7 +61,7 @@
             btnAdd = new Button();
             tabControl1 = new TabControl();
             tabPage3 = new TabPage();
-            department = new Department();
+            department = new DepartmentUserControl();
             tabPage2 = new TabPage();
             tabPage1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
@@ -435,7 +435,7 @@
         private TabControl tabControl1;
         private TableLayoutPanel tableLayoutPanel1;
         private TabPage tabPage3;
-        private Department department;
+        private DepartmentUserControl department;
         private TabPage tabPage2;
         private TableLayoutPanel tableLayoutPanel2;
         private TextBox textBox1;
