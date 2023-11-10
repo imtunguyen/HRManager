@@ -23,51 +23,11 @@ namespace HR_Manager.Employee
             eBUS = new EmployeeBUS();
             eDTO = new EmployeeDTO();
             eList = new List<EmployeeDTO>();
-            loadDataGridView();
+
             InitializeComponent();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
 
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            AddEmployee fadd = new AddEmployee();
-            fadd.Show();
-
-        }
-        private void loadDataGridView()
-        {
-            eList = eBUS.GetAll();
-            dt.Clear();
-            dt.Columns.Clear();
-            dt.Columns.Add("ID");
-            dt.Columns.Add("Name");
-            dt.Columns.Add("Status");
-            int stt = 1;
-            foreach (EmployeeDTO e in eList)
-            {
-                DataRow row = dt.NewRow();
-                row["ID"] = e.ID;
-                row["Name"] = e.Name;
-                row["Status"] = e.Status;
-                dt.Rows.Add(row);
-                stt++;
-            }
-            //dgvEmployees.DataSource = dt;
-
-        }
-        private void dgvEmployees_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-
-        }
 
     }
 }
