@@ -17,12 +17,12 @@ namespace DTO
             
         }
 
-        public Job(int ID, string Job_Name, string role, string description)
+        public Job(int ID, string Job_Name, string Role, string Description)
         {
             this.ID = ID;
             this.Job_Name = Job_Name;
-            this.Role = role;
-            this.Description = description;
+            this.Role = Role;
+            this.Description = Description;
         }
     }
 }
