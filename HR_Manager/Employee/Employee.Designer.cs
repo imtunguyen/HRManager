@@ -32,7 +32,6 @@
             tabPage1 = new TabPage();
             tableLayoutPanel1 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
-            textBox1 = new TextBox();
             panel1 = new Panel();
             crudEmployees1 = new CRUDEmployees();
             tabControl1 = new TabControl();
@@ -41,7 +40,6 @@
             tabPage2 = new TabPage();
             tabPage1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
-            tableLayoutPanel2.SuspendLayout();
             panel1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage3.SuspendLayout();
@@ -79,22 +77,12 @@
             tableLayoutPanel2.ColumnCount = 2;
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 31.44654F));
             tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 68.55346F));
-            tableLayoutPanel2.Controls.Add(textBox1, 1, 0);
             tableLayoutPanel2.Location = new Point(665, 3);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel2.Size = new Size(318, 65);
             tableLayoutPanel2.TabIndex = 2;
-            // 
-            // textBox1
-            // 
-            textBox1.Anchor = AnchorStyles.None;
-            textBox1.Location = new Point(118, 21);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(181, 23);
-            textBox1.TabIndex = 1;
-            textBox1.UseWaitCursor = true;
             // 
             // panel1
             // 
@@ -161,8 +149,6 @@
             Size = new Size(1000, 600);
             tabPage1.ResumeLayout(false);
             tableLayoutPanel1.ResumeLayout(false);
-            tableLayoutPanel2.ResumeLayout(false);
-            tableLayoutPanel2.PerformLayout();
             panel1.ResumeLayout(false);
             tabControl1.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
@@ -176,7 +162,6 @@
         private Department department;
         private TabPage tabPage2;
         private TableLayoutPanel tableLayoutPanel2;
-        private TextBox textBox1;
         private Panel panel1;
         private CRUDEmployees crudEmployees1;
     }

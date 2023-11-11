@@ -18,6 +18,7 @@ namespace HR_Manager.Employee
         EmployeeBUS eBUS;
         List<EmployeeDTO> eList;
         DataTable dt = new DataTable();
+        private int idSelected;
         public CRUDEmployees()
         {
             eBUS = new EmployeeBUS();
@@ -68,7 +69,8 @@ namespace HR_Manager.Employee
 
         private void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
-            AddEmployee update = new AddEmployee(2, "update");
+            eDTO = eBUS.GetById(idSelected);
+            AddEmployee update = new AddEmployee(2, "update", eDTO);
             update.Show();
         }
 
@@ -105,8 +107,7 @@ namespace HR_Manager.Employee
             if (rowIndex >= 0)
             {
                 DataGridViewRow row = dgvEmployee.Rows[rowIndex];
-                AddEmployee update = new AddEmployee(2, "update");
-                update.txtName.Text = row.Cells["Name"].Value.ToString();
+                idSelected = Convert.ToInt32(row.Cells["ID"].Value);
             }
         }
 
@@ -114,9 +115,35 @@ namespace HR_Manager.Employee
         {
             loadDataGridView();
         }
-
-        private void btnSearch_Click(object sender, EventArgs e)
+        private DataTable SearchByUsername(DataTable dataTable, string username)
         {
+            DataTable searchData = new DataTable();
+            searchData = dataTable.Clone();
+
+            // Lặp qua từng dòng trong DataTable để tìm kiếm
+            foreach (DataRow row in dataTable.Rows)
+            {
+                string currentUsername = row["Name"].ToString();
+
+                // Kiểm tra nếu tên người dùng khớp với giá trị tìm kiếm
+                if (currentUsername.ToLower().Contains(username.ToLower()))
+                {
+                    searchData.ImportRow(row);
+                }
+            }
+
+            return searchData;
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            string searchValue = txtSearch.Text.Trim(); // Giá trị tìm kiếm nhận từ TextBox
+            DataTable searchResult = SearchByUsername(dt, searchValue); // Gọi hàm tìm kiếm
+
+            // Gán kết quả tìm kiếm vào DataGridView
+            dgvEmployee.DataSource = searchResult;
+            dgvEmployee.Refresh();
+
 
         }
     }
