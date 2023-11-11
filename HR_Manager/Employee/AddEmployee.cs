@@ -1,5 +1,7 @@
 ﻿using BUS;
 using DTO;
+using HR_Manager.Employee;
+using NodaTime;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,19 +17,14 @@ namespace HR_Manager
 {
     public partial class AddEmployee : Form
     {
-        private EmployeeBUS eBUS;
-        private EmployeeDTO eDTO;
+
         public AddEmployee()
         {
-            eBUS = new EmployeeBUS();
-            eDTO = new EmployeeDTO();
 
             InitializeComponent();
         }
         public AddEmployee(int i)
         {
-            eBUS = new EmployeeBUS();
-            eDTO = new EmployeeDTO();
             InitializeComponent();
             Text = "ADD EMPLOYEE";
             lblTitle.Text = "ADD EMPLOYEE";
@@ -52,24 +49,29 @@ namespace HR_Manager
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
-            if (btnAdd.Text == "ADD") // Thêm nhân viên mới
+            if (btnAdd.Text == "ADD") // Thêm nhân viên mớia
             {
                 try
                 {
+                    EmployeeBUS eBUS = new EmployeeBUS();
+                    EmployeeDTO eDTO = new EmployeeDTO();
                     eDTO.Name = txtName.Text;
-                    eDTO.Date_of_Birth = dtpDateofBirth.Value;
-                    eDTO.Day_Joined = dtpDayJoined.Value;
+                    eDTO.Date_of_Birth = DateTime.Parse(dtpDateofBirth.Text);
+                    eDTO.Date_Joined = DateTime.Parse(dtpDayJoined.Text);
                     eDTO.Phone = txtPhone.Text;
                     eDTO.Email = txtEmail.Text;
                     eDTO.Status = cbStatus.Text;
+
+
                     if (cbGender.Checked)
                     {
-                        eDTO.Gender = "Female"; // Nếu checked thì là nữ
+                        eDTO.Gender = "nu"; // Nếu checked thì là nữ
                     }
                     else
                     {
-                        eDTO.Gender = "Male"; // Nếu không checked thì là nam
+                        eDTO.Gender = "nam"; // Nếu không checked thì là nam
                     }
+
                     if (pictureBox1.Image != null)
                     {
                         // Lấy dữ liệu ảnh
@@ -81,16 +83,23 @@ namespace HR_Manager
                             eDTO.img_path = img_str;
                         }
                     }
-                    eBUS.Add(eDTO);
-                    
+                    bool result = eBUS.Add(eDTO);
+
+                    if (result)
+                    {
                         MessageBox.Show("Thêm nhân viên thành công.");
                         this.Close();
-                  
 
+                    }
+                    else
+                    {
+                        MessageBox.Show("Thêm nhân viên thất bại.", "Thông báo");
+                    }
                 }
-                catch(Exception ex)
+                catch (Exception ex)
                 {
-                    MessageBox.Show("Lỗi " + ex, "Thông báo");
+                    MessageBox.Show("Lỗi khi thêm nhân viên", "Thông báo");
+                    //Thêm các xử lý khác nếu cần thiết
                 }
             }
             else if (btnAdd.Text == "UPDATE") // Cập nhật thông tin nhân viên

@@ -19,17 +19,24 @@ namespace DAO
         {
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "INSERT INTO EMPLOYEE (name, gender, date_Of_Birth, day_joined, phone, email, img_path, status) VALUES (@Name, @Gender, @Date_Of_Birth, @Day_Joined, @Phone, @Email, @img_path, @Status)";
+                string query = "INSERT INTO EMPLOYEE (name, gender, date_Of_Birth, date_joined, phone, email, img_path, status) VALUES (@Name, @Gender, @Date_Of_Birth, @Date_Joined, @Phone, @Email, @img_path, @Status)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Name", t.Name);
                     command.Parameters.AddWithValue("@Gender", t.Gender);
                     command.Parameters.AddWithValue("@Date_Of_Birth", t.Date_of_Birth);
-                    command.Parameters.AddWithValue("@Day_Joined", t.Day_Joined);
+                    command.Parameters.AddWithValue("@Date_Joined", t.Date_Joined);
                     command.Parameters.AddWithValue("@Phone", t.Phone);
                     command.Parameters.AddWithValue("@Email", t.Email);
-                    command.Parameters.AddWithValue("@img_path", t.img_path);
-                    
+
+                    if (!string.IsNullOrEmpty(t.img_path))
+                    {
+                        command.Parameters.AddWithValue("@img_path", t.img_path);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@img_path", DBNull.Value);
+                    }
                     command.Parameters.AddWithValue("@Status", t.Status);
                     int result = command.ExecuteNonQuery();
                     return result > 0;
@@ -39,7 +46,7 @@ namespace DAO
 
         public bool Delete(int id)
         {
-            var command = new SqlCommand("DELETE FROM JOB WHERE id = @id", DbConnection.GetSqlConnection());
+            var command = new SqlCommand("DELETE FROM EMPLOYEE WHERE id = @id", DbConnection.GetSqlConnection());
             command.Parameters.AddWithValue("@id", id);
             var result = command.ExecuteNonQuery();
             return result > 0;
@@ -61,8 +68,8 @@ namespace DAO
                         e.Name = reader["Name"].ToString();
                         e.Gender = reader["gender"].ToString();
                         e.Date_of_Birth = DateTime.Parse(reader["date_Of_Birth"].ToString());
-                        e.Day_Joined = DateTime.Parse(reader["date_joined"].ToString());
-                        //e.Day_Left = DateTime.Parse(reader["date_left"].ToString());
+                        e.Date_Joined = DateTime.Parse(reader["date_joined"].ToString());
+                        //e.Date_Left = DateTime.Parse(reader["date_left"].ToString());
                         e.Phone = reader["phone"].ToString();
                         e.Email = reader["email"].ToString();
                         e.img_path = reader["img_path"].ToString();
@@ -91,8 +98,8 @@ namespace DAO
                         e.Name = reader["Name"].ToString();
                         e.Gender = reader["gender"].ToString();
                         e.Date_of_Birth = DateTime.Parse(reader["date_Of_Birth"].ToString());
-                        e.Day_Joined = DateTime.Parse(reader["date_joined"].ToString());
-                        e.Day_Left = reader["date_left"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(reader["date_left"]);
+                        e.Date_Joined = DateTime.Parse(reader["date_joined"].ToString());
+                        e.Date_Left = reader["date_left"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(reader["date_left"]);
                         e.Phone = reader["phone"].ToString();
                         e.Email = reader["email"].ToString();
                         e.img_path = reader["img_path"].ToString();
@@ -107,13 +114,13 @@ namespace DAO
         {
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "UPDATE EMPLOYEE SET name = @Name, gender = @Gender, date_Of_Birth = @Date_Of_Birth, day_joined = @Day_Joined, day_left = @Day_Left, phone = @Phone, email = @Email, img_path = @img_path, status = @Status WHERE @ID = "+id;
+                string query = "UPDATE EMPLOYEE SET name = @Name, gender = @Gender, date_Of_Birth = @Date_Of_Birth, date_joined = @Date_Joined, date_left = @Date_Left, phone = @Phone, email = @Email, img_path = @img_path, status = @Status WHERE @ID = "+id;
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Name", t.Name);
                     command.Parameters.AddWithValue("@Gender", t.Gender);
                     command.Parameters.AddWithValue("@Date_Of_Birth", t.Date_of_Birth);
-                    command.Parameters.AddWithValue("@Day_Joined", t.Day_Joined);
+                    command.Parameters.AddWithValue("@Date_Joined", t.Date_Joined);
                     command.Parameters.AddWithValue("@Phone", t.Phone);
                     command.Parameters.AddWithValue("@Email", t.Email);
                     command.Parameters.AddWithValue("@img_path", t.img_path);

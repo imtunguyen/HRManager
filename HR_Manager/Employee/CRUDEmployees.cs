@@ -26,7 +26,7 @@ namespace HR_Manager.Employee
             InitializeComponent();
             loadDataGridView();
         }
-        private void loadDataGridView()
+        public void loadDataGridView()
         {
             eList = eBUS.GetAll();
             dt.Clear();
@@ -35,8 +35,8 @@ namespace HR_Manager.Employee
             dt.Columns.Add("Name");
             dt.Columns.Add("Gender");
             dt.Columns.Add("Day Of Birth");
-            dt.Columns.Add("Day Joined");
-            dt.Columns.Add("Day Left");
+            dt.Columns.Add("Date Joined");
+            dt.Columns.Add("Date Left");
             dt.Columns.Add("Phone");
             dt.Columns.Add("Email");
             dt.Columns.Add("Image");
@@ -48,9 +48,9 @@ namespace HR_Manager.Employee
                 row["ID"] = e.ID;
                 row["Name"] = e.Name;
                 row["Gender"] = e.Gender;
-                row["Day Of Birth"] = e.Date_of_Birth;
-                row["Day Joined"] = e.Day_Joined;
-                row["Day Left"] = e.Day_Left;
+                row["Day Of Birth"] = e.Date_of_Birth.ToShortDateString();
+                row["Date Joined"] = e.Date_Joined.ToShortDateString();
+                row["Date Left"] = e.Date_Left.ToShortDateString();
                 row["Phone"] = e.Phone;
                 row["Email"] = e.Email;
                 row["Image"] = e.img_path;
@@ -71,13 +71,51 @@ namespace HR_Manager.Employee
             AddEmployee update = new AddEmployee(2, "update");
             update.Show();
         }
-      
+
         private void btnDelete_Click(object sender, EventArgs e)
         {
-
+            if (dgvEmployee.SelectedCells.Count > 0)
+            {
+                DialogResult dr = MessageBox.Show("Bạn có chắc muốn xóa?", "Xóa Thông tin", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    int id;
+                    int rowIndex = dgvEmployee.SelectedCells[0].RowIndex;
+                    if (int.TryParse(dgvEmployee.Rows[rowIndex].Cells["ID"].Value.ToString(), out id))
+                    {
+                        eBUS.Delete(id);
+                        dgvEmployee.Rows.RemoveAt(rowIndex);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Mã không hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("Bạn chưa chọn ô để xóa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+            loadDataGridView();
         }
 
         private void dgvEmployee_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex >= 0)
+            {
+                DataGridViewRow row = dgvEmployee.Rows[rowIndex];
+                AddEmployee update = new AddEmployee(2, "update");
+                update.txtName.Text = row.Cells["Name"].Value.ToString();
+            }
+        }
+
+        private void btnLoad_Click(object sender, EventArgs e)
+        {
+            loadDataGridView();
+        }
+
+        private void btnSearch_Click(object sender, EventArgs e)
         {
 
         }

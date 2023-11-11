@@ -92,9 +92,9 @@
             label1.AutoSize = true;
             label1.Location = new Point(88, 203);
             label1.Name = "label1";
-            label1.Size = new Size(64, 15);
+            label1.Size = new Size(68, 15);
             label1.TabIndex = 0;
-            label1.Text = "Day Joined";
+            label1.Text = "Date Joined";
             // 
             // label6
             // 
@@ -163,10 +163,12 @@
             // 
             // cbStatus
             // 
+            cbStatus.DropDownStyle = ComboBoxStyle.DropDownList;
             cbStatus.FormattingEnabled = true;
-            cbStatus.Location = new Point(510, 162);
+            cbStatus.Items.AddRange(new object[] { "Thử việc", "Nhân viên chính thức" });
+            cbStatus.Location = new Point(510, 165);
             cbStatus.Name = "cbStatus";
-            cbStatus.Size = new Size(152, 23);
+            cbStatus.Size = new Size(200, 23);
             cbStatus.TabIndex = 4;
             // 
             // label10

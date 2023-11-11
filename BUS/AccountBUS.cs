@@ -38,5 +38,13 @@ namespace BUS
         {
             return accountDAO.GetById(id);
         }
+        public List<Account> GetUserName(string s)
+        {
+            return accountDAO.GetUserName(s);
+        }
+        public void UpdatePassword(string username, string password)
+        {
+            accountDAO.UpdatePassword(username, password);
+        }
     }
 }

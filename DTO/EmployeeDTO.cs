@@ -12,8 +12,8 @@ namespace DTO
         public string Name { get; set; }
         public string Gender { get; set; }
         public DateTime Date_of_Birth { get; set; }
-        public DateTime Day_Joined { get; set; }
-        public DateTime Day_Left { get; set; }
+        public DateTime Date_Joined { get; set; }
+        public DateTime Date_Left { get; set; }
         public string Phone { get; set; }
         public string Status { get; set; }
         public string Email { get; set; }
@@ -25,7 +25,7 @@ namespace DTO
             
         }
 
-        public EmployeeDTO(int ID, string Name, string Gender, DateTime Date_of_Birth, DateTime Day_Joined, DateTime Day_Left, string Phone,
+        public EmployeeDTO(int ID, string Name, string Gender, DateTime Date_of_Birth, DateTime Date_Joined, DateTime Date_Left, string Phone,
             string Email, string Status, string img_path, double base_pay)
         {
             this.ID = ID;
@@ -33,9 +33,9 @@ namespace DTO
             this.Gender = Gender;
             this.Email = Email;
             this.Status = Status;
-            this.Day_Left = Day_Left;
-            this.Day_Joined = Day_Joined;
-            this.Day_Left = Day_Left;
+            this.Date_Left = Date_Left;
+            this.Date_Joined = Date_Joined;
+            this.Date_Left = Date_Left;
             this.Phone = Phone;
             this.img_path = img_path;
             this.base_pay = base_pay;

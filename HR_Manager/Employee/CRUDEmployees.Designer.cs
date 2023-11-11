@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CRUDEmployees));
             button8 = new Button();
             panel3 = new Panel();
             panel4 = new Panel();
@@ -93,14 +94,15 @@
             tableLayoutPanel5 = new TableLayoutPanel();
             tabPage2 = new TabPage();
             tableLayoutPanel6 = new TableLayoutPanel();
-            tableLayoutPanel7 = new TableLayoutPanel();
-            btnAddEmployee = new Button();
-            btnUpdateEmployee = new Button();
-            btnDelete = new Button();
             dgvEmployee = new DataGridView();
-            tableLayoutPanel1 = new TableLayoutPanel();
+            tableLayoutPanel7 = new TableLayoutPanel();
+            btnDelete = new Button();
+            btnUpdateEmployee = new Button();
+            btnAddEmployee = new Button();
             textBox7 = new TextBox();
             btnSearch = new Button();
+            btnLoad = new Button();
+            tableLayoutPanel1 = new TableLayoutPanel();
             panel3.SuspendLayout();
             panel4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
@@ -115,8 +117,8 @@
             ((System.ComponentModel.ISupportInitialize)pbAvatar).BeginInit();
             ((System.ComponentModel.ISupportInitialize)dgvEmployees).BeginInit();
             tableLayoutPanel6.SuspendLayout();
-            tableLayoutPanel7.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvEmployee).BeginInit();
+            tableLayoutPanel7.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -748,58 +750,9 @@
             tableLayoutPanel6.Size = new Size(919, 483);
             tableLayoutPanel6.TabIndex = 0;
             // 
-            // tableLayoutPanel7
-            // 
-            tableLayoutPanel7.ColumnCount = 5;
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 27.74451F));
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 29.141716F));
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 43.1137733F));
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 293F));
-            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 159F));
-            tableLayoutPanel7.Controls.Add(btnDelete, 0, 0);
-            tableLayoutPanel7.Controls.Add(btnUpdateEmployee, 0, 0);
-            tableLayoutPanel7.Controls.Add(btnAddEmployee, 0, 0);
-            tableLayoutPanel7.Controls.Add(textBox7, 3, 0);
-            tableLayoutPanel7.Controls.Add(btnSearch, 4, 0);
-            tableLayoutPanel7.Location = new Point(3, 3);
-            tableLayoutPanel7.Name = "tableLayoutPanel7";
-            tableLayoutPanel7.RowCount = 1;
-            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel7.Size = new Size(913, 76);
-            tableLayoutPanel7.TabIndex = 7;
-            // 
-            // btnAddEmployee
-            // 
-            btnAddEmployee.Location = new Point(3, 3);
-            btnAddEmployee.Name = "btnAddEmployee";
-            btnAddEmployee.Size = new Size(120, 36);
-            btnAddEmployee.TabIndex = 30;
-            btnAddEmployee.Text = "Add Employee";
-            btnAddEmployee.UseVisualStyleBackColor = true;
-            btnAddEmployee.Click += btnAddEmployee_Click;
-            // 
-            // btnUpdateEmployee
-            // 
-            btnUpdateEmployee.Location = new Point(130, 3);
-            btnUpdateEmployee.Name = "btnUpdateEmployee";
-            btnUpdateEmployee.Size = new Size(128, 36);
-            btnUpdateEmployee.TabIndex = 31;
-            btnUpdateEmployee.Text = "Update Employee";
-            btnUpdateEmployee.UseVisualStyleBackColor = true;
-            btnUpdateEmployee.Click += btnUpdateEmployee_Click;
-            // 
-            // btnDelete
-            // 
-            btnDelete.Location = new Point(264, 3);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(128, 36);
-            btnDelete.TabIndex = 32;
-            btnDelete.Text = "Delete";
-            btnDelete.UseVisualStyleBackColor = true;
-            btnDelete.Click += btnDelete_Click;
-            // 
             // dgvEmployee
             // 
+            dgvEmployee.AllowUserToAddRows = false;
             dgvEmployee.BackgroundColor = Color.LightBlue;
             dgvEmployee.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             dgvEmployee.Location = new Point(3, 85);
@@ -808,6 +761,114 @@
             dgvEmployee.Size = new Size(913, 310);
             dgvEmployee.TabIndex = 6;
             dgvEmployee.CellClick += dgvEmployee_CellClick;
+            // 
+            // tableLayoutPanel7
+            // 
+            tableLayoutPanel7.ColumnCount = 6;
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 27.74451F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 29.141716F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 43.1137733F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 293F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 144F));
+            tableLayoutPanel7.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 80F));
+            tableLayoutPanel7.Controls.Add(btnDelete, 0, 0);
+            tableLayoutPanel7.Controls.Add(btnUpdateEmployee, 0, 0);
+            tableLayoutPanel7.Controls.Add(btnAddEmployee, 0, 0);
+            tableLayoutPanel7.Controls.Add(textBox7, 3, 0);
+            tableLayoutPanel7.Controls.Add(btnSearch, 4, 0);
+            tableLayoutPanel7.Controls.Add(btnLoad, 5, 0);
+            tableLayoutPanel7.Location = new Point(3, 3);
+            tableLayoutPanel7.Name = "tableLayoutPanel7";
+            tableLayoutPanel7.RowCount = 1;
+            tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
+            tableLayoutPanel7.Size = new Size(913, 76);
+            tableLayoutPanel7.TabIndex = 7;
+            // 
+            // btnDelete
+            // 
+            btnDelete.BackColor = SystemColors.ButtonHighlight;
+            btnDelete.FlatAppearance.BorderSize = 0;
+            btnDelete.FlatStyle = FlatStyle.Flat;
+            btnDelete.Image = (Image)resources.GetObject("btnDelete.Image");
+            btnDelete.ImageAlign = ContentAlignment.MiddleLeft;
+            btnDelete.Location = new Point(227, 3);
+            btnDelete.Name = "btnDelete";
+            btnDelete.Size = new Size(101, 50);
+            btnDelete.TabIndex = 32;
+            btnDelete.Text = "Delete";
+            btnDelete.TextAlign = ContentAlignment.MiddleRight;
+            btnDelete.UseVisualStyleBackColor = false;
+            btnDelete.Click += btnDelete_Click;
+            // 
+            // btnUpdateEmployee
+            // 
+            btnUpdateEmployee.BackColor = SystemColors.ButtonHighlight;
+            btnUpdateEmployee.FlatAppearance.BorderSize = 0;
+            btnUpdateEmployee.FlatStyle = FlatStyle.Flat;
+            btnUpdateEmployee.Image = (Image)resources.GetObject("btnUpdateEmployee.Image");
+            btnUpdateEmployee.ImageAlign = ContentAlignment.MiddleLeft;
+            btnUpdateEmployee.Location = new Point(112, 3);
+            btnUpdateEmployee.Name = "btnUpdateEmployee";
+            btnUpdateEmployee.Size = new Size(97, 50);
+            btnUpdateEmployee.TabIndex = 31;
+            btnUpdateEmployee.Text = "Update";
+            btnUpdateEmployee.TextAlign = ContentAlignment.MiddleRight;
+            btnUpdateEmployee.UseVisualStyleBackColor = false;
+            btnUpdateEmployee.Click += btnUpdateEmployee_Click;
+            // 
+            // btnAddEmployee
+            // 
+            btnAddEmployee.BackColor = SystemColors.ButtonHighlight;
+            btnAddEmployee.FlatAppearance.BorderColor = Color.MediumSpringGreen;
+            btnAddEmployee.FlatAppearance.BorderSize = 0;
+            btnAddEmployee.FlatStyle = FlatStyle.Flat;
+            btnAddEmployee.Image = (Image)resources.GetObject("btnAddEmployee.Image");
+            btnAddEmployee.ImageAlign = ContentAlignment.MiddleLeft;
+            btnAddEmployee.Location = new Point(3, 3);
+            btnAddEmployee.Name = "btnAddEmployee";
+            btnAddEmployee.Size = new Size(94, 47);
+            btnAddEmployee.TabIndex = 30;
+            btnAddEmployee.Text = "Add";
+            btnAddEmployee.TextAlign = ContentAlignment.MiddleRight;
+            btnAddEmployee.UseVisualStyleBackColor = false;
+            btnAddEmployee.Click += btnAddEmployee_Click;
+            // 
+            // textBox7
+            // 
+            textBox7.Location = new Point(397, 3);
+            textBox7.Margin = new Padding(3, 3, 0, 3);
+            textBox7.Multiline = true;
+            textBox7.Name = "textBox7";
+            textBox7.Size = new Size(290, 36);
+            textBox7.TabIndex = 33;
+            // 
+            // btnSearch
+            // 
+            btnSearch.BackColor = SystemColors.ButtonHighlight;
+            btnSearch.FlatStyle = FlatStyle.Flat;
+            btnSearch.Image = (Image)resources.GetObject("btnSearch.Image");
+            btnSearch.ImageAlign = ContentAlignment.MiddleLeft;
+            btnSearch.Location = new Point(687, 3);
+            btnSearch.Margin = new Padding(0, 3, 3, 3);
+            btnSearch.Name = "btnSearch";
+            btnSearch.Size = new Size(128, 46);
+            btnSearch.TabIndex = 32;
+            btnSearch.Text = "Search";
+            btnSearch.UseVisualStyleBackColor = false;
+            btnSearch.Click += btnSearch_Click;
+            // 
+            // btnLoad
+            // 
+            btnLoad.BackColor = SystemColors.ButtonHighlight;
+            btnLoad.FlatAppearance.BorderSize = 0;
+            btnLoad.FlatStyle = FlatStyle.Flat;
+            btnLoad.Image = (Image)resources.GetObject("btnLoad.Image");
+            btnLoad.Location = new Point(834, 3);
+            btnLoad.Name = "btnLoad";
+            btnLoad.Size = new Size(76, 50);
+            btnLoad.TabIndex = 34;
+            btnLoad.UseVisualStyleBackColor = false;
+            btnLoad.Click += btnLoad_Click;
             // 
             // tableLayoutPanel1
             // 
@@ -822,26 +883,6 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 20F));
             tableLayoutPanel1.Size = new Size(925, 489);
             tableLayoutPanel1.TabIndex = 0;
-            // 
-            // textBox7
-            // 
-            textBox7.Location = new Point(462, 3);
-            textBox7.Margin = new Padding(3, 3, 0, 3);
-            textBox7.Multiline = true;
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(290, 36);
-            textBox7.TabIndex = 33;
-            // 
-            // btnSearch
-            // 
-            btnSearch.Location = new Point(752, 3);
-            btnSearch.Margin = new Padding(0, 3, 3, 3);
-            btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(128, 36);
-            btnSearch.TabIndex = 32;
-            btnSearch.Text = "Search";
-            btnSearch.UseVisualStyleBackColor = true;
-            btnSearch.Click += btnDelete_Click;
             // 
             // CRUDEmployees
             // 
@@ -868,9 +909,9 @@
             ((System.ComponentModel.ISupportInitialize)pbAvatar).EndInit();
             ((System.ComponentModel.ISupportInitialize)dgvEmployees).EndInit();
             tableLayoutPanel6.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)dgvEmployee).EndInit();
             tableLayoutPanel7.ResumeLayout(false);
             tableLayoutPanel7.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)dgvEmployee).EndInit();
             tableLayoutPanel1.ResumeLayout(false);
             ResumeLayout(false);
         }
@@ -949,5 +990,6 @@
         private TextBox textBox7;
         private Button btnSearch;
         private TableLayoutPanel tableLayoutPanel1;
+        private Button btnLoad;
     }
 }
