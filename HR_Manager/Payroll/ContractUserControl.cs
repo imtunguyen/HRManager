@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BUS;
+using DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -13,12 +15,24 @@ namespace HR_Manager.Payroll
 	public partial class ContractUserControl : UserControl
 	{
 		private int count = 1;
+		private ContractBUS ctBus;
 		public ContractUserControl()
 		{
 			InitializeComponent();
+			ctBus = new ContractBUS();
 		}
 
-		private void CreatePanelContract(ContractUserControl obj = null)
+		public void loadContract()
+		{
+			List<Contract> contracts = new List<Contract>();
+			contracts = ctBus.GetAll();
+			foreach (Contract item in contracts)
+			{
+				CreatePanelContract(item);
+			}
+		}
+
+		private void CreatePanelContract(Contract obj = null)
 		{
 			Panel panelContainer = new Panel
 			{
@@ -39,7 +53,7 @@ namespace HR_Manager.Payroll
 				Size = new Size(50, 20),
 				TabIndex = 3,
 				Name = "lblNameHr" + count.ToString(),
-				Text = "label3",
+				Text = "hr name",
 			};
 
 			Label lblSalary = new Label
@@ -60,7 +74,7 @@ namespace HR_Manager.Payroll
 				Size = new Size(50, 20),
 				TabIndex = 1,
 				Name = "lblStatus" + count.ToString(),
-				Text = "label2",
+				Text = obj.Status,
 			};
 
 			Label lblNameContract = new Label
@@ -71,7 +85,7 @@ namespace HR_Manager.Payroll
 				Size = new Size(166, 20),
 				TabIndex = 0,
 				Name = "lblNameContract" + count.ToString(),
-				Text = "dsdsanldasjdaskldjaslk",
+				Text = obj.Name,
 			};
 
 			panelContainer.Controls.AddRange(new Control[] { lblSalary, lblStatus, lblNameContract, lblNameHr });
@@ -84,7 +98,7 @@ namespace HR_Manager.Payroll
 			};
 		}
 
-		private void panelContainer_Click(object s, EventArgs ev, ContractUserControl obj)
+		private void panelContainer_Click(object s, EventArgs ev, Contract obj)
 		{
 			throw new NotImplementedException();
 		}

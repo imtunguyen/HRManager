@@ -51,7 +51,35 @@ namespace DAO
 
 		public List<Contract> GetAll()
 		{
-			throw new NotImplementedException();
+			List<Contract> List = new List<Contract>();
+			using (SqlConnection connection = DbConnection.GetSqlConnection())
+			{
+				string query = "SELECT * FROM CONTRACT";
+				using (SqlCommand command = new SqlCommand(query, connection))
+				{
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							Contract contract = new Contract
+							{
+								Id = Convert.ToInt32(reader["id"]),
+								Name = reader["name"].ToString(),
+								EmployeeId = Convert.ToInt32(reader["employee_id"]),
+								FormDate = Convert.ToDateTime(reader["fromDate"]),
+								ToDate = Convert.ToDateTime(reader["toDate"]),
+								DepartmentId = Convert.ToInt32(reader["department_id"]),
+								HrId = Convert.ToInt32(reader["hr_id"]),
+								Detail = reader["detail"].ToString(),
+								RequiredDay = Convert.ToInt32(reader["requiredDay"]),
+								Status = reader["status"].ToString(),
+							};
+							List.Add(contract);
+						}
+					}
+				}
+			}
+			return List;
 		}
 
 		public Contract GetById(int id)

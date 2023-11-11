@@ -15,6 +15,12 @@ namespace BUS
 		{
 			contractDAO = ContractDAO.GetInstance();
 		}
+
+		public List<Contract> GetAll()
+		{
+			return contractDAO.GetAll();
+		}
+
 		public bool Add(Contract t)
 		{
 			if(contractDAO.Add(t))

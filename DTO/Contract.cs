@@ -19,6 +19,10 @@ namespace DTO
 		public int HrId { get; set; }
 		public string Detail { get; set; }
 		public int RequiredDay { get; set; }
+		public Contract()
+		{
+
+		}
 		// Get, Update
 		public Contract(int id, string name, int employeeId, DateTime formDate, DateTime toDate, string status, int jobId, int departmentId, int hrID, string detail, int requiredDay)
 		{

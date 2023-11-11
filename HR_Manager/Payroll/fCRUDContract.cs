@@ -24,7 +24,7 @@ namespace HR_Manager.Payroll
 		private int selectedEmployee;
 		private int selectedJob;
 		private int selectedDepartment;
-		private string selectedStatus;
+		private string selectedStatus = "";
 		private ContractBUS ctBus;
 		private string hanhDong;
 		private MessageBoxButtons ok = MessageBoxButtons.OK;
@@ -50,6 +50,8 @@ namespace HR_Manager.Payroll
 			loadCbDepartment();
 			loadCbStatus();
 		}
+
+
 		private void loadCbEmployee()
 		{
 			cbEmployee.ValueMember = "ID";
