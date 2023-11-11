@@ -29,5 +29,22 @@ namespace BUS
 			}
 			return false;
 		}
+
+		public bool Update(Contract t)
+		{
+			if(contractDAO.Update(t))
+			{
+				return true;
+			}
+			return false;
+		}
+		public Contract GetById(int id)
+		{
+			return contractDAO.GetById(id);
+		}
+		public List<Contract> GetByEmployeeId(int employeeId)
+		{
+			return contractDAO.GetByEmployeeId(employeeId);
+		}
 	}
 }

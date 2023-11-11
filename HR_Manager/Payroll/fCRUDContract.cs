@@ -29,10 +29,15 @@ namespace HR_Manager.Payroll
 		private string hanhDong;
 		private MessageBoxButtons ok = MessageBoxButtons.OK;
 		private MessageBoxIcon war = MessageBoxIcon.Warning;
-		public fCRUDContract(string hd)
+		private MessageBoxIcon info = MessageBoxIcon.Information;
+		private ContractUserControl contractUserControl;
+		private Contract objUpdate;
+		private EmployeeDTO emUpdate; // dc chuyen vao
+		public fCRUDContract(ContractUserControl u, string hd, Contract up = null)
 		{
 			InitializeComponent();
 			hanhDong = hd;
+			contractUserControl = u;
 			emBus = new EmployeeBUS();
 			jBus = new JobBUS();
 			deBus = new DepartmentBUS();
@@ -41,6 +46,22 @@ namespace HR_Manager.Payroll
 			listJob = new List<Job>();
 			listDe = new List<Department>();
 			load();
+			if (up != null)
+			{
+				lblTitle.Text = "Contract / Update";
+				objUpdate = up;
+				emUpdate = emBus.GetById(objUpdate.EmployeeId);
+				cbEmployee.SelectedValue = objUpdate.EmployeeId;
+				cbDepartment.SelectedValue = objUpdate.DepartmentId;
+				cbJob.SelectedValue = objUpdate.JobId;
+				cbStatus.SelectedItem = objUpdate.Status;
+				txtName.Text = objUpdate.Name;
+				txtBasePay.Text = emUpdate.base_pay.ToString();
+				txtDetail.Text = objUpdate.Detail;
+				timeStart.Value = objUpdate.FormDate;
+				timeEnd.Value = objUpdate.ToDate;
+				num.Value = objUpdate.RequiredDay;
+			}
 		}
 
 		public void load()
@@ -89,9 +110,30 @@ namespace HR_Manager.Payroll
 				{
 					Contract obj = new Contract(txtName.Text, selectedEmployee, timeStart.Value, timeEnd.Value,
 						selectedStatus, selectedJob, selectedDepartment, Login.EMPLOYEE_ID, txtDetail.Text, (int)num.Value);
-					if (ctBus.Add(obj) && emBus.UpdateBasePay(selectedEmployee, Convert.ToDouble(txtBasePay.Text))
-						&& emBus.UpdateDayJoin(selectedEmployee, timeStart.Value))
+					// Biến kiểm tra xem hợp đồng đã tồn tại chưa
+					List<Contract> check = ctBus.GetByEmployeeId(selectedEmployee);
+					int flagUpdateDayJoin = -1;
+					if (ctBus.Add(obj) && emBus.UpdateBasePay(selectedEmployee, Convert.ToDouble(txtBasePay.Text)))
 					{
+						if (obj.Status.Equals(SD.Contract_Running))
+						{
+							// Nếu đã có contract rồi
+							if (check != null)
+							{
+								foreach(Contract item in check)
+								{
+									// Không có contract nào có status running
+									if(!item.Status.Equals(SD.Contract_Running))
+									{
+										flagUpdateDayJoin = 1;
+									}
+								}
+								if(flagUpdateDayJoin == 1) emBus.UpdateDayJoin(selectedEmployee, timeStart.Value);
+							} else
+							{
+								emBus.UpdateDayJoin(selectedEmployee, timeStart.Value);
+							}
+						}
 						return true;
 					}
 					return false;
@@ -103,6 +145,40 @@ namespace HR_Manager.Payroll
 				ex.ToString();
 				return false;
 			}
+		}
+
+		private bool UpdateContract()
+		{
+			if (checkValid())
+			{
+				Contract obj = new Contract(objUpdate.Id, txtName.Text, selectedEmployee, timeStart.Value, timeEnd.Value,
+					selectedStatus, selectedJob, selectedDepartment, Login.EMPLOYEE_ID, txtDetail.Text, (int)num.Value);
+				// Check
+				List<Contract> check = ctBus.GetByEmployeeId(selectedEmployee);
+				int flagUpdateDayJoin = -1;
+				if (ctBus.Update(obj) && emBus.UpdateBasePay(selectedEmployee, Convert.ToDouble(txtBasePay.Text)))
+				{
+					if (obj.Status.Equals(SD.Contract_Running))
+					{
+						// Nếu đã có contract rồi
+						if (check != null)
+						{
+							foreach (Contract item in check)
+							{
+								// Không có contract nào có status running
+								if (!item.Status.Equals(SD.Contract_Running))
+								{
+									flagUpdateDayJoin = 1;
+								}
+							}
+							if (flagUpdateDayJoin == 1) emBus.UpdateDayJoin(selectedEmployee, timeStart.Value);
+						}
+					}
+					return true;
+				}
+				return false;
+			}
+			return false;
 		}
 
 		private bool checkValid()
@@ -175,6 +251,7 @@ namespace HR_Manager.Payroll
 				MessageBox.Show("Contract status not empty", SD.tb, ok, war);
 				return false;
 			}
+			
 			return true;
 		}
 
@@ -208,8 +285,33 @@ namespace HR_Manager.Payroll
 		private void cbStatus_SelectedValueChanged(object sender, EventArgs e)
 		{
 			ComboBox cb = sender as ComboBox;
+			int flag = -1;
+			List<Contract> check = ctBus.GetByEmployeeId(selectedEmployee);
+			if (check != null)
+			{
+				foreach (Contract contract in check)
+				{
+					if (contract.Status.Equals(SD.Contract_Running))
+					{
+						flag = 1; break;
+					}
+				}
+			}
 			if (cb.SelectedValue != null)
 			{
+				if (flag ==  1 && cb.SelectedValue.ToString().Equals(SD.Contract_Running) )
+				{
+					if(objUpdate != null && objUpdate.Status.Equals(SD.Contract_Running))
+					{
+					} else
+					{
+						MessageBox.Show("This employee already has a contract and it has not expired or cancelled", SD.tb, ok, war);
+						cb.SelectedItem = SD.Contract_New;
+						selectedStatus = cb.SelectedItem.ToString();
+					}
+					
+				}
+				if(flag == -1)
 				selectedStatus = cb.SelectedValue.ToString();
 			}
 		}
@@ -230,11 +332,22 @@ namespace HR_Manager.Payroll
 			{
 				if (Add())
 				{
-					MessageBox.Show(SD.addSuccess, SD.tb, ok, war);
+					MessageBox.Show(SD.addSuccess, SD.tb, ok, info);
 				}
 				else
 				{
-					MessageBox.Show(SD.addFail, SD.tb, ok, war);
+					MessageBox.Show(SD.addFail, SD.tb, ok, info);
+				}
+			}
+			else if (hanhDong.Equals("Edit"))
+			{
+				if (UpdateContract())
+				{
+					MessageBox.Show(SD.UpdateSucess, SD.tb, ok, info);
+				}
+				else
+				{
+					MessageBox.Show(SD.UpdateFail, SD.tb, ok, info);
 				}
 			}
 		}

@@ -16,10 +16,13 @@ namespace HR_Manager.Payroll
 	{
 		private int count = 1;
 		private ContractBUS ctBus;
+		private EmployeeBUS emBus;
 		public ContractUserControl()
 		{
 			InitializeComponent();
 			ctBus = new ContractBUS();
+			emBus = new EmployeeBUS();
+			loadContract();
 		}
 
 		public void loadContract()
@@ -34,6 +37,7 @@ namespace HR_Manager.Payroll
 
 		private void CreatePanelContract(Contract obj = null)
 		{
+			EmployeeDTO employeeDTO = emBus.GetById(obj.EmployeeId);
 			Panel panelContainer = new Panel
 			{
 				Location = new Point(10, 10),
@@ -41,7 +45,7 @@ namespace HR_Manager.Payroll
 				BorderStyle = BorderStyle.FixedSingle,
 				Cursor = Cursors.Hand,
 				Name = "panelContainer" + count.ToString(),
-				Size = new Size(350, 132),
+				Size = new Size(340, 132),
 				Margin = new Padding(10),
 				TabIndex = 0,
 			};
@@ -53,7 +57,7 @@ namespace HR_Manager.Payroll
 				Size = new Size(50, 20),
 				TabIndex = 3,
 				Name = "lblNameHr" + count.ToString(),
-				Text = "hr name",
+				Text = employeeDTO.Name,
 			};
 
 			Label lblSalary = new Label
@@ -63,7 +67,7 @@ namespace HR_Manager.Payroll
 				Size = new Size(50, 20),
 				TabIndex = 2,
 				Name = "lblSalary" + count.ToString(),
-				Text = "label2",
+				Text = employeeDTO.base_pay.ToString() + " $ / month",
 			};
 
 
@@ -75,6 +79,8 @@ namespace HR_Manager.Payroll
 				TabIndex = 1,
 				Name = "lblStatus" + count.ToString(),
 				Text = obj.Status,
+				ForeColor = Color.White,
+				Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point),
 			};
 
 			Label lblNameContract = new Label
@@ -96,16 +102,36 @@ namespace HR_Manager.Payroll
 			{
 				panelContainer_Click(s, ev, obj);
 			};
+			if (obj.Status.Equals("New"))
+			{
+				lblStatus.BackColor = Color.FromArgb(20, 162, 184);
+			}
+			else if (obj.Status.Equals("Running"))
+			{
+				lblStatus.Location = new Point(265, 13);
+				lblStatus.BackColor = Color.FromArgb(40, 167, 69);
+			}
+			else if (obj.Status.Equals("Expired"))
+			{
+				lblStatus.Location = new Point(265, 13);
+				lblStatus.BackColor = Color.FromArgb(255, 172, 0);
+			}
+			else
+			{
+				lblStatus.Location = new Point(255, 13);
+				lblStatus.BackColor = Color.FromArgb(242, 78, 29);
+			}
 		}
 
 		private void panelContainer_Click(object s, EventArgs ev, Contract obj)
 		{
-			throw new NotImplementedException();
+			fCRUDContract f = new fCRUDContract(this, "Edit", obj);
+			f.Visible = true;
 		}
 
 		private void btnThemContract_Click(object sender, EventArgs e)
 		{
-			fCRUDContract f = new fCRUDContract("Add");
+			fCRUDContract f = new fCRUDContract(this, "Add");
 			f.Visible = true;
 		}
 	}
