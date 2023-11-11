@@ -91,7 +91,7 @@ namespace HR_Manager.Payroll
 
 		private void btnThemContract_Click(object sender, EventArgs e)
 		{
-			fCRUDContract f = new fCRUDContract();
+			fCRUDContract f = new fCRUDContract("Add");
 			f.Visible = true;
 		}
 	}

@@ -130,6 +130,7 @@ namespace HR_Manager
         {
             string username = txtUserName.Text.Trim();
             int id = accBUS.GetIdByUsername(username);
+            EMPLOYEE_ID = id;
             string password = txtPassword.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))

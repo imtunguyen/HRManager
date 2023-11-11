@@ -35,29 +35,30 @@
 			label5 = new Label();
 			label6 = new Label();
 			label7 = new Label();
-			dateTimePicker1 = new DateTimePicker();
-			dateTimePicker2 = new DateTimePicker();
+			timeStart = new DateTimePicker();
+			timeEnd = new DateTimePicker();
 			cbJob = new ComboBox();
 			cbDepartment = new ComboBox();
 			cbEmployee = new ComboBox();
-			textBox1 = new TextBox();
+			txtName = new TextBox();
 			cbStatus = new ComboBox();
 			lblTitle = new Label();
 			tabControl1 = new TabControl();
 			tabPage1 = new TabPage();
-			textBox2 = new TextBox();
+			txtDetail = new TextBox();
 			label8 = new Label();
 			tabPage2 = new TabPage();
-			textBox3 = new TextBox();
-			numericUpDown1 = new NumericUpDown();
+			txtBasePay = new TextBox();
+			num = new NumericUpDown();
 			label12 = new Label();
 			label11 = new Label();
 			label10 = new Label();
 			label9 = new Label();
+			btnLuu = new Button();
 			tabControl1.SuspendLayout();
 			tabPage1.SuspendLayout();
 			tabPage2.SuspendLayout();
-			((System.ComponentModel.ISupportInitialize)numericUpDown1).BeginInit();
+			((System.ComponentModel.ISupportInitialize)num).BeginInit();
 			SuspendLayout();
 			// 
 			// label1
@@ -94,7 +95,7 @@
 			// 
 			label4.AutoSize = true;
 			label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label4.Location = new Point(670, 295);
+			label4.Location = new Point(722, 295);
 			label4.Name = "label4";
 			label4.Size = new Size(53, 20);
 			label4.TabIndex = 1;
@@ -114,7 +115,7 @@
 			// 
 			label6.AutoSize = true;
 			label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label6.Location = new Point(670, 231);
+			label6.Location = new Point(722, 231);
 			label6.Name = "label6";
 			label6.Size = new Size(95, 20);
 			label6.TabIndex = 1;
@@ -124,67 +125,84 @@
 			// 
 			label7.AutoSize = true;
 			label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label7.Location = new Point(670, 170);
+			label7.Location = new Point(722, 170);
 			label7.Name = "label7";
 			label7.Size = new Size(94, 20);
 			label7.TabIndex = 1;
 			label7.Text = "Department";
 			// 
-			// dateTimePicker1
+			// timeStart
 			// 
-			dateTimePicker1.Location = new Point(205, 224);
-			dateTimePicker1.Name = "dateTimePicker1";
-			dateTimePicker1.Size = new Size(250, 27);
-			dateTimePicker1.TabIndex = 2;
+			timeStart.Cursor = Cursors.Hand;
+			timeStart.Location = new Point(205, 224);
+			timeStart.Name = "timeStart";
+			timeStart.Size = new Size(250, 27);
+			timeStart.TabIndex = 2;
 			// 
-			// dateTimePicker2
+			// timeEnd
 			// 
-			dateTimePicker2.Location = new Point(205, 288);
-			dateTimePicker2.Name = "dateTimePicker2";
-			dateTimePicker2.Size = new Size(250, 27);
-			dateTimePicker2.TabIndex = 2;
+			timeEnd.Cursor = Cursors.Hand;
+			timeEnd.Location = new Point(205, 288);
+			timeEnd.Name = "timeEnd";
+			timeEnd.Size = new Size(250, 27);
+			timeEnd.TabIndex = 2;
 			// 
 			// cbJob
 			// 
+			cbJob.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+			cbJob.AutoCompleteSource = AutoCompleteSource.ListItems;
+			cbJob.Cursor = Cursors.Hand;
 			cbJob.FormattingEnabled = true;
 			cbJob.ItemHeight = 20;
-			cbJob.Location = new Point(814, 221);
+			cbJob.Location = new Point(866, 221);
 			cbJob.Name = "cbJob";
 			cbJob.Size = new Size(228, 28);
 			cbJob.TabIndex = 3;
+			cbJob.SelectedValueChanged += cbJob_SelectedValueChanged;
 			// 
 			// cbDepartment
 			// 
+			cbDepartment.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+			cbDepartment.AutoCompleteSource = AutoCompleteSource.ListItems;
+			cbDepartment.Cursor = Cursors.Hand;
 			cbDepartment.FormattingEnabled = true;
 			cbDepartment.ItemHeight = 20;
-			cbDepartment.Location = new Point(814, 167);
+			cbDepartment.Location = new Point(866, 167);
 			cbDepartment.Name = "cbDepartment";
 			cbDepartment.Size = new Size(228, 28);
 			cbDepartment.TabIndex = 3;
+			cbDepartment.SelectedValueChanged += cbDepartment_SelectedValueChanged;
 			// 
 			// cbEmployee
 			// 
+			cbEmployee.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
+			cbEmployee.AutoCompleteSource = AutoCompleteSource.ListItems;
+			cbEmployee.Cursor = Cursors.Hand;
 			cbEmployee.FormattingEnabled = true;
 			cbEmployee.ItemHeight = 20;
 			cbEmployee.Location = new Point(205, 162);
 			cbEmployee.Name = "cbEmployee";
 			cbEmployee.Size = new Size(250, 28);
 			cbEmployee.TabIndex = 3;
+			cbEmployee.SelectedValueChanged += cbEmployee_SelectedValueChanged;
 			// 
-			// textBox1
+			// txtName
 			// 
-			textBox1.Location = new Point(205, 103);
-			textBox1.Name = "textBox1";
-			textBox1.Size = new Size(250, 27);
-			textBox1.TabIndex = 4;
+			txtName.Cursor = Cursors.Hand;
+			txtName.Location = new Point(205, 103);
+			txtName.Name = "txtName";
+			txtName.Size = new Size(250, 27);
+			txtName.TabIndex = 4;
 			// 
 			// cbStatus
 			// 
+			cbStatus.Cursor = Cursors.Hand;
 			cbStatus.FormattingEnabled = true;
-			cbStatus.Location = new Point(814, 285);
+			cbStatus.Location = new Point(866, 285);
 			cbStatus.Name = "cbStatus";
 			cbStatus.Size = new Size(228, 28);
 			cbStatus.TabIndex = 3;
+			cbStatus.SelectedValueChanged += cbStatus_SelectedValueChanged;
 			// 
 			// lblTitle
 			// 
@@ -200,6 +218,7 @@
 			// 
 			tabControl1.Controls.Add(tabPage1);
 			tabControl1.Controls.Add(tabPage2);
+			tabControl1.Cursor = Cursors.Hand;
 			tabControl1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
 			tabControl1.Location = new Point(38, 347);
 			tabControl1.Name = "tabControl1";
@@ -209,8 +228,9 @@
 			// 
 			// tabPage1
 			// 
-			tabPage1.Controls.Add(textBox2);
+			tabPage1.Controls.Add(txtDetail);
 			tabPage1.Controls.Add(label8);
+			tabPage1.Cursor = Cursors.Hand;
 			tabPage1.Location = new Point(4, 29);
 			tabPage1.Name = "tabPage1";
 			tabPage1.Padding = new Padding(3);
@@ -219,13 +239,13 @@
 			tabPage1.Text = "Contract Details";
 			tabPage1.UseVisualStyleBackColor = true;
 			// 
-			// textBox2
+			// txtDetail
 			// 
-			textBox2.Location = new Point(21, 65);
-			textBox2.Multiline = true;
-			textBox2.Name = "textBox2";
-			textBox2.Size = new Size(1010, 95);
-			textBox2.TabIndex = 1;
+			txtDetail.Location = new Point(21, 65);
+			txtDetail.Multiline = true;
+			txtDetail.Name = "txtDetail";
+			txtDetail.Size = new Size(1010, 95);
+			txtDetail.TabIndex = 1;
 			// 
 			// label8
 			// 
@@ -239,8 +259,8 @@
 			// 
 			// tabPage2
 			// 
-			tabPage2.Controls.Add(textBox3);
-			tabPage2.Controls.Add(numericUpDown1);
+			tabPage2.Controls.Add(txtBasePay);
+			tabPage2.Controls.Add(num);
 			tabPage2.Controls.Add(label12);
 			tabPage2.Controls.Add(label11);
 			tabPage2.Controls.Add(label10);
@@ -254,19 +274,21 @@
 			tabPage2.Text = "Salary Information";
 			tabPage2.UseVisualStyleBackColor = true;
 			// 
-			// textBox3
+			// txtBasePay
 			// 
-			textBox3.Location = new Point(306, 55);
-			textBox3.Name = "textBox3";
-			textBox3.Size = new Size(139, 27);
-			textBox3.TabIndex = 2;
+			txtBasePay.Location = new Point(306, 55);
+			txtBasePay.Name = "txtBasePay";
+			txtBasePay.Size = new Size(139, 27);
+			txtBasePay.TabIndex = 2;
+			txtBasePay.KeyPress += txtBasePay_KeyPress;
 			// 
-			// numericUpDown1
+			// num
 			// 
-			numericUpDown1.Location = new Point(306, 106);
-			numericUpDown1.Name = "numericUpDown1";
-			numericUpDown1.Size = new Size(139, 27);
-			numericUpDown1.TabIndex = 1;
+			num.Location = new Point(306, 106);
+			num.Maximum = new decimal(new int[] { 32, 0, 0, 0 });
+			num.Name = "num";
+			num.Size = new Size(139, 27);
+			num.TabIndex = 1;
 			// 
 			// label12
 			// 
@@ -282,11 +304,11 @@
 			// 
 			label11.AutoSize = true;
 			label11.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label11.Location = new Point(462, 55);
+			label11.Location = new Point(462, 58);
 			label11.Name = "label11";
-			label11.Size = new Size(67, 20);
+			label11.Size = new Size(80, 20);
 			label11.TabIndex = 0;
-			label11.Text = "/ month";
+			label11.Text = "$ / month";
 			// 
 			// label10
 			// 
@@ -308,20 +330,36 @@
 			label9.TabIndex = 0;
 			label9.Text = "Minimum number of working days";
 			// 
+			// btnLuu
+			// 
+			btnLuu.BackColor = Color.FromArgb(1, 107, 112);
+			btnLuu.Cursor = Cursors.Hand;
+			btnLuu.FlatStyle = FlatStyle.Flat;
+			btnLuu.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+			btnLuu.ForeColor = Color.White;
+			btnLuu.Location = new Point(1000, 46);
+			btnLuu.Name = "btnLuu";
+			btnLuu.Size = new Size(94, 41);
+			btnLuu.TabIndex = 7;
+			btnLuu.Text = "LƯU";
+			btnLuu.UseVisualStyleBackColor = false;
+			btnLuu.Click += btnLuu_Click;
+			// 
 			// fCRUDContract
 			// 
 			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
 			ClientSize = new Size(1129, 574);
+			Controls.Add(btnLuu);
 			Controls.Add(tabControl1);
 			Controls.Add(lblTitle);
-			Controls.Add(textBox1);
+			Controls.Add(txtName);
 			Controls.Add(cbEmployee);
 			Controls.Add(cbDepartment);
 			Controls.Add(cbStatus);
 			Controls.Add(cbJob);
-			Controls.Add(dateTimePicker2);
-			Controls.Add(dateTimePicker1);
+			Controls.Add(timeEnd);
+			Controls.Add(timeStart);
 			Controls.Add(label7);
 			Controls.Add(label6);
 			Controls.Add(label5);
@@ -330,13 +368,14 @@
 			Controls.Add(label2);
 			Controls.Add(label1);
 			Name = "fCRUDContract";
+			StartPosition = FormStartPosition.CenterScreen;
 			Text = "fCRUDContract";
 			tabControl1.ResumeLayout(false);
 			tabPage1.ResumeLayout(false);
 			tabPage1.PerformLayout();
 			tabPage2.ResumeLayout(false);
 			tabPage2.PerformLayout();
-			((System.ComponentModel.ISupportInitialize)numericUpDown1).EndInit();
+			((System.ComponentModel.ISupportInitialize)num).EndInit();
 			ResumeLayout(false);
 			PerformLayout();
 		}
@@ -349,24 +388,25 @@
 		private Label label5;
 		private Label label6;
 		private Label label7;
-		private DateTimePicker dateTimePicker1;
-		private DateTimePicker dateTimePicker2;
+		private DateTimePicker timeStart;
+		private DateTimePicker timeEnd;
 		private ComboBox cbJob;
 		private ComboBox cbDepartment;
 		private ComboBox cbEmployee;
-		private TextBox textBox1;
+		private TextBox txtName;
 		private ComboBox cbStatus;
 		private Label lblTitle;
 		private TabControl tabControl1;
 		private TabPage tabPage1;
 		private TabPage tabPage2;
-		private TextBox textBox2;
+		private TextBox txtDetail;
 		private Label label8;
-		private TextBox textBox3;
-		private NumericUpDown numericUpDown1;
+		private TextBox txtBasePay;
+		private NumericUpDown num;
 		private Label label12;
 		private Label label11;
 		private Label label10;
 		private Label label9;
+		private Button btnLuu;
 	}
 }

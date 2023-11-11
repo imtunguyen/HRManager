@@ -17,7 +17,10 @@ namespace DTO
 		public int JobId { get; set; }
 		public int DepartmentId { get; set; }
 		public int HrId { get; set; }
-		public Contract(int id, string name, int employeeId, DateTime formDate, DateTime toDate, string status, int jobId, int departmentId, int hrID)
+		public string Detail { get; set; }
+		public int RequiredDay { get; set; }
+		// Get, Update
+		public Contract(int id, string name, int employeeId, DateTime formDate, DateTime toDate, string status, int jobId, int departmentId, int hrID, string detail, int requiredDay)
 		{
 			Id = id;
 			Name = name;
@@ -28,6 +31,22 @@ namespace DTO
 			JobId = jobId;
 			DepartmentId = departmentId;
 			HrId = hrID;
+			Detail = detail;
+			RequiredDay = requiredDay;
+		}
+		// Add
+		public Contract(string name, int employeeId, DateTime formDate, DateTime toDate, string status, int jobId, int departmentId, int hrID, string detail, int requiredDay)
+		{
+			Name = name;
+			EmployeeId = employeeId;
+			FormDate = formDate;
+			ToDate = toDate;
+			Status = status;
+			JobId = jobId;
+			DepartmentId = departmentId;
+			HrId = hrID;
+			Detail = detail;
+			RequiredDay = requiredDay;
 		}
 	}
 }
