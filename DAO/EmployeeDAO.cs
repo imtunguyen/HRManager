@@ -17,12 +17,39 @@ namespace DAO
         }
         public bool Add(EmployeeDTO t)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "INSERT INTO EMPLOYEE (name, gender, date_Of_Birth, date_joined, phone, email, img_path, status) VALUES (@Name, @Gender, @Date_Of_Birth, @Date_Joined, @Phone, @Email, @img_path, @Status)";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Name", t.Name);
+                    command.Parameters.AddWithValue("@Gender", t.Gender);
+                    command.Parameters.AddWithValue("@Date_Of_Birth", t.Date_of_Birth);
+                    command.Parameters.AddWithValue("@Date_Joined", t.Date_Joined);
+                    command.Parameters.AddWithValue("@Phone", t.Phone);
+                    command.Parameters.AddWithValue("@Email", t.Email);
+
+                    if (!string.IsNullOrEmpty(t.img_path))
+                    {
+                        command.Parameters.AddWithValue("@img_path", t.img_path);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@img_path", DBNull.Value);
+                    }
+                    command.Parameters.AddWithValue("@Status", t.Status);
+                    int result = command.ExecuteNonQuery();
+                    return result > 0;
+                }
+            }
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            var command = new SqlCommand("DELETE FROM EMPLOYEE WHERE id = @id", DbConnection.GetSqlConnection());
+            command.Parameters.AddWithValue("@id", id);
+            var result = command.ExecuteNonQuery();
+            return result > 0;
         }
 
         public List<EmployeeDTO> GetAll()
@@ -41,9 +68,9 @@ namespace DAO
                         e.Name = reader["Name"].ToString();
                         e.Gender = reader["gender"].ToString();
                         e.Date_of_Birth = DateTime.Parse(reader["date_Of_Birth"].ToString());
-                        e.Day_Joined = DateTime.Parse(reader["date_joined"].ToString());
-                        //e.Day_Left = DateTime.Parse(reader["date_left"].ToString());
-                        e.Phone = Convert.ToInt32(reader["phone"].ToString());
+                        e.Date_Joined = DateTime.Parse(reader["date_joined"].ToString());
+                        //e.Date_Left = DateTime.Parse(reader["date_left"].ToString());
+                        e.Phone = reader["phone"].ToString();
                         e.Email = reader["email"].ToString();
                         e.img_path = reader["img_path"].ToString();
                         e.base_pay = Convert.ToDouble(reader["base_pay"]);
@@ -60,9 +87,10 @@ namespace DAO
             EmployeeDTO e = new EmployeeDTO();
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "SELECT * FROM EMPLOYEE WHERE @id = "+id;
+                string query = "SELECT * FROM EMPLOYEE WHERE id = @id";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
+                    command.Parameters.AddWithValue("@id", id);
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
@@ -70,18 +98,38 @@ namespace DAO
                         e.Name = reader["Name"].ToString();
                         e.Gender = reader["gender"].ToString();
                         e.Date_of_Birth = DateTime.Parse(reader["date_Of_Birth"].ToString());
-                        e.Day_Joined = DateTime.Parse(reader["date_joined"].ToString());
-                        e.Day_Left = DateTime.Parse(reader["date_left"].ToString());
-                        e.Phone = Convert.ToInt32(reader["phone"].ToString());
+                        e.Date_Joined = DateTime.Parse(reader["date_joined"].ToString());
+                        e.Date_Left = reader["date_left"] == DBNull.Value ? DateTime.MinValue : Convert.ToDateTime(reader["date_left"]);
+                        e.Phone = reader["phone"].ToString();
                         e.Email = reader["email"].ToString();
                         e.img_path = reader["img_path"].ToString();
-                        e.base_pay = Convert.ToDouble(reader["base_pay"]);
                         e.Status = reader["status"].ToString();
                     }
                 }
-                connection.Close();
             }
             return e;
+        }
+
+        public bool Update(int id, EmployeeDTO t)
+        {
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "UPDATE EMPLOYEE SET name = @Name, gender = @Gender, date_Of_Birth = @Date_Of_Birth, date_joined = @Date_Joined, date_left = @Date_Left, phone = @Phone, email = @Email, img_path = @img_path, status = @Status WHERE @ID = "+id;
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Name", t.Name);
+                    command.Parameters.AddWithValue("@Gender", t.Gender);
+                    command.Parameters.AddWithValue("@Date_Of_Birth", t.Date_of_Birth);
+                    command.Parameters.AddWithValue("@Date_Joined", t.Date_Joined);
+                    command.Parameters.AddWithValue("@Phone", t.Phone);
+                    command.Parameters.AddWithValue("@Email", t.Email);
+                    command.Parameters.AddWithValue("@img_path", t.img_path);
+                    command.Parameters.AddWithValue("@Status", t.Status);
+                    command.Parameters.AddWithValue("@ID", id);
+                    int result = command.ExecuteNonQuery();
+                    return result > 0;
+                }
+            }
         }
 
         public bool Update(EmployeeDTO t)
