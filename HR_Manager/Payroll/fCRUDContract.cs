@@ -333,6 +333,7 @@ namespace HR_Manager.Payroll
 				if (Add())
 				{
 					MessageBox.Show(SD.addSuccess, SD.tb, ok, info);
+					contractUserControl.loadContract();
 				}
 				else
 				{
@@ -344,6 +345,7 @@ namespace HR_Manager.Payroll
 				if (UpdateContract())
 				{
 					MessageBox.Show(SD.UpdateSucess, SD.tb, ok, info);
+					contractUserControl.loadContract();
 				}
 				else
 				{

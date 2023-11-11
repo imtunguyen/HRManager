@@ -27,6 +27,8 @@ namespace HR_Manager.Payroll
 
 		public void loadContract()
 		{
+			// Xóa tất cả các panel được tạo trước đó
+			flowLayoutPanel1.Controls.Clear();
 			List<Contract> contracts = new List<Contract>();
 			contracts = ctBus.GetAll();
 			foreach (Contract item in contracts)
