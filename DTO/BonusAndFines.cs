@@ -9,22 +9,24 @@ namespace DTO
     public class BonusAndFines
     {
         public int id {  get; set; }
-        public int salary_id { get; set; }
-        public float amount { get; set; }
+        public int employee_id { get; set; }
+        public Decimal amount { get; set; }
         public string type { get; set; }
         public string reason { get; set; }
-
+        public DateTime expired_date { get; set; }
         public BonusAndFines()
         {
             
         }
 
-        public BonusAndFines(int id, int salary_id, string type, string reason)
+        public BonusAndFines(int id, int employee_id, string type, string reason, DateTime expired_date, Decimal amount)
         {
             this.id = id;
-            this.salary_id = salary_id;
+            this.employee_id = employee_id;
             this.type = type;
             this.reason = reason;
+            this.expired_date = expired_date;
+            this.amount = amount;
         }
     }
 }

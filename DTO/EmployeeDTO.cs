@@ -18,15 +18,15 @@ namespace DTO
         public string Status { get; set; }
         public string Email { get; set; }
         public string img_path { get; set; }
-        public double base_pay { get; set; }
+        public Decimal base_pay { get; set; }
 
         public EmployeeDTO()
         {
             
         }
 
-        public EmployeeDTO(int ID, string Name, string Gender, DateTime Date_of_Birth, DateTime Date_Joined, DateTime Date_Left, string Phone,
-            string Email, string Status, string img_path, double base_pay)
+        public Employee(int ID, string Name, string Gender, DateOnly Date_of_Birth, DateOnly Day_Joined, DateOnly Day_Left, int Phone,
+            string Email, string Status, string img_path, Decimal base_pay)
         {
             this.ID = ID;
             this.Name = Name;

@@ -50,6 +50,11 @@ namespace BUS
         {
             return edao.Delete(id);
         }
+
+        public DTO.Employee getById(int id)
+        {
+            return employeeDAO.GetById(id);
+        }
     }
 
 }
