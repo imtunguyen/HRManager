@@ -21,5 +21,10 @@ namespace BUS
         {
             return employeeDAO.GetAll();
         }
+
+        public DTO.Employee getById(int id)
+        {
+            return employeeDAO.GetById(id);
+        }
     }
 }

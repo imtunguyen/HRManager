@@ -11,12 +11,12 @@ using System.Windows.Forms;
 
 namespace HR_Manager.Payroll
 {
-	public partial class Payroll : UserControl
-	{
-		private int count = 1;
-		public Payroll()
-		{
-			InitializeComponent();
-		}
-	}
+    public partial class Payroll : UserControl
+    {
+        private int count = 1;
+        public Payroll()
+        {
+            InitializeComponent();
+        }
+    }
 }

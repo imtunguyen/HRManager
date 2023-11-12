@@ -33,5 +33,10 @@ namespace BUS
         {
             return workEntryDAO.Update(workEntry);
         }
+
+        public int getDayOfWork(string dateFrom, string dateTo, int employee_id)
+        {
+            return workEntryDAO.getDayOfWork(dateFrom, dateTo, employee_id);
+        }
     }
 }
