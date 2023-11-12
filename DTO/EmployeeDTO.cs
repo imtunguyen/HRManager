@@ -25,7 +25,7 @@ namespace DTO
             
         }
 
-        public Employee(int ID, string Name, string Gender, DateOnly Date_of_Birth, DateOnly Day_Joined, DateOnly Day_Left, int Phone,
+        public EmployeeDTO(int ID, string Name, string Gender, DateOnly Date_of_Birth, DateOnly Day_Joined, DateOnly Day_Left, string Phone,
             string Email, string Status, string img_path, Decimal base_pay)
         {
             this.ID = ID;

@@ -73,7 +73,7 @@ namespace DAO
 						e.Phone = reader["phone"].ToString();
 						e.Email = reader["email"].ToString();
 						e.img_path = reader["img_path"].ToString();
-						e.base_pay = Convert.ToDouble(reader["base_pay"]);
+						e.base_pay = Convert.ToDecimal(reader["base_pay"]);
 						e.Status = reader["status"].ToString();
 						list.Add(e);
 					}
@@ -157,41 +157,6 @@ namespace DAO
 				return false;
 			}
 		}
-        public Employee GetById(int id)
-        {
-            Employee employee = new Employee();
-            using (SqlConnection connection = DbConnection.GetSqlConnection())
-            {
-                string query = "select * from EMPLOYEE WHERE id = " + id;
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            employee.Name = reader["name"].ToString();
-                            employee.Email = reader["email"].ToString();
-                            employee.Status = reader["status"].ToString();
-                            employee.img_path = reader["status"].ToString();
-                            employee.base_pay = Convert.ToDecimal(reader["base_pay"]);
-                            employee.Gender = reader["gender"].ToString();
-                            employee.Phone = Convert.ToInt32(reader["phone"]);
-                            DateTime dateJoin = Convert.ToDateTime(reader["date_joined"]);
-                            if (reader["date_left"].ToString() != "")
-                            {
-                                DateTime dateLeft = Convert.ToDateTime(reader["date_left"]);
-                                employee.Day_Left = DateOnly.FromDateTime(dateLeft);
-                            }
-                            DateTime dateOfBirth = Convert.ToDateTime(reader["date_Of_Birth"]);
-                            employee.Day_Joined = DateOnly.FromDateTime(dateJoin);
-                            employee.Date_of_Birth = DateOnly.FromDateTime(dateOfBirth);
-                        }
-                    }
-
-                }
-            }
-            return employee;
-        }
 
 		public bool UpdateDayJoin(int Id, DateTime dayJoin)
 		{

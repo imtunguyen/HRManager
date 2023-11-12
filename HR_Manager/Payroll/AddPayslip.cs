@@ -14,7 +14,7 @@ namespace HR_Manager.Payroll
 {
     public partial class AddPayslip : Form
     {
-        List<DTO.Employee> employees;
+        List<EmployeeDTO> employees;
         EmployeeBUS employeeBUS;
         WorkEntryBUS workEntryBUS;
         BonusAndFinesBUS bonusAndFinesBUS;
@@ -45,7 +45,7 @@ namespace HR_Manager.Payroll
             lblDraft.Visible = true;
 
             employeeBUS = new EmployeeBUS();
-            employees = employeeBUS.getAll();
+            employees = employeeBUS.GetAll();
             AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
             for (int i = 0; i < employees.Count; i++)
             {
