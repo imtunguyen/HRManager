@@ -31,5 +31,18 @@ namespace BUS
                 return "thêm thất bại!";
             }
         }
+
+        public List<PaySlipDTO> SearchByEmployeeName(string name)
+        {
+            return paySlipDAO.SearchByStatus(name);
+        }
+        public List<PaySlipDTO> Search(string name, string status)
+        {
+            return paySlipDAO.Search(name.Trim(), status.Trim());
+        }
+        public List<PaySlipDTO> SearchByStatus(string status)
+        {
+            return paySlipDAO.SearchByStatus(status.Trim());
+        }
     }
 }

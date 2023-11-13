@@ -128,5 +128,92 @@ namespace DAO
             }
             return amount;
         }
+
+        public List<BonusAndFines> Search(string type, string name)
+        {
+            List<BonusAndFines> list = new List<BonusAndFines>();
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "select b.* from BONUS_AND_FINES as b join EMPLOYEE as e on e.id = b.employee_id where e.name LIKE '"+name+"%' or b.type LIKE '"+type+"%';";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            BonusAndFines t = new BonusAndFines();
+                            t.id = Convert.ToInt32(reader["id"]);
+                            t.employee_id = Convert.ToInt32(reader["employee_id"]);
+                            t.reason = reader["reason"].ToString();
+                            t.type = reader["type"].ToString();
+                            t.expired_date = Convert.ToDateTime(reader["expired_date"]);
+                            t.amount = Convert.ToDecimal(reader["amount"]);
+
+                            list.Add(t);
+                        }
+                    }
+
+                }
+            }
+            return list;
+        }
+
+        public List<BonusAndFines> SearchByEmployeeName(string name)
+        {
+            List<BonusAndFines> list = new List<BonusAndFines>();
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "select b.* from BONUS_AND_FINES as b join EMPLOYEE as e on e.id = b.employee_id where e.name LIKE '"+name+"%';";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            BonusAndFines t = new BonusAndFines();
+                            t.id = Convert.ToInt32(reader["id"]);
+                            t.employee_id = Convert.ToInt32(reader["employee_id"]);
+                            t.reason = reader["reason"].ToString();
+                            t.type = reader["type"].ToString();
+                            t.expired_date = Convert.ToDateTime(reader["expired_date"]);
+                            t.amount = Convert.ToDecimal(reader["amount"]);
+
+                            list.Add(t);
+                        }
+                    }
+
+                }
+            }
+            return list;
+        }
+
+        public List<BonusAndFines> SearchByType(string type)
+        {
+            List<BonusAndFines> list = new List<BonusAndFines>();
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "select * from BONUS_AND_FINES where type LIKE '"+type+"%'";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            BonusAndFines t = new BonusAndFines();
+                            t.id = Convert.ToInt32(reader["id"]);
+                            t.employee_id = Convert.ToInt32(reader["employee_id"]);
+                            t.reason = reader["reason"].ToString();
+                            t.type = reader["type"].ToString();
+                            t.expired_date = Convert.ToDateTime(reader["expired_date"]);
+                            t.amount = Convert.ToDecimal(reader["amount"]);
+
+                            list.Add(t);
+                        }
+                    }
+
+                }
+            }
+            return list;
+        }
     }
 }

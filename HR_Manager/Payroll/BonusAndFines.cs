@@ -17,13 +17,13 @@ namespace HR_Manager.Payroll
         DataTable dt;
         List<DTO.BonusAndFines> List;
         BonusAndFinesBUS bus;
-
+        EmployeeBUS employeeBUS;
         public BonusAndFines()
         {
             InitializeComponent();
         }
 
-        private void render()
+        private void render(List<DTO.BonusAndFines> bonusAndFines)
         {
             dataGridView1.Controls.Clear();
             dt = new DataTable();
@@ -34,7 +34,7 @@ namespace HR_Manager.Payroll
             dt.Columns.Add("type", typeof(string));
             dt.Columns.Add("amount", typeof(decimal));
 
-            loadDataTable(List);
+            loadDataTable(bonusAndFines);
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.DataSource = dt;
         }
@@ -45,7 +45,7 @@ namespace HR_Manager.Payroll
             {
                 DataRow row = dt.NewRow();
                 row["ID"] = item.id;
-                row["Employee"] = item.employee_id;
+                row["Employee"] = employeeBUS.GetById(item.employee_id).Name;
                 row["expired date"] = item.expired_date.Day + "/" + item.expired_date.Month + "/" + item.expired_date.Year;
                 row["reason"] = item.reason;
                 row["type"] = item.type;
@@ -57,15 +57,28 @@ namespace HR_Manager.Payroll
 
         private void BonusAndFines_Load(object sender, EventArgs e)
         {
+            comboBox1.SelectedIndex = 0;
+            employeeBUS = new EmployeeBUS();
             bus = new BonusAndFinesBUS();
             List = bus.GetAll();
-            render();
+            render(List);
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             AddBonusAndFines addBonusAndFines = new AddBonusAndFines();
             addBonusAndFines.ShowDialog();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            int index = comboBox1.SelectedIndex;
+            switch (index)
+            {
+                case 0: render(bus.SearchByEmployeeName(textBox1.Text)); break;
+                case 1: render(bus.SearchByType(textBox1.Text)); break;
+                case 2: render(bus.Search(textBox1.Text, textBox1.Text)); break;
+            }
         }
     }
 }

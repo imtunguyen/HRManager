@@ -80,5 +80,90 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
+        public List<PaySlipDTO> SearchByStatus(string name) 
+        {
+            List<PaySlipDTO> list = new List<PaySlipDTO>();
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "select p.* from PAYSLIP as p join EMPLOYEE as e on e.id = p.employee_id where e.name LIKE '"+name+"%' ";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            PaySlipDTO paySlip = new PaySlipDTO();
+                            paySlip.id = Convert.ToInt32(reader["id"]);
+                            paySlip.employee_id = Convert.ToInt32(reader["employee_id"]);
+                            paySlip.status = reader["status"].ToString();
+                            paySlip.from_date = Convert.ToDateTime(reader["from_date"]);
+                            paySlip.to_date = Convert.ToDateTime(reader["to_date"]);
+                            paySlip.total = Convert.ToDecimal(reader["total"]);
+
+                            list.Add(paySlip);
+                        }
+                    }
+
+                }
+            }
+            return list;
+        }
+        public List<PaySlipDTO> Search(string name, string status)
+        {
+            List<PaySlipDTO> list = new List<PaySlipDTO>();
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "select p.* from PAYSLIP as p join EMPLOYEE as e on e.id = p.employee_id where e.name LIKE '"+name+"%' or p.status LIKE '"+status+"%';";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            PaySlipDTO paySlip = new PaySlipDTO();
+                            paySlip.id = Convert.ToInt32(reader["id"]);
+                            paySlip.employee_id = Convert.ToInt32(reader["employee_id"]);
+                            paySlip.status = reader["status"].ToString();
+                            paySlip.from_date = Convert.ToDateTime(reader["from_date"]);
+                            paySlip.to_date = Convert.ToDateTime(reader["to_date"]);
+                            paySlip.total = Convert.ToDecimal(reader["total"]);
+
+                            list.Add(paySlip);
+                        }
+                    }
+
+                }
+            }
+            return list;
+        }
+
+        public List<PaySlipDTO> SearchByStaus(string status)
+        {
+            List<PaySlipDTO> list = new List<PaySlipDTO>();
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "select * from PAYSLIP where status LIKE '"+status+"%';";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            PaySlipDTO paySlip = new PaySlipDTO();
+                            paySlip.id = Convert.ToInt32(reader["id"]);
+                            paySlip.employee_id = Convert.ToInt32(reader["employee_id"]);
+                            paySlip.status = reader["status"].ToString();
+                            paySlip.from_date = Convert.ToDateTime(reader["from_date"]);
+                            paySlip.to_date = Convert.ToDateTime(reader["to_date"]);
+                            paySlip.total = Convert.ToDecimal(reader["total"]);
+
+                            list.Add(paySlip);
+                        }
+                    }
+
+                }
+            }
+            return list;
+        }
     }
 }

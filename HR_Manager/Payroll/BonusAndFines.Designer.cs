@@ -83,11 +83,13 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(211, 23);
             textBox1.TabIndex = 2;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // comboBox1
             // 
             comboBox1.Anchor = AnchorStyles.None;
             comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "employee", "type", "both" });
             comboBox1.Location = new Point(556, 24);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(160, 23);
@@ -138,7 +140,7 @@
             button2.Name = "button2";
             button2.Size = new Size(113, 30);
             button2.TabIndex = 1;
-            button2.Text = "DELETE";
+            button2.Text = "CONFIG";
             button2.UseVisualStyleBackColor = false;
             // 
             // BonusAndFines

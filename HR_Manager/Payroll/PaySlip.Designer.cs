@@ -32,10 +32,10 @@
             tableLayoutPanel2 = new TableLayoutPanel();
             textBox1 = new TextBox();
             comboBox1 = new ComboBox();
-            button2 = new Button();
             button1 = new Button();
             dataGridView1 = new DataGridView();
             tableLayoutPanel3 = new TableLayoutPanel();
+            button2 = new Button();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -83,26 +83,17 @@
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(211, 23);
             textBox1.TabIndex = 2;
+            textBox1.TextChanged += textBox1_TextChanged;
             // 
             // comboBox1
             // 
             comboBox1.Anchor = AnchorStyles.None;
             comboBox1.FormattingEnabled = true;
+            comboBox1.Items.AddRange(new object[] { "employee", "status", "both" });
             comboBox1.Location = new Point(556, 24);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(160, 23);
             comboBox1.TabIndex = 0;
-            // 
-            // button2
-            // 
-            button2.Anchor = AnchorStyles.None;
-            button2.BackColor = Color.MediumSeaGreen;
-            button2.Location = new Point(836, 7);
-            button2.Name = "button2";
-            button2.Size = new Size(113, 30);
-            button2.TabIndex = 1;
-            button2.Text = "DELETE";
-            button2.UseVisualStyleBackColor = false;
             // 
             // button1
             // 
@@ -140,6 +131,17 @@
             tableLayoutPanel3.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
             tableLayoutPanel3.Size = new Size(994, 91);
             tableLayoutPanel3.TabIndex = 2;
+            // 
+            // button2
+            // 
+            button2.Anchor = AnchorStyles.None;
+            button2.BackColor = Color.MediumSeaGreen;
+            button2.Location = new Point(836, 7);
+            button2.Name = "button2";
+            button2.Size = new Size(113, 30);
+            button2.TabIndex = 1;
+            button2.Text = "CONFIG";
+            button2.UseVisualStyleBackColor = false;
             // 
             // PaySlip
             // 

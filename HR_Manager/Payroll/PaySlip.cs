@@ -17,6 +17,7 @@ namespace HR_Manager.Payroll
         DataTable dt;
         List<PaySlipDTO> paySlips;
         PaySlipBUS slipBUS;
+        EmployeeBUS employeeBUS;
 
         public PaySlip()
         {
@@ -29,7 +30,7 @@ namespace HR_Manager.Payroll
             addPayslip.ShowDialog();
         }
 
-        private void render()
+        private void render(List<PaySlipDTO> paySlipDTOs)
         {
             dataGridView1.Controls.Clear();
             dt = new DataTable();
@@ -40,7 +41,7 @@ namespace HR_Manager.Payroll
             dt.Columns.Add("total", typeof(decimal));
             dt.Columns.Add("status", typeof(string));
 
-            loadDataTable(paySlips);
+            loadDataTable(paySlipDTOs);
             dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.DataSource = dt;
         }
@@ -51,7 +52,7 @@ namespace HR_Manager.Payroll
             {
                 DataRow row = dt.NewRow();
                 row["ID"] = item.id;
-                row["Employee"] = item.employee_id;
+                row["Employee"] = employeeBUS.getById(item.employee_id).Name;
                 row["fromdate"] = item.from_date.Day + "/" + item.from_date.Month + "/" + item.from_date.Year;
                 row["todate"] = item.to_date.Day + "/" + item.to_date.Month + "/" + item.to_date.Year;
                 row["total"] = item.total;
@@ -63,9 +64,22 @@ namespace HR_Manager.Payroll
 
         private void PaySlip_Load(object sender, EventArgs e)
         {
+            comboBox1.SelectedIndex = 0;
+            employeeBUS = new EmployeeBUS();
             slipBUS = new PaySlipBUS();
             paySlips = slipBUS.getAll();
-            render();
+            render(paySlips);
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            int index = comboBox1.SelectedIndex;
+            switch (index) 
+            {
+                case 0: render(slipBUS.SearchByEmployeeName(textBox1.Text)); break;
+                case 1: render(slipBUS.SearchByStatus(textBox1.Text)); break;
+                case 2: render(slipBUS.Search(textBox1.Text, textBox1.Text)); break;
+            }
         }
     }
 }

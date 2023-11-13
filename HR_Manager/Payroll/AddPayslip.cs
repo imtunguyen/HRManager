@@ -79,6 +79,7 @@ namespace HR_Manager.Payroll
 
                 btnDone.Visible = true;
                 btnSubmit.Visible = false;
+                button2.Visible = false;
             }
         }
 
@@ -121,6 +122,7 @@ namespace HR_Manager.Payroll
             lblRunning.Visible = false;
             lblPaid.Visible = true;
 
+            printPayslip();
         }
 
         private Decimal getFee()
@@ -143,6 +145,8 @@ namespace HR_Manager.Payroll
 
             cbEmployee.Text = string.Empty;
 
+            button2.Visible = true;
+
             lblDraft.Visible = true;
             lblPaid.Visible = false;
             lblRunning.Visible = false;
@@ -151,6 +155,43 @@ namespace HR_Manager.Payroll
         private void button1_Click(object sender, EventArgs e)
         {
             reload();
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            AddBonusAndFines add = new AddBonusAndFines();
+            add.ShowDialog();
+        }
+
+        private void printPayslip()
+        {
+            printPreviewDialog1.Document = printDocument1;
+            printPreviewDialog1.ShowDialog();
+
+        }
+
+        private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
+        {
+            Bitmap bmp = Properties.Resources.logo;
+            Image image = bmp;
+            e.Graphics.DrawImage(image, 15, 15, image.Width / 4, image.Height / 4);
+
+            e.Graphics.DrawString("Employee", new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(50, 250));
+            e.Graphics.DrawString("Peroid", new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(50, 290));
+            e.Graphics.DrawString("Day Worked", new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(50, 330));
+            e.Graphics.DrawString("Bonus", new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(50, 370));
+            e.Graphics.DrawString("Fines", new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(50, 410));
+            e.Graphics.DrawString("---------------------------------------------------------------------------------", new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(50, 430));
+            e.Graphics.DrawString("Total", new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(50, 450));
+
+            e.Graphics.DrawString(cbEmployee.Text.Substring(0, cbEmployee.Text.IndexOf("_")), new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 250));
+            e.Graphics.DrawString("from " + dateFrom + " to " + dateTo, new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 290));
+            e.Graphics.DrawString(textBox1.Text, new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 330));
+            e.Graphics.DrawString(feeBonus.ToString(), new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 370));
+            e.Graphics.DrawString(feeFines.ToString(), new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 410)); ;
+            e.Graphics.DrawString(textBox2.Text, new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 450));
+
+
         }
     }
 }

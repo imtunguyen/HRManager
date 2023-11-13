@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(AddPayslip));
             tableLayoutPanel4 = new TableLayoutPanel();
             tableLayoutPanel2 = new TableLayoutPanel();
             groupBox1 = new GroupBox();
@@ -43,6 +44,7 @@
             label3 = new Label();
             textBox1 = new TextBox();
             label12 = new Label();
+            button2 = new Button();
             label2 = new Label();
             tableLayoutPanel14 = new TableLayoutPanel();
             dateTimeFrom = new DateTimePicker();
@@ -55,8 +57,10 @@
             tableLayoutPanel10 = new TableLayoutPanel();
             textBox2 = new TextBox();
             label13 = new Label();
-            tableLayoutPanel12 = new TableLayoutPanel();
             button1 = new Button();
+            tableLayoutPanel12 = new TableLayoutPanel();
+            printDocument1 = new System.Drawing.Printing.PrintDocument();
+            printPreviewDialog1 = new PrintPreviewDialog();
             tableLayoutPanel2.SuspendLayout();
             groupBox1.SuspendLayout();
             tableLayoutPanel13.SuspendLayout();
@@ -199,7 +203,7 @@
             btnSubmit.Name = "btnSubmit";
             btnSubmit.Size = new Size(108, 43);
             btnSubmit.TabIndex = 1;
-            btnSubmit.Text = "SUBMIT";
+            btnSubmit.Text = "COMPUTE";
             btnSubmit.UseVisualStyleBackColor = false;
             btnSubmit.Click += btnSubmit_Click;
             // 
@@ -217,13 +221,15 @@
             // tableLayoutPanel9
             // 
             tableLayoutPanel9.Anchor = AnchorStyles.None;
-            tableLayoutPanel9.ColumnCount = 2;
-            tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 27.59563F));
-            tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 72.40437F));
+            tableLayoutPanel9.ColumnCount = 3;
+            tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 37.5426636F));
+            tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 62.4573364F));
+            tableLayoutPanel9.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 94F));
             tableLayoutPanel9.Controls.Add(textBox3, 1, 1);
             tableLayoutPanel9.Controls.Add(label3, 0, 1);
             tableLayoutPanel9.Controls.Add(textBox1, 1, 0);
             tableLayoutPanel9.Controls.Add(label12, 0, 0);
+            tableLayoutPanel9.Controls.Add(button2, 2, 1);
             tableLayoutPanel9.Location = new Point(162, 139);
             tableLayoutPanel9.Name = "tableLayoutPanel9";
             tableLayoutPanel9.RowCount = 2;
@@ -237,9 +243,9 @@
             textBox3.Anchor = AnchorStyles.None;
             textBox3.Enabled = false;
             textBox3.ForeColor = Color.Red;
-            textBox3.Location = new Point(151, 65);
+            textBox3.Location = new Point(122, 65);
             textBox3.Name = "textBox3";
-            textBox3.Size = new Size(164, 23);
+            textBox3.Size = new Size(128, 23);
             textBox3.TabIndex = 18;
             textBox3.TextAlign = HorizontalAlignment.Center;
             // 
@@ -247,7 +253,7 @@
             // 
             label3.Anchor = AnchorStyles.None;
             label3.AutoSize = true;
-            label3.Location = new Point(14, 69);
+            label3.Location = new Point(15, 69);
             label3.Name = "label3";
             label3.Size = new Size(72, 15);
             label3.TabIndex = 4;
@@ -258,9 +264,9 @@
             textBox1.Anchor = AnchorStyles.None;
             textBox1.Enabled = false;
             textBox1.ForeColor = Color.Red;
-            textBox1.Location = new Point(151, 14);
+            textBox1.Location = new Point(124, 14);
             textBox1.Name = "textBox1";
-            textBox1.Size = new Size(164, 23);
+            textBox1.Size = new Size(124, 23);
             textBox1.TabIndex = 3;
             textBox1.TextAlign = HorizontalAlignment.Center;
             // 
@@ -268,11 +274,23 @@
             // 
             label12.Anchor = AnchorStyles.None;
             label12.AutoSize = true;
-            label12.Location = new Point(16, 18);
+            label12.Location = new Point(17, 18);
             label12.Name = "label12";
             label12.Size = new Size(68, 15);
             label12.TabIndex = 0;
             label12.Text = "DayOfWork";
+            // 
+            // button2
+            // 
+            button2.Anchor = AnchorStyles.None;
+            button2.BackColor = Color.MediumTurquoise;
+            button2.Location = new Point(281, 65);
+            button2.Name = "button2";
+            button2.Size = new Size(75, 23);
+            button2.TabIndex = 19;
+            button2.Text = "ADD ";
+            button2.UseVisualStyleBackColor = false;
+            button2.Click += button2_Click;
             // 
             // label2
             // 
@@ -411,16 +429,6 @@
             label13.TabIndex = 1;
             label13.Text = "Total";
             // 
-            // tableLayoutPanel12
-            // 
-            tableLayoutPanel12.ColumnCount = 2;
-            tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 24.0437164F));
-            tableLayoutPanel12.Location = new Point(0, 0);
-            tableLayoutPanel12.Name = "tableLayoutPanel12";
-            tableLayoutPanel12.RowCount = 1;
-            tableLayoutPanel12.Size = new Size(200, 100);
-            tableLayoutPanel12.TabIndex = 0;
-            // 
             // button1
             // 
             button1.Anchor = AnchorStyles.None;
@@ -434,6 +442,30 @@
             button1.Text = "Refresh";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
+            // 
+            // tableLayoutPanel12
+            // 
+            tableLayoutPanel12.ColumnCount = 2;
+            tableLayoutPanel12.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 24.0437164F));
+            tableLayoutPanel12.Location = new Point(0, 0);
+            tableLayoutPanel12.Name = "tableLayoutPanel12";
+            tableLayoutPanel12.RowCount = 1;
+            tableLayoutPanel12.Size = new Size(200, 100);
+            tableLayoutPanel12.TabIndex = 0;
+            // 
+            // printDocument1
+            // 
+            printDocument1.PrintPage += printDocument1_PrintPage;
+            // 
+            // printPreviewDialog1
+            // 
+            printPreviewDialog1.AutoScrollMargin = new Size(0, 0);
+            printPreviewDialog1.AutoScrollMinSize = new Size(0, 0);
+            printPreviewDialog1.ClientSize = new Size(400, 300);
+            printPreviewDialog1.Enabled = true;
+            printPreviewDialog1.Icon = (Icon)resources.GetObject("printPreviewDialog1.Icon");
+            printPreviewDialog1.Name = "printPreviewDialog1";
+            printPreviewDialog1.Visible = false;
             // 
             // AddPayslip
             // 
@@ -490,5 +522,8 @@
         private TextBox textBox3;
         private Label label3;
         private Button button1;
+        private Button button2;
+        private System.Drawing.Printing.PrintDocument printDocument1;
+        private PrintPreviewDialog printPreviewDialog1;
     }
 }

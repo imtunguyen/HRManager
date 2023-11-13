@@ -1,4 +1,5 @@
 ﻿using BUS;
+using DTO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,7 +16,7 @@ namespace HR_Manager.Payroll
     public partial class AddBonusAndFines : Form
     {
         EmployeeBUS employeeBUS;
-        List<DTO.Employee> employees;
+        List<EmployeeDTO> employees;
         BonusAndFinesBUS bus;
         int employee_id;
         public AddBonusAndFines()
@@ -28,7 +29,7 @@ namespace HR_Manager.Payroll
             bus = new BonusAndFinesBUS();
 
             employeeBUS = new EmployeeBUS();
-            employees = employeeBUS.getAll();
+            employees = employeeBUS.GetAll();
             AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
             for (int i = 0; i < employees.Count; i++)
             {
