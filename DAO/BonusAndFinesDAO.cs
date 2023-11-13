@@ -39,7 +39,24 @@ namespace DAO
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection conn = DbConnection.GetSqlConnection())
+                {
+                    string query = "delete from BONUS_AND_FINES where id = " + id;
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        int rowsChanged = cmd.ExecuteNonQuery();
+                        return rowsChanged > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                return false;
+            }
         }
 
         public List<BonusAndFines> GetAll()
@@ -73,12 +90,57 @@ namespace DAO
 
         public BonusAndFines GetById(int id)
         {
-            throw new NotImplementedException();
+            BonusAndFines t = new BonusAndFines();
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "select * from BONUS_AND_FINES where id = " + id;
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            t.id = Convert.ToInt32(reader["id"]);
+                            t.employee_id = Convert.ToInt32(reader["employee_id"]);
+                            t.reason = reader["reason"].ToString();
+                            t.type = reader["type"].ToString();
+                            t.expired_date = Convert.ToDateTime(reader["expired_date"]);
+                            t.amount = Convert.ToDecimal(reader["amount"]);
+                        }
+                    }
+
+                }
+            }
+            return t;
         }
 
         public bool Update(BonusAndFines t)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection conn = DbConnection.GetSqlConnection())
+                {
+                    string query = "update BONUS_AND_FINES set employee_id = @employee_id, amount = @amount, type = @type, reason = @reason, expired_date = @expired_date where id = @id";
+
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        cmd.Parameters.AddWithValue("@id", t.id);
+                        cmd.Parameters.AddWithValue("@employee_id", t.employee_id);
+                        cmd.Parameters.AddWithValue("@amount", t.amount);
+                        cmd.Parameters.AddWithValue("@type", t.type);
+                        cmd.Parameters.AddWithValue("@reason", t.reason);
+                        cmd.Parameters.AddWithValue("@expired_date", t.expired_date);
+
+                        int rowsChanged = cmd.ExecuteNonQuery();
+                        return rowsChanged > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                return false;
+            }
         }
 
         public Decimal getAllBonusOfEmployee(int employee_id, string date)

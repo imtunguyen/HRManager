@@ -147,9 +147,9 @@
             lblRunning.ForeColor = Color.RoyalBlue;
             lblRunning.Location = new Point(109, 22);
             lblRunning.Name = "lblRunning";
-            lblRunning.Size = new Size(55, 17);
+            lblRunning.Size = new Size(51, 17);
             lblRunning.TabIndex = 7;
-            lblRunning.Text = "Running";
+            lblRunning.Text = "Waiting";
             lblRunning.Visible = false;
             // 
             // lblDraft
@@ -184,7 +184,7 @@
             // 
             btnDone.Anchor = AnchorStyles.None;
             btnDone.BackColor = Color.LimeGreen;
-            btnDone.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnDone.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnDone.Location = new Point(195, 9);
             btnDone.Name = "btnDone";
             btnDone.Size = new Size(108, 43);
@@ -198,7 +198,7 @@
             // 
             btnSubmit.Anchor = AnchorStyles.None;
             btnSubmit.BackColor = Color.LimeGreen;
-            btnSubmit.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            btnSubmit.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnSubmit.Location = new Point(29, 9);
             btnSubmit.Name = "btnSubmit";
             btnSubmit.Size = new Size(108, 43);
@@ -283,7 +283,8 @@
             // button2
             // 
             button2.Anchor = AnchorStyles.None;
-            button2.BackColor = Color.MediumTurquoise;
+            button2.BackColor = Color.LimeGreen;
+            button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button2.Location = new Point(281, 65);
             button2.Name = "button2";
             button2.Size = new Size(75, 23);
@@ -432,8 +433,8 @@
             // button1
             // 
             button1.Anchor = AnchorStyles.None;
-            button1.BackColor = Color.MediumTurquoise;
-            button1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            button1.BackColor = Color.LimeGreen;
+            button1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             button1.ForeColor = Color.Black;
             button1.Location = new Point(649, 11);
             button1.Name = "button1";

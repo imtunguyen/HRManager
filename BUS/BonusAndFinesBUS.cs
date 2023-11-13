@@ -56,5 +56,34 @@ namespace BUS
         {
             return bonusAndFinesDAO.SearchByType(type.Trim());
         }
+
+        public DTO.BonusAndFines getById(int id)
+        {
+            return bonusAndFinesDAO.GetById(id);
+        }
+
+        public string Delete(int id)
+        {
+            if (bonusAndFinesDAO.Delete(id))
+            {
+                return "xóa thành công";
+            }
+            else
+            {
+                return "xóa thất bại";
+            }
+        }
+
+        public string Update(BonusAndFines t)
+        {
+            if (bonusAndFinesDAO.Update(t))
+            {
+                return "update thành công";
+            }
+            else
+            {
+                return "update thất bại";
+            }
+        }
     }
 }

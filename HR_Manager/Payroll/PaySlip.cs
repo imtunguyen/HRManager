@@ -18,7 +18,7 @@ namespace HR_Manager.Payroll
         List<PaySlipDTO> paySlips;
         PaySlipBUS slipBUS;
         EmployeeBUS employeeBUS;
-
+        int index = -1;
         public PaySlip()
         {
             InitializeComponent();
@@ -74,12 +74,13 @@ namespace HR_Manager.Payroll
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
             int index = comboBox1.SelectedIndex;
-            switch (index) 
+            switch (index)
             {
                 case 0: render(slipBUS.SearchByEmployeeName(textBox1.Text)); break;
                 case 1: render(slipBUS.SearchByStatus(textBox1.Text)); break;
                 case 2: render(slipBUS.Search(textBox1.Text, textBox1.Text)); break;
             }
         }
+
     }
 }
