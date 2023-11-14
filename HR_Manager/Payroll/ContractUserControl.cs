@@ -104,16 +104,16 @@ namespace HR_Manager.Payroll
 			{
 				panelContainer_Click(s, ev, obj);
 			};
-			if (obj.Status.Equals("New"))
+			if (obj.Status.Equals(SD.Contract_New))
 			{
 				lblStatus.BackColor = Color.FromArgb(20, 162, 184);
 			}
-			else if (obj.Status.Equals("Running"))
+			else if (obj.Status.Equals(SD.Contract_Running))
 			{
 				lblStatus.Location = new Point(265, 13);
 				lblStatus.BackColor = Color.FromArgb(40, 167, 69);
 			}
-			else if (obj.Status.Equals("Expired"))
+			else if (obj.Status.Equals(SD.Contract_Expired))
 			{
 				lblStatus.Location = new Point(265, 13);
 				lblStatus.BackColor = Color.FromArgb(255, 172, 0);

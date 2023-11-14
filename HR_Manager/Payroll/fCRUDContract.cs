@@ -285,7 +285,7 @@ namespace HR_Manager.Payroll
 		private void cbStatus_SelectedValueChanged(object sender, EventArgs e)
 		{
 			ComboBox cb = sender as ComboBox;
-			int flag = -1;
+			int flag = -1; // check xem có contract nào của user đang running không
 			List<Contract> check = ctBus.GetByEmployeeId(selectedEmployee);
 			if (check != null)
 			{
@@ -299,10 +299,13 @@ namespace HR_Manager.Payroll
 			}
 			if (cb.SelectedValue != null)
 			{
+				// Chặn không cho chọn status running
 				if (flag ==  1 && cb.SelectedValue.ToString().Equals(SD.Contract_Running) )
 				{
+					// Nếu chỉnh sửa contract đang có trạng thái running thì không ngăn chặn việc select status
 					if(objUpdate != null && objUpdate.Status.Equals(SD.Contract_Running))
 					{
+						selectedStatus = cb.SelectedItem.ToString();
 					} else
 					{
 						MessageBox.Show("This employee already has a contract and it has not expired or cancelled", SD.tb, ok, war);
@@ -311,6 +314,7 @@ namespace HR_Manager.Payroll
 					}
 					
 				}
+				// Nếu không tồn tại contract trước đó
 				if(flag == -1)
 				selectedStatus = cb.SelectedValue.ToString();
 			}
