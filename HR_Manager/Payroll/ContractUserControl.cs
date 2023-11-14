@@ -22,7 +22,7 @@ namespace HR_Manager.Payroll
 			InitializeComponent();
 			ctBus = new ContractBUS();
 			emBus = new EmployeeBUS();
-			loadContract();
+			rbAll.Checked = true;
 		}
 
 		public void loadContract()
