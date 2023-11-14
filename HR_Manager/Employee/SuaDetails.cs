@@ -10,9 +10,9 @@ using System.Windows.Forms;
 
 namespace HR_Manager.Employee
 {
-    public partial class fSuaDetails : Form
+    public partial class SuaDetails : UserControl
     {
-        public fSuaDetails()
+        public SuaDetails()
         {
             InitializeComponent();
         }

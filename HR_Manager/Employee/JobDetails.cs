@@ -1,23 +1,24 @@
-﻿using System;
-using System.Data;
-using System.Windows.Forms;
-
-using BUS;
+﻿using BUS;
 using DTO;
+using System;
+using System.Collections.Generic;
+using System.ComponentModel;
+using System.Data;
+using System.Drawing;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+using System.Windows.Forms;
 
 namespace HR_Manager.Employee
 {
-
-    public partial class fJobDetails : Form
+    public partial class JobDetails : UserControl
     {
-        Job_DetailBUS jobDetailBUS = new Job_DetailBUS();
-
-        public fJobDetails()
+        public JobDetails()
         {
             InitializeComponent();
             LoadData();
         }
-
         public void LoadData()
         {
             // Khởi tạo đối tượng bus
@@ -46,7 +47,6 @@ namespace HR_Manager.Employee
 
             //...
         }
-
         private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
             // xử lý sự kiện click vào 1 dòng trong datagridview
@@ -62,6 +62,6 @@ namespace HR_Manager.Employee
         {
 
         }
-    }
 
+    }
 }

@@ -1,6 +1,6 @@
 ﻿namespace HR_Manager.Employee
 {
-    partial class fThemDetails
+    partial class ThemDetails
     {
         /// <summary>
         /// Required designer variable.

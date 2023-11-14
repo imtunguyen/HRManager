@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BUS;
+using DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,17 +9,15 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using BUS;
-using DTO;
 
 namespace HR_Manager.Employee
 {
-    public partial class fThemDetails : Form
+    public partial class ThemDetails : UserControl
     {
         EmployeeBUS employeeBUS = new EmployeeBUS();
         DepartmentBUS departmentBUS = new DepartmentBUS();
         JobBUS jobBUS = new JobBUS();
-        public fThemDetails()
+        public ThemDetails()
         {
             InitializeComponent();
 
@@ -93,11 +93,5 @@ namespace HR_Manager.Employee
             fJobDetails frm = new fJobDetails();
             frm.Show();
         }
-
     }
 }
-
-
-
-
-
