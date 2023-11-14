@@ -1,6 +1,6 @@
-﻿namespace HR_Manager.Employee
+﻿namespace HR_Manager.Payroll
 {
-    partial class WorkFlow
+    partial class UserControlDay
     {
         /// <summary> 
         /// Required designer variable.
@@ -28,17 +28,37 @@
         /// </summary>
         private void InitializeComponent()
         {
+            label1 = new Label();
             SuspendLayout();
             // 
-            // WorkFlow
+            // label1
+            // 
+            label1.AutoSize = true;
+            label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            label1.Location = new Point(17, 15);
+            label1.Name = "label1";
+            label1.Size = new Size(28, 21);
+            label1.TabIndex = 0;
+            label1.Text = "00";
+            // 
+            // UserControlDay
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            Name = "WorkFlow";
-            Size = new Size(416, 343);
+            BackColor = Color.LightBlue;
+            BorderStyle = BorderStyle.FixedSingle;
+            Controls.Add(label1);
+            Margin = new Padding(0);
+            Name = "UserControlDay";
+            Size = new Size(141, 77);
+            Load += UserControlDay_Load;
+            Click += UserControlDay_Click;
             ResumeLayout(false);
+            PerformLayout();
         }
 
         #endregion
+
+        private Label label1;
     }
 }

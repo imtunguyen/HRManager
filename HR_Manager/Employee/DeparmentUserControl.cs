@@ -8,13 +8,18 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HR_Manager.Employee
+namespace HR_Manager
 {
-    public partial class WorkFlow : UserControl
+    public partial class DepartmentUserControl : UserControl
     {
-        public WorkFlow()
+        public DepartmentUserControl()
         {
             InitializeComponent();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }

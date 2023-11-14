@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace HR_Manager
 {
-    public partial class Department : UserControl
+    public partial class JobUserControl : UserControl
     {
-        public Department()
+        public JobUserControl()
         {
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

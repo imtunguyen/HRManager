@@ -129,7 +129,8 @@
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
             txtPassword.Size = new Size(307, 24);
-            txtPassword.TabIndex = 5;
+            txtPassword.TabIndex = 2;
+            txtPassword.KeyDown += txtPassword_KeyDown;
             // 
             // label2
             // 
@@ -148,7 +149,8 @@
             txtUserName.Multiline = true;
             txtUserName.Name = "txtUserName";
             txtUserName.Size = new Size(307, 24);
-            txtUserName.TabIndex = 5;
+            txtUserName.TabIndex = 1;
+            txtUserName.KeyDown += txtUserName_KeyDown;
             // 
             // label3
             // 
@@ -163,7 +165,8 @@
             // labelForgot
             // 
             labelForgot.Anchor = AnchorStyles.None;
-            labelForgot.Font = new Font("Segoe UI", 11.25F, FontStyle.Regular, GraphicsUnit.Point);
+            labelForgot.Font = new Font("Segoe UI", 11.25F, FontStyle.Underline, GraphicsUnit.Point);
+            labelForgot.ForeColor = SystemColors.HotTrack;
             labelForgot.Location = new Point(79, 403);
             labelForgot.Name = "labelForgot";
             labelForgot.Size = new Size(155, 27);
@@ -179,7 +182,7 @@
             btnLogin.Location = new Point(100, 338);
             btnLogin.Name = "btnLogin";
             btnLogin.Size = new Size(112, 44);
-            btnLogin.TabIndex = 12;
+            btnLogin.TabIndex = 3;
             btnLogin.Text = "LOGIN";
             btnLogin.UseVisualStyleBackColor = false;
             btnLogin.Click += btnLogin_Click;
@@ -192,6 +195,7 @@
             Controls.Add(tableLayoutPanel1);
             Name = "Login";
             Text = "Login";
+            Load += Login_Load;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);
             tableLayoutPanel2.PerformLayout();

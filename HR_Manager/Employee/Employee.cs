@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BUS;
+using DTO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -12,25 +14,20 @@ namespace HR_Manager.Employee
 {
     public partial class Employee : UserControl
     {
+        EmployeeDTO eDTO;
+        EmployeeBUS eBUS;
+        List<EmployeeDTO> eList;
+        DataTable dt = new DataTable();
         public Employee()
         {
+            eBUS = new EmployeeBUS();
+            eDTO = new EmployeeDTO();
+            eList = new List<EmployeeDTO>();
+
             InitializeComponent();
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-            AddEmployee addEmployee = new AddEmployee();
-            addEmployee.ShowDialog();
-        }
-
-        private void textBox1_TextChanged(object sender, EventArgs e)
-        {
 
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
-        {
 
-        }
     }
 }

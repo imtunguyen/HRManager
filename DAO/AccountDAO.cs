@@ -115,6 +115,51 @@ namespace DAO
             }
             return Id;
         }
+        public List<Account> GetUserName(string s)
+        {
+            List<Account> users = new List<Account>();
+
+            try
+            {
+                using (SqlConnection connection = DbConnection.GetSqlConnection())
+                {
+                    string query = "SELECT username FROM ACCOUNT WHERE username = @input";
+
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@input", s);
+
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            while (reader.Read())
+                            {
+                                Account user = new Account();
+                                user.Username = reader["username"].ToString();
+                                users.Add(user);
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+            }
+
+            return users;
+        }
+        public void UpdatePassword(string username, string newPassword)
+        {
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "UPDATE ACCOUNT SET password = @newPassword WHERE username = @username";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@username", username);
+                    command.Parameters.AddWithValue("@newPassword", newPassword);
+                    command.ExecuteNonQuery();
+                }
+            }
+        }
         public Account GetById(int id)
         {
             Account acc = new Account();

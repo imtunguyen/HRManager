@@ -8,11 +8,11 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HR_Manager
+namespace HR_Manager.Payroll
 {
-    public partial class Job : UserControl
+    public partial class UserControlBlank : UserControl
     {
-        public Job()
+        public UserControlBlank()
         {
             InitializeComponent();
         }

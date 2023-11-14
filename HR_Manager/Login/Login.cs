@@ -12,6 +12,7 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 using BUS;
 using DTO;
 using static System.Windows.Forms.VisualStyles.VisualStyleElement.StartPanel;
+using static System.Windows.Forms.VisualStyles.VisualStyleElement.ToolBar;
 
 namespace HR_Manager
 {
@@ -120,16 +121,11 @@ namespace HR_Manager
         {
             lockedAccounts[username] = DateTime.Now;
         }
-
-        private void RemoveLockedAccount(string username)
-        {
-            lockedAccounts.Remove(username);
-        }
-
         private void btnLogin_Click(object sender, EventArgs e)
         {
             string username = txtUserName.Text.Trim();
             int id = accBUS.GetIdByUsername(username);
+            EMPLOYEE_ID = id;
             string password = txtPassword.Text.Trim();
 
             if (string.IsNullOrWhiteSpace(username) || string.IsNullOrWhiteSpace(password))
@@ -161,6 +157,7 @@ namespace HR_Manager
                 else
                 {
                     MessageBox.Show("Mật khẩu không đúng.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    password = "";
                 }
                 return;
             }
@@ -169,6 +166,28 @@ namespace HR_Manager
             MainForm mainForm = new MainForm();
             mainForm.Show();
             this.Hide();
+        }
+
+        private void Login_Load(object sender, EventArgs e)
+        {
+            txtUserName.Focus();
+        }
+
+        private void txtPassword_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;  // Hủy sự kiện xuống dòng
+                btnLogin.PerformClick();
+            }
+        }
+        private void txtUserName_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Enter)
+            {
+                e.SuppressKeyPress = true;  // Hủy sự kiện xuống dòng
+                txtPassword.Focus();
+            }
         }
     }
 }

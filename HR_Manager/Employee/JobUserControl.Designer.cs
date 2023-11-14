@@ -1,6 +1,6 @@
 ﻿namespace HR_Manager
 {
-    partial class Job
+    partial class JobUserControl
     {
         /// <summary> 
         /// Required designer variable.

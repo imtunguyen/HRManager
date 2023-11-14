@@ -33,10 +33,10 @@
             label2 = new Label();
             label3 = new Label();
             label4 = new Label();
-            button1 = new Button();
-            textBox1 = new TextBox();
-            textBox2 = new TextBox();
-            textBox3 = new TextBox();
+            btnSubmit = new Button();
+            txtUsername = new TextBox();
+            txtNewPass = new TextBox();
+            txtConfirm = new TextBox();
             tableLayoutPanel1.SuspendLayout();
             SuspendLayout();
             // 
@@ -50,10 +50,10 @@
             tableLayoutPanel1.Controls.Add(label2, 0, 1);
             tableLayoutPanel1.Controls.Add(label3, 0, 2);
             tableLayoutPanel1.Controls.Add(label4, 0, 3);
-            tableLayoutPanel1.Controls.Add(button1, 1, 4);
-            tableLayoutPanel1.Controls.Add(textBox1, 1, 1);
-            tableLayoutPanel1.Controls.Add(textBox2, 1, 2);
-            tableLayoutPanel1.Controls.Add(textBox3, 1, 3);
+            tableLayoutPanel1.Controls.Add(btnSubmit, 1, 4);
+            tableLayoutPanel1.Controls.Add(txtUsername, 1, 1);
+            tableLayoutPanel1.Controls.Add(txtNewPass, 1, 2);
+            tableLayoutPanel1.Controls.Add(txtConfirm, 1, 3);
             tableLayoutPanel1.Dock = DockStyle.Fill;
             tableLayoutPanel1.Location = new Point(0, 0);
             tableLayoutPanel1.Name = "tableLayoutPanel1";
@@ -107,40 +107,41 @@
             label4.TabIndex = 3;
             label4.Text = "Confirm Password";
             // 
-            // button1
+            // btnSubmit
             // 
-            button1.Anchor = AnchorStyles.None;
-            button1.BackColor = Color.CornflowerBlue;
-            button1.Location = new Point(222, 330);
-            button1.Name = "button1";
-            button1.Size = new Size(99, 43);
-            button1.TabIndex = 4;
-            button1.Text = "SUBMIT";
-            button1.UseVisualStyleBackColor = false;
+            btnSubmit.Anchor = AnchorStyles.None;
+            btnSubmit.BackColor = Color.CornflowerBlue;
+            btnSubmit.Location = new Point(222, 330);
+            btnSubmit.Name = "btnSubmit";
+            btnSubmit.Size = new Size(99, 43);
+            btnSubmit.TabIndex = 4;
+            btnSubmit.Text = "SUBMIT";
+            btnSubmit.UseVisualStyleBackColor = false;
+            btnSubmit.Click += btnSubmit_Click;
             // 
-            // textBox1
+            // txtUsername
             // 
-            textBox1.Anchor = AnchorStyles.None;
-            textBox1.Location = new Point(166, 105);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(210, 23);
-            textBox1.TabIndex = 5;
+            txtUsername.Anchor = AnchorStyles.None;
+            txtUsername.Location = new Point(166, 105);
+            txtUsername.Name = "txtUsername";
+            txtUsername.Size = new Size(210, 23);
+            txtUsername.TabIndex = 5;
             // 
-            // textBox2
+            // txtNewPass
             // 
-            textBox2.Anchor = AnchorStyles.None;
-            textBox2.Location = new Point(166, 183);
-            textBox2.Name = "textBox2";
-            textBox2.Size = new Size(210, 23);
-            textBox2.TabIndex = 6;
+            txtNewPass.Anchor = AnchorStyles.None;
+            txtNewPass.Location = new Point(166, 183);
+            txtNewPass.Name = "txtNewPass";
+            txtNewPass.Size = new Size(210, 23);
+            txtNewPass.TabIndex = 6;
             // 
-            // textBox3
+            // txtConfirm
             // 
-            textBox3.Anchor = AnchorStyles.None;
-            textBox3.Location = new Point(166, 261);
-            textBox3.Name = "textBox3";
-            textBox3.Size = new Size(210, 23);
-            textBox3.TabIndex = 7;
+            txtConfirm.Anchor = AnchorStyles.None;
+            txtConfirm.Location = new Point(166, 261);
+            txtConfirm.Name = "txtConfirm";
+            txtConfirm.Size = new Size(210, 23);
+            txtConfirm.TabIndex = 7;
             // 
             // ForgotPassword
             // 
@@ -162,9 +163,9 @@
         private Label label2;
         private Label label3;
         private Label label4;
-        private Button button1;
-        private TextBox textBox1;
-        private TextBox textBox2;
-        private TextBox textBox3;
+        private Button btnSubmit;
+        private TextBox txtUsername;
+        private TextBox txtNewPass;
+        private TextBox txtConfirm;
     }
 }
