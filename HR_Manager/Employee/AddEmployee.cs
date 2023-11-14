@@ -148,6 +148,7 @@ namespace HR_Manager
             eDto.Name = txtName.Text;
             eDto.Date_of_Birth = dtpDateofBirth.Value;
             eDto.Date_Joined = dtpDayJoined.Value;
+            eDto.Date_Left = dtpDateLeft.Value;
             eDto.Email = txtEmail.Text;
             eDto.Phone = txtPhone.Text;
             eDto.Status = cbStatus.Text;

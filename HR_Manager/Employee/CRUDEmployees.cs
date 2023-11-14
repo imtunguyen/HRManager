@@ -51,7 +51,7 @@ namespace HR_Manager.Employee
                 row["Gender"] = e.Gender;
                 row["Day Of Birth"] = e.Date_of_Birth.ToShortDateString();
                 row["Date Joined"] = e.Date_Joined.ToShortDateString();
-                row["Date Left"] = e.Date_Left.ToShortDateString();
+                row["Date Left"] = e.Date_Left.HasValue ? e.Date_Left.Value.ToShortDateString() : string.Empty;
                 row["Phone"] = e.Phone;
                 row["Email"] = e.Email;
                 row["Image"] = e.img_path;
@@ -124,8 +124,6 @@ namespace HR_Manager.Employee
             foreach (DataRow row in dataTable.Rows)
             {
                 string currentUsername = row["Name"].ToString();
-
-                // Kiểm tra nếu tên người dùng khớp với giá trị tìm kiếm
                 if (currentUsername.ToLower().Contains(username.ToLower()))
                 {
                     searchData.ImportRow(row);
@@ -137,8 +135,8 @@ namespace HR_Manager.Employee
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
         {
-            string searchValue = txtSearch.Text.Trim(); // Giá trị tìm kiếm nhận từ TextBox
-            DataTable searchResult = SearchByUsername(dt, searchValue); // Gọi hàm tìm kiếm
+            string searchValue = txtSearch.Text.Trim(); 
+            DataTable searchResult = SearchByUsername(dt, searchValue);
 
             // Gán kết quả tìm kiếm vào DataGridView
             dgvEmployee.DataSource = searchResult;

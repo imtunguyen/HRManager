@@ -68,7 +68,18 @@ namespace DAO
                         e.Gender = reader["gender"].ToString();
                         e.Date_of_Birth = DateTime.Parse(reader["date_Of_Birth"].ToString());
                         e.Date_Joined = DateTime.Parse(reader["date_joined"].ToString());
-                        e.Date_Left = DateTime.TryParse(reader["date_left"].ToString(), out DateTime dateLeft) ? dateLeft : DateTime.MinValue;
+                        DateTime dateLeft;
+                        e.Date_Left = DateTime.TryParse(reader["date_left"].ToString(), out dateLeft) ? dateLeft : null;
+
+                        // Thay thế bằng
+                        if (DateTime.TryParse(reader["date_left"].ToString(), out dateLeft))
+                        {
+                            e.Date_Left = dateLeft;
+                        }
+                        else
+                        {
+                            e.Date_Left = null;
+                        }
                         e.Phone = reader["phone"].ToString();
                         e.Email = reader["email"].ToString();
                         e.img_path = reader["img_path"].ToString();
@@ -98,7 +109,18 @@ namespace DAO
                         e.Gender = reader["gender"].ToString();
                         e.Date_of_Birth = DateTime.Parse(reader["date_Of_Birth"].ToString());
                         e.Date_Joined = DateTime.Parse(reader["date_joined"].ToString());
-                        e.Date_Left = DateTime.TryParse(reader["date_left"].ToString(), out DateTime dateLeft) ? dateLeft : DateTime.MinValue;
+                        DateTime dateLeft;
+                        e.Date_Left = DateTime.TryParse(reader["date_left"].ToString(), out dateLeft) ? dateLeft : null;
+
+                        // Thay thế bằng
+                        if (DateTime.TryParse(reader["date_left"].ToString(), out dateLeft))
+                        {
+                            e.Date_Left = dateLeft;
+                        }
+                        else
+                        {
+                            e.Date_Left = null;
+                        }
                         e.Phone = reader["phone"].ToString();
                         e.Email = reader["email"].ToString();
                         e.img_path = reader["img_path"].ToString();
@@ -113,7 +135,7 @@ namespace DAO
         {
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "UPDATE EMPLOYEE SET name = @Name, gender = @Gender, date_Of_Birth = @Date_Of_Birth, date_joined = @Date_Joined, phone = @Phone, email = @Email, img_path = @img_path, status = @Status WHERE id = @id";
+                string query = "UPDATE EMPLOYEE SET name = @Name, gender = @Gender, date_Of_Birth = @Date_Of_Birth, date_joined = @Date_Joined, date_left = @Date_Left, phone = @Phone, email = @Email, img_path = @img_path, status = @Status WHERE id = @id";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
@@ -123,6 +145,14 @@ namespace DAO
                     command.Parameters.AddWithValue("@Date_Joined", employee.Date_Joined);
                     command.Parameters.AddWithValue("@Phone", employee.Phone);
                     command.Parameters.AddWithValue("@Email", employee.Email);
+                    if (employee.Date_Left.HasValue)
+                    {
+                        command.Parameters.AddWithValue("@Date_Left", employee.Date_Left.Value);
+                    }
+                    else
+                    {
+                        command.Parameters.AddWithValue("@Date_Left", DBNull.Value);
+                    }
                     if (!string.IsNullOrEmpty(employee.img_path))
                     {
                         command.Parameters.AddWithValue("@img_path", employee.img_path);
@@ -133,9 +163,6 @@ namespace DAO
                     }
                     command.Parameters.AddWithValue("@Status", employee.Status);
                     command.Parameters.AddWithValue("@id", id);
-
-
-
                     int result = command.ExecuteNonQuery();
                     return result > 0;
                 }

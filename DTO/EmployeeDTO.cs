@@ -13,7 +13,7 @@ namespace DTO
         public string Gender { get; set; }
         public DateTime Date_of_Birth { get; set; }
         public DateTime Date_Joined { get; set; }
-        public DateTime Date_Left { get; set; }
+        public DateTime? Date_Left { get; set; }
         public string Phone { get; set; }
         public string Status { get; set; }
         public string Email { get; set; }
