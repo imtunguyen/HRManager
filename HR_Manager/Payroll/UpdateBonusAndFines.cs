@@ -13,22 +13,22 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace HR_Manager.Payroll
 {
-    public partial class AddBonusAndFines : Form
+    public partial class UpdateBonusAndFines : Form
     {
         EmployeeBUS employeeBUS;
         List<EmployeeDTO> employees;
+        DTO.BonusAndFines BAF;
         BonusAndFinesBUS bus;
         int employee_id;
-        public AddBonusAndFines()
+        public UpdateBonusAndFines(int id)
         {
             InitializeComponent();
-        }
 
-        private void AddBonusAndFines_Load(object sender, EventArgs e)
-        {
-            bus = new BonusAndFinesBUS();
             employeeBUS = new EmployeeBUS();
+            bus = new BonusAndFinesBUS();
             employees = employeeBUS.GetAll();
+            BAF = new DTO.BonusAndFines();
+
             AutoCompleteStringCollection collection = new AutoCompleteStringCollection();
             for (int i = 0; i < employees.Count; i++)
             {
@@ -36,20 +36,27 @@ namespace HR_Manager.Payroll
                 cbEmployee.Items.Add(employees[i].Name + "_" + employees[i].ID);
             }
             cbEmployee.AutoCompleteCustomSource = collection;
+
+            BAF = bus.getById(id);
+            cbEmployee.SelectedItem = employees[BAF.employee_id - 1].Name + "_" + employees[BAF.employee_id - 1].ID;
+            cbType.SelectedItem = BAF.type;
+            txtReason.Text = BAF.reason;
+            txtAmount.Text = BAF.amount + "";
+            dateTimePicker1.Value = BAF.expired_date;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             if (validate())
             {
-                DTO.BonusAndFines baf = new DTO.BonusAndFines();
+                DTO.BonusAndFines baf = BAF;
                 baf.amount = Convert.ToDecimal(txtAmount.Text);
                 baf.reason = txtReason.Text;
                 baf.expired_date = dateTimePicker1.Value;
                 baf.type = cbType.Text;
                 baf.employee_id = employee_id;
 
-                MessageBox.Show(bus.Add(baf));
+                MessageBox.Show(bus.Update(baf));
 
                 this.Dispose();
             }
@@ -83,7 +90,7 @@ namespace HR_Manager.Payroll
                 MessageBox.Show("chưa nhập lý do!");
                 return false;
             }
-            if(dateTimePicker1.Value <= DateTime.Now)
+            if (dateTimePicker1.Value <= DateTime.Now)
             {
                 MessageBox.Show("ngày hết hạn phải lớn hay ngày hiện tại!");
                 return false;

@@ -19,6 +19,7 @@ namespace HR_Manager.Payroll
         WorkEntryBUS workEntryBUS;
         BonusAndFinesBUS bonusAndFinesBUS;
         PaySlipBUS slipBUS;
+        ContractBUS contractBUS;
         string dateFrom;
         string dateTo;
         int dayOfWork;
@@ -33,6 +34,7 @@ namespace HR_Manager.Payroll
 
         private void AddPayslip_Load(object sender, EventArgs e)
         {
+            contractBUS = new ContractBUS();
             workEntryBUS = new WorkEntryBUS();
             bonusAndFinesBUS = new BonusAndFinesBUS();
 
@@ -105,6 +107,11 @@ namespace HR_Manager.Payroll
                 MessageBox.Show("ngày bắt đầu phải nhỏ hơn ngày kết thúc!");
                 return false;
             }
+            if (minimunDay() == -1)
+            {
+                MessageBox.Show("Chưa có hợp đồng!");
+                return false;
+            }
             return true;
         }
 
@@ -127,7 +134,7 @@ namespace HR_Manager.Payroll
 
         private Decimal getFee()
         {
-            Decimal feeRegular = dayOfWork * (employeeBUS.getById(employee_id).base_pay / 24);
+            Decimal feeRegular = dayOfWork * (employeeBUS.getById(employee_id).base_pay / minimunDay());
             return Math.Round(feeRegular + feeBonus - feeFines, 2);
         }
 
@@ -168,6 +175,21 @@ namespace HR_Manager.Payroll
             printPreviewDialog1.Document = printDocument1;
             printPreviewDialog1.ShowDialog();
 
+        }
+
+        private int minimunDay()
+        {
+            int d = -1;
+            List<Contract> contracts = contractBUS.GetByEmployeeId(employee_id);
+            for (int i = 0; i < contracts.Count; i++)
+            {
+                if (contracts[i].Status == "Running")
+                {
+                    d = contracts[i].RequiredDay;
+                    break;
+                }
+            }
+            return d;
         }
 
         private void printDocument1_PrintPage(object sender, System.Drawing.Printing.PrintPageEventArgs e)
