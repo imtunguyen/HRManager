@@ -312,7 +312,10 @@ namespace HR_Manager.Payroll
 						cb.SelectedItem = SD.Contract_New;
 						selectedStatus = cb.SelectedItem.ToString();
 					}
-					
+					// Nếu đã tồn tại contract trước đó và status select ko phải là running 
+				} else if(flag == 1 && !cb.SelectedValue.ToString().Equals(SD.Contract_Running))
+				{
+					selectedStatus = cb.SelectedItem.ToString();
 				}
 				// Nếu không tồn tại contract trước đó
 				if(flag == -1)

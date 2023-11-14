@@ -67,6 +67,7 @@
 			rbCancelled.TabStop = true;
 			rbCancelled.Text = "Cancelled";
 			rbCancelled.UseVisualStyleBackColor = true;
+			rbCancelled.CheckedChanged += rbCancelled_CheckedChanged;
 			// 
 			// rbExpired
 			// 
@@ -80,6 +81,7 @@
 			rbExpired.TabStop = true;
 			rbExpired.Text = "Expired";
 			rbExpired.UseVisualStyleBackColor = true;
+			rbExpired.CheckedChanged += rbExpired_CheckedChanged;
 			// 
 			// rbRunning
 			// 
@@ -93,6 +95,7 @@
 			rbRunning.TabStop = true;
 			rbRunning.Text = "Running";
 			rbRunning.UseVisualStyleBackColor = true;
+			rbRunning.CheckedChanged += rbRunning_CheckedChanged;
 			// 
 			// rbNew
 			// 
@@ -106,6 +109,7 @@
 			rbNew.TabStop = true;
 			rbNew.Text = "New";
 			rbNew.UseVisualStyleBackColor = true;
+			rbNew.CheckedChanged += rbNew_CheckedChanged;
 			// 
 			// rbAll
 			// 
@@ -118,6 +122,7 @@
 			rbAll.TabStop = true;
 			rbAll.Text = "All";
 			rbAll.UseVisualStyleBackColor = true;
+			rbAll.CheckedChanged += rbAll_CheckedChanged;
 			// 
 			// btnThemContract
 			// 
