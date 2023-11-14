@@ -37,6 +37,15 @@ namespace HR_Manager.Payroll
 			}
 		}
 
+		private void loadContract(List<Contract> contracts)
+		{
+			flowLayoutPanel1.Controls.Clear();
+			foreach (Contract item in contracts)
+			{
+				CreatePanelContract(item);
+			}
+		}
+
 		private void CreatePanelContract(Contract obj = null)
 		{
 			EmployeeDTO employeeDTO = emBus.GetById(obj.EmployeeId);
@@ -104,16 +113,16 @@ namespace HR_Manager.Payroll
 			{
 				panelContainer_Click(s, ev, obj);
 			};
-			if (obj.Status.Equals("New"))
+			if (obj.Status.Equals(SD.Contract_New))
 			{
 				lblStatus.BackColor = Color.FromArgb(20, 162, 184);
 			}
-			else if (obj.Status.Equals("Running"))
+			else if (obj.Status.Equals(SD.Contract_Running))
 			{
 				lblStatus.Location = new Point(265, 13);
 				lblStatus.BackColor = Color.FromArgb(40, 167, 69);
 			}
-			else if (obj.Status.Equals("Expired"))
+			else if (obj.Status.Equals(SD.Contract_Expired))
 			{
 				lblStatus.Location = new Point(265, 13);
 				lblStatus.BackColor = Color.FromArgb(255, 172, 0);
@@ -135,6 +144,82 @@ namespace HR_Manager.Payroll
 		{
 			fCRUDContract f = new fCRUDContract(this, "Add");
 			f.Visible = true;
+		}
+
+		private void rbNew_CheckedChanged(object sender, EventArgs e)
+		{
+			if (rbNew.Checked)
+			{
+				List<Contract> contracts = ctBus.GetAll();
+				List<Contract> contractsNew = new List<Contract>();
+				foreach (Contract contract in contracts)
+				{
+					if (contract.Status.Equals(SD.Contract_New))
+					{
+						contractsNew.Add(contract);
+					}
+				}
+				loadContract(contractsNew);
+			}
+		}
+
+		private void rbAll_CheckedChanged(object sender, EventArgs e)
+		{
+			if (rbAll.Checked)
+			{
+				loadContract();
+			}
+		}
+
+		private void rbRunning_CheckedChanged(object sender, EventArgs e)
+		{
+			if (rbRunning.Checked)
+			{
+				List<Contract> contracts = ctBus.GetAll();
+				List<Contract> contractsRunning = new List<Contract>();
+				foreach (Contract contract in contracts)
+				{
+					if (contract.Status.Equals(SD.Contract_Running))
+					{
+						contractsRunning.Add(contract);
+					}
+				}
+				loadContract(contractsRunning);
+			}
+		}
+
+		private void rbExpired_CheckedChanged(object sender, EventArgs e)
+		{
+			if (rbExpired.Checked)
+			{
+				List<Contract> contracts = ctBus.GetAll();
+				List<Contract> contractsExpired = new List<Contract>();
+				foreach (Contract contract in contracts)
+				{
+					if (contract.Status.Equals(SD.Contract_Expired))
+					{
+						contractsExpired.Add(contract);
+					}
+				}
+				loadContract(contractsExpired);
+			}
+		}
+
+		private void rbCancelled_CheckedChanged(object sender, EventArgs e)
+		{
+			if (rbCancelled.Checked)
+			{
+				List<Contract> contracts = ctBus.GetAll();
+				List<Contract> contractsCancelled = new List<Contract>();
+				foreach (Contract contract in contracts)
+				{
+					if (contract.Status.Equals(SD.Contract_Cacelled))
+					{
+						contractsCancelled.Add(contract);
+					}
+				}
+				loadContract(contractsCancelled);
+			}
 		}
 	}
 }
