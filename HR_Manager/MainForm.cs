@@ -63,6 +63,11 @@ namespace HR_Manager
         {
 
         }
+
+        private void employee1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }

@@ -8,18 +8,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HR_Manager
+namespace HR_Manager.Dashboard
 {
-    public partial class DashBoard : UserControl
+    public partial class fDashBoard_employ : Form
     {
-        public DashBoard()
+        public fDashBoard_employ()
         {
             InitializeComponent();
         }
 
-        private void label1_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }

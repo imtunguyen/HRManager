@@ -48,9 +48,9 @@ namespace HR_Manager
             button4.BackColor = Color.White;
             button4.Image = Properties.Resources.log_out;
             button4.ImageAlign = ContentAlignment.MiddleLeft;
-            button4.Location = new Point(6, 263);
+            button4.Location = new Point(6, 280);
             button4.Name = "button4";
-            button4.Size = new Size(188, 50);
+            button4.Size = new Size(188, 53);
             button4.TabIndex = 0;
             button4.Text = "LOG OUT";
             button4.UseVisualStyleBackColor = false;
@@ -62,9 +62,9 @@ namespace HR_Manager
             button3.BackColor = Color.White;
             button3.Image = Properties.Resources.business_report;
             button3.ImageAlign = ContentAlignment.MiddleLeft;
-            button3.Location = new Point(6, 135);
+            button3.Location = new Point(6, 143);
             button3.Name = "button3";
-            button3.Size = new Size(188, 50);
+            button3.Size = new Size(188, 53);
             button3.TabIndex = 0;
             button3.Text = "DASBOARD";
             button3.UseVisualStyleBackColor = false;
@@ -78,7 +78,7 @@ namespace HR_Manager
             btnEmployee.ImageAlign = ContentAlignment.MiddleLeft;
             btnEmployee.Location = new Point(6, 7);
             btnEmployee.Name = "btnEmployee";
-            btnEmployee.Size = new Size(188, 50);
+            btnEmployee.Size = new Size(188, 53);
             btnEmployee.TabIndex = 0;
             btnEmployee.Text = "EMPLOYEE";
             btnEmployee.UseVisualStyleBackColor = false;
@@ -90,9 +90,9 @@ namespace HR_Manager
             button1.BackColor = Color.White;
             button1.Image = Properties.Resources.salary;
             button1.ImageAlign = ContentAlignment.MiddleLeft;
-            button1.Location = new Point(6, 71);
+            button1.Location = new Point(6, 75);
             button1.Name = "button1";
-            button1.Size = new Size(188, 50);
+            button1.Size = new Size(188, 53);
             button1.TabIndex = 0;
             button1.Text = "PAYROLL";
             button1.UseVisualStyleBackColor = false;
@@ -100,10 +100,11 @@ namespace HR_Manager
             // 
             // employee1
             // 
-            employee1.Location = new Point(206, 0);
+            employee1.Location = new Point(200, 0);
             employee1.Name = "employee1";
-            employee1.Size = new Size(1000, 562);
+            employee1.Size = new Size(1000, 599);
             employee1.TabIndex = 3;
+            employee1.Load += employee1_Load;
             // 
             // dashboard1
             // 
@@ -111,7 +112,7 @@ namespace HR_Manager
             dashboard1.Location = new Point(206, 0);
             dashboard1.Margin = new Padding(3, 4, 3, 4);
             dashboard1.Name = "dashboard1";
-            dashboard1.Size = new Size(1000, 600);
+            dashboard1.Size = new Size(1000, 640);
             dashboard1.TabIndex = 3;
             // 
             // payroll1
@@ -119,7 +120,7 @@ namespace HR_Manager
             payroll1.Location = new Point(206, 0);
             payroll1.Margin = new Padding(3, 4, 3, 4);
             payroll1.Name = "payroll1";
-            payroll1.Size = new Size(1000, 600);
+            payroll1.Size = new Size(1000, 640);
             payroll1.TabIndex = 3;
             // 
             // tableLayoutPanel1
@@ -139,7 +140,7 @@ namespace HR_Manager
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 20F));
-            tableLayoutPanel1.Size = new Size(200, 320);
+            tableLayoutPanel1.Size = new Size(200, 341);
             tableLayoutPanel1.TabIndex = 5;
             // 
             // button5
@@ -148,9 +149,9 @@ namespace HR_Manager
             button5.BackColor = Color.White;
             button5.Image = Properties.Resources.workflow;
             button5.ImageAlign = ContentAlignment.MiddleLeft;
-            button5.Location = new Point(6, 199);
+            button5.Location = new Point(6, 211);
             button5.Name = "button5";
-            button5.Size = new Size(188, 50);
+            button5.Size = new Size(188, 53);
             button5.TabIndex = 1;
             button5.Text = "WORKFLOW";
             button5.UseVisualStyleBackColor = false;
@@ -158,9 +159,9 @@ namespace HR_Manager
             // 
             // MainForm
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1199, 561);
+            ClientSize = new Size(1199, 598);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(employee1);
             Controls.Add(payroll1);
