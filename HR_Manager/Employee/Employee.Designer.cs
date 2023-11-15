@@ -31,6 +31,7 @@
         {
             tabPage1 = new TabPage();
             tableLayoutPanel1 = new TableLayoutPanel();
+            tableLayoutPanel2 = new TableLayoutPanel();
             panel1 = new Panel();
             crudEmployees1 = new CRUDEmployees();
             tabControl1 = new TabControl();
@@ -68,6 +69,19 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 87.23022F));
             tableLayoutPanel1.Size = new Size(986, 556);
             tableLayoutPanel1.TabIndex = 0;
+            // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 31.44654F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 68.55346F));
+            tableLayoutPanel2.Location = new Point(665, 3);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Size = new Size(318, 65);
+            tableLayoutPanel2.TabIndex = 2;
             // 
             // panel1
             // 
@@ -146,6 +160,7 @@
         private TabPage tabPage3;
         private DepartmentUserControl department;
         private TabPage tabPage2;
+        private TableLayoutPanel tableLayoutPanel2;
         private Panel panel1;
         private CRUDEmployees crudEmployees1;
     }

@@ -18,6 +18,7 @@ namespace HR_Manager.Employee
         EmployeeBUS eBUS;
         List<EmployeeDTO> eList;
         DataTable dt = new DataTable();
+        private int idSelected;
         public CRUDEmployees()
         {
             eBUS = new EmployeeBUS();
@@ -50,7 +51,7 @@ namespace HR_Manager.Employee
                 row["Gender"] = e.Gender;
                 row["Day Of Birth"] = e.Date_of_Birth.ToShortDateString();
                 row["Date Joined"] = e.Date_Joined.ToShortDateString();
-                row["Date Left"] = e.Date_Left.ToShortDateString();
+                row["Date Left"] = e.Date_Left.HasValue ? e.Date_Left.Value.ToShortDateString() : string.Empty;
                 row["Phone"] = e.Phone;
                 row["Email"] = e.Email;
                 row["Image"] = e.img_path;
@@ -68,7 +69,8 @@ namespace HR_Manager.Employee
 
         private void btnUpdateEmployee_Click(object sender, EventArgs e)
         {
-            AddEmployee update = new AddEmployee(2, "update");
+            eDTO = eBUS.GetById(idSelected);
+            AddEmployee update = new AddEmployee(2, "update", eDTO);
             update.Show();
         }
 
@@ -105,8 +107,7 @@ namespace HR_Manager.Employee
             if (rowIndex >= 0)
             {
                 DataGridViewRow row = dgvEmployee.Rows[rowIndex];
-                AddEmployee update = new AddEmployee(2, "update");
-                update.txtName.Text = row.Cells["Name"].Value.ToString();
+                idSelected = Convert.ToInt32(row.Cells["ID"].Value);
             }
         }
 
@@ -114,9 +115,33 @@ namespace HR_Manager.Employee
         {
             loadDataGridView();
         }
-
-        private void btnSearch_Click(object sender, EventArgs e)
+        private DataTable SearchByUsername(DataTable dataTable, string username)
         {
+            DataTable searchData = new DataTable();
+            searchData = dataTable.Clone();
+
+            // Lặp qua từng dòng trong DataTable để tìm kiếm
+            foreach (DataRow row in dataTable.Rows)
+            {
+                string currentUsername = row["Name"].ToString();
+                if (currentUsername.ToLower().Contains(username.ToLower()))
+                {
+                    searchData.ImportRow(row);
+                }
+            }
+
+            return searchData;
+        }
+
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            string searchValue = txtSearch.Text.Trim(); 
+            DataTable searchResult = SearchByUsername(dt, searchValue);
+
+            // Gán kết quả tìm kiếm vào DataGridView
+            dgvEmployee.DataSource = searchResult;
+            dgvEmployee.Refresh();
+
 
         }
     }

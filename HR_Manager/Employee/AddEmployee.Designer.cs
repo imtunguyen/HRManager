@@ -50,6 +50,8 @@
             btnChoose = new Button();
             label5 = new Label();
             comboBox1 = new ComboBox();
+            lblDateLeft = new Label();
+            dtpDateLeft = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -234,7 +236,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(88, 247);
+            label5.Location = new Point(88, 283);
             label5.Name = "label5";
             label5.Size = new Size(73, 15);
             label5.TabIndex = 10;
@@ -243,10 +245,28 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(166, 247);
+            comboBox1.Location = new Point(166, 283);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(200, 23);
             comboBox1.TabIndex = 11;
+            // 
+            // lblDateLeft
+            // 
+            lblDateLeft.AutoSize = true;
+            lblDateLeft.Location = new Point(88, 244);
+            lblDateLeft.Name = "lblDateLeft";
+            lblDateLeft.Size = new Size(54, 15);
+            lblDateLeft.TabIndex = 0;
+            lblDateLeft.Text = "Date Left";
+            lblDateLeft.Visible = false;
+            // 
+            // dtpDateLeft
+            // 
+            dtpDateLeft.Location = new Point(166, 241);
+            dtpDateLeft.Name = "dtpDateLeft";
+            dtpDateLeft.Size = new Size(200, 23);
+            dtpDateLeft.TabIndex = 2;
+            dtpDateLeft.Visible = false;
             // 
             // AddEmployee
             // 
@@ -262,6 +282,7 @@
             Controls.Add(btnAdd);
             Controls.Add(cbStatus);
             Controls.Add(cbGender);
+            Controls.Add(dtpDateLeft);
             Controls.Add(dtpDayJoined);
             Controls.Add(dtpDateofBirth);
             Controls.Add(txtPhone);
@@ -272,6 +293,7 @@
             Controls.Add(label6);
             Controls.Add(label4);
             Controls.Add(label7);
+            Controls.Add(lblDateLeft);
             Controls.Add(label1);
             Controls.Add(label3);
             Controls.Add(label2);
@@ -305,5 +327,7 @@
         private Button btnChoose;
         private Label label5;
         private ComboBox comboBox1;
+        private Label lblDateLeft;
+        private DateTimePicker dtpDateLeft;
     }
 }
