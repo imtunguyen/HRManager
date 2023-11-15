@@ -172,69 +172,42 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
+
+        public bool UpdateBasePay(int Id, double basePay)
+        {
+            try
+            {
+                using (SqlConnection conn = DbConnection.GetSqlConnection())
+                {
+                    string query = "update EMPLOYEE set base_pay = " + basePay + " where id = " + Id;
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        int rowsChanged = cmd.ExecuteNonQuery();
+                        return rowsChanged > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                ex.ToString();
+                return false;
+            }
+        }
+
+        public bool UpdateDayJoin(int Id, DateTime dayJoin)
+        {
+
+            using (SqlConnection conn = DbConnection.GetSqlConnection())
+            {
+                string query = "update EMPLOYEE set date_joined = '" + dayJoin + "' where id = " + Id;
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    int rowsChanged = cmd.ExecuteNonQuery();
+                    return rowsChanged > 0;
+                }
+            }
+        }
     }
-}
-		public bool Update(int id, EmployeeDTO t)
-		{
-			using (SqlConnection connection = DbConnection.GetSqlConnection())
-			{
-				string query = "UPDATE EMPLOYEE SET name = @Name, gender = @Gender, date_Of_Birth = @Date_Of_Birth, date_joined = @Date_Joined, date_left = @Date_Left, phone = @Phone, email = @Email, img_path = @img_path, status = @Status WHERE @ID = " + id;
-				using (SqlCommand command = new SqlCommand(query, connection))
-				{
-					command.Parameters.AddWithValue("@Name", t.Name);
-					command.Parameters.AddWithValue("@Gender", t.Gender);
-					command.Parameters.AddWithValue("@Date_Of_Birth", t.Date_of_Birth);
-					command.Parameters.AddWithValue("@Date_Joined", t.Date_Joined);
-					command.Parameters.AddWithValue("@Phone", t.Phone);
-					command.Parameters.AddWithValue("@Email", t.Email);
-					command.Parameters.AddWithValue("@img_path", t.img_path);
-					command.Parameters.AddWithValue("@Status", t.Status);
-					command.Parameters.AddWithValue("@ID", id);
-					int result = command.ExecuteNonQuery();
-					return result > 0;
-				}
-			}
-		}
-
-		public bool Update(EmployeeDTO t)
-		{
-			throw new NotImplementedException();
-		}
-		public bool UpdateBasePay(int Id, double basePay)
-		{
-			try
-			{
-				using (SqlConnection conn = DbConnection.GetSqlConnection())
-				{
-					string query = "update EMPLOYEE set base_pay = " + basePay + " where id = " + Id;
-					using (SqlCommand cmd = new SqlCommand(query, conn))
-					{
-						int rowsChanged = cmd.ExecuteNonQuery();
-						return rowsChanged > 0;
-					}
-				}
-			}
-			catch (Exception ex)
-			{
-				ex.ToString();
-				return false;
-			}
-		}
-
-		public bool UpdateDayJoin(int Id, DateTime dayJoin)
-		{
-
-			using (SqlConnection conn = DbConnection.GetSqlConnection())
-			{
-				string query = "update EMPLOYEE set date_joined = '" + dayJoin + "' where id = " + Id;
-				using (SqlCommand cmd = new SqlCommand(query, conn))
-				{
-					int rowsChanged = cmd.ExecuteNonQuery();
-					return rowsChanged > 0;
-				}
-			}
-		}
-	}
 
 
 }
