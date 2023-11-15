@@ -14,5 +14,6 @@ namespace DAO
         bool Add(T t);
         bool Update(T t);
         bool Delete(int id);
+
     }
 }

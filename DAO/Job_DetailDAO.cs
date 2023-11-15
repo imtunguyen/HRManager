@@ -1,15 +1,17 @@
 ﻿using DTO;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Threading.Tasks;
 
 namespace DAO
 {
-    public class Job_DetailDAO : InterfaceDAO<Job_Detail>
+    public class Job_DetailDAO : InterfaceDAO<Job_DetailDTO>
     {
-        public bool Add(Job_Detail t)
+        public bool Add(Job_DetailDTO t)
         {
             throw new NotImplementedException();
         }
@@ -19,19 +21,28 @@ namespace DAO
             throw new NotImplementedException();
         }
 
-        public List<Job_Detail> GetAll()
+        public List<Job_DetailDTO> GetAll()
         {
             throw new NotImplementedException();
         }
 
-        public Job_Detail GetById(int id)
+        public Job_DetailDTO GetById(int id)
         {
             throw new NotImplementedException();
         }
 
-        public bool Update(Job_Detail t)
+        public bool Update(Job_DetailDTO t)
         {
             throw new NotImplementedException();
         }
-    }
+        
+       
+
+
+
+
+
+
+        }
 }
+

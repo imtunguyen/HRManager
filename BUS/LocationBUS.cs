@@ -1,4 +1,6 @@
-﻿using System;
+﻿using DAO;
+using DTO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,7 +8,20 @@ using System.Threading.Tasks;
 
 namespace BUS
 {
-    internal class LocationBUS
+    public class LocationBUS
     {
+        public LocationDAO locaDao;
+        public LocationBUS()
+        {
+            locaDao = LocationDAO.getInstance();
+        }
+        public List<LocationDTO> GetAll()
+        {
+            return locaDao.GetAll();
+        }
+        public LocationDTO getById(int id)
+        {
+            return locaDao.GetById(id);
+        }
     }
 }

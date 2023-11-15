@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class Job_Detail
+    public class Job_DetailDTO
     {
-        public Job_Detail() { }
+        public Job_DetailDTO() { }
         public int ID { get; set; }
         public int Employee_ID { get; set; }
         public int Job_ID { get; set; }
@@ -18,7 +18,7 @@ namespace DTO
         public string description { get; set; }
         public string status { get; set; }
 
-        public Job_Detail(int ID, int Employee_ID, int Job_ID, int Location_ID, 
+        public Job_DetailDTO(int ID, int Employee_ID, int Job_ID, int Location_ID, 
             DateOnly fromDate, DateOnly toDate, string description, string status)
         {
             this.ID = ID;

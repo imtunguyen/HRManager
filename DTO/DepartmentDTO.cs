@@ -6,19 +6,19 @@ using System.Threading.Tasks;
 
 namespace DTO
 {
-    public class Department
+    public class DepartmentDTO
     {
         public int ID {  get; set; }
         public int Location_ID { get; set; }
         public string Name { get; set; }
         public string Address_Detail { get; set; }
 
-        public Department()
+        public DepartmentDTO()
         {
             
         }
 
-        public Department(int ID, int Location_ID, string Name, string Address_Detail)
+        public DepartmentDTO(int ID, int Location_ID, string Name, string Address_Detail)
         {
             this.Address_Detail = Address_Detail;
             this.ID = ID;

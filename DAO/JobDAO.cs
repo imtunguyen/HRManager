@@ -8,13 +8,13 @@ using System.Threading.Tasks;
 
 namespace DAO
 {
-    public class JobDAO : InterfaceDAO<Job>
+    public class JobDAO : InterfaceDAO<JobDTO>
     {
         public static JobDAO getInstance() 
         {
             return new JobDAO();
         }
-        public bool Add(Job t)
+        public bool Add(JobDTO t)
         {
             try
             {
@@ -41,22 +41,93 @@ namespace DAO
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                var command = new SqlCommand("DELETE FROM JOB WHERE id = @id", DbConnection.GetSqlConnection());
+                command.Parameters.AddWithValue("@id", id);
+                var result = command.ExecuteNonQuery();
+                return result > 0;
+            }
+           
         }
 
-        public List<Job> GetAll()
+        public List<JobDTO> GetAll()
         {
-            throw new NotImplementedException();
+            List<JobDTO> joblist = new List<JobDTO>();
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "SELECT * FROM JOB";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            JobDTO job = new JobDTO
+                            {
+                                ID = Convert.ToInt32(reader["id"]),
+                                Job_Name = reader["job_name"].ToString(),
+                                role = reader["role"].ToString(),
+                                description = reader["description"].ToString()
+                            };
+                            joblist.Add(job);
+                        }
+                    }
+                }
+            }
+            return joblist;
         }
 
-        public Job GetById(int id)
+        public JobDTO GetById(int id)
         {
-            throw new NotImplementedException();
+            JobDTO result = null;
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "SELECT * FROM JOB WHERE id = @id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            result = new JobDTO
+                            {
+                                ID = Convert.ToInt32(reader["id"]),
+                                Job_Name = reader["job_name"].ToString(),
+                                role = reader["role"].ToString(),
+                                description = reader["description"].ToString()
+                            };
+                        }
+                    }
+                }
+            }
+            return result;
         }
 
-        public bool Update(Job t)
+        public bool Update(JobDTO t)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection connection = DbConnection.GetSqlConnection())
+                {
+                    string query = "update JOB set job_name = @job_name, role = @role, description = @description where id = @id";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@id", t.ID);
+                        command.Parameters.AddWithValue("@name", t.Job_Name);
+                        command.Parameters.AddWithValue("@location_id", t.role);
+                        command.Parameters.AddWithValue("@address_detail", t.description);
+                        int rowsChanged = command.ExecuteNonQuery();
+                        return rowsChanged > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
         }
     }
 }
