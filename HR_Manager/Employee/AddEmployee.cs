@@ -181,6 +181,7 @@ namespace HR_Manager
                     txtName.Text = eDto.Name;
                     dtpDateofBirth.Value = eDto.Date_of_Birth;
                     dtpDayJoined.Value = eDto.Date_Joined;
+                    dtpDateLeft.Value = eDto.Date_Left.Value;
                     txtEmail.Text = eDto.Email;
                     txtPhone.Text = eDto.Phone;
                     cbStatus.Text = eDto.Status;
@@ -195,8 +196,6 @@ namespace HR_Manager
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Chưa chọn hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
             }
         }
         private bool ValidatePhoneNumber()
