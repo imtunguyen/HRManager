@@ -83,7 +83,7 @@ namespace DAO
                         e.Phone = reader["phone"].ToString();
                         e.Email = reader["email"].ToString();
                         e.img_path = reader["img_path"].ToString();
-                        e.base_pay = Convert.ToDouble(reader["base_pay"]);
+                        e.base_pay = Convert.ToDecimal(reader["base_pay"]);
                         e.Status = reader["status"].ToString();
                         list.Add(e);
                     }

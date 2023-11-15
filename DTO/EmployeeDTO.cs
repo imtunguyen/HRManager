@@ -18,7 +18,7 @@ namespace DTO
         public string Status { get; set; }
         public string Email { get; set; }
         public string img_path { get; set; }
-        public Double base_pay { get; set; }
+        public Decimal base_pay { get; set; }
 
         public EmployeeDTO()
         {
@@ -26,7 +26,7 @@ namespace DTO
         }
 
         public EmployeeDTO(int ID, string Name, string Gender, DateOnly Date_of_Birth, DateOnly Day_Joined, DateOnly Day_Left, string Phone,
-            string Email, string Status, string img_path, Double base_pay)
+            string Email, string Status, string img_path, Decimal base_pay)
         {
             this.ID = ID;
             this.Name = Name;
