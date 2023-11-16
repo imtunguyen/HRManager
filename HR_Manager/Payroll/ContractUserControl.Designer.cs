@@ -36,6 +36,8 @@
 			rbAll = new RadioButton();
 			btnThemContract = new Button();
 			flowLayoutPanel1 = new FlowLayoutPanel();
+			cbTimKiem = new ComboBox();
+			txtTimKiem = new TextBox();
 			gbStatus.SuspendLayout();
 			SuspendLayout();
 			// 
@@ -150,10 +152,29 @@
 			flowLayoutPanel1.Size = new Size(1111, 584);
 			flowLayoutPanel1.TabIndex = 3;
 			// 
+			// cbTimKiem
+			// 
+			cbTimKiem.FormattingEnabled = true;
+			cbTimKiem.Location = new Point(747, 17);
+			cbTimKiem.Name = "cbTimKiem";
+			cbTimKiem.Size = new Size(141, 28);
+			cbTimKiem.TabIndex = 6;
+			cbTimKiem.SelectedValueChanged += cbTimKiem_SelectedValueChanged;
+			// 
+			// txtTimKiem
+			// 
+			txtTimKiem.Location = new Point(907, 18);
+			txtTimKiem.Name = "txtTimKiem";
+			txtTimKiem.Size = new Size(216, 27);
+			txtTimKiem.TabIndex = 7;
+			txtTimKiem.KeyPress += txtTimKiem_KeyPress;
+			// 
 			// ContractUserControl
 			// 
 			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
+			Controls.Add(txtTimKiem);
+			Controls.Add(cbTimKiem);
 			Controls.Add(gbStatus);
 			Controls.Add(btnThemContract);
 			Controls.Add(flowLayoutPanel1);
@@ -162,6 +183,7 @@
 			gbStatus.ResumeLayout(false);
 			gbStatus.PerformLayout();
 			ResumeLayout(false);
+			PerformLayout();
 		}
 
 		#endregion
@@ -174,5 +196,7 @@
 		private RadioButton rbAll;
 		private Button btnThemContract;
 		private FlowLayoutPanel flowLayoutPanel1;
+		private ComboBox cbTimKiem;
+		private TextBox txtTimKiem;
 	}
 }
