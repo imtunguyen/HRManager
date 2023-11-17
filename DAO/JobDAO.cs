@@ -18,11 +18,10 @@ namespace DAO
         {
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "INSERT INTO JOB (job_name, role, description) VALUES (@Job_Name, @Role, @Description)";
+                string query = "INSERT INTO JOB (job_name, description) VALUES (@Job_Name, @Description)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Job_Name", t.Job_Name);
-                    command.Parameters.AddWithValue("@Role", t.Role);
                     command.Parameters.AddWithValue("@Description", t.Description);
                     int result = command.ExecuteNonQuery();
                     return result > 0;
@@ -52,7 +51,6 @@ namespace DAO
                         Job job = new Job();
                         job.ID = Convert.ToInt32(reader["id"]);
                         job.Job_Name = reader["job_name"].ToString();
-                        job.Role = reader["role"].ToString();
                         job.Description = reader["description"].ToString();
                         list.Add(job);
                     }
@@ -76,7 +74,6 @@ namespace DAO
                         {
                             job.ID = Convert.ToInt32(reader["id"].ToString());
                             job.Job_Name = reader["job_name"].ToString();
-                            job.Role = reader["role"].ToString();
                             job.Description = reader["description"].ToString();
                         }
                     }
@@ -86,17 +83,15 @@ namespace DAO
             }
             return job;
         }
-
         public bool Update(int id, Job t)
         {
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "UPDATE JOB SET job_name = @Job_Name, role = @Role, description = @Description WHERE id = " + id;
+                string query = "UPDATE JOB SET job_name = @Job_Name, description = @Description WHERE id = " + id;
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@ID", id);
                     command.Parameters.AddWithValue("@Job_Name", t.Job_Name);
-                    command.Parameters.AddWithValue("@Role", t.Role);
                     command.Parameters.AddWithValue("@Description", t.Description);
                     int result = command.ExecuteNonQuery();
                     return result > 0;
@@ -104,10 +99,61 @@ namespace DAO
 
             }
         }
-
-		public bool Update(Job t)
-		{
-			throw new NotImplementedException();
-		}
-	}
+        public int GetAutoIncrement()
+        {
+            int result = -1;
+            try
+            {
+                using (SqlConnection connection = DbConnection.GetSqlConnection())
+                {
+                    string query = "SELECT ID from JOB";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (!reader.HasRows)
+                            {
+                                Console.WriteLine("No data");
+                            }
+                            else
+                            {
+                                while (reader.Read())
+                                {
+                                    result = reader.GetInt32(0); // Lấy giá trị cột AUTO_INCREMENT
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return result + 1;
+        }
+        public bool Update(Job t)
+        {
+            try
+            {
+                using (SqlConnection connection = DbConnection.GetSqlConnection())
+                {
+                    string query = "update JOB set job_name = @job_name, description = @description where id = @id";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@ID", t.ID);
+                        command.Parameters.AddWithValue("@Job_Name", t.Job_Name);
+                        command.Parameters.AddWithValue("@Description", t.Description);
+                        int rowsChanged = command.ExecuteNonQuery();
+                        return rowsChanged > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
+        }
+    }
 }

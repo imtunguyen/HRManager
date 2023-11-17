@@ -1,7 +1,10 @@
-﻿using DAO;
+﻿using System;
+using DAO;
 using DTO;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
+using System.Data;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -10,30 +13,41 @@ namespace BUS
 {
     public class JobBUS
     {
-        JobDAO dao;
-        public JobBUS() 
+        private JobDAO jobDAO = new JobDAO();
+
+        public JobBUS()
         {
-            dao = JobDAO.getInstance();
+            jobDAO = JobDAO.getInstance();
         }
-        public bool Add(Job dto)
+        public string Add(Job job)
         {
-            return dao.Add(dto);
-        } 
-        public bool Update(int id, Job dto)
-        {
-            return dao.Update(id, dto);
+            if (jobDAO.Add(job)) return "Add Job Success";
+            return "Add Job fail";
         }
-        public bool Delete(int id)
+
+        public string Update(Job t)
         {
-            return dao.Delete(id);
+            if (jobDAO.Update(t)) return " Update Job Success";
+            return "Update Job Fail";
         }
-        public Job GetById(int id)
+        public string Delete(int id)
         {
-            return dao.GetById(id);
+            if (jobDAO.Delete(id)) return "Delete Job Success";
+            return "Delete Fail";
         }
+
         public List<Job> GetAll()
         {
-            return dao.GetAll();
+            return jobDAO.GetAll();
+        }
+
+        public Job GetById(int id)
+        {
+            return jobDAO.GetById(id);
+        }
+        public int GetAutoIncrement()
+        {
+            return jobDAO.GetAutoIncrement();
         }
     }
 }
