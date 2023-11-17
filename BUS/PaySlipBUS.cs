@@ -34,7 +34,7 @@ namespace BUS
 
         public List<PaySlipDTO> SearchByEmployeeName(string name)
         {
-            return paySlipDAO.SearchByStatus(name);
+            return paySlipDAO.SearchByName(name);
         }
         public List<PaySlipDTO> Search(string name, string status)
         {
