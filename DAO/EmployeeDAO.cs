@@ -20,13 +20,12 @@ namespace DAO
         {
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "INSERT INTO EMPLOYEE (name, gender, date_Of_Birth, date_joined, phone, email, img_path, status) VALUES (@Name, @Gender, @Date_Of_Birth, @Date_Joined, @Phone, @Email, @img_path, @Status)";
+                string query = "INSERT INTO EMPLOYEE (name, gender, date_Of_Birth, phone, email, img_path, status) VALUES (@Name, @Gender, @Date_Of_Birth, @Phone, @Email, @img_path, @Status)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Name", t.Name);
                     command.Parameters.AddWithValue("@Gender", t.Gender);
                     command.Parameters.AddWithValue("@Date_Of_Birth", t.Date_of_Birth);
-                    command.Parameters.AddWithValue("@Date_Joined", t.Date_Joined);
                     command.Parameters.AddWithValue("@Phone", t.Phone);
                     command.Parameters.AddWithValue("@Email", t.Email);
                     if (!string.IsNullOrEmpty(t.img_path))
@@ -67,7 +66,13 @@ namespace DAO
                         e.Name = reader["Name"].ToString();
                         e.Gender = reader["gender"].ToString();
                         e.Date_of_Birth = DateTime.Parse(reader["date_Of_Birth"].ToString());
-                        e.Date_Joined = DateTime.Parse(reader["date_joined"].ToString());
+                        DateTime dateJoined;
+                        e.Date_Joined = DateTime.TryParse(reader["date_joined"].ToString(), out dateJoined) ? dateJoined : null;
+                        // Thay thế bằng
+                        if (DateTime.TryParse(reader["date_joined"].ToString(), out dateJoined))
+                        {
+                            e.Date_Joined = dateJoined;
+                        }
                         DateTime dateLeft;
                         e.Date_Left = DateTime.TryParse(reader["date_left"].ToString(), out dateLeft) ? dateLeft : null;
 
@@ -108,7 +113,18 @@ namespace DAO
                         e.Name = reader["Name"].ToString();
                         e.Gender = reader["gender"].ToString();
                         e.Date_of_Birth = DateTime.Parse(reader["date_Of_Birth"].ToString());
-                        e.Date_Joined = DateTime.Parse(reader["date_joined"].ToString());
+                        DateTime dateJoined;
+                        e.Date_Left = DateTime.TryParse(reader["date_left"].ToString(), out dateJoined) ? dateJoined : null;
+
+                        // Thay thế bằng
+                        if (DateTime.TryParse(reader["date_left"].ToString(), out dateJoined))
+                        {
+                            e.Date_Joined = dateJoined;
+                        }
+                        else
+                        {
+                            e.Date_Joined = null;
+                        }
                         DateTime dateLeft;
                         e.Date_Left = DateTime.TryParse(reader["date_left"].ToString(), out dateLeft) ? dateLeft : null;
 
@@ -123,6 +139,7 @@ namespace DAO
                         }
                         e.Phone = reader["phone"].ToString();
                         e.Email = reader["email"].ToString();
+                        e.base_pay = Convert.ToDecimal(reader["base_pay"]);
                         e.img_path = reader["img_path"].ToString();
                         e.Status = reader["status"].ToString();
                     }
@@ -135,14 +152,13 @@ namespace DAO
         {
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "UPDATE EMPLOYEE SET name = @Name, gender = @Gender, date_Of_Birth = @Date_Of_Birth, date_joined = @Date_Joined, date_left = @Date_Left, phone = @Phone, email = @Email, img_path = @img_path, status = @Status WHERE id = @id";
+                string query = "UPDATE EMPLOYEE SET name = @Name, gender = @Gender, date_Of_Birth = @Date_Of_Birth, date_left = @Date_Left, phone = @Phone, email = @Email, img_path = @img_path, status = @Status WHERE id = @id";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Name", employee.Name);
                     command.Parameters.AddWithValue("@Gender", employee.Gender);
                     command.Parameters.AddWithValue("@Date_Of_Birth", employee.Date_of_Birth);
-                    command.Parameters.AddWithValue("@Date_Joined", employee.Date_Joined);
                     command.Parameters.AddWithValue("@Phone", employee.Phone);
                     command.Parameters.AddWithValue("@Email", employee.Email);
                     if (employee.Date_Left.HasValue)

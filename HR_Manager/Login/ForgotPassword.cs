@@ -27,7 +27,11 @@ namespace HR_Manager
         }
 
         public object MessageIcons { get; private set; }
-
+        private void txtUsername_TextChanged(object sender, EventArgs e)
+        {
+            errorPro.SetError(txtUsername, "Username does not exist!");
+            errorPro.SetError(txtUsername, string.Empty);
+        }
         private void btnSubmit_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrWhiteSpace(txtUsername.Text) || string.IsNullOrWhiteSpace(txtNewPass.Text) || string.IsNullOrWhiteSpace(txtConfirm.Text))
@@ -66,9 +70,6 @@ namespace HR_Manager
             }
         }
 
-        private void txtUsername_TextChanged(object sender, EventArgs e)
-        {
-            errorPro.SetError(txtUsername, string.Empty);
-        }
+        
     }
 }

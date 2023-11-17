@@ -96,11 +96,11 @@ namespace HR_Manager
 
                 if (CheckDuplicatePhoneNumberEmail(txtPhone.Text, txtEmail.Text, idSelected))
                 {
-                    if (!ValidateJoinedLeft())
-                    {
-                        MessageBox.Show("Date Joined < Date Left!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
+                    //if (!ValidateJoinedLeft())
+                    //{
+                    //    MessageBox.Show("Date Joined < Date Left!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //    return;
+                    //}
                     try
                     {
                         EmployeeBUS eBUS = new EmployeeBUS();
@@ -143,7 +143,6 @@ namespace HR_Manager
             EmployeeDTO eDto = new EmployeeDTO();
             eDto.Name = txtName.Text;
             eDto.Date_of_Birth = dtpDateofBirth.Value;
-            eDto.Date_Joined = dtpDayJoined.Value;
             eDto.Date_Left = dtpDateLeft.Value;
             eDto.Email = txtEmail.Text;
             eDto.Phone = txtPhone.Text;
@@ -178,7 +177,7 @@ namespace HR_Manager
                 {
                     txtName.Text = eDto.Name;
                     dtpDateofBirth.Value = eDto.Date_of_Birth;
-                    dtpDayJoined.Value = eDto.Date_Joined;
+                    
                     dtpDateLeft.Value = eDto.Date_Left.Value;
                     txtEmail.Text = eDto.Email;
                     txtPhone.Text = eDto.Phone;
@@ -194,7 +193,7 @@ namespace HR_Manager
             }
             catch (Exception ex)
             {
-                
+
             }
         }
         private bool ValidatePhoneNumber()
@@ -217,14 +216,13 @@ namespace HR_Manager
             int age = currentDate.Year - dateOfBirth.Year;
             return age >= 18;
         }
-        private bool ValidateJoinedLeft()
-        {
-            DateTime currentDate = DateTime.Now;
-            DateTime dateJoined = dtpDayJoined.Value;
-            DateTime dateLeft = dtpDateLeft.Value;
+        //private bool ValidateJoinedLeft()
+        //{
+        //    DateTime currentDate = DateTime.Now;
+        //    DateTime dateLeft = dtpDateLeft.Value;
 
-            return dateJoined < dateLeft;
-        }
+        //    return dateJoined < dateLeft;
+        //}
         private bool CheckDuplicatePhoneNumberEmail(string phone, string email, int currentEmployeeId)
         {
             EmployeeBUS eBUS = new EmployeeBUS();
