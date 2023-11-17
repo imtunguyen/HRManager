@@ -40,6 +40,7 @@ namespace HR_Manager.Employee
             dt.Columns.Add("Date Left");
             dt.Columns.Add("Phone");
             dt.Columns.Add("Email");
+            dt.Columns.Add("Base Pay");
             dt.Columns.Add("Image");
             dt.Columns.Add("Status");
             int stt = 1;
@@ -50,10 +51,11 @@ namespace HR_Manager.Employee
                 row["Name"] = e.Name;
                 row["Gender"] = e.Gender;
                 row["Day Of Birth"] = e.Date_of_Birth.ToShortDateString();
-                row["Date Joined"] = e.Date_Joined.ToShortDateString();
+                row["Date Joined"] = e.Date_Joined.HasValue ? e.Date_Joined.Value.ToShortDateString() : string.Empty;
                 row["Date Left"] = e.Date_Left.HasValue ? e.Date_Left.Value.ToShortDateString() : string.Empty;
                 row["Phone"] = e.Phone;
                 row["Email"] = e.Email;
+                row["Base Pay"] = e.base_pay;
                 row["Image"] = e.img_path;
                 row["Status"] = e.Status;
                 dt.Rows.Add(row);
