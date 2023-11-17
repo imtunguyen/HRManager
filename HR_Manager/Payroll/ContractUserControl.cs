@@ -86,7 +86,7 @@ namespace HR_Manager.Payroll
 				Size = new Size(50, 20),
 				TabIndex = 2,
 				Name = "lblSalary" + count.ToString(),
-				Text = employeeDTO.base_pay.ToString() + " $ / month",
+				Text = obj.BasePay.ToString() + " $ / month",
 			};
 
 

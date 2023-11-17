@@ -174,7 +174,7 @@ namespace DAO
             throw new NotImplementedException();
         }
 
-        public bool UpdateBasePay(int Id, double basePay)
+        public bool UpdateBasePay(int Id, decimal basePay)
         {
             try
             {
