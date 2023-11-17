@@ -18,7 +18,7 @@ namespace BUS
         {
             return edao.GetAll();
         }
-        public bool UpdateBasePay(int Id, double basePay)
+        public bool UpdateBasePay(int Id, decimal basePay)
         {
             if(edao.UpdateBasePay(Id, basePay))
             {

@@ -80,7 +80,7 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
-        public List<PaySlipDTO> SearchByStatus(string name) 
+        public List<PaySlipDTO> SearchByName(string name) 
         {
             List<PaySlipDTO> list = new List<PaySlipDTO>();
             using (SqlConnection connection = DbConnection.GetSqlConnection())
@@ -137,7 +137,7 @@ namespace DAO
             return list;
         }
 
-        public List<PaySlipDTO> SearchByStaus(string status)
+        public List<PaySlipDTO> SearchByStatus(string status)
         {
             List<PaySlipDTO> list = new List<PaySlipDTO>();
             using (SqlConnection connection = DbConnection.GetSqlConnection())

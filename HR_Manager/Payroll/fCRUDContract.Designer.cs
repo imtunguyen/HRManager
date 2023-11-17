@@ -341,7 +341,7 @@
 			btnLuu.Name = "btnLuu";
 			btnLuu.Size = new Size(94, 41);
 			btnLuu.TabIndex = 7;
-			btnLuu.Text = "LƯU";
+			btnLuu.Text = "SAVE";
 			btnLuu.UseVisualStyleBackColor = false;
 			btnLuu.Click += btnLuu_Click;
 			// 

@@ -1,6 +1,7 @@
 ﻿using DTO;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,7 +14,6 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
-
         public bool Delete(int id)
         {
             throw new NotImplementedException();

@@ -157,7 +157,8 @@ namespace HR_Manager
                 else
                 {
                     MessageBox.Show("Mật khẩu không đúng.", "Cảnh báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    password = "";
+                    txtPassword.Text = string.Empty;
+
                 }
                 return;
             }

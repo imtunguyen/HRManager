@@ -32,14 +32,12 @@
             txtName = new TextBox();
             label3 = new Label();
             label4 = new Label();
-            label1 = new Label();
             label6 = new Label();
             txtPhone = new TextBox();
             label7 = new Label();
             label9 = new Label();
             txtEmail = new TextBox();
             dtpDateofBirth = new DateTimePicker();
-            dtpDayJoined = new DateTimePicker();
             cbGender = new CheckBox();
             cbStatus = new ComboBox();
             label10 = new Label();
@@ -50,6 +48,8 @@
             btnChoose = new Button();
             label5 = new Label();
             comboBox1 = new ComboBox();
+            lblDateLeft = new Label();
+            dtpDateLeft = new DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             SuspendLayout();
             // 
@@ -86,15 +86,6 @@
             label4.Size = new Size(76, 15);
             label4.TabIndex = 0;
             label4.Text = "Date of Birth:";
-            // 
-            // label1
-            // 
-            label1.AutoSize = true;
-            label1.Location = new Point(88, 203);
-            label1.Name = "label1";
-            label1.Size = new Size(68, 15);
-            label1.TabIndex = 0;
-            label1.Text = "Date Joined";
             // 
             // label6
             // 
@@ -143,13 +134,6 @@
             dtpDateofBirth.Name = "dtpDateofBirth";
             dtpDateofBirth.Size = new Size(200, 23);
             dtpDateofBirth.TabIndex = 2;
-            // 
-            // dtpDayJoined
-            // 
-            dtpDayJoined.Location = new Point(166, 200);
-            dtpDayJoined.Name = "dtpDayJoined";
-            dtpDayJoined.Size = new Size(200, 23);
-            dtpDayJoined.TabIndex = 2;
             // 
             // cbGender
             // 
@@ -234,7 +218,7 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(88, 247);
+            label5.Location = new Point(88, 245);
             label5.Name = "label5";
             label5.Size = new Size(73, 15);
             label5.TabIndex = 10;
@@ -243,10 +227,28 @@
             // comboBox1
             // 
             comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(166, 247);
+            comboBox1.Location = new Point(166, 245);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(200, 23);
             comboBox1.TabIndex = 11;
+            // 
+            // lblDateLeft
+            // 
+            lblDateLeft.AutoSize = true;
+            lblDateLeft.Location = new Point(88, 206);
+            lblDateLeft.Name = "lblDateLeft";
+            lblDateLeft.Size = new Size(54, 15);
+            lblDateLeft.TabIndex = 0;
+            lblDateLeft.Text = "Date Left";
+            lblDateLeft.Visible = false;
+            // 
+            // dtpDateLeft
+            // 
+            dtpDateLeft.Location = new Point(166, 203);
+            dtpDateLeft.Name = "dtpDateLeft";
+            dtpDateLeft.Size = new Size(200, 23);
+            dtpDateLeft.TabIndex = 2;
+            dtpDateLeft.Visible = false;
             // 
             // AddEmployee
             // 
@@ -262,7 +264,7 @@
             Controls.Add(btnAdd);
             Controls.Add(cbStatus);
             Controls.Add(cbGender);
-            Controls.Add(dtpDayJoined);
+            Controls.Add(dtpDateLeft);
             Controls.Add(dtpDateofBirth);
             Controls.Add(txtPhone);
             Controls.Add(txtEmail);
@@ -272,7 +274,7 @@
             Controls.Add(label6);
             Controls.Add(label4);
             Controls.Add(label7);
-            Controls.Add(label1);
+            Controls.Add(lblDateLeft);
             Controls.Add(label3);
             Controls.Add(label2);
             Name = "AddEmployee";
@@ -287,14 +289,12 @@
         public TextBox txtName;
         private Label label3;
         private Label label4;
-        private Label label1;
         private Label label6;
         public TextBox txtPhone;
         private Label label7;
         private Label label9;
         public TextBox txtEmail;
         private DateTimePicker dtpDateofBirth;
-        private DateTimePicker dtpDayJoined;
         private CheckBox cbGender;
         private ComboBox cbStatus;
         private Label label10;
@@ -305,5 +305,7 @@
         private Button btnChoose;
         private Label label5;
         private ComboBox comboBox1;
+        private Label lblDateLeft;
+        private DateTimePicker dtpDateLeft;
     }
 }

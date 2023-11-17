@@ -99,8 +99,7 @@
             btnDelete = new Button();
             btnUpdateEmployee = new Button();
             btnAddEmployee = new Button();
-            textBox7 = new TextBox();
-            btnSearch = new Button();
+            txtSearch = new TextBox();
             btnLoad = new Button();
             tableLayoutPanel1 = new TableLayoutPanel();
             panel3.SuspendLayout();
@@ -774,14 +773,13 @@
             tableLayoutPanel7.Controls.Add(btnDelete, 0, 0);
             tableLayoutPanel7.Controls.Add(btnUpdateEmployee, 0, 0);
             tableLayoutPanel7.Controls.Add(btnAddEmployee, 0, 0);
-            tableLayoutPanel7.Controls.Add(textBox7, 3, 0);
-            tableLayoutPanel7.Controls.Add(btnSearch, 4, 0);
+            tableLayoutPanel7.Controls.Add(txtSearch, 3, 0);
             tableLayoutPanel7.Controls.Add(btnLoad, 5, 0);
             tableLayoutPanel7.Location = new Point(3, 3);
             tableLayoutPanel7.Name = "tableLayoutPanel7";
             tableLayoutPanel7.RowCount = 1;
             tableLayoutPanel7.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel7.Size = new Size(913, 76);
+            tableLayoutPanel7.Size = new Size(913, 49);
             tableLayoutPanel7.TabIndex = 7;
             // 
             // btnDelete
@@ -793,7 +791,7 @@
             btnDelete.ImageAlign = ContentAlignment.MiddleLeft;
             btnDelete.Location = new Point(227, 3);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(101, 50);
+            btnDelete.Size = new Size(101, 43);
             btnDelete.TabIndex = 32;
             btnDelete.Text = "Delete";
             btnDelete.TextAlign = ContentAlignment.MiddleRight;
@@ -809,7 +807,7 @@
             btnUpdateEmployee.ImageAlign = ContentAlignment.MiddleLeft;
             btnUpdateEmployee.Location = new Point(112, 3);
             btnUpdateEmployee.Name = "btnUpdateEmployee";
-            btnUpdateEmployee.Size = new Size(97, 50);
+            btnUpdateEmployee.Size = new Size(97, 43);
             btnUpdateEmployee.TabIndex = 31;
             btnUpdateEmployee.Text = "Update";
             btnUpdateEmployee.TextAlign = ContentAlignment.MiddleRight;
@@ -826,36 +824,24 @@
             btnAddEmployee.ImageAlign = ContentAlignment.MiddleLeft;
             btnAddEmployee.Location = new Point(3, 3);
             btnAddEmployee.Name = "btnAddEmployee";
-            btnAddEmployee.Size = new Size(94, 47);
+            btnAddEmployee.Size = new Size(94, 43);
             btnAddEmployee.TabIndex = 30;
             btnAddEmployee.Text = "Add";
             btnAddEmployee.TextAlign = ContentAlignment.MiddleRight;
             btnAddEmployee.UseVisualStyleBackColor = false;
             btnAddEmployee.Click += btnAddEmployee_Click;
             // 
-            // textBox7
+            // txtSearch
             // 
-            textBox7.Location = new Point(397, 3);
-            textBox7.Margin = new Padding(3, 3, 0, 3);
-            textBox7.Multiline = true;
-            textBox7.Name = "textBox7";
-            textBox7.Size = new Size(290, 36);
-            textBox7.TabIndex = 33;
-            // 
-            // btnSearch
-            // 
-            btnSearch.BackColor = SystemColors.ButtonHighlight;
-            btnSearch.FlatStyle = FlatStyle.Flat;
-            btnSearch.Image = (Image)resources.GetObject("btnSearch.Image");
-            btnSearch.ImageAlign = ContentAlignment.MiddleLeft;
-            btnSearch.Location = new Point(687, 3);
-            btnSearch.Margin = new Padding(0, 3, 3, 3);
-            btnSearch.Name = "btnSearch";
-            btnSearch.Size = new Size(128, 46);
-            btnSearch.TabIndex = 32;
-            btnSearch.Text = "Search";
-            btnSearch.UseVisualStyleBackColor = false;
-            btnSearch.Click += btnSearch_Click;
+            txtSearch.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
+            txtSearch.Location = new Point(397, 3);
+            txtSearch.Margin = new Padding(3, 3, 0, 3);
+            txtSearch.Multiline = true;
+            txtSearch.Name = "txtSearch";
+            txtSearch.PlaceholderText = "Search by username...";
+            txtSearch.Size = new Size(290, 36);
+            txtSearch.TabIndex = 33;
+            txtSearch.TextChanged += txtSearch_TextChanged;
             // 
             // btnLoad
             // 
@@ -865,7 +851,7 @@
             btnLoad.Image = (Image)resources.GetObject("btnLoad.Image");
             btnLoad.Location = new Point(834, 3);
             btnLoad.Name = "btnLoad";
-            btnLoad.Size = new Size(76, 50);
+            btnLoad.Size = new Size(76, 43);
             btnLoad.TabIndex = 34;
             btnLoad.UseVisualStyleBackColor = false;
             btnLoad.Click += btnLoad_Click;
@@ -987,8 +973,7 @@
         private Button btnDelete;
         private Button btnUpdateEmployee;
         private Button btnAddEmployee;
-        private TextBox textBox7;
-        private Button btnSearch;
+        private TextBox txtSearch;
         private TableLayoutPanel tableLayoutPanel1;
         private Button btnLoad;
     }

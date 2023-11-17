@@ -17,24 +17,41 @@ namespace HR_Manager.Payroll
 		private int count = 1;
 		private ContractBUS ctBus;
 		private EmployeeBUS emBus;
+		private JobBUS jBus;
+		private List<string> lcbTimKiem = new List<string> { "Contract Name", "Employee Name", "Job Position" };
+		private string indexTk = "";
 		public ContractUserControl()
 		{
 			InitializeComponent();
 			ctBus = new ContractBUS();
 			emBus = new EmployeeBUS();
-			loadContract();
+			jBus = new JobBUS();
+			loadcbTimKiem();
 		}
 
 		public void loadContract()
 		{
 			// Xóa tất cả các panel được tạo trước đó
 			flowLayoutPanel1.Controls.Clear();
-			List<Contract> contracts = new List<Contract>();
-			contracts = ctBus.GetAll();
+			List<Contract> contracts = ctBus.GetAll();
 			foreach (Contract item in contracts)
 			{
 				CreatePanelContract(item);
 			}
+		}
+
+		private void loadContract(List<Contract> contracts)
+		{
+			flowLayoutPanel1.Controls.Clear();
+			foreach (Contract item in contracts)
+			{
+				CreatePanelContract(item);
+			}
+		}
+
+		private void loadcbTimKiem()
+		{
+			cbTimKiem.DataSource = lcbTimKiem;
 		}
 
 		private void CreatePanelContract(Contract obj = null)
@@ -69,7 +86,7 @@ namespace HR_Manager.Payroll
 				Size = new Size(50, 20),
 				TabIndex = 2,
 				Name = "lblSalary" + count.ToString(),
-				Text = employeeDTO.base_pay.ToString() + " $ / month",
+				Text = obj.BasePay.ToString() + " $ / month",
 			};
 
 
@@ -104,16 +121,16 @@ namespace HR_Manager.Payroll
 			{
 				panelContainer_Click(s, ev, obj);
 			};
-			if (obj.Status.Equals("New"))
+			if (obj.Status.Equals(SD.Contract_New))
 			{
 				lblStatus.BackColor = Color.FromArgb(20, 162, 184);
 			}
-			else if (obj.Status.Equals("Running"))
+			else if (obj.Status.Equals(SD.Contract_Running))
 			{
 				lblStatus.Location = new Point(265, 13);
 				lblStatus.BackColor = Color.FromArgb(40, 167, 69);
 			}
-			else if (obj.Status.Equals("Expired"))
+			else if (obj.Status.Equals(SD.Contract_Expired))
 			{
 				lblStatus.Location = new Point(265, 13);
 				lblStatus.BackColor = Color.FromArgb(255, 172, 0);
@@ -135,6 +152,159 @@ namespace HR_Manager.Payroll
 		{
 			fCRUDContract f = new fCRUDContract(this, "Add");
 			f.Visible = true;
+		}
+
+		private void rbNew_CheckedChanged(object sender, EventArgs e)
+		{
+			if (rbNew.Checked)
+			{
+				List<Contract> contracts = ctBus.GetAll();
+				List<Contract> contractsNew = new List<Contract>();
+				foreach (Contract contract in contracts)
+				{
+					if (contract.Status.Equals(SD.Contract_New))
+					{
+						contractsNew.Add(contract);
+					}
+				}
+				loadContract(contractsNew);
+			}
+		}
+
+		private void rbAll_CheckedChanged(object sender, EventArgs e)
+		{
+			if (rbAll.Checked)
+			{
+				loadContract();
+			}
+		}
+
+		private void rbRunning_CheckedChanged(object sender, EventArgs e)
+		{
+			if (rbRunning.Checked)
+			{
+				List<Contract> contracts = ctBus.GetAll();
+				List<Contract> contractsRunning = new List<Contract>();
+				foreach (Contract contract in contracts)
+				{
+					if (contract.Status.Equals(SD.Contract_Running))
+					{
+						contractsRunning.Add(contract);
+					}
+				}
+				loadContract(contractsRunning);
+			}
+		}
+
+		private void rbExpired_CheckedChanged(object sender, EventArgs e)
+		{
+			if (rbExpired.Checked)
+			{
+				List<Contract> contracts = ctBus.GetAll();
+				List<Contract> contractsExpired = new List<Contract>();
+				foreach (Contract contract in contracts)
+				{
+					if (contract.Status.Equals(SD.Contract_Expired))
+					{
+						contractsExpired.Add(contract);
+					}
+				}
+				loadContract(contractsExpired);
+			}
+		}
+
+		private void rbCancelled_CheckedChanged(object sender, EventArgs e)
+		{
+			if (rbCancelled.Checked)
+			{
+				List<Contract> contracts = ctBus.GetAll();
+				List<Contract> contractsCancelled = new List<Contract>();
+				foreach (Contract contract in contracts)
+				{
+					if (contract.Status.Equals(SD.Contract_Cacelled))
+					{
+						contractsCancelled.Add(contract);
+					}
+				}
+				loadContract(contractsCancelled);
+			}
+		}
+
+
+		private void cbTimKiem_SelectedValueChanged(object sender, EventArgs e)
+		{
+			ComboBox cb = sender as ComboBox;
+			if (cb.SelectedValue != null)
+			{
+				indexTk = cb.SelectedValue.ToString();
+			}
+		}
+
+		private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar == (char)Keys.Enter)
+			{
+				// Enter key is pressed
+				// Add your logic here
+				string checkStatus = "";
+				// Duyệt qua gropbox xem radiobutton nào đang đc check 
+				foreach (RadioButton rb in gbStatus.Controls.OfType<RadioButton>())
+				{
+					if (rb.Checked)
+					{
+						checkStatus = rb.Text;
+						break;
+					}
+				}
+				List<Contract> contracts = ctBus.GetAll();
+				List<Contract> contractsSearch = new List<Contract>();
+				if (!checkStatus.Equals("All"))
+				{
+					foreach (Contract contract in contracts)
+					{
+						if (contract.Status.Equals(checkStatus))
+						{
+							contractsSearch.Add(contract);
+						}
+					}
+				}
+				else
+				{
+					contractsSearch = contracts;
+				}
+				
+				switch (indexTk)
+				{
+					case "Contract Name":
+						contractsSearch = contractsSearch.Where(c => c.Name.ToLower().Contains(txtTimKiem.Text.ToLower())).ToList();
+						loadContract(contractsSearch);
+						break;
+					case "Employee Name":
+						List<EmployeeDTO> employeesList = emBus.GetAll();
+						List<EmployeeDTO> employeeSearch = employeesList
+							.Where(employee => employee.Name.ToLower().Contains(txtTimKiem.Text.ToLower()))
+							.ToList();
+						contractsSearch = contractsSearch
+						 .Join(employeeSearch, contract => contract.EmployeeId, employee => employee.ID , 
+						 (contract, employee) => new {Contract = contract, Employee = employee}).Select(x=>x.Contract).ToList();
+						loadContract(contractsSearch);
+						break;
+					case "Job Position":
+						List<Job> jobsList = jBus.GetAll();
+						List<Job> jobsSearch = jobsList
+							.Where(job => job.Job_Name.ToLower().Contains(txtTimKiem.Text.ToLower()))
+							.ToList();
+						contractsSearch = contractsSearch
+						 .Join(jobsSearch, contract => contract.JobId, job => job.ID,
+						 (contract, job) => new { Contract = contract, Job = job }).Select(x => x.Contract).ToList();
+						loadContract(contractsSearch);
+						break;
+
+
+				}
+				e.Handled = true; // This line prevents the beep sound
+			}
+
 		}
 	}
 }

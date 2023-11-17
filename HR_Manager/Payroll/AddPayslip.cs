@@ -109,7 +109,7 @@ namespace HR_Manager.Payroll
             }
             if (minimunDay() == -1)
             {
-                MessageBox.Show("Chưa có hợp đồng!");
+                MessageBox.Show("Chưa có hợp đồng hoặc hợp đồng đã hết hạn!");
                 return false;
             }
             return true;

@@ -31,17 +31,21 @@
         {
             tabPage1 = new TabPage();
             tableLayoutPanel1 = new TableLayoutPanel();
+            tableLayoutPanel2 = new TableLayoutPanel();
             panel1 = new Panel();
             crudEmployees1 = new CRUDEmployees();
             tabControl1 = new TabControl();
             tabPage3 = new TabPage();
             department = new DepartmentUserControl();
             tabPage2 = new TabPage();
+            tabPage4 = new TabPage();
+            jobUserControl1 = new JobUserControl();
             tabPage1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage3.SuspendLayout();
+            tabPage4.SuspendLayout();
             SuspendLayout();
             // 
             // tabPage1
@@ -69,6 +73,19 @@
             tableLayoutPanel1.Size = new Size(986, 556);
             tableLayoutPanel1.TabIndex = 0;
             // 
+            // tableLayoutPanel2
+            // 
+            tableLayoutPanel2.Anchor = AnchorStyles.Top | AnchorStyles.Right;
+            tableLayoutPanel2.ColumnCount = 2;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 31.44654F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 68.55346F));
+            tableLayoutPanel2.Location = new Point(665, 3);
+            tableLayoutPanel2.Name = "tableLayoutPanel2";
+            tableLayoutPanel2.RowCount = 1;
+            tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 50F));
+            tableLayoutPanel2.Size = new Size(318, 65);
+            tableLayoutPanel2.TabIndex = 2;
+            // 
             // panel1
             // 
             panel1.Controls.Add(crudEmployees1);
@@ -81,6 +98,7 @@
             // crudEmployees1
             // 
             crudEmployees1.Location = new Point(0, 3);
+            crudEmployees1.Margin = new Padding(3, 4, 3, 4);
             crudEmployees1.Name = "crudEmployees1";
             crudEmployees1.Size = new Size(980, 456);
             crudEmployees1.TabIndex = 0;
@@ -90,6 +108,7 @@
             tabControl1.Controls.Add(tabPage1);
             tabControl1.Controls.Add(tabPage3);
             tabControl1.Controls.Add(tabPage2);
+            tabControl1.Controls.Add(tabPage4);
             tabControl1.Dock = DockStyle.Fill;
             tabControl1.ItemSize = new Size(80, 30);
             tabControl1.Location = new Point(0, 0);
@@ -101,10 +120,10 @@
             // tabPage3
             // 
             tabPage3.Controls.Add(department);
-            tabPage3.Location = new Point(4, 34);
+            tabPage3.Location = new Point(4, 29);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(992, 562);
+            tabPage3.Size = new Size(192, 67);
             tabPage3.TabIndex = 5;
             tabPage3.Text = "Department";
             tabPage3.UseVisualStyleBackColor = true;
@@ -113,19 +132,40 @@
             // 
             department.BackColor = SystemColors.ButtonHighlight;
             department.Location = new Point(0, 0);
+            department.Margin = new Padding(3, 4, 3, 4);
             department.Name = "department";
             department.Size = new Size(1000, 600);
             department.TabIndex = 0;
             // 
             // tabPage2
             // 
-            tabPage2.Location = new Point(4, 34);
+            tabPage2.Location = new Point(4, 29);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(992, 562);
+            tabPage2.Size = new Size(192, 67);
             tabPage2.TabIndex = 6;
             tabPage2.Text = "Reporting";
             tabPage2.UseVisualStyleBackColor = true;
+            // 
+            // tabPage4
+            // 
+            tabPage4.Controls.Add(jobUserControl1);
+            tabPage4.Location = new Point(4, 34);
+            tabPage4.Name = "tabPage4";
+            tabPage4.Padding = new Padding(3);
+            tabPage4.Size = new Size(992, 562);
+            tabPage4.TabIndex = 7;
+            tabPage4.Text = "Job";
+            tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // jobUserControl1
+            // 
+            jobUserControl1.Dock = DockStyle.Fill;
+            jobUserControl1.Location = new Point(3, 3);
+            jobUserControl1.Margin = new Padding(3, 4, 3, 4);
+            jobUserControl1.Name = "jobUserControl1";
+            jobUserControl1.Size = new Size(986, 556);
+            jobUserControl1.TabIndex = 0;
             // 
             // Employee
             // 
@@ -137,6 +177,7 @@
             panel1.ResumeLayout(false);
             tabControl1.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
+            tabPage4.ResumeLayout(false);
             ResumeLayout(false);
         }
 
@@ -146,7 +187,10 @@
         private TabPage tabPage3;
         private DepartmentUserControl department;
         private TabPage tabPage2;
+        private TableLayoutPanel tableLayoutPanel2;
         private Panel panel1;
         private CRUDEmployees crudEmployees1;
+        private TabPage tabPage4;
+        private JobUserControl jobUserControl1;
     }
 }
