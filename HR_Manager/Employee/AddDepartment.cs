@@ -14,15 +14,15 @@ namespace HR_Manager.Employee
 {
     public partial class AddDepartment : Form
     {
-        private Department department;
-        DepartmentDTO deDto;
-        LocationDTO locaDto;
+        private DepartmentUserControl department;
+        Department deDto;
+        Location locaDto;
         LocationBUS locaBus;
         private DepartmentBUS deBus;
-        public AddDepartment(Department de)
+        public AddDepartment(DepartmentUserControl de)
         {
             InitializeComponent();
-            deDto = new DepartmentDTO();
+            deDto = new Department();
             deBus = new DepartmentBUS();
             locaBus = new LocationBUS();
             department = de;
@@ -30,9 +30,8 @@ namespace HR_Manager.Employee
         }
         void loadcbLocationID()
         {
-            comboBox1.ValueMember = "ID";
-            comboBox1.DisplayMember = "Address";
-            List<LocationDTO> listLoca = locaBus.GetAll();
+            comboBox1.ValueMember = "Location_ID";
+            List<Department> listLoca = deBus.GetAll().GroupBy(loc=>loc.Location_ID).Select(group=>group.First()).ToList();
             comboBox1.DataSource = listLoca;
         }
         private void textBox1_TextChanged(object sender, EventArgs e)
@@ -47,7 +46,8 @@ namespace HR_Manager.Employee
             {
                 if (checkValidInput())
                 {
-                    DepartmentDTO de = new DepartmentDTO(deBus.GetAutoIncrement(), 1, txtName.Text, txtAddressDetail.Text);
+                    int selected=Convert.ToInt32(comboBox1.Text);
+                    Department de = new Department(deBus.GetAutoIncrement(), selected, txtName.Text, txtAddressDetail.Text);
                     department.AddDe(de);
                     MessageBox.Show("Thêm phòng ban thành công.");
                     this.Close();
