@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             tableLayoutPanel1 = new TableLayoutPanel();
             label1 = new Label();
             label2 = new Label();
@@ -37,7 +38,9 @@
             txtUsername = new TextBox();
             txtNewPass = new TextBox();
             txtConfirm = new TextBox();
+            errorPro = new ErrorProvider(components);
             tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)errorPro).BeginInit();
             SuspendLayout();
             // 
             // tableLayoutPanel1
@@ -126,6 +129,7 @@
             txtUsername.Name = "txtUsername";
             txtUsername.Size = new Size(210, 23);
             txtUsername.TabIndex = 5;
+            txtUsername.TextChanged += txtUsername_TextChanged;
             // 
             // txtNewPass
             // 
@@ -143,6 +147,10 @@
             txtConfirm.Size = new Size(210, 23);
             txtConfirm.TabIndex = 7;
             // 
+            // errorPro
+            // 
+            errorPro.ContainerControl = this;
+            // 
             // ForgotPassword
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
@@ -153,6 +161,7 @@
             Text = "ForgotPassword";
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)errorPro).EndInit();
             ResumeLayout(false);
         }
 
@@ -167,5 +176,6 @@
         private TextBox txtUsername;
         private TextBox txtNewPass;
         private TextBox txtConfirm;
+        private ErrorProvider errorPro;
     }
 }

@@ -37,12 +37,15 @@ namespace HR_Manager.Payroll
             }
             cbEmployee.AutoCompleteCustomSource = collection;
 
-            BAF = bus.getById(id);
-            cbEmployee.SelectedItem = employees[BAF.employee_id - 1].Name + "_" + employees[BAF.employee_id - 1].ID;
-            cbType.SelectedItem = BAF.type;
-            txtReason.Text = BAF.reason;
-            txtAmount.Text = BAF.amount + "";
-            dateTimePicker1.Value = BAF.expired_date;
+            if (id != -1)
+            {
+                BAF = bus.getById(id);
+                cbEmployee.SelectedItem = employees[BAF.employee_id - 1].Name + "_" + employees[BAF.employee_id - 1].ID;
+                cbType.SelectedItem = BAF.type;
+                txtReason.Text = BAF.reason;
+                txtAmount.Text = BAF.amount + "";
+                dateTimePicker1.Value = BAF.expired_date;
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

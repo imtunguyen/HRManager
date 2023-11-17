@@ -27,14 +27,17 @@ namespace HR_Manager
         }
 
         public object MessageIcons { get; private set; }
-
+        private void txtUsername_TextChanged(object sender, EventArgs e)
+        {
+            errorPro.SetError(txtUsername, "Username does not exist!");
+            errorPro.SetError(txtUsername, string.Empty);
+        }
         private void btnSubmit_Click(object sender, EventArgs e)
         {
-            if(string.IsNullOrWhiteSpace(txtUsername.Text) || string.IsNullOrWhiteSpace(txtNewPass.Text)||string.IsNullOrWhiteSpace(txtConfirm.Text))
+            if (string.IsNullOrWhiteSpace(txtUsername.Text) || string.IsNullOrWhiteSpace(txtNewPass.Text) || string.IsNullOrWhiteSpace(txtConfirm.Text))
             {
-                MessageBox.Show("Please fill in the required information!","Notification",MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please fill in the required information!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return;
-                
             }
             else
             {
@@ -46,10 +49,14 @@ namespace HR_Manager
                 {
                     if (newPass != confirm)
                     {
-                        MessageBox.Show("Password incorrect!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                        // Hiển thị thông báo lỗi nếu mật khẩu không khớp
+                        errorPro.SetError(txtConfirm, "Password incorrect!");
                     }
                     else
                     {
+                        // Xóa thông báo lỗi trước đó
+                        errorPro.SetError(txtConfirm, string.Empty);
+
                         accBUS.UpdatePassword(username, newPass);
                         MessageBox.Show("Password changed successfully!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Information);
                         this.Close();
@@ -57,9 +64,12 @@ namespace HR_Manager
                 }
                 else
                 {
-                    MessageBox.Show("Username does not exist!", "Notification", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    // Hiển thị thông báo lỗi nếu tên người dùng không tồn tại
+                    errorPro.SetError(txtUsername, "Username does not exist!");
                 }
             }
         }
+
+        
     }
 }

@@ -66,17 +66,14 @@ namespace HR_Manager
         {
             if (btnAdd.Text == "ADD")
             {
-
-                if (validateForm() && checkSDTMail())
+                if (validateForm() && CheckDuplicatePhoneNumberEmail(txtPhone.Text, txtEmail.Text, 0))
                 {
-
                     try
                     {
                         EmployeeBUS eBUS = new EmployeeBUS();
                         EmployeeDTO eDTO = GetEmployeeFromFields();
 
                         bool result = eBUS.Add(eDTO);
-
 
                         if (result)
                         {
@@ -90,20 +87,20 @@ namespace HR_Manager
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Lỗi khi thêm nhân viên", "Thông báo");
+                        MessageBox.Show("Lỗi khi thêm nhân viên" + ex, "Thông báo");
                     }
                 }
             }
             else if (btnAdd.Text == "UPDATE")
             {
 
-                if (validateForm())
+                if (CheckDuplicatePhoneNumberEmail(txtPhone.Text, txtEmail.Text, idSelected))
                 {
-                    if (!ValidateJoinedLeft())
-                    {
-                        MessageBox.Show("Date Joined < Date Left!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                        return;
-                    }
+                    //if (!ValidateJoinedLeft())
+                    //{
+                    //    MessageBox.Show("Date Joined < Date Left!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    //    return;
+                    //}
                     try
                     {
                         EmployeeBUS eBUS = new EmployeeBUS();
@@ -137,7 +134,6 @@ namespace HR_Manager
                 filepath = ofdImages.FileName;
 
                 pictureBox1.Image = Image.FromFile(filepath);
-                // pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
                 pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
             }
@@ -147,7 +143,6 @@ namespace HR_Manager
             EmployeeDTO eDto = new EmployeeDTO();
             eDto.Name = txtName.Text;
             eDto.Date_of_Birth = dtpDateofBirth.Value;
-            eDto.Date_Joined = dtpDayJoined.Value;
             eDto.Date_Left = dtpDateLeft.Value;
             eDto.Email = txtEmail.Text;
             eDto.Phone = txtPhone.Text;
@@ -162,11 +157,13 @@ namespace HR_Manager
                 eDto.Gender = "nam";
             }
 
-            if (pictureBox1.Image != null)
+            if (!string.IsNullOrEmpty(filepath))
             {
-
                 eDto.img_path = filepath;
-
+            }
+            else if (pictureBox1.Image != null && !string.IsNullOrEmpty(pictureBox1.ImageLocation))
+            {
+                eDto.img_path = pictureBox1.ImageLocation;
             }
 
             return eDto;
@@ -180,7 +177,8 @@ namespace HR_Manager
                 {
                     txtName.Text = eDto.Name;
                     dtpDateofBirth.Value = eDto.Date_of_Birth;
-                    dtpDayJoined.Value = eDto.Date_Joined;
+                    
+                    dtpDateLeft.Value = eDto.Date_Left.Value;
                     txtEmail.Text = eDto.Email;
                     txtPhone.Text = eDto.Phone;
                     cbStatus.Text = eDto.Status;
@@ -195,8 +193,7 @@ namespace HR_Manager
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Chưa chọn hàng!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
+
             }
         }
         private bool ValidatePhoneNumber()
@@ -219,36 +216,25 @@ namespace HR_Manager
             int age = currentDate.Year - dateOfBirth.Year;
             return age >= 18;
         }
-        private bool ValidateJoinedLeft()
-        {
-            DateTime currentDate = DateTime.Now;
-            DateTime dateJoined = dtpDayJoined.Value;
-            DateTime dateLeft = dtpDateLeft.Value;
+        //private bool ValidateJoinedLeft()
+        //{
+        //    DateTime currentDate = DateTime.Now;
+        //    DateTime dateLeft = dtpDateLeft.Value;
 
-            return dateJoined < dateLeft;
-        }
-        private bool checkSDTMail()
+        //    return dateJoined < dateLeft;
+        //}
+        private bool CheckDuplicatePhoneNumberEmail(string phone, string email, int currentEmployeeId)
         {
             EmployeeBUS eBUS = new EmployeeBUS();
-            List<EmployeeDTO> check = eBUS.GetAll();
-            int index = 0;
-            while (index < check.Count)
-            {
-                string phoneNumber = check[index].Phone;
-                string email = check[index].Email;
-                if (txtPhone.Text == phoneNumber)
-                {
-                    MessageBox.Show("Số điện thoại trùng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
-                }
-                if (txtEmail.Text == email)
-                {
+            List<EmployeeDTO> employees = eBUS.GetAll();
 
-                    MessageBox.Show("Email trùng.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    return false;
-                }
-                index++;
+            // Kiểm tra nếu số điện thoại hoặc email trùng với một nhân viên khác (không phải nhân viên hiện tại)
+            if (employees.Any(emp => emp.Phone == phone && emp.ID != currentEmployeeId) || employees.Any(emp => emp.Email == email && emp.ID != currentEmployeeId))
+            {
+                MessageBox.Show("Số điện thoại hoặc Email đã tồn tại cho một nhân viên khác.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
             }
+
             return true;
         }
 
@@ -276,7 +262,11 @@ namespace HR_Manager
                 MessageBox.Show("Số điện thoại có 10 số bằng bắt đầu bằng 0", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-
+            if (string.IsNullOrEmpty(cbStatus.Text))
+            {
+                MessageBox.Show("Vui lòng chọn trạng thái.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return false;
+            }
 
             return true;
         }
