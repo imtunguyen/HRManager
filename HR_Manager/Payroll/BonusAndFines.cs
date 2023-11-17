@@ -90,7 +90,12 @@ namespace HR_Manager.Payroll
 
                 string s = row.Cells["id"].Value.ToString();
 
-                int id = Convert.ToInt32(s.Substring(s.IndexOf("_") + 1));
+                int id = -1;
+
+                if(s != "")
+                {
+                    id = Convert.ToInt32(s.Substring(s.IndexOf("_") + 1));
+                }
 
                 UpdateBonusAndFines update = new UpdateBonusAndFines(id);
                 update.ShowDialog();
@@ -120,7 +125,10 @@ namespace HR_Manager.Payroll
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
-                indexSelected = Convert.ToInt32(row.Cells["id"].Value.ToString());
+                if(row.Cells["id"].Value.ToString() != "")
+                {
+                    indexSelected = Convert.ToInt32(row.Cells["id"].Value.ToString());
+                }
             }
         }
 
