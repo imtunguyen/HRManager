@@ -145,13 +145,13 @@ namespace HR_Manager.Payroll
 		private void panelContainer_Click(object s, EventArgs ev, Contract obj)
 		{
 			fCRUDContract f = new fCRUDContract(this, "Edit", obj);
-			f.Visible = true;
+			f.ShowDialog();
 		}
 
 		private void btnThemContract_Click(object sender, EventArgs e)
 		{
 			fCRUDContract f = new fCRUDContract(this, "Add");
-			f.Visible = true;
+			f.ShowDialog();
 		}
 
 		private void rbNew_CheckedChanged(object sender, EventArgs e)
