@@ -14,7 +14,7 @@ namespace DTO
 		public int DepartmentID { get; set; }
 		public int JobID { get; set; }
 		public DateTime FromDate { get; set; }
-		public DateTime? ToDate { get; set; }
+		public DateTime ToDate { get; set; }
 		public string Description { get; set; }
 		public string Status { get; set; }
 
@@ -32,12 +32,13 @@ namespace DTO
 		}
 
 		public Job_Detail(int EmployeeID, int JobID, int DepartmentID,
-			DateTime FromDate, string Description, string Status)
+			DateTime FromDate, DateTime ToDate, string Description, string Status)
 		{
 			this.EmployeeID = EmployeeID;
 			this.JobID = JobID;
 			this.DepartmentID = DepartmentID;
 			this.FromDate = FromDate;
+			this.ToDate = ToDate;
 			this.Description = Description;
 			this.Status = Status;
 		}

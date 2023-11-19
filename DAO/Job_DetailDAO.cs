@@ -16,12 +16,13 @@ namespace DAO
 			{
 				using (SqlConnection conn = DbConnection.GetSqlConnection())
 				{
-					SqlCommand cmd = new SqlCommand("INSERT INTO JOB_DETAIL (employee_id, department_id, job_id, fromDate, description, status) VALUES (@employee_id, @department_id, @job_id, @fromDate, @description, @status)", conn);
+					SqlCommand cmd = new SqlCommand("INSERT INTO JOB_DETAIL (employee_id, department_id, job_id, fromDate, toDate, description, status) VALUES (@employee_id, @department_id, @job_id, @fromDate, @toDate, @description, @status)", conn);
 
 					cmd.Parameters.AddWithValue("@employee_id", jobDetail.EmployeeID);
 					cmd.Parameters.AddWithValue("@department_id", jobDetail.DepartmentID);
 					cmd.Parameters.AddWithValue("@job_id", jobDetail.JobID);
 					cmd.Parameters.AddWithValue("@fromDate", jobDetail.FromDate);
+					cmd.Parameters.AddWithValue("@toDate", jobDetail.ToDate);
 					cmd.Parameters.AddWithValue("@description", jobDetail.Description);
 					cmd.Parameters.AddWithValue("@status", jobDetail.Status);
 
@@ -86,22 +87,9 @@ namespace DAO
 					jobDetail.DepartmentID = (int)reader["department_id"];
 					jobDetail.JobID = (int)reader["job_id"];
 					jobDetail.FromDate = Convert.ToDateTime(reader["fromDate"]);
-
-					DateTime dateLeft;
-					jobDetail.ToDate = DateTime.TryParse(reader["toDate"].ToString(), out dateLeft) ? dateLeft : null;
-
-					// Thay thế bằng
-					if (DateTime.TryParse(reader["toDate"].ToString(), out dateLeft))
-					{
-						jobDetail.ToDate = dateLeft;
-					}
-					else
-					{
-						jobDetail.ToDate = null;
-					}
+					jobDetail.ToDate =  Convert.ToDateTime(reader["toDate"]);
 					jobDetail.Description = (string)reader["description"];
 					jobDetail.Status = (string)reader["status"];
-
 					jobDetails.Add(jobDetail);
 				}
 
@@ -128,24 +116,28 @@ namespace DAO
 					jobDetail.DepartmentID = (int)reader["department_id"];
 					jobDetail.JobID = (int)reader["job_id"];
 					jobDetail.FromDate =Convert.ToDateTime(reader["fromDate"]);
-					DateTime dateLeft;
-					jobDetail.ToDate = DateTime.TryParse(reader["toDate"].ToString(), out dateLeft) ? dateLeft : null;
-
-					// Thay thế bằng
-					if (DateTime.TryParse(reader["toDate"].ToString(), out dateLeft))
-					{
-						jobDetail.ToDate = dateLeft;
-					}
-					else
-					{
-						jobDetail.ToDate = null;
-					}
+					jobDetail.ToDate =  Convert.ToDateTime(reader["toDate"]);
 					jobDetail.Description = (string)reader["description"];
 					jobDetail.Status = (string)reader["status"];
 				}
 
 				return jobDetail;
 			}
+		}
+
+		public int checkDateOverLap(int userid,DateTime fromDate, DateTime toDate)
+		{
+			int result = 0;
+			using(SqlConnection conn = DbConnection.GetSqlConnection())
+			{
+				string query = "SELECT Count(*) FROM JOB_DETAIL WHERE employee_id = " + userid + " and " +
+					"(FromDate >= '" + fromDate + "' AND ToDate <= '" + toDate + "');";
+				using(SqlCommand cmd = new SqlCommand(query, conn))
+				{
+					result = (int)cmd.ExecuteScalar();
+				}
+			}
+			return result;
 		}
 	}
 }

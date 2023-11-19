@@ -16,8 +16,7 @@ namespace BUS
 
 		public bool Add(Job_Detail jobDetail)
 		{
-			if(jobDetailDAO.Add(jobDetail)) return true;
-			return false;
+			return jobDetailDAO.Add(jobDetail);
 		}
 
 		public bool Update(Job_Detail jobDetail)
@@ -38,6 +37,10 @@ namespace BUS
 		public Job_Detail GetById(int id)
 		{
 			return jobDetailDAO.GetById(id);
+		}
+		public int CheckDateOverLap(int id, DateTime fromDate, DateTime toDate)
+		{
+			return jobDetailDAO.checkDateOverLap(id, fromDate, toDate);
 		}
 	}
 }

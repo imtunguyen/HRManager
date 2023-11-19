@@ -41,7 +41,7 @@
 			tabPage4 = new TabPage();
 			jobUserControl1 = new JobUserControl();
 			tabPage5 = new TabPage();
-			jobDetailUserControl = new JobDetailUserControl();
+			jobDetailUserControl2 = new JobDetailUserControl();
 			tabPage1.SuspendLayout();
 			tableLayoutPanel1.SuspendLayout();
 			panel1.SuspendLayout();
@@ -173,7 +173,7 @@
 			// 
 			// tabPage5
 			// 
-			tabPage5.Controls.Add(jobDetailUserControl);
+			tabPage5.Controls.Add(jobDetailUserControl2);
 			tabPage5.Location = new Point(4, 34);
 			tabPage5.Name = "tabPage5";
 			tabPage5.Padding = new Padding(3);
@@ -182,14 +182,13 @@
 			tabPage5.Text = "Job Detail";
 			tabPage5.UseVisualStyleBackColor = true;
 			// 
-			// jobDetailUserControl
+			// jobDetailUserControl2
 			// 
-			jobDetailUserControl.Dock = DockStyle.Fill;
-			jobDetailUserControl.Location = new Point(3, 3);
-			jobDetailUserControl.Margin = new Padding(3, 4, 3, 4);
-			jobDetailUserControl.Name = "jobDetailUserControl";
-			jobDetailUserControl.Size = new Size(986, 556);
-			jobDetailUserControl.TabIndex = 0;
+			jobDetailUserControl2.Dock = DockStyle.Fill;
+			jobDetailUserControl2.Location = new Point(3, 3);
+			jobDetailUserControl2.Margin = new Padding(3, 4, 3, 4);
+			jobDetailUserControl2.Name = "jobUserControl2";
+			jobDetailUserControl2.TabIndex = 0;
 			// 
 			// Employee
 			// 
@@ -218,6 +217,6 @@
 		private TabPage tabPage4;
 		private JobUserControl jobUserControl1;
 		private TabPage tabPage5;
-		private JobDetailUserControl jobDetailUserControl;
+		private JobDetailUserControl jobDetailUserControl2;
 	}
 }
