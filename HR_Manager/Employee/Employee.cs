@@ -12,22 +12,22 @@ using System.Windows.Forms;
 
 namespace HR_Manager.Employee
 {
-    public partial class Employee : UserControl
-    {
-        EmployeeDTO eDTO;
-        EmployeeBUS eBUS;
-        List<EmployeeDTO> eList;
-        DataTable dt = new DataTable();
-        public Employee()
-        {
-            eBUS = new EmployeeBUS();
-            eDTO = new EmployeeDTO();
-            eList = new List<EmployeeDTO>();
+	public partial class Employee : UserControl
+	{
+		EmployeeDTO eDTO;
+		EmployeeBUS eBUS;
+		List<EmployeeDTO> eList;
+		DataTable dt = new DataTable();
+		public Employee()
+		{
+			eBUS = new EmployeeBUS();
+			eDTO = new EmployeeDTO();
+			eList = new List<EmployeeDTO>();
 
-            InitializeComponent();
+			InitializeComponent();
 
-        }
+		}
 
 
-    }
+	}
 }

@@ -19,5 +19,9 @@ namespace BUS
         {
             return departmentDAO.GetAll();
         }
+        public Department GetById(int id)
+        {
+            return departmentDAO.GetById(id);
+        }
     }
 }
