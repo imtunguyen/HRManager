@@ -12,32 +12,35 @@ namespace BUS
 {
     public class Job_DetailBUS
     {
-        private Job_DetailDAO jobDetailDAO = new Job_DetailDAO();
+		private Job_DetailDAO jobDetailDAO = new Job_DetailDAO();
 
-        public bool Add(Job_Detail jobDetail)
-        {
-            return jobDetailDAO.Add(jobDetail);
-        }
+		public bool Add(Job_Detail jobDetail)
+		{
+			return jobDetailDAO.Add(jobDetail);
+		}
 
-        public bool Update(Job_Detail jobDetail)
-        {
-            return jobDetailDAO.Update(jobDetail);
-        }
+		public bool Update(Job_Detail jobDetail)
+		{
+			return jobDetailDAO.Update(jobDetail);
+		}
 
-        public bool Delete(int id)
-        {
-            return jobDetailDAO.Delete(id);
-        }
+		public bool Delete(int id)
+		{
+			return jobDetailDAO.Delete(id);
+		}
 
-        public List<Job_Detail> GetAll()
-        {
-            return jobDetailDAO.GetAll();
-        }
+		public List<Job_Detail> GetAll()
+		{
+			return jobDetailDAO.GetAll();
+		}
 
-        public Job_Detail GetById(int id)
-        {
-            return jobDetailDAO.GetById(id);
-        }
-
-    }
+		public Job_Detail GetById(int id)
+		{
+			return jobDetailDAO.GetById(id);
+		}
+		public int CheckDateOverLap(int id, DateTime fromDate, DateTime toDate)
+		{
+			return jobDetailDAO.checkDateOverLap(id, fromDate, toDate);
+		}
+	}
 }
