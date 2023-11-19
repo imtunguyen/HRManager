@@ -53,7 +53,7 @@ namespace HR_Manager.Employee
 				DataRow row = dt.NewRow();
 				row["ID"] = item.ID;
 				row["Employee"] = employeeBUS.GetById(item.EmployeeID).Name;
-				row["Department"] = departmentBUS.GetById(item.DepartmentID).Name;
+				row["Department"] = departmentBUS.getById(item.DepartmentID).Name;
 				row["Job"] = jobBUS.GetById(item.JobID).Job_Name;
 				row["Start Date"] = item.FromDate.ToString();
 				row["End Date"] = item.ToDate.HasValue ? item.ToDate.Value.ToString() : string.Empty;
