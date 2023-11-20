@@ -24,6 +24,7 @@ namespace DTO
 		public const string deleteSuccess = "Delete Success";
 		public const string deleteFail = "Delete Fail";
 		public const string tb_delete = "Are you sure you want to delete it?";
+		public const string error = "Error";
 
 		// color
 		public const string textGreen = "#099268";
