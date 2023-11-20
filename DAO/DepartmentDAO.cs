@@ -155,8 +155,6 @@ namespace DAO
                         {
                             Department department = new Department
                             {
-                                ID = Convert.ToInt32(reader["id"]),
-                                Location_ID = Convert.ToInt32(reader["location_id"]),
                                 Name = reader["name"].ToString(),
                                 Address_Detail = reader["address_detail"].ToString()
                             };
@@ -184,7 +182,6 @@ namespace DAO
                             result = new Department
                             {
                                 ID = Convert.ToInt32(reader["id"]),
-                                Location_ID = Convert.ToInt32(reader["location_id"]),
                                 Name = reader["name"].ToString(),
                                 Address_Detail = reader["address_detail"].ToString()
                             };

@@ -16,15 +16,12 @@ namespace HR_Manager.Employee
     {
         private DepartmentUserControl department;
         Department deDto;
-        Location locaDto;
-        LocationBUS locaBus;
         private DepartmentBUS deBus;
         public AddDepartment(DepartmentUserControl de)
         {
             InitializeComponent();
             deDto = new Department();
             deBus = new DepartmentBUS();
-            locaBus = new LocationBUS();
             department = de;
             loadcbLocationID();
         }
@@ -79,7 +76,6 @@ namespace HR_Manager.Employee
             System.Windows.Forms.ComboBox cb = sender as System.Windows.Forms.ComboBox;
             if (cb.SelectedValue != null)
             {
-                locaDto = locaBus.getById(Convert.ToInt32(cb.SelectedValue));
             }
         }
     }
