@@ -254,13 +254,16 @@ namespace HR_Manager.Payroll
 					{
 						Contract obj = new Contract(txtName.Text, selectedEmployee, timeStart.Value, timeEnd.Value,
 							selectedStatus, selectedJob, txtDetail.Text, (int)num.Value, Convert.ToDecimal(txtBasePay.Text));
-						MessageBox.Show(SD.addSuccess, SD.tb, ok, info);
-						contractUserControl.loadContract();
-						this.Dispose();
-					}
-					else
-					{
-						MessageBox.Show(SD.addFail, SD.tb, ok, info);
+						if (ctBus.Add(obj))
+						{
+							MessageBox.Show(SD.addSuccess, SD.tb, ok, info);
+							contractUserControl.loadContract();
+							this.Dispose();
+						}
+						else
+						{
+							MessageBox.Show(SD.addFail, SD.tb, ok, info);
+						}
 					}
 				}
 				catch (Exception ex)
@@ -276,13 +279,15 @@ namespace HR_Manager.Payroll
 					{
 						Contract obj = new Contract(objUpdate.Id, txtName.Text, selectedEmployee, timeStart.Value, timeEnd.Value,
 							selectedStatus, selectedJob, txtDetail.Text, (int)num.Value, Convert.ToDecimal(txtBasePay.Text));
-						MessageBox.Show(SD.UpdateSucess, SD.tb, ok, info);
-						contractUserControl.loadContract();
-					}
-					else
-					{
-						MessageBox.Show(SD.UpdateFail, SD.tb, ok, info);
-
+						if(ctBus.Update(obj))
+						{
+							MessageBox.Show(SD.UpdateSucess, SD.tb, ok, info);
+							contractUserControl.loadContract();
+						}
+						else
+						{
+							MessageBox.Show(SD.UpdateFail, SD.tb, ok, info);
+						}
 					}
 				}
 				catch (Exception ex)
