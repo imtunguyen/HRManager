@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            components = new System.ComponentModel.Container();
             label2 = new Label();
             txtName = new TextBox();
             label3 = new Label();
@@ -47,10 +48,10 @@
             lblTitle = new Label();
             btnChoose = new Button();
             label5 = new Label();
-            comboBox1 = new ComboBox();
-            lblDateLeft = new Label();
-            dtpDateLeft = new DateTimePicker();
+            cbDepartment = new ComboBox();
+            departmentBindingSource = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)departmentBindingSource).BeginInit();
             SuspendLayout();
             // 
             // label2
@@ -140,16 +141,16 @@
             cbGender.AutoSize = true;
             cbGender.Location = new Point(166, 115);
             cbGender.Name = "cbGender";
-            cbGender.Size = new Size(42, 19);
+            cbGender.Size = new Size(64, 19);
             cbGender.TabIndex = 3;
-            cbGender.Text = "Nữ";
+            cbGender.Text = "Female";
             cbGender.UseVisualStyleBackColor = true;
             // 
             // cbStatus
             // 
             cbStatus.DropDownStyle = ComboBoxStyle.DropDownList;
             cbStatus.FormattingEnabled = true;
-            cbStatus.Items.AddRange(new object[] { "Thử việc", "Nhân viên chính thức" });
+            cbStatus.Items.AddRange(new object[] { "Trail work", "Official employee" });
             cbStatus.Location = new Point(510, 165);
             cbStatus.Name = "cbStatus";
             cbStatus.Size = new Size(200, 23);
@@ -218,37 +219,25 @@
             // label5
             // 
             label5.AutoSize = true;
-            label5.Location = new Point(88, 245);
+            label5.Location = new Point(88, 206);
             label5.Name = "label5";
             label5.Size = new Size(73, 15);
             label5.TabIndex = 10;
             label5.Text = "Department:";
             // 
-            // comboBox1
+            // cbDepartment
             // 
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(166, 245);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(200, 23);
-            comboBox1.TabIndex = 11;
+            cbDepartment.DataSource = departmentBindingSource;
+            cbDepartment.DropDownStyle = ComboBoxStyle.DropDownList;
+            cbDepartment.FormattingEnabled = true;
+            cbDepartment.Location = new Point(166, 206);
+            cbDepartment.Name = "cbDepartment";
+            cbDepartment.Size = new Size(200, 23);
+            cbDepartment.TabIndex = 11;
             // 
-            // lblDateLeft
+            // departmentBindingSource
             // 
-            lblDateLeft.AutoSize = true;
-            lblDateLeft.Location = new Point(88, 206);
-            lblDateLeft.Name = "lblDateLeft";
-            lblDateLeft.Size = new Size(54, 15);
-            lblDateLeft.TabIndex = 0;
-            lblDateLeft.Text = "Date Left";
-            lblDateLeft.Visible = false;
-            // 
-            // dtpDateLeft
-            // 
-            dtpDateLeft.Location = new Point(166, 203);
-            dtpDateLeft.Name = "dtpDateLeft";
-            dtpDateLeft.Size = new Size(200, 23);
-            dtpDateLeft.TabIndex = 2;
-            dtpDateLeft.Visible = false;
+            departmentBindingSource.DataSource = typeof(DTO.Department);
             // 
             // AddEmployee
             // 
@@ -256,7 +245,7 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(pictureBox1);
-            Controls.Add(comboBox1);
+            Controls.Add(cbDepartment);
             Controls.Add(label5);
             Controls.Add(btnChoose);
             Controls.Add(lblTitle);
@@ -264,7 +253,6 @@
             Controls.Add(btnAdd);
             Controls.Add(cbStatus);
             Controls.Add(cbGender);
-            Controls.Add(dtpDateLeft);
             Controls.Add(dtpDateofBirth);
             Controls.Add(txtPhone);
             Controls.Add(txtEmail);
@@ -274,12 +262,12 @@
             Controls.Add(label6);
             Controls.Add(label4);
             Controls.Add(label7);
-            Controls.Add(lblDateLeft);
             Controls.Add(label3);
             Controls.Add(label2);
             Name = "AddEmployee";
             Text = "AddEmployee";
             ((System.ComponentModel.ISupportInitialize)pictureBox1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)departmentBindingSource).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
@@ -304,8 +292,7 @@
         public Label lblTitle;
         private Button btnChoose;
         private Label label5;
-        private ComboBox comboBox1;
-        private Label lblDateLeft;
-        private DateTimePicker dtpDateLeft;
+        private ComboBox cbDepartment;
+        private BindingSource departmentBindingSource;
     }
 }

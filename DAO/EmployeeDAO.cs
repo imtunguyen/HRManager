@@ -20,7 +20,7 @@ namespace DAO
         {
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "INSERT INTO EMPLOYEE (name, gender, date_Of_Birth, phone, email, img_path, status) VALUES (@Name, @Gender, @Date_Of_Birth, @Phone, @Email, @img_path, @Status)";
+                string query = "INSERT INTO EMPLOYEE (name, gender, date_Of_Birth, phone, email, img_path, department_id, status) VALUES (@Name, @Gender, @Date_Of_Birth, @Phone, @Email, @img_path,@Department_id, @Status)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Name", t.Name);
@@ -36,6 +36,7 @@ namespace DAO
                     {
                         command.Parameters.AddWithValue("@img_path", DBNull.Value);
                     }
+                    command.Parameters.AddWithValue("@Department_id", t.Department_id);
                     command.Parameters.AddWithValue("@Status", t.Status);
                     int result = command.ExecuteNonQuery();
                     return result > 0;
@@ -66,28 +67,10 @@ namespace DAO
                         e.Name = reader["Name"].ToString();
                         e.Gender = reader["gender"].ToString();
                         e.Date_of_Birth = DateTime.Parse(reader["date_Of_Birth"].ToString());
-                        DateTime dateJoined;
-                        e.Date_Joined = DateTime.TryParse(reader["date_joined"].ToString(), out dateJoined) ? dateJoined : null;
-                        // Thay thế bằng
-                        if (DateTime.TryParse(reader["date_joined"].ToString(), out dateJoined))
-                        {
-                            e.Date_Joined = dateJoined;
-                        }
-                        DateTime dateLeft;
-                        e.Date_Left = DateTime.TryParse(reader["date_left"].ToString(), out dateLeft) ? dateLeft : null;
-
-                        // Thay thế bằng
-                        if (DateTime.TryParse(reader["date_left"].ToString(), out dateLeft))
-                        {
-                            e.Date_Left = dateLeft;
-                        }
-                        else
-                        {
-                            e.Date_Left = null;
-                        }
                         e.Phone = reader["phone"].ToString();
                         e.Email = reader["email"].ToString();
                         e.img_path = reader["img_path"].ToString();
+                        e.Department_id = Convert.ToInt32(reader["Department_id"].ToString());
                         e.Status = reader["status"].ToString();
                         list.Add(e);
                     }
@@ -112,33 +95,10 @@ namespace DAO
                         e.Name = reader["Name"].ToString();
                         e.Gender = reader["gender"].ToString();
                         e.Date_of_Birth = DateTime.Parse(reader["date_Of_Birth"].ToString());
-                        DateTime dateJoined;
-                        e.Date_Left = DateTime.TryParse(reader["date_left"].ToString(), out dateJoined) ? dateJoined : null;
-
-                        // Thay thế bằng
-                        if (DateTime.TryParse(reader["date_left"].ToString(), out dateJoined))
-                        {
-                            e.Date_Joined = dateJoined;
-                        }
-                        else
-                        {
-                            e.Date_Joined = null;
-                        }
-                        DateTime dateLeft;
-                        e.Date_Left = DateTime.TryParse(reader["date_left"].ToString(), out dateLeft) ? dateLeft : null;
-
-                        // Thay thế bằng
-                        if (DateTime.TryParse(reader["date_left"].ToString(), out dateLeft))
-                        {
-                            e.Date_Left = dateLeft;
-                        }
-                        else
-                        {
-                            e.Date_Left = null;
-                        }
                         e.Phone = reader["phone"].ToString();
                         e.Email = reader["email"].ToString();
                         e.img_path = reader["img_path"].ToString();
+                        e.Department_id = Convert.ToInt32(reader["Department_id"].ToString());
                         e.Status = reader["status"].ToString();
                     }
                 }
@@ -150,7 +110,7 @@ namespace DAO
         {
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "UPDATE EMPLOYEE SET name = @Name, gender = @Gender, date_Of_Birth = @Date_Of_Birth, date_left = @Date_Left, phone = @Phone, email = @Email, img_path = @img_path, status = @Status WHERE id = @id";
+                string query = "UPDATE EMPLOYEE SET name = @Name, gender = @Gender, date_Of_Birth = @Date_Of_Birth, phone = @Phone, email = @Email, img_path = @img_path,department_id = @Department_id, status = @Status WHERE id = @id";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
@@ -159,14 +119,6 @@ namespace DAO
                     command.Parameters.AddWithValue("@Date_Of_Birth", employee.Date_of_Birth);
                     command.Parameters.AddWithValue("@Phone", employee.Phone);
                     command.Parameters.AddWithValue("@Email", employee.Email);
-                    if (employee.Date_Left.HasValue)
-                    {
-                        command.Parameters.AddWithValue("@Date_Left", employee.Date_Left.Value);
-                    }
-                    else
-                    {
-                        command.Parameters.AddWithValue("@Date_Left", DBNull.Value);
-                    }
                     if (!string.IsNullOrEmpty(employee.img_path))
                     {
                         command.Parameters.AddWithValue("@img_path", employee.img_path);
@@ -176,6 +128,7 @@ namespace DAO
                         command.Parameters.AddWithValue("@img_path", DBNull.Value);
                     }
                     command.Parameters.AddWithValue("@Status", employee.Status);
+                    command.Parameters.AddWithValue("@Department_id", employee.Department_id);
                     command.Parameters.AddWithValue("@id", id);
                     int result = command.ExecuteNonQuery();
                     return result > 0;

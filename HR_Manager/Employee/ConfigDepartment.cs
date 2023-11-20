@@ -38,10 +38,6 @@ namespace HR_Manager.Employee
         {
             label1.Text = "Config " + deDto.Name.ToString();
             label2.Text = deDto.ID.ToString();
-            comboBox1.ValueMember = "Location_ID";
-            List<Department> locaID = deBus.GetAll().GroupBy(loc => loc.Location_ID).Select(group => group.First()).ToList();
-            comboBox1.DataSource = locaID;
-            comboBox1.Text = deDto.Location_ID.ToString();
             textBox1.Text = deDto.Name.ToString();
             textBox2.Text = deDto.Address_Detail.ToString();
         }
@@ -58,8 +54,7 @@ namespace HR_Manager.Employee
 
         private void btnSave_Click_1(object sender, EventArgs e)
         {
-            int selected = Convert.ToInt32(comboBox1.Text);
-            Department d = new Department(deDto.ID, selected, textBox1.Text, textBox2.Text);
+            Department d = new Department(deDto.ID, textBox1.Text, textBox2.Text);
             department.UpdateDe(d);
             MessageBox.Show("Chỉnh sửa phòng ban thành công");
             this.Close();

@@ -29,14 +29,12 @@
         private void InitializeComponent()
         {
             label1 = new Label();
-            label2 = new Label();
             label3 = new Label();
             label4 = new Label();
             txtName = new TextBox();
             txtAddressDetail = new TextBox();
             btnCreate = new Button();
             btnCancel = new Button();
-            comboBox1 = new ComboBox();
             SuspendLayout();
             // 
             // label1
@@ -45,51 +43,44 @@
             label1.Font = new Font("Segoe UI", 18F, FontStyle.Bold, GraphicsUnit.Point);
             label1.ForeColor = Color.FromArgb(0, 0, 192);
             label1.ImageAlign = ContentAlignment.TopLeft;
-            label1.Location = new Point(272, 30);
+            label1.Location = new Point(238, 22);
             label1.Name = "label1";
-            label1.Size = new Size(261, 41);
+            label1.Size = new Size(210, 32);
             label1.TabIndex = 0;
             label1.Text = "New Department";
-            // 
-            // label2
-            // 
-            label2.AutoSize = true;
-            label2.Location = new Point(207, 116);
-            label2.Name = "label2";
-            label2.Size = new Size(92, 20);
-            label2.TabIndex = 1;
-            label2.Text = "Loaction ID :";
             // 
             // label3
             // 
             label3.AutoSize = true;
-            label3.Location = new Point(243, 169);
+            label3.Location = new Point(213, 127);
             label3.Name = "label3";
-            label3.Size = new Size(56, 20);
+            label3.Size = new Size(45, 15);
             label3.TabIndex = 1;
             label3.Text = "Name :";
             // 
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(186, 221);
+            label4.Location = new Point(163, 166);
             label4.Name = "label4";
-            label4.Size = new Size(113, 20);
+            label4.Size = new Size(88, 15);
             label4.TabIndex = 1;
             label4.Text = "Address Detail :";
             // 
             // txtName
             // 
-            txtName.Location = new Point(316, 166);
+            txtName.Location = new Point(276, 124);
+            txtName.Margin = new Padding(3, 2, 3, 2);
             txtName.Name = "txtName";
-            txtName.Size = new Size(237, 27);
+            txtName.Size = new Size(208, 23);
             txtName.TabIndex = 2;
             // 
             // txtAddressDetail
             // 
-            txtAddressDetail.Location = new Point(316, 214);
+            txtAddressDetail.Location = new Point(276, 160);
+            txtAddressDetail.Margin = new Padding(3, 2, 3, 2);
             txtAddressDetail.Name = "txtAddressDetail";
-            txtAddressDetail.Size = new Size(237, 27);
+            txtAddressDetail.Size = new Size(208, 23);
             txtAddressDetail.TabIndex = 2;
             // 
             // btnCreate
@@ -97,9 +88,10 @@
             btnCreate.BackColor = Color.MediumSeaGreen;
             btnCreate.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
             btnCreate.ForeColor = SystemColors.ButtonHighlight;
-            btnCreate.Location = new Point(186, 315);
+            btnCreate.Location = new Point(163, 236);
+            btnCreate.Margin = new Padding(3, 2, 3, 2);
             btnCreate.Name = "btnCreate";
-            btnCreate.Size = new Size(134, 57);
+            btnCreate.Size = new Size(117, 43);
             btnCreate.TabIndex = 3;
             btnCreate.Text = "CREATE";
             btnCreate.UseVisualStyleBackColor = false;
@@ -109,39 +101,28 @@
             // 
             btnCancel.BackColor = Color.Salmon;
             btnCancel.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            btnCancel.Location = new Point(439, 315);
+            btnCancel.Location = new Point(384, 236);
+            btnCancel.Margin = new Padding(3, 2, 3, 2);
             btnCancel.Name = "btnCancel";
-            btnCancel.Size = new Size(134, 57);
+            btnCancel.Size = new Size(117, 43);
             btnCancel.TabIndex = 3;
             btnCancel.Text = "CANCEL";
             btnCancel.UseVisualStyleBackColor = false;
             btnCancel.Click += btnCancel_Click;
             // 
-            // comboBox1
-            // 
-            comboBox1.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            comboBox1.Font = new System.Drawing.Font("Segoe UI", 10F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            comboBox1.FormattingEnabled = true;
-            comboBox1.Location = new Point(316, 116);
-            comboBox1.Name = "comboBox1";
-            comboBox1.Size = new Size(151, 28);
-            comboBox1.TabIndex = 4;
-            comboBox1.SelectedValueChanged += comboBox1_SelectedIndexChanged;
-            // 
             // AddDepartment
             // 
-            AutoScaleDimensions = new SizeF(8F, 20F);
+            AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(800, 450);
-            Controls.Add(comboBox1);
+            ClientSize = new Size(700, 338);
             Controls.Add(btnCancel);
             Controls.Add(btnCreate);
             Controls.Add(txtAddressDetail);
             Controls.Add(txtName);
             Controls.Add(label4);
             Controls.Add(label3);
-            Controls.Add(label2);
             Controls.Add(label1);
+            Margin = new Padding(3, 2, 3, 2);
             Name = "AddDepartment";
             Text = "AddDepartment";
             ResumeLayout(false);
@@ -151,13 +132,11 @@
         #endregion
 
         private Label label1;
-        private Label label2;
         private Label label3;
         private Label label4;
         private TextBox txtName;
         private TextBox txtAddressDetail;
         private Button btnCreate;
         private Button btnCancel;
-        private ComboBox comboBox1;
     }
 }

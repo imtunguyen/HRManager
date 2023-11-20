@@ -20,11 +20,10 @@ namespace DAO
             {
                 using (SqlConnection connection = DbConnection.GetSqlConnection())
                 {
-                    string query = "INSERT INTO DEPARTMENT (location_id, name, address_detail) " +
-                        " VALUES (@location_id, @name, @address_detail)";
+                    string query = "INSERT INTO DEPARTMENT (name, address_detail) " +
+                        " VALUES ( @name, @address_detail)";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
-                        command.Parameters.AddWithValue("@location_id", t.Location_ID);
                         command.Parameters.AddWithValue("@name", t.Name);
                         command.Parameters.AddWithValue("@address_detail", t.Address_Detail);
                         int rowsChanged = command.ExecuteNonQuery();
@@ -62,7 +61,6 @@ namespace DAO
                             Department department = new Department
                             {
                                 ID = Convert.ToInt32(reader["id"]),
-                                Location_ID = Convert.ToInt32(reader["location_id"]),
                                 Name = reader["name"].ToString(),
                                 Address_Detail = reader["address"].ToString()
                             };
@@ -155,6 +153,7 @@ namespace DAO
                         {
                             Department department = new Department
                             {
+                                ID = Convert.ToInt32(reader["id"]),
                                 Name = reader["name"].ToString(),
                                 Address_Detail = reader["address_detail"].ToString()
                             };
@@ -198,12 +197,11 @@ namespace DAO
             {
                 using (SqlConnection connection = DbConnection.GetSqlConnection())
                 {
-                    string query = "update DEPARTMENT set name = @name, location_id = @location_id, address_detail = @address_detail where id = @id";
+                    string query = "update DEPARTMENT set name = @name, address_detail = @address_detail where id = @id";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@id", t.ID);
                         command.Parameters.AddWithValue("@name", t.Name);
-                        command.Parameters.AddWithValue("@location_id", t.Location_ID);
                         command.Parameters.AddWithValue("@address_detail", t.Address_Detail);
                         int rowsChanged = command.ExecuteNonQuery();
                         return rowsChanged > 0;

@@ -101,7 +101,6 @@ namespace HR_Manager
                 Name = "lblLocID" + counter,
                 Size = new Size(200, 13),
                 TabIndex = 1,
-                Text = "Location ID : " + obj.Location_ID,
                 Font = new Font("Segoe UI", 10, FontStyle.Regular)
 
             };
