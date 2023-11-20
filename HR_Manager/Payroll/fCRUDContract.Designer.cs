@@ -34,11 +34,9 @@
 			label4 = new Label();
 			label5 = new Label();
 			label6 = new Label();
-			label7 = new Label();
 			timeStart = new DateTimePicker();
 			timeEnd = new DateTimePicker();
 			cbJob = new ComboBox();
-			cbDepartment = new ComboBox();
 			cbEmployee = new ComboBox();
 			txtName = new TextBox();
 			cbStatus = new ComboBox();
@@ -65,7 +63,7 @@
 			// 
 			label1.AutoSize = true;
 			label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label1.Location = new Point(42, 170);
+			label1.Location = new Point(677, 121);
 			label1.Name = "label1";
 			label1.Size = new Size(77, 20);
 			label1.TabIndex = 1;
@@ -75,7 +73,7 @@
 			// 
 			label2.AutoSize = true;
 			label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label2.Location = new Point(42, 229);
+			label2.Location = new Point(41, 185);
 			label2.Name = "label2";
 			label2.Size = new Size(144, 20);
 			label2.TabIndex = 1;
@@ -85,7 +83,7 @@
 			// 
 			label3.AutoSize = true;
 			label3.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label3.Location = new Point(42, 293);
+			label3.Location = new Point(41, 249);
 			label3.Name = "label3";
 			label3.Size = new Size(136, 20);
 			label3.TabIndex = 1;
@@ -95,7 +93,7 @@
 			// 
 			label4.AutoSize = true;
 			label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label4.Location = new Point(722, 295);
+			label4.Location = new Point(679, 251);
 			label4.Name = "label4";
 			label4.Size = new Size(53, 20);
 			label4.TabIndex = 1;
@@ -105,7 +103,7 @@
 			// 
 			label5.AutoSize = true;
 			label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label5.Location = new Point(42, 110);
+			label5.Location = new Point(41, 113);
 			label5.Name = "label5";
 			label5.Size = new Size(51, 20);
 			label5.TabIndex = 1;
@@ -115,26 +113,16 @@
 			// 
 			label6.AutoSize = true;
 			label6.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label6.Location = new Point(722, 231);
+			label6.Location = new Point(677, 187);
 			label6.Name = "label6";
 			label6.Size = new Size(95, 20);
 			label6.TabIndex = 1;
 			label6.Text = "Job Position";
 			// 
-			// label7
-			// 
-			label7.AutoSize = true;
-			label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label7.Location = new Point(722, 170);
-			label7.Name = "label7";
-			label7.Size = new Size(94, 20);
-			label7.TabIndex = 1;
-			label7.Text = "Department";
-			// 
 			// timeStart
 			// 
 			timeStart.Cursor = Cursors.Hand;
-			timeStart.Location = new Point(205, 224);
+			timeStart.Location = new Point(204, 180);
 			timeStart.Name = "timeStart";
 			timeStart.Size = new Size(250, 27);
 			timeStart.TabIndex = 2;
@@ -142,7 +130,7 @@
 			// timeEnd
 			// 
 			timeEnd.Cursor = Cursors.Hand;
-			timeEnd.Location = new Point(205, 288);
+			timeEnd.Location = new Point(204, 244);
 			timeEnd.Name = "timeEnd";
 			timeEnd.Size = new Size(250, 27);
 			timeEnd.TabIndex = 2;
@@ -154,24 +142,11 @@
 			cbJob.Cursor = Cursors.Hand;
 			cbJob.FormattingEnabled = true;
 			cbJob.ItemHeight = 20;
-			cbJob.Location = new Point(866, 221);
+			cbJob.Location = new Point(840, 177);
 			cbJob.Name = "cbJob";
-			cbJob.Size = new Size(228, 28);
+			cbJob.Size = new Size(250, 28);
 			cbJob.TabIndex = 3;
 			cbJob.SelectedValueChanged += cbJob_SelectedValueChanged;
-			// 
-			// cbDepartment
-			// 
-			cbDepartment.AutoCompleteMode = AutoCompleteMode.SuggestAppend;
-			cbDepartment.AutoCompleteSource = AutoCompleteSource.ListItems;
-			cbDepartment.Cursor = Cursors.Hand;
-			cbDepartment.FormattingEnabled = true;
-			cbDepartment.ItemHeight = 20;
-			cbDepartment.Location = new Point(866, 167);
-			cbDepartment.Name = "cbDepartment";
-			cbDepartment.Size = new Size(228, 28);
-			cbDepartment.TabIndex = 3;
-			cbDepartment.SelectedValueChanged += cbDepartment_SelectedValueChanged;
 			// 
 			// cbEmployee
 			// 
@@ -180,7 +155,7 @@
 			cbEmployee.Cursor = Cursors.Hand;
 			cbEmployee.FormattingEnabled = true;
 			cbEmployee.ItemHeight = 20;
-			cbEmployee.Location = new Point(205, 162);
+			cbEmployee.Location = new Point(840, 113);
 			cbEmployee.Name = "cbEmployee";
 			cbEmployee.Size = new Size(250, 28);
 			cbEmployee.TabIndex = 3;
@@ -189,7 +164,7 @@
 			// txtName
 			// 
 			txtName.Cursor = Cursors.Hand;
-			txtName.Location = new Point(205, 103);
+			txtName.Location = new Point(204, 106);
 			txtName.Name = "txtName";
 			txtName.Size = new Size(250, 27);
 			txtName.TabIndex = 4;
@@ -198,9 +173,9 @@
 			// 
 			cbStatus.Cursor = Cursors.Hand;
 			cbStatus.FormattingEnabled = true;
-			cbStatus.Location = new Point(866, 285);
+			cbStatus.Location = new Point(844, 241);
 			cbStatus.Name = "cbStatus";
-			cbStatus.Size = new Size(228, 28);
+			cbStatus.Size = new Size(246, 28);
 			cbStatus.TabIndex = 3;
 			cbStatus.SelectedValueChanged += cbStatus_SelectedValueChanged;
 			// 
@@ -208,11 +183,11 @@
 			// 
 			lblTitle.AutoSize = true;
 			lblTitle.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
-			lblTitle.Location = new Point(27, 29);
+			lblTitle.Location = new Point(426, 19);
 			lblTitle.Name = "lblTitle";
-			lblTitle.Size = new Size(292, 46);
+			lblTitle.Size = new Size(291, 46);
 			lblTitle.TabIndex = 5;
-			lblTitle.Text = "Contract / Create";
+			lblTitle.Text = "Contract - Create";
 			// 
 			// tabControl1
 			// 
@@ -220,7 +195,7 @@
 			tabControl1.Controls.Add(tabPage2);
 			tabControl1.Cursor = Cursors.Hand;
 			tabControl1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			tabControl1.Location = new Point(38, 347);
+			tabControl1.Location = new Point(37, 303);
 			tabControl1.Name = "tabControl1";
 			tabControl1.SelectedIndex = 0;
 			tabControl1.Size = new Size(1060, 215);
@@ -337,7 +312,7 @@
 			btnLuu.FlatStyle = FlatStyle.Flat;
 			btnLuu.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
 			btnLuu.ForeColor = Color.White;
-			btnLuu.Location = new Point(1000, 46);
+			btnLuu.Location = new Point(996, 524);
 			btnLuu.Name = "btnLuu";
 			btnLuu.Size = new Size(94, 41);
 			btnLuu.TabIndex = 7;
@@ -355,12 +330,10 @@
 			Controls.Add(lblTitle);
 			Controls.Add(txtName);
 			Controls.Add(cbEmployee);
-			Controls.Add(cbDepartment);
 			Controls.Add(cbStatus);
 			Controls.Add(cbJob);
 			Controls.Add(timeEnd);
 			Controls.Add(timeStart);
-			Controls.Add(label7);
 			Controls.Add(label6);
 			Controls.Add(label5);
 			Controls.Add(label4);
@@ -369,7 +342,7 @@
 			Controls.Add(label1);
 			Name = "fCRUDContract";
 			StartPosition = FormStartPosition.CenterScreen;
-			Text = "fCRUDContract";
+			Text = "Contract - Create";
 			tabControl1.ResumeLayout(false);
 			tabPage1.ResumeLayout(false);
 			tabPage1.PerformLayout();
@@ -387,11 +360,9 @@
 		private Label label4;
 		private Label label5;
 		private Label label6;
-		private Label label7;
 		private DateTimePicker timeStart;
 		private DateTimePicker timeEnd;
 		private ComboBox cbJob;
-		private ComboBox cbDepartment;
 		private ComboBox cbEmployee;
 		private TextBox txtName;
 		private ComboBox cbStatus;

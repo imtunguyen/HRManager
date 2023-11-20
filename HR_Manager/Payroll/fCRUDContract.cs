@@ -23,7 +23,6 @@ namespace HR_Manager.Payroll
 		private List<string> listStatus = SD.ListContractStatus;
 		private int selectedEmployee;
 		private int selectedJob;
-		private int selectedDepartment;
 		private string selectedStatus = "";
 		private ContractBUS ctBus;
 		private string hanhDong;
@@ -48,11 +47,11 @@ namespace HR_Manager.Payroll
 			load();
 			if (up != null)
 			{
-				lblTitle.Text = "Contract / Update";
+				this.Text = "Contract - Update";
+				lblTitle.Text = "Contract - Update";
 				objUpdate = up;
 				emUpdate = emBus.GetById(objUpdate.EmployeeId);
 				cbEmployee.SelectedValue = objUpdate.EmployeeId;
-				cbDepartment.SelectedValue = objUpdate.DepartmentId;
 				cbJob.SelectedValue = objUpdate.JobId;
 				cbStatus.SelectedItem = objUpdate.Status;
 				txtName.Text = objUpdate.Name;
@@ -68,7 +67,6 @@ namespace HR_Manager.Payroll
 		{
 			loadCbEmployee();
 			loadCbJob();
-			loadCbDepartment();
 			loadCbStatus();
 		}
 
@@ -88,15 +86,6 @@ namespace HR_Manager.Payroll
 			listJob = jBus.GetAll();
 			cbJob.DataSource = listJob;
 		}
-
-		private void loadCbDepartment()
-		{
-			cbDepartment.ValueMember = "ID";
-			cbDepartment.DisplayMember = "Name";
-			listDe = deBus.GetAll();
-			cbDepartment.DataSource = listDe;
-		}
-
 		private void loadCbStatus()
 		{
 			cbStatus.DataSource = listStatus;
@@ -109,7 +98,7 @@ namespace HR_Manager.Payroll
 				if (checkValid())
 				{
 					Contract obj = new Contract(txtName.Text, selectedEmployee, timeStart.Value, timeEnd.Value,
-						selectedStatus, selectedJob, selectedDepartment, Login.EMPLOYEE_ID, txtDetail.Text, (int)num.Value, Convert.ToDecimal(txtBasePay.Text));
+						selectedStatus, selectedJob, txtDetail.Text, (int)num.Value, Convert.ToDecimal(txtBasePay.Text));
 					// Biến kiểm tra xem hợp đồng đã tồn tại chưa
 					List<Contract> check = ctBus.GetByEmployeeId(selectedEmployee);
 					int flagUpdateDayJoin = -1;
@@ -154,7 +143,7 @@ namespace HR_Manager.Payroll
 			if (checkValid())
 			{
 				Contract obj = new Contract(objUpdate.Id, txtName.Text, selectedEmployee, timeStart.Value, timeEnd.Value,
-					selectedStatus, selectedJob, selectedDepartment, Login.EMPLOYEE_ID, txtDetail.Text, (int)num.Value, Convert.ToDecimal(txtBasePay.Text));
+					selectedStatus, selectedJob, txtDetail.Text, (int)num.Value, Convert.ToDecimal(txtBasePay.Text));
 				// Check
 				List<Contract> check = ctBus.GetByEmployeeId(selectedEmployee);
 				int flagUpdateDayJoin = -1;
@@ -239,11 +228,6 @@ namespace HR_Manager.Payroll
 				MessageBox.Show("Contract job not empty", SD.tb, ok, war);
 				return false;
 			}
-			if (selectedDepartment == null)
-			{
-				MessageBox.Show("Contract department not empty", SD.tb, ok, war);
-				return false;
-			}
 			if (selectedStatus == null)
 			{
 				MessageBox.Show("Contract status not empty", SD.tb, ok, war);
@@ -270,15 +254,6 @@ namespace HR_Manager.Payroll
 			if (cb.SelectedValue != null)
 			{
 				selectedEmployee = Convert.ToInt32(cb.SelectedValue);
-			}
-		}
-
-		private void cbDepartment_SelectedValueChanged(object sender, EventArgs e)
-		{
-			ComboBox cb = sender as ComboBox;
-			if (cb.SelectedValue != null)
-			{
-				selectedDepartment = Convert.ToInt32(cb.SelectedValue);
 			}
 		}
 
