@@ -146,7 +146,7 @@ namespace HR_Manager.Employee
 			DateTime toDate = dtpNgayKetThuc.Value;
 			string status = cbStatus.SelectedValue.ToString();
 			Job_Detail job_Detail;
-			if (jobDetailUserControl == null)
+			if (jobDetailUpdate == null)
 			{
 				job_Detail = new Job_Detail(employeeid, jobId, derpartmentId, fromDate, toDate, des, status);
 			}
