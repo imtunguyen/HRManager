@@ -20,16 +20,13 @@ namespace HR_Manager
         private DataTable dt = new DataTable();
         private EmployeeBUS eBus;
         private DepartmentBUS deBus;
-        private LocationBUS loBus;
         private JobBUS jobBus;
         private Department deDto;
         private EmployeeDTO eDto;
-        private Location loDto;
         private Job_DetailBUS jdBus;
         private List<Job> jobList;
         private List<EmployeeDTO> elist;
         private List<Department> delist;
-        private List<Location> lolist;
         private JobUserControl jobUserControl;
         private Job jobDto;
         private int index;
@@ -40,11 +37,9 @@ namespace HR_Manager
             jobList = new List<Job>();
             eBus = new EmployeeBUS();
             deBus = new DepartmentBUS();
-            loBus = new LocationBUS();
             jobBus = new JobBUS();
             elist = eBus.GetAll();
             delist = deBus.GetAll();
-            lolist = loBus.GetAll();
             jobList = jobBus.GetAll();
             dt.Columns.Add("ID");
             dt.Columns.Add("Job Name");
