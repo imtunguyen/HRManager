@@ -1,5 +1,6 @@
 ﻿using BUS;
 using DTO;
+using HR_Manager.Employee;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -55,7 +56,7 @@ namespace HR_Manager.Payroll
 				cbJob.SelectedValue = objUpdate.JobId;
 				cbStatus.SelectedItem = objUpdate.Status;
 				txtName.Text = objUpdate.Name;
-				txtBasePay.Text = emUpdate.base_pay.ToString();
+				txtBasePay.Text = objUpdate.BasePay.ToString();
 				txtDetail.Text = objUpdate.Detail;
 				timeStart.Value = objUpdate.FormDate;
 				timeEnd.Value = objUpdate.ToDate;
@@ -91,85 +92,9 @@ namespace HR_Manager.Payroll
 			cbStatus.DataSource = listStatus;
 		}
 
-		private bool Add()
-		{
-			try
-			{
-				if (checkValid())
-				{
-					Contract obj = new Contract(txtName.Text, selectedEmployee, timeStart.Value, timeEnd.Value,
-						selectedStatus, selectedJob, txtDetail.Text, (int)num.Value, Convert.ToDecimal(txtBasePay.Text));
-					// Biến kiểm tra xem hợp đồng đã tồn tại chưa
-					List<Contract> check = ctBus.GetByEmployeeId(selectedEmployee);
-					int flagUpdateDayJoin = -1;
-					if (ctBus.Add(obj))
-					{
-						if (obj.Status.Equals(SD.Contract_Running))
-						{
-							// Nếu đã có contract rồi
-							if (check != null)
-							{
-								foreach (Contract item in check)
-								{
-									// Không có contract nào có status running
-									if (!item.Status.Equals(SD.Contract_Running))
-									{
-										flagUpdateDayJoin = 1;
-									}
-								}
-								if (flagUpdateDayJoin == 1) emBus.UpdateDayJoin(selectedEmployee, timeStart.Value);
-							}
-							else
-							{
-								emBus.UpdateDayJoin(selectedEmployee, timeStart.Value);
-							}
-							emBus.UpdateBasePay(obj.EmployeeId, obj.BasePay);
-						}
-						return true;
-					}
-					return false;
-				}
-				return false;
-			}
-			catch (Exception ex)
-			{
-				ex.ToString();
-				return false;
-			}
-		}
-
 		private bool UpdateContract()
 		{
-			if (checkValid())
-			{
-				Contract obj = new Contract(objUpdate.Id, txtName.Text, selectedEmployee, timeStart.Value, timeEnd.Value,
-					selectedStatus, selectedJob, txtDetail.Text, (int)num.Value, Convert.ToDecimal(txtBasePay.Text));
-				// Check
-				List<Contract> check = ctBus.GetByEmployeeId(selectedEmployee);
-				int flagUpdateDayJoin = -1;
-				if (ctBus.Update(obj))
-				{
-					if (obj.Status.Equals(SD.Contract_Running))
-					{
-						// Nếu đã có contract rồi
-						if (check != null)
-						{
-							foreach (Contract item in check)
-							{
-								// Không có contract nào có status running
-								if (!item.Status.Equals(SD.Contract_Running))
-								{
-									flagUpdateDayJoin = 1;
-								}
-							}
-							if (flagUpdateDayJoin == 1) emBus.UpdateDayJoin(selectedEmployee, timeStart.Value);
-						}
-						emBus.UpdateBasePay(obj.EmployeeId, obj.BasePay);
-					}
-					return true;
-				}
-				return false;
-			}
+
 			return false;
 		}
 
@@ -323,26 +248,46 @@ namespace HR_Manager.Payroll
 		{
 			if (hanhDong.Equals("Add"))
 			{
-				if (Add())
+				try
 				{
-					MessageBox.Show(SD.addSuccess, SD.tb, ok, info);
-					contractUserControl.loadContract();
+					if (checkValid())
+					{
+						Contract obj = new Contract(txtName.Text, selectedEmployee, timeStart.Value, timeEnd.Value,
+							selectedStatus, selectedJob, txtDetail.Text, (int)num.Value, Convert.ToDecimal(txtBasePay.Text));
+						MessageBox.Show(SD.addSuccess, SD.tb, ok, info);
+						contractUserControl.loadContract();
+						this.Dispose();
+					}
+					else
+					{
+						MessageBox.Show(SD.addFail, SD.tb, ok, info);
+					}
 				}
-				else
+				catch (Exception ex)
 				{
-					MessageBox.Show(SD.addFail, SD.tb, ok, info);
+					MessageBox.Show(ex.ToString(), SD.error, ok, MessageBoxIcon.Error);
 				}
 			}
 			else if (hanhDong.Equals("Edit"))
 			{
-				if (UpdateContract())
+				try
 				{
-					MessageBox.Show(SD.UpdateSucess, SD.tb, ok, info);
-					contractUserControl.loadContract();
+					if (checkValid())
+					{
+						Contract obj = new Contract(objUpdate.Id, txtName.Text, selectedEmployee, timeStart.Value, timeEnd.Value,
+							selectedStatus, selectedJob, txtDetail.Text, (int)num.Value, Convert.ToDecimal(txtBasePay.Text));
+						MessageBox.Show(SD.UpdateSucess, SD.tb, ok, info);
+						contractUserControl.loadContract();
+					}
+					else
+					{
+						MessageBox.Show(SD.UpdateFail, SD.tb, ok, info);
+
+					}
 				}
-				else
+				catch (Exception ex)
 				{
-					MessageBox.Show(SD.UpdateFail, SD.tb, ok, info);
+					MessageBox.Show(ex.ToString(), SD.error, ok, MessageBoxIcon.Error);
 				}
 			}
 		}

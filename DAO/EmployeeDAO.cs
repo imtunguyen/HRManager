@@ -186,42 +186,7 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
-
-        public bool UpdateBasePay(int Id, decimal basePay)
-        {
-            try
-            {
-                using (SqlConnection conn = DbConnection.GetSqlConnection())
-                {
-                    string query = "update EMPLOYEE set base_pay = " + basePay + " where id = " + Id;
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
-                    {
-                        int rowsChanged = cmd.ExecuteNonQuery();
-                        return rowsChanged > 0;
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                ex.ToString();
-                return false;
-            }
-        }
-
-        public bool UpdateDayJoin(int Id, DateTime dayJoin)
-        {
-
-            using (SqlConnection conn = DbConnection.GetSqlConnection())
-            {
-                string query = "update EMPLOYEE set date_joined = '" + dayJoin + "' where id = " + Id;
-                using (SqlCommand cmd = new SqlCommand(query, conn))
-                {
-                    int rowsChanged = cmd.ExecuteNonQuery();
-                    return rowsChanged > 0;
-                }
-            }
-        }
-    }
+	}
 }
 
 
