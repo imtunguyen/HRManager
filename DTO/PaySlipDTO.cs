@@ -15,5 +15,6 @@ namespace DTO
         public string status { set; get; }
         public DateTime from_date { set; get; }
         public DateTime to_date { set; get;}
+        public int Contract_ID { get; set; }
     }
 }

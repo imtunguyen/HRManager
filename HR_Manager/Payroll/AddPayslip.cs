@@ -26,6 +26,7 @@ namespace HR_Manager.Payroll
 		int employee_id;
 		Decimal feeBonus;
 		Decimal feeFines;
+		private DataTable dt;
 		public AddPayslip()
 		{
 			InitializeComponent();
@@ -34,6 +35,19 @@ namespace HR_Manager.Payroll
 
 		private void loadBonus()
 		{
+			dt.Clear();
+			List<DTO.BonusAndFines> list = bonusAndFinesBUS.getAllListBonusOfEmployee(employee_id, dateTo);
+			foreach(DTO.BonusAndFines b in list)
+			{
+				DataRow row = dt.NewRow();
+				row["ID"] = b.id;
+				row["Amout"] = b.amount;
+				row["Type"] = b.type;
+				row["Reason"] = b.reason;
+				row["Expired Date"] = b.expired_date.ToShortDateString();
+				dt.Rows.Add(row);
+			}
+			dataGridView1.DataSource = dt;
 		}
 
 		private void AddPayslip_Load(object sender, EventArgs e)
@@ -59,12 +73,20 @@ namespace HR_Manager.Payroll
 				cbEmployee.Items.Add(employees[i].Name + "_" + employees[i].ID);
 			}
 			cbEmployee.AutoCompleteCustomSource = collection;
+
+			dt = new DataTable();
+			dt.Columns.Add("ID", typeof(int));
+			dt.Columns.Add("Amout", typeof(decimal));
+			dt.Columns.Add("Type", typeof(string));
+			dt.Columns.Add("Reason", typeof(string));
+			dt.Columns.Add("Expired Date", typeof(string));
 		}
 
 		private void cbEmployee_SelectedIndexChanged(object sender, EventArgs e)
 		{
 			string s = cbEmployee.Text;
 			employee_id = Convert.ToInt32(s.Substring(s.IndexOf("_") + 1));
+			loadBonus();
 		}
 
 		private void btnSubmit_Click(object sender, EventArgs e)
@@ -128,6 +150,16 @@ namespace HR_Manager.Payroll
 			paySlip.employee_id = employee_id;
 			paySlip.total = Convert.ToDecimal(textBox2.Text);
 			paySlip.status = lblPaid.Text;
+			int contractID = 0;
+			List<Contract> list = contractBUS.GetByEmployeeId(employee_id);
+			foreach (Contract contract in list)
+			{
+				if (contract.Status.Equals(SD.Contract_Running))
+				{
+					contractID = contract.Id; break;
+				}
+			}
+			paySlip.Contract_ID = contractID;
 			MessageBox.Show(slipBUS.Add(paySlip));
 
 			lblRunning.Visible = false;
@@ -138,7 +170,16 @@ namespace HR_Manager.Payroll
 
 		private Decimal getFee()
 		{
-			Decimal feeRegular = dayOfWork * (employeeBUS.getById(employee_id).base_pay / minimunDay());
+			Decimal basePay = 0;
+			List<Contract> list = contractBUS.GetByEmployeeId(employee_id);
+			foreach(Contract contract in list)
+			{
+				if(contract.Status.Equals(SD.Contract_Running))
+				{
+					basePay = contract.BasePay; break;
+				}
+			}
+			Decimal feeRegular = dayOfWork * (basePay / minimunDay());
 			return Math.Round(feeRegular + feeBonus - feeFines, 2);
 		}
 
@@ -213,9 +254,9 @@ namespace HR_Manager.Payroll
 			e.Graphics.DrawString(cbEmployee.Text.Substring(0, cbEmployee.Text.IndexOf("_")), new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 250));
 			e.Graphics.DrawString("from " + dateFrom + " to " + dateTo, new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 290));
 			e.Graphics.DrawString(textBox1.Text, new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 330));
-			e.Graphics.DrawString(feeBonus.ToString(), new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 370));
-			e.Graphics.DrawString(feeFines.ToString(), new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 410)); ;
-			e.Graphics.DrawString(textBox2.Text, new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 450));
+			e.Graphics.DrawString(feeBonus.ToString() + " VND", new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 370));
+			e.Graphics.DrawString(feeFines.ToString() +" VND", new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 410)); ;
+			e.Graphics.DrawString(textBox2.Text +" VND", new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 450));
 
 
 		}
