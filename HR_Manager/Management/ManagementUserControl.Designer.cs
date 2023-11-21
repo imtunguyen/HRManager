@@ -1,4 +1,6 @@
-﻿namespace HR_Manager.Management
+﻿using HR_Manager.Employee;
+
+namespace HR_Manager.Management
 {
 	partial class ManagementUserControl
 	{
@@ -31,6 +33,8 @@
 			tabControl = new TabControl();
 			tabPageSkill = new TabPage();
 			tabPageLevel = new TabPage();
+			skillUserControl = new SkillUserControl();
+			levelUserControl = new LevelUserControl();
 			tabControl.SuspendLayout();
 			SuspendLayout();
 			// 
@@ -47,6 +51,7 @@
 			// 
 			// tabPageSkill
 			// 
+			tabPageSkill.Controls.Add(skillUserControl);
 			tabPageSkill.Location = new Point(4, 29);
 			tabPageSkill.Name = "tabPageSkill";
 			tabPageSkill.Padding = new Padding(3);
@@ -54,9 +59,18 @@
 			tabPageSkill.TabIndex = 0;
 			tabPageSkill.Text = "Skill";
 			tabPageSkill.UseVisualStyleBackColor = true;
+			//
+			// SkillUserControl
+			//
+			skillUserControl.Dock = DockStyle.Fill;
+			skillUserControl.Location = new Point(3, 3);
+			skillUserControl.Margin = new Padding(3, 4, 3, 4);
+			skillUserControl.Name = "skillUserControl";
+			skillUserControl.TabIndex = 0;
 			// 
 			// tabPageLevel
 			// 
+			tabPageLevel.Controls.Add(levelUserControl);
 			tabPageLevel.Location = new Point(4, 29);
 			tabPageLevel.Name = "tabPageLevel";
 			tabPageLevel.Padding = new Padding(3);
@@ -64,6 +78,14 @@
 			tabPageLevel.TabIndex = 1;
 			tabPageLevel.Text = "Level";
 			tabPageLevel.UseVisualStyleBackColor = true;
+			//
+			// LevelUserControl
+			//
+			levelUserControl.Dock = DockStyle.Fill;
+			levelUserControl.Location = new Point(3, 3);
+			levelUserControl.Margin = new Padding(3, 4, 3, 4);
+			levelUserControl.Name = "levelUserControl";
+			levelUserControl.TabIndex = 0;
 			// 
 			// Management
 			// 
@@ -81,5 +103,7 @@
 		private TabControl tabControl;
 		private TabPage tabPageSkill;
 		private TabPage tabPageLevel;
+		private SkillUserControl skillUserControl;
+		private LevelUserControl levelUserControl;
 	}
 }
