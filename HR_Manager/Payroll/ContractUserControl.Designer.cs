@@ -42,6 +42,10 @@
 			dataGridView1 = new DataGridView();
 			btnEdit = new Button();
 			label1 = new Label();
+			dtpNgayBatDau = new DateTimePicker();
+			label2 = new Label();
+			dtpNgayKetThuc = new DateTimePicker();
+			btnLamMoi = new Button();
 			gbStatus.SuspendLayout();
 			((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
 			SuspendLayout();
@@ -56,7 +60,7 @@
 			gbStatus.Controls.Add(rbAll);
 			gbStatus.Cursor = Cursors.Hand;
 			gbStatus.FlatStyle = FlatStyle.Flat;
-			gbStatus.Location = new Point(300, 7);
+			gbStatus.Location = new Point(12, 52);
 			gbStatus.Name = "gbStatus";
 			gbStatus.Size = new Size(403, 44);
 			gbStatus.TabIndex = 5;
@@ -148,15 +152,17 @@
 			// 
 			// cbTimKiem
 			// 
+			cbTimKiem.Cursor = Cursors.Hand;
 			cbTimKiem.FormattingEnabled = true;
-			cbTimKiem.Location = new Point(709, 19);
+			cbTimKiem.Location = new Point(689, 19);
 			cbTimKiem.Name = "cbTimKiem";
-			cbTimKiem.Size = new Size(141, 28);
+			cbTimKiem.Size = new Size(161, 28);
 			cbTimKiem.TabIndex = 6;
 			cbTimKiem.SelectedValueChanged += cbTimKiem_SelectedValueChanged;
 			// 
 			// txtTimKiem
 			// 
+			txtTimKiem.Cursor = Cursors.Hand;
 			txtTimKiem.Location = new Point(853, 19);
 			txtTimKiem.Margin = new Padding(0);
 			txtTimKiem.Name = "txtTimKiem";
@@ -167,6 +173,7 @@
 			// btnTimKiem
 			// 
 			btnTimKiem.BackColor = Color.FromArgb(1, 107, 112);
+			btnTimKiem.Cursor = Cursors.Hand;
 			btnTimKiem.FlatAppearance.BorderSize = 0;
 			btnTimKiem.FlatStyle = FlatStyle.Flat;
 			btnTimKiem.Image = Properties.Resources.search;
@@ -176,6 +183,7 @@
 			btnTimKiem.Size = new Size(54, 29);
 			btnTimKiem.TabIndex = 8;
 			btnTimKiem.UseVisualStyleBackColor = false;
+			btnTimKiem.Click += btnTimKiem_Click;
 			// 
 			// dataGridView1
 			// 
@@ -190,7 +198,7 @@
 			dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
 			dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
 			dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-			dataGridView1.ColumnHeadersHeight = 70;
+			dataGridView1.ColumnHeadersHeight = 50;
 			dataGridView1.Location = new Point(12, 101);
 			dataGridView1.Name = "dataGridView1";
 			dataGridView1.ReadOnly = true;
@@ -222,16 +230,63 @@
 			// 
 			label1.AutoSize = true;
 			label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label1.Location = new Point(12, 68);
+			label1.Location = new Point(425, 68);
 			label1.Name = "label1";
-			label1.Size = new Size(80, 20);
+			label1.Size = new Size(88, 20);
 			label1.TabIndex = 10;
-			label1.Text = "Start Date";
+			label1.Text = "Start Date: ";
+			// 
+			// dtpNgayBatDau
+			// 
+			dtpNgayBatDau.Cursor = Cursors.Hand;
+			dtpNgayBatDau.Location = new Point(512, 65);
+			dtpNgayBatDau.Name = "dtpNgayBatDau";
+			dtpNgayBatDau.Size = new Size(261, 27);
+			dtpNgayBatDau.TabIndex = 11;
+			// 
+			// label2
+			// 
+			label2.AutoSize = true;
+			label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+			label2.Location = new Point(789, 68);
+			label2.Name = "label2";
+			label2.Size = new Size(71, 20);
+			label2.TabIndex = 10;
+			label2.Text = "To Date: ";
+			// 
+			// dtpNgayKetThuc
+			// 
+			dtpNgayKetThuc.Cursor = Cursors.Hand;
+			dtpNgayKetThuc.Location = new Point(861, 65);
+			dtpNgayKetThuc.Name = "dtpNgayKetThuc";
+			dtpNgayKetThuc.Size = new Size(262, 27);
+			dtpNgayKetThuc.TabIndex = 11;
+			// 
+			// btnLamMoi
+			// 
+			btnLamMoi.BackColor = Color.FromArgb(1, 107, 112);
+			btnLamMoi.Cursor = Cursors.Hand;
+			btnLamMoi.FlatStyle = FlatStyle.Flat;
+			btnLamMoi.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+			btnLamMoi.ForeColor = Color.White;
+			btnLamMoi.Image = Properties.Resources.refresh_24;
+			btnLamMoi.Location = new Point(234, 11);
+			btnLamMoi.Name = "btnLamMoi";
+			btnLamMoi.Size = new Size(105, 43);
+			btnLamMoi.TabIndex = 4;
+			btnLamMoi.Text = "Refesh";
+			btnLamMoi.TextAlign = ContentAlignment.MiddleRight;
+			btnLamMoi.TextImageRelation = TextImageRelation.ImageBeforeText;
+			btnLamMoi.UseVisualStyleBackColor = false;
+			btnLamMoi.Click += btnLamMoi_Click;
 			// 
 			// ContractUserControl
 			// 
 			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
+			Controls.Add(dtpNgayKetThuc);
+			Controls.Add(dtpNgayBatDau);
+			Controls.Add(label2);
 			Controls.Add(label1);
 			Controls.Add(dataGridView1);
 			Controls.Add(btnTimKiem);
@@ -239,6 +294,7 @@
 			Controls.Add(cbTimKiem);
 			Controls.Add(gbStatus);
 			Controls.Add(btnEdit);
+			Controls.Add(btnLamMoi);
 			Controls.Add(btnThemContract);
 			Name = "ContractUserControl";
 			Size = new Size(1135, 717);
@@ -264,5 +320,9 @@
 		private DataGridView dataGridView1;
 		private Button btnEdit;
 		private Label label1;
+		private DateTimePicker dtpNgayBatDau;
+		private Label label2;
+		private DateTimePicker dtpNgayKetThuc;
+		private Button btnLamMoi;
 	}
 }

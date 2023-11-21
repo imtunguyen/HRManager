@@ -23,6 +23,8 @@ namespace HR_Manager.Payroll
 		private DataTable dt;
 		private int idSelected;
 		private int index;
+		private DateTime defaultDate = new DateTime(1950, 1, 1);
+		private string curentStatus = "All";
 		public ContractUserControl()
 		{
 			InitializeComponent();
@@ -31,24 +33,34 @@ namespace HR_Manager.Payroll
 			jBus = new JobBUS();
 			dt = new DataTable();
 			dt.Columns.Add("ID", typeof(int));
-			dt.Columns.Add("Contract Name", typeof(string));
-			dt.Columns.Add("Employee Name", typeof(string));
+			dt.Columns.Add("Name", typeof(string));
+			dt.Columns.Add("Employee", typeof(string));
+			dt.Columns.Add("Base Pay", typeof(decimal));
+			dt.Columns.Add("Required Day", typeof(int));
+			dt.Columns.Add("Status", typeof(string));
 			dt.Columns.Add("From Date", typeof(string));
 			dt.Columns.Add("To Date", typeof(string));
-			dt.Columns.Add("Job Name", typeof(string));
-			dt.Columns.Add("Required Day", typeof(int));
-			dt.Columns.Add("Base Pay", typeof(decimal));
-			dt.Columns.Add("Status", typeof(string));
+			dt.Columns.Add("Job", typeof(string));
 			dt.Columns.Add("Detail", typeof(string));
+			MainLoad();
+			dataGridView1.Columns["ID"].Width = 60;
+			dataGridView1.Columns["Name"].Width = 180;
+			dataGridView1.Columns["Employee"].Width = 180;
+			dataGridView1.Columns["Job"].Width = 150;
+			dataGridView1.Columns["From Date"].Width = 140;
+			dataGridView1.Columns["To Date"].Width = 130;
+			dataGridView1.Columns["Required Day"].Width = 180;
+			dataGridView1.Columns["Detail"].Width = 300;
+		}
+
+		public void MainLoad()
+		{
 			loadcbTimKiem();
 			rbAll.Checked = true;
-			dataGridView1.Columns["ID"].Width = 60;
-			dataGridView1.Columns["Contract Name"].Width = 180;
-			dataGridView1.Columns["Employee Name"].Width = 180;
-			dataGridView1.Columns["Job Name"].Width = 180;
-			dataGridView1.Columns["From Date"].Width = 130;
-			dataGridView1.Columns["To Date"].Width = 130;
-			dataGridView1.Columns["Detail"].Width = 300;
+			loadContract();
+			txtTimKiem.Text = string.Empty;
+			dtpNgayBatDau.Value = defaultDate;
+			dtpNgayKetThuc.Value = defaultDate;
 		}
 
 		public void loadContract()
@@ -59,11 +71,11 @@ namespace HR_Manager.Payroll
 			{
 				DataRow row = dt.NewRow();
 				row["ID"] = contract.Id;
-				row["Contract Name"] = contract.Name;
-				row["Employee Name"] = emBus.getById(contract.EmployeeId).Name;
+				row["Name"] = contract.Name;
+				row["Employee"] = emBus.getById(contract.EmployeeId).Name;
 				row["From Date"] = contract.FormDate.ToShortDateString();
 				row["To Date"] = contract.ToDate.ToShortDateString();
-				row["Job Name"] = jBus.GetById(contract.JobId).Job_Name;
+				row["Job"] = jBus.GetById(contract.JobId).Job_Name;
 				row["Required Day"] = contract.RequiredDay;
 				row["Base Pay"] = contract.BasePay;
 				row["Status"] = contract.Status;
@@ -80,11 +92,11 @@ namespace HR_Manager.Payroll
 			{
 				DataRow row = dt.NewRow();
 				row["ID"] = contract.Id;
-				row["Contract Name"] = contract.Name;
-				row["Employee Name"] = emBus.getById(contract.EmployeeId).Name;
+				row["Name"] = contract.Name;
+				row["Employee"] = emBus.getById(contract.EmployeeId).Name;
 				row["From Date"] = contract.FormDate.ToShortDateString();
 				row["To Date"] = contract.ToDate.ToShortDateString();
-				row["Job Name"] = jBus.GetById(contract.JobId).Job_Name;
+				row["Job"] = jBus.GetById(contract.JobId).Job_Name;
 				row["Required Day"] = contract.RequiredDay;
 				row["Base Pay"] = contract.BasePay;
 				row["Status"] = contract.Status;
@@ -98,7 +110,6 @@ namespace HR_Manager.Payroll
 		{
 			cbTimKiem.DataSource = lcbTimKiem;
 		}
-
 
 		private void btnThemContract_Click(object sender, EventArgs e)
 		{
@@ -120,6 +131,8 @@ namespace HR_Manager.Payroll
 					}
 				}
 				loadContract(contractsNew);
+				curentStatus = SD.Contract_New;
+				FilterDate();
 			}
 		}
 
@@ -128,6 +141,8 @@ namespace HR_Manager.Payroll
 			if (rbAll.Checked)
 			{
 				loadContract();
+				curentStatus = "All";
+				FilterDate();
 			}
 		}
 
@@ -145,6 +160,8 @@ namespace HR_Manager.Payroll
 					}
 				}
 				loadContract(contractsRunning);
+				curentStatus = SD.Contract_Running;
+				FilterDate();
 			}
 		}
 
@@ -162,6 +179,8 @@ namespace HR_Manager.Payroll
 					}
 				}
 				loadContract(contractsExpired);
+				curentStatus = SD.Contract_Expired;
+				FilterDate();
 			}
 		}
 
@@ -179,6 +198,8 @@ namespace HR_Manager.Payroll
 					}
 				}
 				loadContract(contractsCancelled);
+				curentStatus = SD.Contract_Cacelled;
+				FilterDate();
 			}
 		}
 
@@ -192,68 +213,95 @@ namespace HR_Manager.Payroll
 			}
 		}
 
+		private void SearchAdvanced()
+		{
+			string checkStatus = "";
+			// Duyệt qua gropbox xem radiobutton nào đang đc check 
+			foreach (RadioButton rb in gbStatus.Controls.OfType<RadioButton>())
+			{
+				if (rb.Checked)
+				{
+					checkStatus = rb.Text;
+					break;
+				}
+			}
+			List<Contract> contracts = ctBus.GetAll();
+			List<Contract> contractsSearch = new List<Contract>();
+			if (!checkStatus.Equals("All"))
+			{
+				foreach (Contract contract in contracts)
+				{
+					if (contract.Status.Equals(checkStatus))
+					{
+						contractsSearch.Add(contract);
+					}
+				}
+			}
+			else
+			{
+				contractsSearch = contracts;
+			}
+
+			switch (indexTk)
+			{
+				case "Contract Name":
+					contractsSearch = contractsSearch.Where(c => c.Name.ToLower().Contains(txtTimKiem.Text.ToLower())).ToList();
+					break;
+				case "Employee Name":
+					List<EmployeeDTO> employeesList = emBus.GetAll();
+					List<EmployeeDTO> employeeSearch = employeesList
+						.Where(employee => employee.Name.ToLower().Contains(txtTimKiem.Text.ToLower()))
+						.ToList();
+					contractsSearch = contractsSearch
+					 .Join(employeeSearch, contract => contract.EmployeeId, employee => employee.ID,
+					 (contract, employee) => new { Contract = contract, Employee = employee }).Select(x => x.Contract).ToList();
+					break;
+				case "Job Position":
+					List<Job> jobsList = jBus.GetAll();
+					List<Job> jobsSearch = jobsList
+						.Where(job => job.Job_Name.ToLower().Contains(txtTimKiem.Text.ToLower()))
+						.ToList();
+					contractsSearch = contractsSearch
+					 .Join(jobsSearch, contract => contract.JobId, job => job.ID,
+					 (contract, job) => new { Contract = contract, Job = job }).Select(x => x.Contract).ToList();
+					break;
+			}
+			// sreach theo khoảng thời gian
+			// Kiểm tra người dùng đã chọn giá trị mới chưa (rồi)
+			if (dtpNgayBatDau.Value != defaultDate && dtpNgayKetThuc.Value != defaultDate)
+			{
+				// Lấy ngày tháng năm của dtpNgayBatDau và dtpNgayKetThuc
+				DateTime fromDatePicker = dtpNgayBatDau.Value.Date;
+				DateTime toDatePicker = dtpNgayKetThuc.Value.Date;
+				List<Contract> result = new List<Contract>();
+				foreach (Contract item in contractsSearch)
+				{
+					// Lấy ngày tháng năm từ FromDate và ToDate của Job_Detail
+					DateTime fromDateJobDetail = item.FormDate.Date;
+					DateTime toDateJobDetail = item.ToDate.Date;
+
+					// Kiểm tra xem khoảng thời gian từ fromDate đến toDate nằm trong khoảng thời gian có trong hợp đồng
+					bool isWithinRange = fromDatePicker <= fromDateJobDetail && toDatePicker <= toDateJobDetail;
+					if (isWithinRange)
+					{
+						result.Add(item);
+					}
+				}
+				loadContract(result);
+			}
+			else
+			{
+				loadContract(contractsSearch);
+			}
+		}
+
 		private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
 		{
 			if (e.KeyChar == (char)Keys.Enter)
 			{
 				// Enter key is pressed
 				// Add your logic here
-				string checkStatus = "";
-				// Duyệt qua gropbox xem radiobutton nào đang đc check 
-				foreach (RadioButton rb in gbStatus.Controls.OfType<RadioButton>())
-				{
-					if (rb.Checked)
-					{
-						checkStatus = rb.Text;
-						break;
-					}
-				}
-				List<Contract> contracts = ctBus.GetAll();
-				List<Contract> contractsSearch = new List<Contract>();
-				if (!checkStatus.Equals("All"))
-				{
-					foreach (Contract contract in contracts)
-					{
-						if (contract.Status.Equals(checkStatus))
-						{
-							contractsSearch.Add(contract);
-						}
-					}
-				}
-				else
-				{
-					contractsSearch = contracts;
-				}
-
-				switch (indexTk)
-				{
-					case "Contract Name":
-						contractsSearch = contractsSearch.Where(c => c.Name.ToLower().Contains(txtTimKiem.Text.ToLower())).ToList();
-						loadContract(contractsSearch);
-						break;
-					case "Employee Name":
-						List<EmployeeDTO> employeesList = emBus.GetAll();
-						List<EmployeeDTO> employeeSearch = employeesList
-							.Where(employee => employee.Name.ToLower().Contains(txtTimKiem.Text.ToLower()))
-							.ToList();
-						contractsSearch = contractsSearch
-						 .Join(employeeSearch, contract => contract.EmployeeId, employee => employee.ID,
-						 (contract, employee) => new { Contract = contract, Employee = employee }).Select(x => x.Contract).ToList();
-						loadContract(contractsSearch);
-						break;
-					case "Job Position":
-						List<Job> jobsList = jBus.GetAll();
-						List<Job> jobsSearch = jobsList
-							.Where(job => job.Job_Name.ToLower().Contains(txtTimKiem.Text.ToLower()))
-							.ToList();
-						contractsSearch = contractsSearch
-						 .Join(jobsSearch, contract => contract.JobId, job => job.ID,
-						 (contract, job) => new { Contract = contract, Job = job }).Select(x => x.Contract).ToList();
-						loadContract(contractsSearch);
-						break;
-
-
-				}
+				SearchAdvanced();
 				e.Handled = true; // This line prevents the beep sound
 			}
 
@@ -306,6 +354,59 @@ namespace HR_Manager.Payroll
 			}
 			fCRUDContract f = new fCRUDContract(this, "Edit", contract);
 			f.ShowDialog();
+		}
+
+		private void FilterDate()
+		{
+			if (dtpNgayKetThuc.Value != defaultDate && dtpNgayBatDau.Value != defaultDate)
+			{
+				// Lọc status
+				List<Contract> contracts = ctBus.GetAll();
+				List<Contract> contractsSearch = new List<Contract>();
+				if (!curentStatus.Equals("All"))
+				{
+					foreach (Contract item in contracts)
+					{
+						if (item.Status.Equals(curentStatus))
+						{
+							contractsSearch.Add(item);
+						}
+					}
+				}
+				else
+				{
+					contractsSearch = contracts;
+				}
+
+				// Lọc Date
+				DateTime fromDatePicker = dtpNgayBatDau.Value.Date;
+				DateTime toDatePicker = dtpNgayKetThuc.Value.Date;
+				List<Contract> result = new List<Contract>();
+				foreach (Contract item in contractsSearch)
+				{
+					// Lấy ngày tháng năm từ FromDate và ToDate của Job_Detail
+					DateTime fromDateJobDetail = item.FormDate.Date;
+					DateTime toDateJobDetail = item.ToDate.Date;
+
+					// Kiểm tra xem khoảng thời gian từ fromDate đến toDate nằm trong khoảng thời gian có trong hợp đồng
+					bool isWithinRange = fromDatePicker <= fromDateJobDetail && toDatePicker <= toDateJobDetail;
+					if (isWithinRange)
+					{
+						result.Add(item);
+					}
+				}
+				loadContract(result);
+			}
+		}
+
+		private void btnLamMoi_Click(object sender, EventArgs e)
+		{
+			MainLoad();
+		}
+
+		private void btnTimKiem_Click(object sender, EventArgs e)
+		{
+			SearchAdvanced();
 		}
 	}
 }
