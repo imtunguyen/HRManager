@@ -120,7 +120,7 @@ namespace HR_Manager
 			dashboard1.Location = new Point(235, 0);
 			dashboard1.Margin = new Padding(3, 5, 3, 5);
 			dashboard1.Name = "dashboard1";
-			dashboard1.Size = new Size(1143, 800);
+			dashboard1.Size = new Size(1130, 738);
 			dashboard1.TabIndex = 3;
 			// 
 			// WorkEntry
