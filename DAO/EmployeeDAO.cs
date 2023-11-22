@@ -139,7 +139,35 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
-	}
+
+        public List<EmployeeDTO> GetEmployeeHaveContractRunning()
+        {
+            List<EmployeeDTO> list = new List<EmployeeDTO>();
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "select e.* from EMPLOYEE as e join CONTRACT as c on c.employee_id = e.id where c.status = 'Running'";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        EmployeeDTO e = new EmployeeDTO();
+                        e.ID = Convert.ToInt32(reader["id"].ToString());
+                        e.Name = reader["Name"].ToString();
+                        e.Gender = reader["gender"].ToString();
+                        e.Date_of_Birth = DateTime.Parse(reader["date_Of_Birth"].ToString());
+                        e.Phone = reader["phone"].ToString();
+                        e.Email = reader["email"].ToString();
+                        e.img_path = reader["img_path"].ToString();
+                        e.Department_id = Convert.ToInt32(reader["Department_id"].ToString());
+                        e.Status = reader["status"].ToString();
+                        list.Add(e);
+                    }
+                }
+            }
+            return list;
+        }
+    }
 }
 
 

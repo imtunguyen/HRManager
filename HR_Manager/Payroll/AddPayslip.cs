@@ -125,17 +125,17 @@ namespace HR_Manager.Payroll
 		{
 			if (cbEmployee.Text.Length <= 0)
 			{
-				MessageBox.Show("chưa chọn nhân viên!");
+				MessageBox.Show("You should click in the table!");
 				return false;
 			}
 			if (dateTimeTo.Value < dateTimeFrom.Value)
 			{
-				MessageBox.Show("ngày bắt đầu phải nhỏ hơn ngày kết thúc!");
+				MessageBox.Show("To date should be bigger than from date!");
 				return false;
 			}
 			if (minimunDay() == -1)
 			{
-				MessageBox.Show("Chưa có hợp đồng hoặc hợp đồng đã hết hạn!");
+				MessageBox.Show("Contract could be out of date or employee doesn't have contract");
 				return false;
 			}
 			return true;
@@ -260,5 +260,6 @@ namespace HR_Manager.Payroll
 
 
 		}
+
 	}
 }
