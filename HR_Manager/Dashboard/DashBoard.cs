@@ -10,14 +10,21 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Windows.Media;
+using BUS;
+using DTO;
 
 namespace HR_Manager
 {
 	public partial class DashBoard : UserControl
 	{
+		private StatisticalBUS statisticalBUS;
+		private List<string> lcbThang = SD.listThang;
+		private List<int> lcbNam = SD.listNam;
 		public DashBoard()
 		{
 			InitializeComponent();
+			statisticalBUS = new StatisticalBUS();
+			mainLoad();
 			cartesianChart1.Series = new SeriesCollection
 			{
 				new LineSeries
@@ -68,5 +75,21 @@ namespace HR_Manager
 			cartesianChart1.Series[2].Values.Add(5d);
 
 		}
+
+		private void mainLoad()
+		{
+			loadPanel();
+			cbNam.DataSource = lcbNam;
+			cbNam.SelectedItem = 2023;
+			cbThang.DataSource = lcbThang;
+		}
+
+		private void loadPanel()
+		{
+			lblCountDepartment.Text = statisticalBUS.GetCountDepartment().ToString();
+			lblCountContract.Text = statisticalBUS.GetCountContract().ToString();
+			lblCountActiveEmployee.Text = statisticalBUS.GetCountActiveEmployee().ToString();
+		}
+		
 	}
 }

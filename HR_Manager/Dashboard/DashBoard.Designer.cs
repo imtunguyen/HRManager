@@ -42,15 +42,15 @@ namespace HR_Manager
 		{
 			ComponentResourceManager resources = new ComponentResourceManager(typeof(DashBoard));
 			panel1 = new Panel();
-			label2 = new Label();
+			lblCountDepartment = new Label();
 			label1 = new Label();
 			pictureBox1 = new PictureBox();
 			panel2 = new Panel();
-			label3 = new Label();
+			lblCountActiveEmployee = new Label();
 			label4 = new Label();
 			pictureBox2 = new PictureBox();
 			panel3 = new Panel();
-			label5 = new Label();
+			lblCountContract = new Label();
 			label6 = new Label();
 			pictureBox3 = new PictureBox();
 			cartesianChart1 = new LiveCharts.WinForms.CartesianChart();
@@ -59,6 +59,8 @@ namespace HR_Manager
 			comboBox1 = new ComboBox();
 			label9 = new Label();
 			dataGridView1 = new DataGridView();
+			cbNam = new ComboBox();
+			cbThang = new ComboBox();
 			panel1.SuspendLayout();
 			((ISupportInitialize)pictureBox1).BeginInit();
 			panel2.SuspendLayout();
@@ -71,7 +73,7 @@ namespace HR_Manager
 			// panel1
 			// 
 			panel1.BorderStyle = BorderStyle.FixedSingle;
-			panel1.Controls.Add(label2);
+			panel1.Controls.Add(lblCountDepartment);
 			panel1.Controls.Add(label1);
 			panel1.Controls.Add(pictureBox1);
 			panel1.Location = new Point(3, 12);
@@ -79,16 +81,16 @@ namespace HR_Manager
 			panel1.Size = new Size(367, 153);
 			panel1.TabIndex = 0;
 			// 
-			// label2
+			// lblCountDepartment
 			// 
-			label2.AutoSize = true;
-			label2.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
-			label2.ForeColor = Color.DimGray;
-			label2.Location = new Point(159, 78);
-			label2.Name = "label2";
-			label2.Size = new Size(60, 46);
-			label2.TabIndex = 2;
-			label2.Text = "25";
+			lblCountDepartment.AutoSize = true;
+			lblCountDepartment.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
+			lblCountDepartment.ForeColor = Color.DimGray;
+			lblCountDepartment.Location = new Point(159, 78);
+			lblCountDepartment.Name = "lblCountDepartment";
+			lblCountDepartment.Size = new Size(60, 46);
+			lblCountDepartment.TabIndex = 2;
+			lblCountDepartment.Text = "25";
 			// 
 			// label1
 			// 
@@ -113,7 +115,7 @@ namespace HR_Manager
 			// panel2
 			// 
 			panel2.BorderStyle = BorderStyle.FixedSingle;
-			panel2.Controls.Add(label3);
+			panel2.Controls.Add(lblCountActiveEmployee);
 			panel2.Controls.Add(label4);
 			panel2.Controls.Add(pictureBox2);
 			panel2.Location = new Point(381, 12);
@@ -121,16 +123,16 @@ namespace HR_Manager
 			panel2.Size = new Size(367, 153);
 			panel2.TabIndex = 0;
 			// 
-			// label3
+			// lblCountActiveEmployee
 			// 
-			label3.AutoSize = true;
-			label3.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
-			label3.ForeColor = Color.DimGray;
-			label3.Location = new Point(159, 78);
-			label3.Name = "label3";
-			label3.Size = new Size(60, 46);
-			label3.TabIndex = 2;
-			label3.Text = "25";
+			lblCountActiveEmployee.AutoSize = true;
+			lblCountActiveEmployee.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
+			lblCountActiveEmployee.ForeColor = Color.DimGray;
+			lblCountActiveEmployee.Location = new Point(159, 78);
+			lblCountActiveEmployee.Name = "lblCountActiveEmployee";
+			lblCountActiveEmployee.Size = new Size(60, 46);
+			lblCountActiveEmployee.TabIndex = 2;
+			lblCountActiveEmployee.Text = "25";
 			// 
 			// label4
 			// 
@@ -155,7 +157,7 @@ namespace HR_Manager
 			// panel3
 			// 
 			panel3.BorderStyle = BorderStyle.FixedSingle;
-			panel3.Controls.Add(label5);
+			panel3.Controls.Add(lblCountContract);
 			panel3.Controls.Add(label6);
 			panel3.Controls.Add(pictureBox3);
 			panel3.Location = new Point(759, 12);
@@ -163,16 +165,16 @@ namespace HR_Manager
 			panel3.Size = new Size(367, 153);
 			panel3.TabIndex = 0;
 			// 
-			// label5
+			// lblCountContract
 			// 
-			label5.AutoSize = true;
-			label5.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
-			label5.ForeColor = Color.DimGray;
-			label5.Location = new Point(159, 78);
-			label5.Name = "label5";
-			label5.Size = new Size(60, 46);
-			label5.TabIndex = 2;
-			label5.Text = "25";
+			lblCountContract.AutoSize = true;
+			lblCountContract.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
+			lblCountContract.ForeColor = Color.DimGray;
+			lblCountContract.Location = new Point(159, 78);
+			lblCountContract.Name = "lblCountContract";
+			lblCountContract.Size = new Size(60, 46);
+			lblCountContract.TabIndex = 2;
+			lblCountContract.Text = "25";
 			// 
 			// label6
 			// 
@@ -250,11 +252,29 @@ namespace HR_Manager
 			dataGridView1.Size = new Size(1123, 198);
 			dataGridView1.TabIndex = 5;
 			// 
+			// cbNam
+			// 
+			cbNam.FormattingEnabled = true;
+			cbNam.Location = new Point(818, 497);
+			cbNam.Name = "cbNam";
+			cbNam.Size = new Size(151, 28);
+			cbNam.TabIndex = 6;
+			// 
+			// cbThang
+			// 
+			cbThang.FormattingEnabled = true;
+			cbThang.Location = new Point(975, 497);
+			cbThang.Name = "cbThang";
+			cbThang.Size = new Size(151, 28);
+			cbThang.TabIndex = 6;
+			// 
 			// DashBoard
 			// 
 			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = Color.White;
+			Controls.Add(cbThang);
+			Controls.Add(cbNam);
 			Controls.Add(dataGridView1);
 			Controls.Add(comboBox1);
 			Controls.Add(label8);
@@ -286,13 +306,13 @@ namespace HR_Manager
 		private Panel panel1;
 		private PictureBox pictureBox1;
 		private Label label1;
-		private Label label2;
+		private Label lblCountDepartment;
 		private Panel panel2;
-		private Label label3;
+		private Label lblCountActiveEmployee;
 		private Label label4;
 		private PictureBox pictureBox2;
 		private Panel panel3;
-		private Label label5;
+		private Label lblCountContract;
 		private Label label6;
 		private PictureBox pictureBox3;
 		private LiveCharts.WinForms.CartesianChart cartesianChart1;
@@ -301,5 +321,7 @@ namespace HR_Manager
 		private ComboBox comboBox1;
 		private Label label9;
 		private DataGridView dataGridView1;
+		private ComboBox cbNam;
+		private ComboBox cbThang;
 	}
 }
