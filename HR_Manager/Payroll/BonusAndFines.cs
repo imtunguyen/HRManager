@@ -110,7 +110,7 @@ namespace HR_Manager.Payroll
             }
             else
             {
-                DialogResult dr = MessageBox.Show("Bạn muốn xóa hàng này?", "Delete", MessageBoxButtons.YesNoCancel,
+                DialogResult dr = MessageBox.Show("Do You want delete this row?", "Delete", MessageBoxButtons.YesNoCancel,
                 MessageBoxIcon.Information);
 
                 if (dr == DialogResult.Yes)

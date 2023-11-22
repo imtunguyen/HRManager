@@ -24,6 +24,7 @@ namespace HR_Manager
     {
         private EmployeeDTO eDto;
 
+
         private int idSelected;
         private string filepath;
         public AddEmployee()
@@ -37,6 +38,7 @@ namespace HR_Manager
             Text = "ADD EMPLOYEE";
             lblTitle.Text = "ADD EMPLOYEE";
             btnAdd.Text = "ADD";
+            loadDepartment();
         }
         public AddEmployee(int i, string update, EmployeeDTO eDTO)
         {
@@ -46,10 +48,9 @@ namespace HR_Manager
             btnAdd.Text = "UPDATE";
             eDto = eDTO;
             idSelected = eDTO.ID;
-            cbStatus.Items.Add("Nghĩ việc");
-            lblDateLeft.Visible = true;
-            dtpDateLeft.Visible = true;
+            cbStatus.Items.Add("Resign");
             LoadFields();
+            loadDepartment();
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
         }
         private void textBox5_TextChanged(object sender, EventArgs e)
@@ -72,22 +73,21 @@ namespace HR_Manager
                     {
                         EmployeeBUS eBUS = new EmployeeBUS();
                         EmployeeDTO eDTO = GetEmployeeFromFields();
-
                         bool result = eBUS.Add(eDTO);
 
                         if (result)
                         {
-                            MessageBox.Show("Thêm nhân viên thành công.");
+                            MessageBox.Show(SD.addSuccess);
                             this.Close();
                         }
                         else
                         {
-                            MessageBox.Show("Thêm nhân viên thất bại.", "Thông báo");
+                            MessageBox.Show(SD.addFail, SD.tb);
                         }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Lỗi khi thêm nhân viên" + ex, "Thông báo");
+                        MessageBox.Show("Error" + ex, SD.tb);
                     }
                 }
             }
@@ -96,11 +96,6 @@ namespace HR_Manager
 
                 if (CheckDuplicatePhoneNumberEmail(txtPhone.Text, txtEmail.Text, idSelected))
                 {
-                    //if (!ValidateJoinedLeft())
-                    //{
-                    //    MessageBox.Show("Date Joined < Date Left!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    //    return;
-                    //}
                     try
                     {
                         EmployeeBUS eBUS = new EmployeeBUS();
@@ -109,17 +104,17 @@ namespace HR_Manager
 
                         if (result)
                         {
-                            MessageBox.Show("Sửa nhân viên thành công.");
+                            MessageBox.Show(SD.UpdateSucess, SD.tb);
                             this.Close();
                         }
                         else
                         {
-                            MessageBox.Show("Sửa nhân viên thất bại.", "Thông báo");
+                            MessageBox.Show(SD.UpdateFail, SD.tb);
                         }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Lỗi khi sửa nhân viên" + ex, "Thông báo");
+                        MessageBox.Show("Error" + ex, SD.tb);
                     }
                 }
             }
@@ -143,18 +138,17 @@ namespace HR_Manager
             EmployeeDTO eDto = new EmployeeDTO();
             eDto.Name = txtName.Text;
             eDto.Date_of_Birth = dtpDateofBirth.Value;
-            eDto.Date_Left = dtpDateLeft.Value;
             eDto.Email = txtEmail.Text;
             eDto.Phone = txtPhone.Text;
             eDto.Status = cbStatus.Text;
 
             if (cbGender.Checked)
             {
-                eDto.Gender = "nữ";
+                eDto.Gender = "Female";
             }
             else
             {
-                eDto.Gender = "nam";
+                eDto.Gender = "Male";
             }
 
             if (!string.IsNullOrEmpty(filepath))
@@ -177,12 +171,10 @@ namespace HR_Manager
                 {
                     txtName.Text = eDto.Name;
                     dtpDateofBirth.Value = eDto.Date_of_Birth;
-                    
-                    dtpDateLeft.Value = eDto.Date_Left.Value;
                     txtEmail.Text = eDto.Email;
                     txtPhone.Text = eDto.Phone;
                     cbStatus.Text = eDto.Status;
-                    cbGender.Checked = eDto.Gender == "nữ";
+                    cbGender.Checked = eDto.Gender == "Female";
 
 
                     if (!string.IsNullOrEmpty(eDto.img_path))
@@ -214,15 +206,9 @@ namespace HR_Manager
             DateTime currentDate = DateTime.Now;
             DateTime dateOfBirth = dtpDateofBirth.Value;
             int age = currentDate.Year - dateOfBirth.Year;
-            return age >= 18;
+            return age >= 16 && age <= 65;
         }
-        //private bool ValidateJoinedLeft()
-        //{
-        //    DateTime currentDate = DateTime.Now;
-        //    DateTime dateLeft = dtpDateLeft.Value;
 
-        //    return dateJoined < dateLeft;
-        //}
         private bool CheckDuplicatePhoneNumberEmail(string phone, string email, int currentEmployeeId)
         {
             EmployeeBUS eBUS = new EmployeeBUS();
@@ -231,7 +217,7 @@ namespace HR_Manager
             // Kiểm tra nếu số điện thoại hoặc email trùng với một nhân viên khác (không phải nhân viên hiện tại)
             if (employees.Any(emp => emp.Phone == phone && emp.ID != currentEmployeeId) || employees.Any(emp => emp.Email == email && emp.ID != currentEmployeeId))
             {
-                MessageBox.Show("Số điện thoại hoặc Email đã tồn tại cho một nhân viên khác.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Phone number or Email already exists for another Employee!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
@@ -242,33 +228,46 @@ namespace HR_Manager
         {
             if (string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtPhone.Text) || string.IsNullOrEmpty(txtEmail.Text))
             {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please fill out the required information!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             if (!ValidateDateOfBirth())
             {
-                MessageBox.Show("Ngày sinh phải đủ 18 tuổi.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Date of birth from 16 to 65!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             if (!ValidateEmail())
             {
-                MessageBox.Show("Email phải có dạng _@gmail.com", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Email must be in the form _@gmail.com", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             if (!ValidatePhoneNumber())
             {
-                MessageBox.Show("Số điện thoại có 10 số bằng bắt đầu bằng 0", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Phone numbers have 10 digits starting with 0", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             if (string.IsNullOrEmpty(cbStatus.Text))
             {
-                MessageBox.Show("Vui lòng chọn trạng thái.", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                MessageBox.Show("Please select a status.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
 
             return true;
+        }
+        private void loadDepartment()
+        {
+            DepartmentBUS deBus = new DepartmentBUS();
+            List<Department> listDe;
+            listDe = deBus.GetAll();
+
+            // Thiết lập DataSource cho ComboBox
+            cbDepartment.DisplayMember = "ID"; // Thiết lập trường hiển thị
+            cbDepartment.ValueMember = "ID";   // Thiết lập giá trị thực
+
+            // Đổ dữ liệu vào ComboBox từ danh sách Department
+            cbDepartment.DataSource = listDe;
         }
     }
 }

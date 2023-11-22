@@ -15,16 +15,15 @@ namespace DTO
 		public DateTime ToDate { get; set; }
 		public string Status { get; set; }
 		public int JobId { get; set; }
-		public int DepartmentId { get; set; }
-		public int HrId { get; set; }
 		public string Detail { get; set; }
 		public int RequiredDay { get; set; }
+		public Decimal BasePay { get; set; }
 		public Contract()
 		{
 
 		}
 		// Get, Update
-		public Contract(int id, string name, int employeeId, DateTime formDate, DateTime toDate, string status, int jobId, int departmentId, int hrID, string detail, int requiredDay)
+		public Contract(int id, string name, int employeeId, DateTime formDate, DateTime toDate, string status, int jobId, string detail, int requiredDay, decimal basePay)
 		{
 			Id = id;
 			Name = name;
@@ -33,13 +32,12 @@ namespace DTO
 			ToDate = toDate;
 			Status = status;
 			JobId = jobId;
-			DepartmentId = departmentId;
-			HrId = hrID;
 			Detail = detail;
 			RequiredDay = requiredDay;
+			BasePay = basePay;
 		}
 		// Add
-		public Contract(string name, int employeeId, DateTime formDate, DateTime toDate, string status, int jobId, int departmentId, int hrID, string detail, int requiredDay)
+		public Contract(string name, int employeeId, DateTime formDate, DateTime toDate, string status, int jobId, string detail, int requiredDay, decimal basePay)
 		{
 			Name = name;
 			EmployeeId = employeeId;
@@ -47,10 +45,9 @@ namespace DTO
 			ToDate = toDate;
 			Status = status;
 			JobId = jobId;
-			DepartmentId = departmentId;
-			HrId = hrID;
 			Detail = detail;
 			RequiredDay = requiredDay;
+			BasePay = basePay;
 		}
 	}
 }

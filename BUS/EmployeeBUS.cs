@@ -18,23 +18,8 @@ namespace BUS
         {
             return edao.GetAll();
         }
-        public bool UpdateBasePay(int Id, double basePay)
-        {
-            if(edao.UpdateBasePay(Id, basePay))
-            {
-                return true;
-            }
-            return false;
-        }
-        public bool UpdateDayJoin(int Id, DateTime dayJoin)
-        {
-            if(edao.UpdateDayJoin(Id,dayJoin))
-            {
-                return true;
-            }
-            return false;
-        }
-        public EmployeeDTO GetById(int id)
+
+		public EmployeeDTO GetById(int id)
         {
             return edao.GetById(id);
         }
@@ -54,6 +39,11 @@ namespace BUS
         public EmployeeDTO getById(int id)
         {
             return edao.GetById(id);
+        }
+
+        public List<EmployeeDTO> GetEmployeeHaveContractRunning()
+        {
+            return edao.GetEmployeeHaveContractRunning();
         }
     }
 

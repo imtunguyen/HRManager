@@ -9,7 +9,6 @@ namespace DTO
     public class Department
     {
         public int ID {  get; set; }
-        public int Location_ID { get; set; }
         public string Name { get; set; }
         public string Address_Detail { get; set; }
 
@@ -18,11 +17,10 @@ namespace DTO
             
         }
 
-        public Department(int ID, int Location_ID, string Name, string Address_Detail)
+        public Department(int ID, string Name, string Address_Detail)
         {
             this.Address_Detail = Address_Detail;
             this.ID = ID;
-            this.Location_ID = Location_ID;
             this.Name = Name;
         }
     }

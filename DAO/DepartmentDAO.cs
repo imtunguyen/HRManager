@@ -10,55 +10,211 @@ namespace DAO
 {
     public class DepartmentDAO : InterfaceDAO<Department>
     {
-		public static DepartmentDAO GetInstance()
-		{
-			return new DepartmentDAO();
-		}
+        public static DepartmentDAO getInstance()
+        {
+            return new DepartmentDAO();
+        }
         public bool Add(Department t)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection connection = DbConnection.GetSqlConnection())
+                {
+                    string query = "INSERT INTO DEPARTMENT (name, address_detail) " +
+                        " VALUES ( @name, @address_detail)";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@name", t.Name);
+                        command.Parameters.AddWithValue("@address_detail", t.Address_Detail);
+                        int rowsChanged = command.ExecuteNonQuery();
+                        return rowsChanged > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
         }
 
         public bool Delete(int id)
         {
-            throw new NotImplementedException();
+            var command = new SqlCommand("DELETE FROM DEPARTMENT WHERE id = @id", DbConnection.GetSqlConnection());
+            command.Parameters.AddWithValue("@id", id);
+            var result = command.ExecuteNonQuery();
+            return result > 0;
+        }
+        public List<Department> GetAll(int DeID)
+        {
+            List<Department> departmentlist = new List<Department>();
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "select * from DEPARTMENT" +
+                    "WHERE DEPARTMENT.department_id=" + DeID;
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Department department = new Department
+                            {
+                                ID = Convert.ToInt32(reader["id"]),
+                                Name = reader["name"].ToString(),
+                                Address_Detail = reader["address"].ToString()
+                            };
+                            departmentlist.Add(department);
+                        }
+                    }
+                }
+            }
+            return departmentlist;
+        }
+        public int GetAutoIncrement()
+        {
+            int result = -1;
+            try
+            {
+                using (SqlConnection connection = DbConnection.GetSqlConnection())
+                {
+                    string query = "SELECT id from DEPARTMENT";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (!reader.HasRows)
+                            {
+                                Console.WriteLine("No data");
+                            }
+                            else
+                            {
+                                while (reader.Read())
+                                {
+                                    result = reader.GetInt32(0);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return result + 1;
+        }
+        public int CountEmployee(int id)
+        {
+            int number = 0;
+            try
+            {
+                using (SqlConnection connection = DbConnection.GetSqlConnection())
+                {
+                    string query = " Select count(employee_id) from JOB_DETAIL " +
+                        " where department_id = " + id;
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        using (SqlDataReader reader = command.ExecuteReader())
+                        {
+                            if (!reader.HasRows)
+                            {
+                                Console.WriteLine("No data");
+                            }
+                            else
+                            {
+                                while (reader.Read())
+                                {
+                                    number = reader.GetInt32(0);
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex);
+            }
+            return number;
         }
 
         public List<Department> GetAll()
         {
-			List<Department> des = new List<Department>();
-			using (SqlConnection conn = DbConnection.GetSqlConnection())
-			{
-				string query = "select * from DEPARTMENT";
-				using (SqlCommand cmd = new SqlCommand(query, conn))
-				{
-					using (SqlDataReader reader = cmd.ExecuteReader())
-					{
-						while (reader.Read())
-						{
-							Department d = new Department
-							{
-								ID = Convert.ToInt32(reader["id"]),
-								Location_ID = Convert.ToInt32(reader["location_id"]),
-								Name = reader["name"].ToString(),
-								Address_Detail = reader["address_detail"].ToString(),
-							};
-							des.Add(d);
-						}
-					}
-				}
-			}
-			return des;
-		}
+            List<Department> departmentlist = new List<Department>();
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "SELECT * FROM DEPARTMENT";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            Department department = new Department
+                            {
+                                ID = Convert.ToInt32(reader["id"]),
+                                Name = reader["name"].ToString(),
+                                Address_Detail = reader["address_detail"].ToString()
+                            };
+                            departmentlist.Add(department);
+                        }
+                    }
+                }
+            }
+            return departmentlist;
+        }
 
         public Department GetById(int id)
         {
-            throw new NotImplementedException();
+            Department result = null;
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "SELECT * FROM DEPARTMENT WHERE id=@id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@id", id);
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            result = new Department
+                            {
+                                ID = Convert.ToInt32(reader["id"]),
+                                Name = reader["name"].ToString(),
+                                Address_Detail = reader["address_detail"].ToString()
+                            };
+                        }
+                    }
+                }
+            }
+            return result;
         }
 
         public bool Update(Department t)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection connection = DbConnection.GetSqlConnection())
+                {
+                    string query = "update DEPARTMENT set name = @name, address_detail = @address_detail where id = @id";
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@id", t.ID);
+                        command.Parameters.AddWithValue("@name", t.Name);
+                        command.Parameters.AddWithValue("@address_detail", t.Address_Detail);
+                        int rowsChanged = command.ExecuteNonQuery();
+                        return rowsChanged > 0;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
         }
+
+
     }
 }

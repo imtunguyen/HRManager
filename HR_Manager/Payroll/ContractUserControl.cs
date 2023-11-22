@@ -6,6 +6,7 @@ using System.ComponentModel;
 using System.Data;
 using System.Drawing;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
@@ -14,136 +15,95 @@ namespace HR_Manager.Payroll
 {
 	public partial class ContractUserControl : UserControl
 	{
-		private int count = 1;
 		private ContractBUS ctBus;
 		private EmployeeBUS emBus;
+		private JobBUS jBus;
+		private List<string> lcbTimKiem = new List<string> { "Contract Name", "Employee Name", "Job Position" };
+		private string indexTk = "";
+		private DataTable dt;
+		private int idSelected;
+		private int index;
 		public ContractUserControl()
 		{
 			InitializeComponent();
 			ctBus = new ContractBUS();
 			emBus = new EmployeeBUS();
+			jBus = new JobBUS();
+			dt = new DataTable();
+			dt.Columns.Add("ID", typeof(int));
+			dt.Columns.Add("Contract Name", typeof(string));
+			dt.Columns.Add("Employee Name", typeof(string));
+			dt.Columns.Add("From Date", typeof(string));
+			dt.Columns.Add("To Date", typeof(string));
+			dt.Columns.Add("Job Name", typeof(string));
+			dt.Columns.Add("Required Day", typeof(int));
+			dt.Columns.Add("Base Pay", typeof(decimal));
+			dt.Columns.Add("Status", typeof(string));
+			dt.Columns.Add("Detail", typeof(string));
+			loadcbTimKiem();
 			rbAll.Checked = true;
+			dataGridView1.Columns["ID"].Width = 60;
+			dataGridView1.Columns["Contract Name"].Width = 180;
+			dataGridView1.Columns["Employee Name"].Width = 180;
+			dataGridView1.Columns["Job Name"].Width = 180;
+			dataGridView1.Columns["From Date"].Width = 130;
+			dataGridView1.Columns["To Date"].Width = 130;
+			dataGridView1.Columns["Detail"].Width = 300;
 		}
 
 		public void loadContract()
 		{
-			// Xóa tất cả các panel được tạo trước đó
-			flowLayoutPanel1.Controls.Clear();
-			List<Contract> contracts = new List<Contract>();
-			contracts = ctBus.GetAll();
-			foreach (Contract item in contracts)
+			dt.Clear();
+			List<Contract> contracts = ctBus.GetAll();
+			foreach (Contract contract in contracts)
 			{
-				CreatePanelContract(item);
+				DataRow row = dt.NewRow();
+				row["ID"] = contract.Id;
+				row["Contract Name"] = contract.Name;
+				row["Employee Name"] = emBus.getById(contract.EmployeeId).Name;
+				row["From Date"] = contract.FormDate.ToShortDateString();
+				row["To Date"] = contract.ToDate.ToShortDateString();
+				row["Job Name"] = jBus.GetById(contract.JobId).Job_Name;
+				row["Required Day"] = contract.RequiredDay;
+				row["Base Pay"] = contract.BasePay;
+				row["Status"] = contract.Status;
+				row["Detail"] = contract.Detail;
+				dt.Rows.Add(row);
 			}
+			dataGridView1.DataSource = dt;
 		}
 
 		private void loadContract(List<Contract> contracts)
 		{
-			flowLayoutPanel1.Controls.Clear();
-			foreach (Contract item in contracts)
+			dt.Clear();
+			foreach (Contract contract in contracts)
 			{
-				CreatePanelContract(item);
+				DataRow row = dt.NewRow();
+				row["ID"] = contract.Id;
+				row["Contract Name"] = contract.Name;
+				row["Employee Name"] = emBus.getById(contract.EmployeeId).Name;
+				row["From Date"] = contract.FormDate.ToShortDateString();
+				row["To Date"] = contract.ToDate.ToShortDateString();
+				row["Job Name"] = jBus.GetById(contract.JobId).Job_Name;
+				row["Required Day"] = contract.RequiredDay;
+				row["Base Pay"] = contract.BasePay;
+				row["Status"] = contract.Status;
+				row["Detail"] = contract.Detail;
+				dt.Rows.Add(row);
 			}
+			dataGridView1.DataSource = dt;
 		}
 
-		private void CreatePanelContract(Contract obj = null)
+		private void loadcbTimKiem()
 		{
-			EmployeeDTO employeeDTO = emBus.GetById(obj.EmployeeId);
-			Panel panelContainer = new Panel
-			{
-				Location = new Point(10, 10),
-				BackColor = Color.White,
-				BorderStyle = BorderStyle.FixedSingle,
-				Cursor = Cursors.Hand,
-				Name = "panelContainer" + count.ToString(),
-				Size = new Size(340, 132),
-				Margin = new Padding(10),
-				TabIndex = 0,
-			};
-
-			Label lblNameHr = new Label
-			{
-				AutoSize = true,
-				Location = new Point(3, 52),
-				Size = new Size(50, 20),
-				TabIndex = 3,
-				Name = "lblNameHr" + count.ToString(),
-				Text = employeeDTO.Name,
-			};
-
-			Label lblSalary = new Label
-			{
-				AutoSize = true,
-				Location = new Point(3, 87),
-				Size = new Size(50, 20),
-				TabIndex = 2,
-				Name = "lblSalary" + count.ToString(),
-				Text = employeeDTO.base_pay.ToString() + " $ / month",
-			};
-
-
-			Label lblStatus = new Label
-			{
-				AutoSize = true,
-				Location = new Point(290, 13),
-				Size = new Size(50, 20),
-				TabIndex = 1,
-				Name = "lblStatus" + count.ToString(),
-				Text = obj.Status,
-				ForeColor = Color.White,
-				Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point),
-			};
-
-			Label lblNameContract = new Label
-			{
-				AutoSize = true,
-				Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point),
-				Location = new Point(3, 13),
-				Size = new Size(166, 20),
-				TabIndex = 0,
-				Name = "lblNameContract" + count.ToString(),
-				Text = obj.Name,
-			};
-
-			panelContainer.Controls.AddRange(new Control[] { lblSalary, lblStatus, lblNameContract, lblNameHr });
-			flowLayoutPanel1.Controls.Add(panelContainer);
-			flowLayoutPanel1.AutoScroll = true;
-			count++;
-			panelContainer.Click += (s, ev) =>
-			{
-				panelContainer_Click(s, ev, obj);
-			};
-			if (obj.Status.Equals(SD.Contract_New))
-			{
-				lblStatus.BackColor = Color.FromArgb(20, 162, 184);
-			}
-			else if (obj.Status.Equals(SD.Contract_Running))
-			{
-				lblStatus.Location = new Point(265, 13);
-				lblStatus.BackColor = Color.FromArgb(40, 167, 69);
-			}
-			else if (obj.Status.Equals(SD.Contract_Expired))
-			{
-				lblStatus.Location = new Point(265, 13);
-				lblStatus.BackColor = Color.FromArgb(255, 172, 0);
-			}
-			else
-			{
-				lblStatus.Location = new Point(255, 13);
-				lblStatus.BackColor = Color.FromArgb(242, 78, 29);
-			}
+			cbTimKiem.DataSource = lcbTimKiem;
 		}
 
-		private void panelContainer_Click(object s, EventArgs ev, Contract obj)
-		{
-			fCRUDContract f = new fCRUDContract(this, "Edit", obj);
-			f.Visible = true;
-		}
 
 		private void btnThemContract_Click(object sender, EventArgs e)
 		{
 			fCRUDContract f = new fCRUDContract(this, "Add");
-			f.Visible = true;
+			f.ShowDialog();
 		}
 
 		private void rbNew_CheckedChanged(object sender, EventArgs e)
@@ -220,6 +180,132 @@ namespace HR_Manager.Payroll
 				}
 				loadContract(contractsCancelled);
 			}
+		}
+
+
+		private void cbTimKiem_SelectedValueChanged(object sender, EventArgs e)
+		{
+			ComboBox cb = sender as ComboBox;
+			if (cb.SelectedValue != null)
+			{
+				indexTk = cb.SelectedValue.ToString();
+			}
+		}
+
+		private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar == (char)Keys.Enter)
+			{
+				// Enter key is pressed
+				// Add your logic here
+				string checkStatus = "";
+				// Duyệt qua gropbox xem radiobutton nào đang đc check 
+				foreach (RadioButton rb in gbStatus.Controls.OfType<RadioButton>())
+				{
+					if (rb.Checked)
+					{
+						checkStatus = rb.Text;
+						break;
+					}
+				}
+				List<Contract> contracts = ctBus.GetAll();
+				List<Contract> contractsSearch = new List<Contract>();
+				if (!checkStatus.Equals("All"))
+				{
+					foreach (Contract contract in contracts)
+					{
+						if (contract.Status.Equals(checkStatus))
+						{
+							contractsSearch.Add(contract);
+						}
+					}
+				}
+				else
+				{
+					contractsSearch = contracts;
+				}
+
+				switch (indexTk)
+				{
+					case "Contract Name":
+						contractsSearch = contractsSearch.Where(c => c.Name.ToLower().Contains(txtTimKiem.Text.ToLower())).ToList();
+						loadContract(contractsSearch);
+						break;
+					case "Employee Name":
+						List<EmployeeDTO> employeesList = emBus.GetAll();
+						List<EmployeeDTO> employeeSearch = employeesList
+							.Where(employee => employee.Name.ToLower().Contains(txtTimKiem.Text.ToLower()))
+							.ToList();
+						contractsSearch = contractsSearch
+						 .Join(employeeSearch, contract => contract.EmployeeId, employee => employee.ID,
+						 (contract, employee) => new { Contract = contract, Employee = employee }).Select(x => x.Contract).ToList();
+						loadContract(contractsSearch);
+						break;
+					case "Job Position":
+						List<Job> jobsList = jBus.GetAll();
+						List<Job> jobsSearch = jobsList
+							.Where(job => job.Job_Name.ToLower().Contains(txtTimKiem.Text.ToLower()))
+							.ToList();
+						contractsSearch = contractsSearch
+						 .Join(jobsSearch, contract => contract.JobId, job => job.ID,
+						 (contract, job) => new { Contract = contract, Job = job }).Select(x => x.Contract).ToList();
+						loadContract(contractsSearch);
+						break;
+
+
+				}
+				e.Handled = true; // This line prevents the beep sound
+			}
+
+		}
+
+		private void dataGridView1_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
+		{
+			// Kiểm tra xem cột là "Status" và giá trị của ô là "Validated"
+			if (dataGridView1.Columns[e.ColumnIndex].Name == "Status" && e.Value != null)
+			{
+				if (e.Value.ToString() == SD.Contract_New)
+				{
+					// Đổi màu chữ của ô thành màu xanh
+					e.CellStyle.ForeColor = Color.FromArgb(20, 162, 184);
+				}
+				else if (e.Value.ToString() == SD.Contract_Running)
+				{
+					e.CellStyle.ForeColor = Color.FromArgb(0, 167, 69);
+				}
+				else if (e.Value.ToString() == SD.Contract_Expired)
+				{
+					e.CellStyle.ForeColor = Color.FromArgb(255, 172, 0);
+				}
+				else if (e.Value.ToString() == SD.Contract_Cacelled)
+				{
+					e.CellStyle.ForeColor = Color.FromArgb(242, 78, 29);
+				}
+				// Đặt định dạng font chữ là bold
+				e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+			}
+		}
+
+		private void dataGridView1_CellClick(object sender, DataGridViewCellEventArgs e)
+		{
+			if (e.RowIndex >= 0)
+			{
+				DataGridViewRow row = dataGridView1.Rows[e.RowIndex];
+				idSelected = Convert.ToInt32(row.Cells[0].Value);
+				index = e.RowIndex;
+			}
+		}
+
+		private void btnEdit_Click(object sender, EventArgs e)
+		{
+			Contract contract = ctBus.GetById(idSelected);
+			if (contract == null)
+			{
+				MessageBox.Show("The item to be edited is not selected", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+			fCRUDContract f = new fCRUDContract(this, "Edit", contract);
+			f.ShowDialog();
 		}
 	}
 }

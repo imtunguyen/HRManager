@@ -18,8 +18,8 @@ namespace DAO
 			{
 				using (SqlConnection conn = DbConnection.GetSqlConnection())
 				{
-					string query = "insert into Contract (name, employee_id, fromDate, toDate, status, job_id, department_id, hr_id, detail, requiredDay)" +
-						" values (@name, @employee_id, @fromDate, @toDate, @status, @job_id, @department_id, @hr_id, @detail, @requiredDay)";
+					string query = "insert into Contract (name, employee_id, fromDate, toDate, status, job_id, detail, requiredDay, basePay)" +
+						" values (@name, @employee_id, @fromDate, @toDate, @status, @job_id, @detail, @requiredDay, @basePay)";
 					using (SqlCommand cmd = new SqlCommand(query, conn))
 					{
 						cmd.Parameters.AddWithValue("@name", t.Name);
@@ -28,10 +28,9 @@ namespace DAO
 						cmd.Parameters.AddWithValue("@toDate", t.ToDate);
 						cmd.Parameters.AddWithValue("@status", t.Status);
 						cmd.Parameters.AddWithValue("@job_id", t.JobId);
-						cmd.Parameters.AddWithValue("@department_id", t.DepartmentId);
-						cmd.Parameters.AddWithValue("@hr_id", t.HrId);
 						cmd.Parameters.AddWithValue("@detail", t.Detail);
 						cmd.Parameters.AddWithValue("@requiredDay", t.RequiredDay);
+						cmd.Parameters.AddWithValue("@basePay", t.BasePay);
 						int rowsChanged = cmd.ExecuteNonQuery();
 						return rowsChanged > 0;
 					}
@@ -69,12 +68,11 @@ namespace DAO
 								EmployeeId = Convert.ToInt32(reader["employee_id"]),
 								FormDate = Convert.ToDateTime(reader["fromDate"]),
 								ToDate = Convert.ToDateTime(reader["toDate"]),
-								DepartmentId = Convert.ToInt32(reader["department_id"]),
-								HrId = Convert.ToInt32(reader["hr_id"]),
 								JobId = Convert.ToInt32(reader["job_id"]),
 								Detail = reader["detail"].ToString(),
 								RequiredDay = Convert.ToInt32(reader["requiredDay"]),
 								Status = reader["status"].ToString(),
+								BasePay = Convert.ToDecimal(reader["basePay"]),
 							};
 							List.Add(contract);
 						}
@@ -104,12 +102,11 @@ namespace DAO
 								EmployeeId = Convert.ToInt32(reader["employee_id"]),
 								FormDate = Convert.ToDateTime(reader["fromDate"]),
 								ToDate = Convert.ToDateTime(reader["toDate"]),
-								DepartmentId = Convert.ToInt32(reader["department_id"]),
-								HrId = Convert.ToInt32(reader["hr_id"]),
 								JobId = Convert.ToInt32(reader["job_id"]),
 								Detail = reader["detail"].ToString(),
 								RequiredDay = Convert.ToInt32(reader["requiredDay"]),
 								Status = reader["status"].ToString(),
+								BasePay = Convert.ToDecimal(reader["basePay"]),
 							};
 						}
 					}
@@ -137,12 +134,11 @@ namespace DAO
 								EmployeeId = Convert.ToInt32(reader["employee_id"]),
 								FormDate = Convert.ToDateTime(reader["fromDate"]),
 								ToDate = Convert.ToDateTime(reader["toDate"]),
-								DepartmentId = Convert.ToInt32(reader["department_id"]),
-								HrId = Convert.ToInt32(reader["hr_id"]),
 								JobId = Convert.ToInt32(reader["job_id"]),
 								Detail = reader["detail"].ToString(),
 								RequiredDay = Convert.ToInt32(reader["requiredDay"]),
 								Status = reader["status"].ToString(),
+								BasePay = Convert.ToDecimal(reader["basePay"]),
 							};
 							List.Add(contract);
 						}
@@ -159,8 +155,8 @@ namespace DAO
 				using (SqlConnection conn = DbConnection.GetSqlConnection())
 				{
 					string query = "update Contract set name = @name, employee_id = @employee_id, fromDate = @fromDate, " +
-						"toDate = @toDate, status = @status, job_id = @job_id, department_id = @department_id, " +
-						"hr_id = @hr_id, detail = @detail, requiredDay = @requiredDay where id = @id";
+						"toDate = @toDate, status = @status, job_id = @job_id, " +
+						"detail = @detail, requiredDay = @requiredDay, basePay = @basePay where id = @id";
 
 					using (SqlCommand cmd = new SqlCommand(query, conn))
 					{
@@ -171,10 +167,9 @@ namespace DAO
 						cmd.Parameters.AddWithValue("@toDate", t.ToDate);
 						cmd.Parameters.AddWithValue("@status", t.Status);
 						cmd.Parameters.AddWithValue("@job_id", t.JobId);
-						cmd.Parameters.AddWithValue("@department_id", t.DepartmentId);
-						cmd.Parameters.AddWithValue("@hr_id", t.HrId);
 						cmd.Parameters.AddWithValue("@detail", t.Detail);
 						cmd.Parameters.AddWithValue("@requiredDay", t.RequiredDay);
+						cmd.Parameters.AddWithValue("@basePay", t.BasePay);
 						int rowsChanged = cmd.ExecuteNonQuery();
 						return rowsChanged > 0;
 					}
