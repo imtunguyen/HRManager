@@ -124,10 +124,10 @@
 			// tabPage3
 			// 
 			tabPage3.Controls.Add(department);
-			tabPage3.Location = new Point(4, 29);
+			tabPage3.Location = new Point(4, 34);
 			tabPage3.Name = "tabPage3";
 			tabPage3.Padding = new Padding(3);
-			tabPage3.Size = new Size(192, 67);
+			tabPage3.Size = new Size(992, 562);
 			tabPage3.TabIndex = 5;
 			tabPage3.Text = "Department";
 			tabPage3.UseVisualStyleBackColor = true;
@@ -143,10 +143,10 @@
 			// 
 			// tabPage2
 			// 
-			tabPage2.Location = new Point(4, 29);
+			tabPage2.Location = new Point(4, 34);
 			tabPage2.Name = "tabPage2";
 			tabPage2.Padding = new Padding(3);
-			tabPage2.Size = new Size(192, 67);
+			tabPage2.Size = new Size(992, 562);
 			tabPage2.TabIndex = 6;
 			tabPage2.Text = "Reporting";
 			tabPage2.UseVisualStyleBackColor = true;
@@ -154,10 +154,10 @@
 			// tabPage4
 			// 
 			tabPage4.Controls.Add(jobUserControl1);
-			tabPage4.Location = new Point(4, 29);
+			tabPage4.Location = new Point(4, 34);
 			tabPage4.Name = "tabPage4";
 			tabPage4.Padding = new Padding(3);
-			tabPage4.Size = new Size(192, 67);
+			tabPage4.Size = new Size(992, 562);
 			tabPage4.TabIndex = 7;
 			tabPage4.Text = "Job";
 			tabPage4.UseVisualStyleBackColor = true;
@@ -168,7 +168,7 @@
 			jobUserControl1.Location = new Point(3, 3);
 			jobUserControl1.Margin = new Padding(3, 4, 3, 4);
 			jobUserControl1.Name = "jobUserControl1";
-			jobUserControl1.Size = new Size(186, 61);
+			jobUserControl1.Size = new Size(986, 556);
 			jobUserControl1.TabIndex = 0;
 			// 
 			// tabPage5
@@ -184,10 +184,12 @@
 			// 
 			// jobDetailUserControl2
 			// 
+			jobDetailUserControl2.BackColor = Color.FromArgb(240, 238, 240);
 			jobDetailUserControl2.Dock = DockStyle.Fill;
 			jobDetailUserControl2.Location = new Point(3, 3);
 			jobDetailUserControl2.Margin = new Padding(3, 4, 3, 4);
-			jobDetailUserControl2.Name = "jobUserControl2";
+			jobDetailUserControl2.Name = "jobDetailUserControl2";
+			jobDetailUserControl2.Size = new Size(986, 556);
 			jobDetailUserControl2.TabIndex = 0;
 			// 
 			// Employee

@@ -290,7 +290,7 @@ namespace HR_Manager.Employee
 					DateTime toDateJobDetail = jobDetail.ToDate.Date;
 
 					// Kiểm tra xem khoảng thời gian từ fromDate đến toDate nằm trong khoảng thời gian có trong hợp đồng
-					bool isWithinRange = fromDatePicker <= fromDateJobDetail && toDatePicker <= toDateJobDetail;
+					bool isWithinRange = fromDatePicker >= fromDateJobDetail && toDatePicker <= toDateJobDetail;
 					if (isWithinRange)
 					{
 						result.Add(jobDetail);
@@ -343,7 +343,7 @@ namespace HR_Manager.Employee
 					DateTime toDateJobDetail = jobDetail.ToDate.Date;
 
 					// Kiểm tra xem khoảng thời gian từ fromDate đến toDate nằm trong khoảng thời gian có trong hợp đồng
-					bool isWithinRange = fromDatePicker <= fromDateJobDetail && toDatePicker <= toDateJobDetail;
+					bool isWithinRange = fromDatePicker >= fromDateJobDetail && toDatePicker <= toDateJobDetail;
 					if (isWithinRange)
 					{
 						result.Add(jobDetail);
