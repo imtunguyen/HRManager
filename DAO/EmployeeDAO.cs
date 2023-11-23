@@ -139,15 +139,15 @@ namespace DAO
         {
             throw new NotImplementedException();
         }
-        public List<EmployeeDTO> GetByDepartmentId(int id)
+
+        public List<EmployeeDTO> GetEmployeeHaveContractRunning()
         {
             List<EmployeeDTO> list = new List<EmployeeDTO>();
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "SELECT * FROM EMPLOYEE WHERE department_id = @id";
+                string query = "select e.* from EMPLOYEE as e join CONTRACT as c on c.employee_id = e.id where c.status = 'Running'";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@id", id);
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
@@ -159,7 +159,7 @@ namespace DAO
                         e.Phone = reader["phone"].ToString();
                         e.Email = reader["email"].ToString();
                         e.img_path = reader["img_path"].ToString();
-                        e.Department_id = Convert.ToInt32(reader["department_id"].ToString());
+                        e.Department_id = Convert.ToInt32(reader["Department_id"].ToString());
                         e.Status = reader["status"].ToString();
                         list.Add(e);
                     }

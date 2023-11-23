@@ -362,5 +362,16 @@ namespace HR_Manager.Employee
 		{
 			filterDate();
 		}
+
+		private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
+		{
+			if (e.KeyChar == (char)Keys.Enter)
+			{
+				// Enter key is pressed
+				// Add your logic here
+				TimKiem();
+				e.Handled = true; // This line prevents the beep sound
+			}
+		}
 	}
 }

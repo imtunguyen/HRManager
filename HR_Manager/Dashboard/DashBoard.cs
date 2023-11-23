@@ -1,4 +1,6 @@
-﻿using System;
+﻿using LiveCharts.Wpf;
+using LiveCharts;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -7,41 +9,87 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Windows.Media;
+using BUS;
+using DTO;
 
 namespace HR_Manager
 {
-    public partial class DashBoard : UserControl
-    {
-        public DashBoard()
-        {
-            InitializeComponent();
+	public partial class DashBoard : UserControl
+	{
+		private StatisticalBUS statisticalBUS;
+		private List<string> lcbThang = SD.listThang;
+		private List<int> lcbNam = SD.listNam;
+		public DashBoard()
+		{
+			InitializeComponent();
+			statisticalBUS = new StatisticalBUS();
+			mainLoad();
+			cartesianChart1.Series = new SeriesCollection
+			{
+				new LineSeries
+				{
+					Title = "Series 1",
+					Values = new ChartValues<double> {4, 6, 5, 2, 7}
+				},
+				new LineSeries
+				{
+					Title = "Series 2",
+					Values = new ChartValues<double> {6, 7, 3, 4, 6},
+					PointGeometry = null
+				},
+				new LineSeries
+				{
+					Title = "Series 2",
+					Values = new ChartValues<double> {5, 2, 8, 3},
+					PointGeometry = DefaultGeometries.Square,
+					PointGeometrySize = 15
+				}
+			};
 
-        }
+			cartesianChart1.AxisX.Add(new Axis
+			{
+				Title = "Month",
+				Labels = new[] { "Jan", "Feb", "Mar", "Apr", "May" }
+			});
 
-        private void button1_Click(object sender, EventArgs e)
-        {
-            SaveFileDialog saveFileDialog = new SaveFileDialog();
-            saveFileDialog.Title = "Choose File";
-            saveFileDialog.Filter = "Excel Document|*.xlsx";
-            saveFileDialog.FilterIndex = 2;
-            saveFileDialog.RestoreDirectory = true;
-            if (saveFileDialog.ShowDialog() == DialogResult.OK)
-            {
-                string filePath = saveFileDialog.FileName;
-                try
-                {
-                    MessageBox.Show("Export File succed");
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error:" + ex.Message);
-                }
-            }
-        }
+			cartesianChart1.AxisY.Add(new Axis
+			{
+				Title = "Sales",
+				LabelFormatter = value => value.ToString("C")
+			});
 
-        private void tableLayoutPanel3_Paint(object sender, PaintEventArgs e)
-        {
+			cartesianChart1.LegendLocation = LegendLocation.Right;
 
-        }
-    }
+			//modifying the series collection will animate and update the chart
+			cartesianChart1.Series.Add(new LineSeries
+			{
+				Values = new ChartValues<double> { 5, 3, 2, 4, 5 },
+				LineSmoothness = 0, //straight lines, 1 really smooth lines
+				PointGeometry = Geometry.Parse("m 25 70.36218 20 -28 -20 22 -8 -6 z"),
+				PointGeometrySize = 50,
+				PointForeground = System.Windows.Media.Brushes.Gray
+			});
+
+			//modifying any series values will also animate and update the chart
+			cartesianChart1.Series[2].Values.Add(5d);
+
+		}
+
+		private void mainLoad()
+		{
+			loadPanel();
+			cbNam.DataSource = lcbNam;
+			cbNam.SelectedItem = 2023;
+			cbThang.DataSource = lcbThang;
+		}
+
+		private void loadPanel()
+		{
+			lblCountDepartment.Text = statisticalBUS.GetCountDepartment().ToString();
+			lblCountContract.Text = statisticalBUS.GetCountContract().ToString();
+			lblCountActiveEmployee.Text = statisticalBUS.GetCountActiveEmployee().ToString();
+		}
+		
+	}
 }

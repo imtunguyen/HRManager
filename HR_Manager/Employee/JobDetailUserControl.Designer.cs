@@ -142,6 +142,7 @@
 			txtTimKiem.Name = "txtTimKiem";
 			txtTimKiem.Size = new Size(285, 27);
 			txtTimKiem.TabIndex = 3;
+			txtTimKiem.KeyPress += txtTimKiem_KeyPress;
 			// 
 			// btnTimKiem
 			// 

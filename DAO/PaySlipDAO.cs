@@ -16,7 +16,7 @@ namespace DAO
             {
                 using (SqlConnection connection = DbConnection.GetSqlConnection())
                 {
-                    string query = "INSERT INTO PAYSLIP (employee_id, status, from_date, to_date, total) VALUES (@employee_id, @status, @from_date, @to_date, @total)";
+                    string query = "INSERT INTO PAYSLIP (employee_id, status, from_date, to_date, total, contract_id) VALUES (@employee_id, @status, @from_date, @to_date, @total, @contract_id)";
                     using (SqlCommand command = new SqlCommand(query, connection))
                     {
                         command.Parameters.AddWithValue("@employee_id", t.employee_id);
@@ -24,8 +24,8 @@ namespace DAO
                         command.Parameters.AddWithValue("@from_date", t.from_date);
                         command.Parameters.AddWithValue("@to_date", t.to_date);
                         command.Parameters.AddWithValue("@total", t.total);
-
-                        int rowsChanged = command.ExecuteNonQuery();
+						command.Parameters.AddWithValue("@contract_id", t.Contract_ID);
+						int rowsChanged = command.ExecuteNonQuery();
                         return rowsChanged > 0;
                     }
                 }
@@ -61,8 +61,8 @@ namespace DAO
                             paySlip.from_date = Convert.ToDateTime(reader["from_date"]);
                             paySlip.to_date = Convert.ToDateTime(reader["to_date"]);
                             paySlip.total = Convert.ToDecimal(reader["total"]);
-
-                            list.Add(paySlip);
+							paySlip.Contract_ID = Convert.ToInt32(reader["contract_id"]);
+							list.Add(paySlip);
                         }
                     }
 
@@ -99,8 +99,8 @@ namespace DAO
                             paySlip.from_date = Convert.ToDateTime(reader["from_date"]);
                             paySlip.to_date = Convert.ToDateTime(reader["to_date"]);
                             paySlip.total = Convert.ToDecimal(reader["total"]);
-
-                            list.Add(paySlip);
+							paySlip.Contract_ID = Convert.ToInt32(reader["contract_id"]);
+							list.Add(paySlip);
                         }
                     }
 
@@ -127,8 +127,9 @@ namespace DAO
                             paySlip.from_date = Convert.ToDateTime(reader["from_date"]);
                             paySlip.to_date = Convert.ToDateTime(reader["to_date"]);
                             paySlip.total = Convert.ToDecimal(reader["total"]);
+							paySlip.Contract_ID = Convert.ToInt32(reader["contract_id"]);
 
-                            list.Add(paySlip);
+							list.Add(paySlip);
                         }
                     }
 
@@ -156,8 +157,8 @@ namespace DAO
                             paySlip.from_date = Convert.ToDateTime(reader["from_date"]);
                             paySlip.to_date = Convert.ToDateTime(reader["to_date"]);
                             paySlip.total = Convert.ToDecimal(reader["total"]);
-
-                            list.Add(paySlip);
+							paySlip.Contract_ID = Convert.ToInt32(reader["contract_id"]);
+							list.Add(paySlip);
                         }
                     }
 

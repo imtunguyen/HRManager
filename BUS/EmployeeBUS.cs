@@ -40,9 +40,10 @@ namespace BUS
         {
             return edao.GetById(id);
         }
-        public List<EmployeeDTO> GetByDepartmentId(int id)
+
+        public List<EmployeeDTO> GetEmployeeHaveContractRunning()
         {
-            return edao.GetByDepartmentId(id);
+            return edao.GetEmployeeHaveContractRunning();
         }
     }
 

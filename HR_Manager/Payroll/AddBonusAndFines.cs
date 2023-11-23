@@ -65,33 +65,33 @@ namespace HR_Manager.Payroll
         {
             if (cbEmployee.Text.Length <= 0)
             {
-                MessageBox.Show("chưa chọn nhân viên!");
+                MessageBox.Show("Have not employee!");
                 return false;
             }
             if (cbType.Text.Length <= 0)
             {
-                MessageBox.Show("chưa chọn loại!");
+                MessageBox.Show("Have not Type!");
                 return false;
             }
             if (txtAmount.Text.Length <= 0)
             {
-                MessageBox.Show("chưa nhập số tiền!");
+                MessageBox.Show("Have not amount!");
                 return false;
             }
             if (txtReason.Text.Length <= 0)
             {
-                MessageBox.Show("chưa nhập lý do!");
+                MessageBox.Show("Have not reason!");
                 return false;
             }
             if(dateTimePicker1.Value <= DateTime.Now)
             {
-                MessageBox.Show("ngày hết hạn phải lớn hay ngày hiện tại!");
+                MessageBox.Show("Expired date must be bigger than now!");
                 return false;
             }
             bool isDecimal = decimal.TryParse(txtAmount.Text, out decimal value);
             if (!isDecimal)
             {
-                MessageBox.Show("tiền phải là số!");
+                MessageBox.Show("Amount must be numberic!");
                 return false;
             }
             return true;
