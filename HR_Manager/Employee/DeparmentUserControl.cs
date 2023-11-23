@@ -3,6 +3,7 @@ using DAO;
 using DTO;
 using HR_Manager.Employee;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,207 +19,166 @@ namespace HR_Manager
 {
     public partial class DepartmentUserControl : UserControl
     {
-        System.Windows.Forms.ToolTip toolTip = new System.Windows.Forms.ToolTip();
         private int counter = 1;
+        private int id;
         DepartmentBUS deBus;
-        private List<Department> departmentList;
-
+        List<Department> deList;
+        List<EmployeeDTO> eList;
+        EmployeeBUS eBus;
+        EmployeeDTO eDTO;
+        DataTable dtDepartment; // DataTable for Department
+        DataTable dtEmployee;   // DataTable for Employee
+        BindingSource bsDepartment;
+        BindingSource bsEmployee;
         public DepartmentUserControl()
         {
             InitializeComponent();
             deBus = new DepartmentBUS();
-            departmentList = deBus.GetAll();
-            loadDe(departmentList);
-
+            eBus = new EmployeeBUS();
+            eDTO = new EmployeeDTO();
+            dtDepartment = new DataTable();
+            dtEmployee = new DataTable();
+            bsDepartment = new BindingSource();
+            bsEmployee = new BindingSource();
+            loadDepartment();
         }
-        private void loadDe(List<Department> list)
+        private Dictionary<int, int> employeeCountByDepartment = new Dictionary<int, int>();
+
+        private void loadDepartment()
         {
-            departmentList = list;
-            flowLayoutPanel1.Controls.Clear();
-            foreach (var l in departmentList)
+            // Load department data from database
+            deList = deBus.GetAll();
+
+            // Clear and reset data table
+            dtDepartment.Clear();
+            dtDepartment.Columns.Clear();
+            dtDepartment.Columns.Add("ID");
+            dtDepartment.Columns.Add("Name");
+            dtDepartment.Columns.Add("Address Detail");
+            // Calculate and store employee count for each department
+            employeeCountByDepartment.Clear();
+            foreach (Department de in deList)
             {
-                CreatePanel(l);
+                int id = de.ID;
+                int count = deBus.CountEmployee(id);
+                employeeCountByDepartment[id] = count;
             }
-        }
-        public void AddDe(Department obj)
-        {
-            deBus.Add(obj);
-            departmentList.Add(obj);
-            CreatePanel(obj);
-        }
-        public void UpdateDe(Department obj)
-        {
-            deBus.Update(obj);
-            DepartmentBUS deB = new DepartmentBUS();
-            List<Department> list = deB.GetAll();
-            loadDe(list);
-        }
-        public void DeleteDe(int id)
-        {
-            deBus.Delete(id);
-        }
-        private void CreatePanel(Department obj)
-        {
 
-            Panel panelHead = new Panel
+            // Add rows to data table
+            int stt = 1;
+            foreach (Department de in deList)
             {
-                Location = new Point(3, 3),
-                Name = "panelCOntain" + counter.ToString(),
-                Size = new Size(340, 335),
-                TabIndex = 0,
-                BorderStyle = BorderStyle.FixedSingle,
-                Margin = new Padding(10, 10, 10, 10),
-                BackColor = GetRandomColor()
-            };
-            Label labelName = new Label
-            {
-                AutoSize = false,
-                Font = new Font("Segoe UI", 20F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
-                Location = new Point(10, 9),
-                Name = "labelTenDe" + counter.ToString(),
-                Size = new Size(300, 50),
-                TabIndex = 0,
+                DataRow row = dtDepartment.NewRow();
+                row["ID"] = de.ID;
+                row["Name"] = de.Name;
+                row["Address Detail"] = de.Address_Detail;
 
-                Text = obj.Name,
-                AutoEllipsis = true
-            };
-            toolTip.SetToolTip(labelName, labelName.Text);
-            Label labelNV = new Label
-            {
-                AutoSize = true,
-                Location = new Point(20, 90),
-                Name = "lblLocID" + counter,
-                Size = new Size(200, 13),
-                TabIndex = 1,
-                Text = "Number of personel : " + deBus.CountEmployee(obj.ID),
-                Font = new Font("Segoe UI", 10, FontStyle.Regular)
-
-            };
-            Label labelLocID = new Label
-            {
-                AutoSize = true,
-                Location = new Point(20, 120),
-                Name = "lblLocID" + counter,
-                Size = new Size(200, 13),
-                TabIndex = 1,
-                Font = new Font("Segoe UI", 10, FontStyle.Regular)
-
-            };
-            Label labelAddressDT = new Label
-            {
-                AutoSize = true,
-                Location = new Point(20, 150),
-                Name = "lbjAddressDT" + counter,
-                Size = new Size(200, 13),
-                TabIndex = 2,
-                Text = " Address Detail : " + obj.Address_Detail,
-                Font = new Font("Segoe UI", 10, FontStyle.Regular)
-
-            };
-            Button btnConfig = new Button
-            {
-                Location = new Point(40, 200),
-                Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
-                Name = "button2" + counter,
-                Size = new Size(100, 40),
-                TabIndex = 2,
-                Text = "Config",
-                UseVisualStyleBackColor = true,
-                Cursor = Cursors.Hand
-
-            };
-            Button btnDelete = new Button
-            {
-
-                Location = new Point(150, 200),
-                Font = new Font("Segoe UI", 10F, FontStyle.Bold, GraphicsUnit.Point, ((byte)(0))),
-                Name = "button3" + counter,
-                Size = new Size(100, 40),
-                TabIndex = 3,
-                Text = "Delete",
-                UseVisualStyleBackColor = true,
-                Cursor = Cursors.Hand
-            };
-            btnDelete.Click += (s, ev) =>
-            {
-                btnDelete_Click(s, ev, obj);
-            };
-            btnConfig.Click += (s, ev) =>
-            {
-                btnConfig_Click(s, ev, obj);
-            };
-            panelHead.Controls.AddRange(new Control[] { labelName, labelNV, labelLocID, labelAddressDT, btnConfig, btnDelete });
-
-
-            flowLayoutPanel1.Controls.Add(panelHead);
-
-            flowLayoutPanel1.AutoScroll = true;
-
-            counter++;
-
-
-        }
-        private Color GetRandomColor()
-        {
-            Random random = new Random();
-            int r = random.Next(256);
-            int g = random.Next(256);
-            int b = random.Next(256);
-
-            // Làm cho màu sắc nhạt hơn bằng cách thêm 128 vào mỗi thành phần màu
-            r += 128;
-            g += 128;
-            b += 128;
-
-            // Đảm bảo rằng các thành phần màu không vượt quá 255
-            r = r > 255 ? 255 : r;
-            g = g > 255 ? 255 : g;
-            b = b > 255 ? 255 : b;
-
-            if (r == 134 && r == 142 && r == 150)
-            {
-                return GetRandomColor();
+                dtDepartment.Rows.Add(row);
+                stt++;
             }
-            return Color.FromArgb(r, g, b);
+
+            // Bind data table to grid
+            bsDepartment.DataSource = dtDepartment;
+            dgvDepartment.DataSource = bsDepartment;
+
+            if (!dgvDepartment.Columns.Contains("General Employees"))
+            { 
+                dgvDepartment.Columns.Add("General Employees", "General Employees");
+            }
+            dgvDepartment.Columns["General Employees"].DisplayIndex = dgvDepartment.Columns.Count - 1;
+        }
+        public void loadEmployee(int id)
+        {
+            eList = eBus.GetByDepartmentId(id);
+            dtEmployee.Clear();
+            dtEmployee.Columns.Clear();
+            dtEmployee.Columns.Add("ID");
+            dtEmployee.Columns.Add("Name");
+            dtEmployee.Columns.Add("Date of Birth");
+            dtEmployee.Columns.Add("Status");
+
+            int stt = 1;
+            foreach (EmployeeDTO e in eList)
+            {
+                DataRow row = dtEmployee.NewRow();
+                row["ID"] = e.ID;
+                row["Name"] = e.Name;
+                row["Date of Birth"] = e.Date_of_Birth;
+                row["Status"] = e.Status;
+
+                dtEmployee.Rows.Add(row);
+                stt++;
+            }
+
+            bsEmployee.DataSource = dtEmployee;
+            dgvEmployees.DataSource = bsEmployee;
         }
 
-
-
-
-        private void btnDelete_Click(object sender, EventArgs e, Department obj)
+        private void dgvDepartment_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            DeleteDe(obj.ID);
-            System.Windows.Forms.Button clickedButton = (System.Windows.Forms.Button)sender;
-            Panel panelContain = (Panel)clickedButton.Parent;
-
-            DialogResult result = MessageBox.Show("Xác nhận xóa phòng ban?", "Confirmation", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-
-            if (result == DialogResult.Yes)
+            if (e.RowIndex >= 0)
             {
-                flowLayoutPanel1.Controls.Remove(panelContain);
+                id = Convert.ToInt32(dgvDepartment.Rows[e.RowIndex].Cells["ID"].Value);
+                loadEmployee(id);
             }
         }
 
-        private void btnConfig_Click(object sender, EventArgs e, Department obj)
+        private void dgvDepartment_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
         {
-            ConfigDepartment cd = new ConfigDepartment(this, obj);
-            cd.Visible = true;
-        }
+            string columnName = "General Employees";
 
-        private bool checkValidInput()
-        {
-            if (string.IsNullOrEmpty(textBox1.Text))
+            if (dgvDepartment.Columns.Contains(columnName) && e.RowIndex >= 0)
             {
-                MessageBox.Show("Không được để trống tên phòng ban", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                return false;
+                int id = Convert.ToInt32(dgvDepartment.Rows[e.RowIndex].Cells["ID"].Value);
+                int count = employeeCountByDepartment[id];
+                dgvDepartment.Rows[e.RowIndex].Cells[columnName].Value = count;
             }
-            return true;
         }
 
-        private void button1_Click_1(object sender, EventArgs e)
+        private void btnThem_Click(object sender, EventArgs e)
         {
             AddDepartment add = new AddDepartment(this);
-            add.Visible = true;
+            add.Show();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            Department deDTO = deBus.getById(id);
+            AddDepartment update = new AddDepartment(this, deDTO);
+            update.Show();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvDepartment.SelectedCells.Count > 0)
+            {
+                DialogResult dr = MessageBox.Show("Are you sure you want to delete?", SD.tb, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    int id;
+                    int rowIndex = dgvDepartment.SelectedCells[0].RowIndex;
+                    if (int.TryParse(dgvDepartment.Rows[rowIndex].Cells["ID"].Value.ToString(), out id))
+                    {
+                        deBus.Delete(id);
+                        dgvDepartment.Rows.RemoveAt(rowIndex);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid ID!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("You have not selected any rows to delete.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            loadDepartment();
+        }
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            loadDepartment();
         }
     }
 }

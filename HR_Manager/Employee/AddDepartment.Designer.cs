@@ -93,7 +93,7 @@
             btnCreate.Name = "btnCreate";
             btnCreate.Size = new Size(117, 43);
             btnCreate.TabIndex = 3;
-            btnCreate.Text = "CREATE";
+            btnCreate.Text = "ADD";
             btnCreate.UseVisualStyleBackColor = false;
             btnCreate.Click += btnCreate_Click;
             // 
@@ -114,7 +114,7 @@
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(700, 338);
+            ClientSize = new Size(701, 338);
             Controls.Add(btnCancel);
             Controls.Add(btnCreate);
             Controls.Add(txtAddressDetail);

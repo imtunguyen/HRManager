@@ -101,17 +101,11 @@ namespace HR_Manager
             // 
             // employee1
             // 
-            employee1.Location = new Point(206, 0);
+            employee1.Location = new Point(200, 0);
             employee1.Name = "employee1";
-            employee1.Size = new Size(1000, 562);
+            employee1.Size = new Size(1000, 580);
             employee1.TabIndex = 3;
-            // 
-            // work entry
-            // 
-            WorkEntry.Location = new Point(206, 0);
-            WorkEntry.Name = "workentry";
-            WorkEntry.Size = new Size(1000, 600);
-            WorkEntry.TabIndex = 3;
+            employee1.Load += employee1_Load;
             // 
             // dashboard1
             // 
@@ -121,6 +115,13 @@ namespace HR_Manager
             dashboard1.Name = "dashboard1";
             dashboard1.Size = new Size(1000, 600);
             dashboard1.TabIndex = 3;
+            // 
+            // WorkEntry
+            // 
+            WorkEntry.Location = new Point(206, 0);
+            WorkEntry.Name = "WorkEntry";
+            WorkEntry.Size = new Size(1000, 600);
+            WorkEntry.TabIndex = 3;
             // 
             // payroll1
             // 
@@ -168,7 +169,7 @@ namespace HR_Manager
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
-            ClientSize = new Size(1199, 561);
+            ClientSize = new Size(1199, 580);
             Controls.Add(tableLayoutPanel1);
             Controls.Add(employee1);
             Controls.Add(payroll1);

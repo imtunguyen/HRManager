@@ -150,7 +150,7 @@
             // 
             cbStatus.DropDownStyle = ComboBoxStyle.DropDownList;
             cbStatus.FormattingEnabled = true;
-            cbStatus.Items.AddRange(new object[] { "Trail work", "Official employee" });
+            cbStatus.Items.AddRange(new object[] { "Trial period", "Official employee" });
             cbStatus.Location = new Point(510, 165);
             cbStatus.Name = "cbStatus";
             cbStatus.Size = new Size(200, 23);

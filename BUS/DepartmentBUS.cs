@@ -15,15 +15,13 @@ namespace BUS
         {
             departmentDAO = DepartmentDAO.getInstance();
         }
-        public string Add(Department t)
+        public bool Add(Department t)
         {
-            if (departmentDAO.Add(t)) return "Add Department Success";
-            return "Add Department fail";
+            return departmentDAO.Add(t);
         }
-        public string Update(Department t)
+        public bool Update(int id, Department t)
         {
-            if (departmentDAO.Update(t)) return " Update Department Success";
-            return "Update Department Fail";
+            return departmentDAO.Update(id, t);
         }
         public string Delete(int id)
         {
@@ -41,6 +39,10 @@ namespace BUS
         public List<Department> GetAll(int DeID)
         {
             return departmentDAO.GetAll(DeID);
+        }
+        public List<Department> GetID()
+        {
+            return departmentDAO.GetID();
         }
         public int GetAutoIncrement()
         {

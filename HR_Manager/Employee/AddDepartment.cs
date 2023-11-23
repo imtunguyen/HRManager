@@ -15,44 +15,94 @@ namespace HR_Manager.Employee
     public partial class AddDepartment : Form
     {
         private DepartmentUserControl department;
-        Department deDto;
-        private DepartmentBUS deBus;
+        private Department deDto;
+        private int id;
         public AddDepartment(DepartmentUserControl de)
         {
             InitializeComponent();
-            deDto = new Department();
-            deBus = new DepartmentBUS();
             department = de;
+            txtName.Focus();
         }
-        private void textBox1_TextChanged(object sender, EventArgs e)
+        public AddDepartment(DepartmentUserControl de, Department deDTO)
         {
+            InitializeComponent();
+            label1.Text = "Update Department";
+            btnCreate.Text = "UPDATE";
+            deDto = deDTO;
+            id = deDTO.ID;
+            LoadFields();
 
         }
 
         private void btnCreate_Click(object sender, EventArgs e)
         {
-
             try
             {
-                if (checkValidInput())
+                if (btnCreate.Text == "ADD")
                 {
-                    Department de = new Department(deBus.GetAutoIncrement(), txtName.Text, txtAddressDetail.Text);
-                    department.AddDe(de);
-                    MessageBox.Show(SD.addSuccess);
-                    this.Close();
-                    this.Dispose();
+                    if (checkValidInput())
+                    {
+                        DepartmentBUS deBus = new DepartmentBUS();
+                        Department de = GetDepartment();
+                        deBus.Add(de);
+                        MessageBox.Show(SD.addSuccess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Dispose();
+                    }
+                    else
+                    {
+                        MessageBox.Show(SD.addFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+                else if (btnCreate.Text == "UPDATE")
+                {
+                    if (checkValidInput())
+                    {
+                        DepartmentBUS deBus = new DepartmentBUS();
+
+                        Department de = GetDepartment();
+                        deBus.Update(id, de);
+                        MessageBox.Show(SD.UpdateSucess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                        this.Dispose();
+                    }
+                    else
+                    {
+                        MessageBox.Show(SD.UpdateFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
             }
             catch (Exception ex)
             {
-                MessageBox.Show("Error" + ex, "Thông báo");
+                MessageBox.Show("Error" + ex, SD.tb);
+            }
+
+        }
+        private Department GetDepartment()
+        {
+            Department de = new Department();
+            de.Name = txtName.Text;
+            de.Address_Detail = txtAddressDetail.Text;
+            return de;
+        }
+        private void LoadFields()
+        {
+            try
+            {
+                if (deDto != null)
+                {
+                    txtName.Text = deDto.Name;
+                    txtAddressDetail.Text = deDto.Address_Detail;
+                }
+            }
+            catch (Exception ex)
+            {
+
             }
         }
         private bool checkValidInput()
         {
             if ((string.IsNullOrEmpty(txtName.Text)) || (string.IsNullOrEmpty(txtAddressDetail.Text)))
             {
-                MessageBox.Show("Không được để trống thông tin", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                MessageBox.Show("Please fill out the required information!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             return true;

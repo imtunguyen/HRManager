@@ -55,7 +55,6 @@ namespace HR_Manager.Employee
         private void btnSave_Click_1(object sender, EventArgs e)
         {
             Department d = new Department(deDto.ID, textBox1.Text, textBox2.Text);
-            department.UpdateDe(d);
             MessageBox.Show("Chỉnh sửa phòng ban thành công");
             this.Close();
             this.Dispose();

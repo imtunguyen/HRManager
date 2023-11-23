@@ -48,7 +48,7 @@ namespace HR_Manager
             btnAdd.Text = "UPDATE";
             eDto = eDTO;
             idSelected = eDTO.ID;
-            cbStatus.Items.Add("Resign");
+            cbStatus.Items.Add("Resignation");
             LoadFields();
             loadDepartment();
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
@@ -77,17 +77,17 @@ namespace HR_Manager
 
                         if (result)
                         {
-                            MessageBox.Show(SD.addSuccess);
+                            MessageBox.Show(SD.addSuccess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.Close();
                         }
                         else
                         {
-                            MessageBox.Show(SD.addFail, SD.tb);
+                            MessageBox.Show(SD.addFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error" + ex, SD.tb);
+                        MessageBox.Show("Error" + ex, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -104,17 +104,17 @@ namespace HR_Manager
 
                         if (result)
                         {
-                            MessageBox.Show(SD.UpdateSucess, SD.tb);
+                            MessageBox.Show(SD.UpdateSucess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
                             this.Close();
                         }
                         else
                         {
-                            MessageBox.Show(SD.UpdateFail, SD.tb);
+                            MessageBox.Show(SD.UpdateFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
                         }
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error" + ex, SD.tb);
+                        MessageBox.Show("Error" + ex, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -141,7 +141,7 @@ namespace HR_Manager
             eDto.Email = txtEmail.Text;
             eDto.Phone = txtPhone.Text;
             eDto.Status = cbStatus.Text;
-
+            eDto.Department_id = Convert.ToInt32(cbDepartment.SelectedValue);
             if (cbGender.Checked)
             {
                 eDto.Gender = "Female";
@@ -259,12 +259,11 @@ namespace HR_Manager
         private void loadDepartment()
         {
             DepartmentBUS deBus = new DepartmentBUS();
-            List<Department> listDe;
-            listDe = deBus.GetAll();
+            List<Department> listDe = deBus.GetID();
 
-            // Thiết lập DataSource cho ComboBox
-            cbDepartment.DisplayMember = "ID"; // Thiết lập trường hiển thị
-            cbDepartment.ValueMember = "ID";   // Thiết lập giá trị thực
+            // Thiết lập trường hiển thị và giá trị thực cho ComboBox
+            cbDepartment.DisplayMember = "id"; // Trường hiển thị là ID của Department
+            cbDepartment.ValueMember = "id";   // Giá trị thực là ID của Department
 
             // Đổ dữ liệu vào ComboBox từ danh sách Department
             cbDepartment.DataSource = listDe;

@@ -18,6 +18,8 @@ namespace HR_Manager.Employee
         EmployeeBUS eBUS;
         List<EmployeeDTO> eList;
         DataTable dt = new DataTable();
+        DataTable searchData = new DataTable();
+        private List<string> listCb = new List<string> { "Name", "Department ID" };
         private int idSelected;
         public CRUDEmployees()
         {
@@ -26,6 +28,7 @@ namespace HR_Manager.Employee
             eList = new List<EmployeeDTO>();
             InitializeComponent();
             loadDataGridView();
+            loadcb();
         }
         public void loadDataGridView()
         {
@@ -61,44 +64,9 @@ namespace HR_Manager.Employee
             }
             dgvEmployee.DataSource = dt;
         }
-        private void btnAddEmployee_Click(object sender, EventArgs e)
+        private void loadcb()
         {
-            AddEmployee add = new AddEmployee(1);
-            add.Show();
-        }
-
-        private void btnUpdateEmployee_Click(object sender, EventArgs e)
-        {
-            eDTO = eBUS.GetById(idSelected);
-            AddEmployee update = new AddEmployee(2, "update", eDTO);
-            update.Show();
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (dgvEmployee.SelectedCells.Count > 0)
-            {
-                DialogResult dr = MessageBox.Show("Bạn có chắc muốn xóa?", "Xóa Thông tin", MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-                if (dr == DialogResult.Yes)
-                {
-                    int id;
-                    int rowIndex = dgvEmployee.SelectedCells[0].RowIndex;
-                    if (int.TryParse(dgvEmployee.Rows[rowIndex].Cells["ID"].Value.ToString(), out id))
-                    {
-                        eBUS.Delete(id);
-                        dgvEmployee.Rows.RemoveAt(rowIndex);
-                    }
-                    else
-                    {
-                        MessageBox.Show("Mã không hợp lệ!", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            else
-            {
-                MessageBox.Show("Bạn chưa chọn ô để xóa", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-            }
-            loadDataGridView();
+            cbTimKiem.DataSource = listCb;
         }
 
         private void dgvEmployee_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -110,16 +78,9 @@ namespace HR_Manager.Employee
                 idSelected = Convert.ToInt32(row.Cells["ID"].Value);
             }
         }
-
-        private void btnLoad_Click(object sender, EventArgs e)
-        {
-            loadDataGridView();
-        }
         private DataTable SearchByUsername(DataTable dataTable, string username)
         {
-            DataTable searchData = new DataTable();
             searchData = dataTable.Clone();
-
             // Lặp qua từng dòng trong DataTable để tìm kiếm
             foreach (DataRow row in dataTable.Rows)
             {
@@ -129,20 +90,144 @@ namespace HR_Manager.Employee
                     searchData.ImportRow(row);
                 }
             }
+            return searchData;
+        }
+        private DataTable SearchByDepartment(DataTable dataTable, int departmentId)
+        {
+            DataTable searchData = dataTable.Clone();
+
+            // Iterate through each row in the DataTable to search
+            foreach (DataRow row in dataTable.Rows)
+            {
+                int currentDepartmentId = Convert.ToInt32(row["Department ID"].ToString());
+                if (currentDepartmentId == departmentId)
+                {
+                    searchData.ImportRow(row);
+                }
+            }
 
             return searchData;
         }
-
-        private void txtSearch_TextChanged(object sender, EventArgs e)
+        private void txtTimKiem_TextChanged(object sender, EventArgs e)
         {
-            string searchValue = txtSearch.Text.Trim(); 
-            DataTable searchResult = SearchByUsername(dt, searchValue);
+        }
 
+        private void btnThem_Click(object sender, EventArgs e)
+        {
+            AddEmployee add = new AddEmployee(1);
+            add.Show();
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            eDTO = eBUS.GetById(idSelected);
+            AddEmployee update = new AddEmployee(2, "update", eDTO);
+            update.Show();
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            if (dgvEmployee.SelectedCells.Count > 0)
+            {
+                DialogResult dr = MessageBox.Show("Are you sure you want to delete?", SD.tb, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+                if (dr == DialogResult.Yes)
+                {
+                    int id;
+                    int rowIndex = dgvEmployee.SelectedCells[0].RowIndex;
+                    if (int.TryParse(dgvEmployee.Rows[rowIndex].Cells["ID"].Value.ToString(), out id))
+                    {
+                        eBUS.Delete(id);
+                        dgvEmployee.Rows.RemoveAt(rowIndex);
+                    }
+                    else
+                    {
+                        MessageBox.Show("Invalid ID!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
+                }
+            }
+            else
+            {
+                MessageBox.Show("You have not selected any rows to delete.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+            }
+
+            loadDataGridView();
+        }
+
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            loadDataGridView();
+        }
+
+        private void btnTimKiem_Click(object sender, EventArgs e)
+        {
+            string searchValue = txtTimKiem.Text.Trim();
+            DataTable searchResult = null;
+            try
+            {
+                if (cbTimKiem.SelectedValue.ToString() == "Name")
+                {
+                    searchResult = SearchByUsername(dt, searchValue);
+                }
+                else if (cbTimKiem.SelectedValue.ToString() == "Department ID")
+                {
+                    int departmentId = Convert.ToInt32(searchValue);
+
+                    // Search for employees by department ID
+                    searchResult = SearchByDepartment(dt, departmentId);
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
             // Gán kết quả tìm kiếm vào DataGridView
             dgvEmployee.DataSource = searchResult;
             dgvEmployee.Refresh();
+        }
 
+        private void RadioButton_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton radioButton = sender as RadioButton;
 
+            if (radioButton != null && radioButton.Tag != null)
+            {
+                if (rbAll.Checked)
+                {
+                    // Hiển thị tất cả dữ liệu
+                    dgvEmployee.DataSource = dt;
+                }
+                else
+                {
+                    string selectedStatus = radioButton.Tag.ToString();
+
+                    DataView dv = new DataView(dt);
+                    dv.RowFilter = $"Status = '{selectedStatus}'";
+
+                    dgvEmployee.DataSource = dv.ToTable();
+                    dgvEmployee.Refresh();
+                }
+            }
+        }
+
+        private void rbAll_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton_CheckedChanged(sender, e);
+        }
+
+        private void rbTrial_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton_CheckedChanged(sender, e);
+        }
+
+        private void rbOfficial_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton_CheckedChanged(sender, e);
+        }
+
+        private void rbResignation_CheckedChanged(object sender, EventArgs e)
+        {
+            RadioButton_CheckedChanged(sender, e);
         }
     }
 }

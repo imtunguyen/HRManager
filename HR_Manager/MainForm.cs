@@ -64,6 +64,11 @@ namespace HR_Manager
         {
             showUserControl(WorkEntry);
         }
+
+        private void employee1_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
