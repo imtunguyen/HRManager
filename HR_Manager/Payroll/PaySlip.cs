@@ -65,7 +65,7 @@ namespace HR_Manager.Payroll
             {
                 DataRow row = dt.NewRow();
                 row["ID"] = item.id;
-                row["Employee"] = employeeBUS.getById(item.employee_id).Name;
+                row["Employee"] = employeeBUS.GetById(item.employee_id).Name;
                 row["fromdate"] = item.from_date.Day + "/" + item.from_date.Month + "/" + item.from_date.Year;
                 row["todate"] = item.to_date.Day + "/" + item.to_date.Month + "/" + item.to_date.Year;
                 row["total"] = item.total;

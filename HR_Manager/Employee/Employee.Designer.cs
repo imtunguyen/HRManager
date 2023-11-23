@@ -125,10 +125,10 @@
             // tabPage3
             // 
             tabPage3.Controls.Add(department);
-            tabPage3.Location = new Point(4, 24);
+            tabPage3.Location = new Point(4, 34);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
-            tabPage3.Size = new Size(192, 72);
+            tabPage3.Size = new Size(992, 562);
             tabPage3.TabIndex = 5;
             tabPage3.Text = "Department";
             tabPage3.UseVisualStyleBackColor = true;
@@ -136,18 +136,18 @@
             // department
             // 
             department.BackColor = SystemColors.ButtonHighlight;
-            department.Location = new Point(0, 0);
+            department.Location = new Point(-4, 0);
             department.Margin = new Padding(3, 4, 3, 4);
             department.Name = "department";
-            department.Size = new Size(1000, 600);
+            department.Size = new Size(997, 562);
             department.TabIndex = 0;
             // 
             // tabPage2
             // 
-            tabPage2.Location = new Point(4, 24);
+            tabPage2.Location = new Point(4, 34);
             tabPage2.Name = "tabPage2";
             tabPage2.Padding = new Padding(3);
-            tabPage2.Size = new Size(192, 72);
+            tabPage2.Size = new Size(992, 562);
             tabPage2.TabIndex = 6;
             tabPage2.Text = "Reporting";
             tabPage2.UseVisualStyleBackColor = true;
@@ -155,10 +155,10 @@
             // tabPage4
             // 
             tabPage4.Controls.Add(jobUserControl1);
-            tabPage4.Location = new Point(4, 24);
+            tabPage4.Location = new Point(4, 34);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
-            tabPage4.Size = new Size(192, 72);
+            tabPage4.Size = new Size(992, 562);
             tabPage4.TabIndex = 7;
             tabPage4.Text = "Job";
             tabPage4.UseVisualStyleBackColor = true;
@@ -169,16 +169,16 @@
             jobUserControl1.Location = new Point(3, 3);
             jobUserControl1.Margin = new Padding(3, 4, 3, 4);
             jobUserControl1.Name = "jobUserControl1";
-            jobUserControl1.Size = new Size(186, 66);
+            jobUserControl1.Size = new Size(986, 556);
             jobUserControl1.TabIndex = 0;
             // 
             // tabPage5
             // 
             tabPage5.Controls.Add(jobDetailUserControl2);
-            tabPage5.Location = new Point(4, 24);
+            tabPage5.Location = new Point(4, 34);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3);
-            tabPage5.Size = new Size(192, 72);
+            tabPage5.Size = new Size(992, 562);
             tabPage5.TabIndex = 8;
             tabPage5.Text = "Job Detail";
             tabPage5.UseVisualStyleBackColor = true;
@@ -190,7 +190,7 @@
             jobDetailUserControl2.Location = new Point(3, 3);
             jobDetailUserControl2.Margin = new Padding(3, 4, 3, 4);
             jobDetailUserControl2.Name = "jobDetailUserControl2";
-            jobDetailUserControl2.Size = new Size(186, 66);
+            jobDetailUserControl2.Size = new Size(986, 556);
             jobDetailUserControl2.TabIndex = 0;
             // 
             // Employee

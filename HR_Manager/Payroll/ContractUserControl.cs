@@ -72,7 +72,7 @@ namespace HR_Manager.Payroll
 				DataRow row = dt.NewRow();
 				row["ID"] = contract.Id;
 				row["Name"] = contract.Name;
-				row["Employee"] = emBus.getById(contract.EmployeeId).Name;
+				row["Employee"] = emBus.GetById(contract.EmployeeId).Name;
 				row["From Date"] = contract.FormDate.ToShortDateString();
 				row["To Date"] = contract.ToDate.ToShortDateString();
 				row["Job"] = jBus.GetById(contract.JobId).Job_Name;
@@ -93,7 +93,7 @@ namespace HR_Manager.Payroll
 				DataRow row = dt.NewRow();
 				row["ID"] = contract.Id;
 				row["Name"] = contract.Name;
-				row["Employee"] = emBus.getById(contract.EmployeeId).Name;
+				row["Employee"] = emBus.GetById(contract.EmployeeId).Name;
 				row["From Date"] = contract.FormDate.ToShortDateString();
 				row["To Date"] = contract.ToDate.ToShortDateString();
 				row["Job"] = jBus.GetById(contract.JobId).Job_Name;

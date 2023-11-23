@@ -167,6 +167,34 @@ namespace DAO
             }
             return list;
         }
+        public List<EmployeeDTO> GetByDepartmentId(int de_id)
+        {
+            List<EmployeeDTO> elist = new List<EmployeeDTO>();
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "SELECT * FROM EMPLOYEE WHERE department_id = @Department_id";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@Department_id", de_id);
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        EmployeeDTO e = new EmployeeDTO();
+                        e.ID = Convert.ToInt32(reader["id"].ToString());
+                        e.Name = reader["Name"].ToString();
+                        e.Gender = reader["gender"].ToString();
+                        e.Date_of_Birth = DateTime.Parse(reader["date_Of_Birth"].ToString());
+                        e.Phone = reader["phone"].ToString();
+                        e.Email = reader["email"].ToString();
+                        e.img_path = reader["img_path"].ToString();
+                        e.Department_id = Convert.ToInt32(reader["department_id"].ToString());
+                        e.Status = reader["status"].ToString();
+                        elist.Add(e);
+                    }
+                }
+            }
+            return elist;
+        }
     }
 }
 
