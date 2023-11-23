@@ -12,6 +12,7 @@ using System.Windows.Forms;
 using System.Windows.Media;
 using BUS;
 using DTO;
+using System.Diagnostics.Contracts;
 
 namespace HR_Manager
 {
@@ -20,11 +21,89 @@ namespace HR_Manager
 		private StatisticalBUS statisticalBUS;
 		private List<string> lcbThang = SD.listThang;
 		private List<int> lcbNam = SD.listNam;
+		private DataTable dt;
+		private DateTime startDate;
+		private DateTime endDate;
+		private BonusAndFinesBUS bonusAndFinesBUS;
+		private WorkEntryBUS workEntryBUS;
 		public DashBoard()
 		{
 			InitializeComponent();
 			statisticalBUS = new StatisticalBUS();
+			bonusAndFinesBUS = new BonusAndFinesBUS();
+			workEntryBUS = new WorkEntryBUS();
+			dt = new DataTable();
+			dt.Columns.Add("ID", typeof(int));
+			dt.Columns.Add("Name", typeof(string));
+			dt.Columns.Add("Job", typeof(string));
+			dt.Columns.Add("Department", typeof(string));
+			dt.Columns.Add("Required Day", typeof(int));
+			dt.Columns.Add("Day of work", typeof(int));
+			dt.Columns.Add("Base Pay", typeof(decimal));
+			dt.Columns.Add("Bonus", typeof(decimal));
+			dt.Columns.Add("Fines", typeof(decimal));
+			dt.Columns.Add("Real Salary", typeof(decimal));
+			dt.Columns.Add("Total", typeof(decimal));
 			mainLoad();
+		}
+
+		private void mainLoad()
+		{
+			loadPanel();
+			cbNam.DataSource = lcbNam;
+			cbNam.SelectedItem = 2023;
+			cbThang.DataSource = lcbThang;
+			loadChart();
+			startDate = new DateTime(2023, 11, 1);
+			endDate = new DateTime(2023,11,30);
+			loadDataGridView();
+		}
+
+		private void loadPanel()
+		{
+			lblCountDepartment.Text = statisticalBUS.GetCountDepartment().ToString();
+			lblCountContract.Text = statisticalBUS.GetCountContract().ToString();
+			lblCountActiveEmployee.Text = statisticalBUS.GetCountActiveEmployee().ToString();
+		}
+
+		private void loadDataGridView()
+		{
+			dt.Clear();
+			List<EmployeeDTO> list = statisticalBUS.GetInfoSalaryEmployee(startDate, endDate);
+			string dateTo = startDate.Year.ToString() + "-" + startDate.Month.ToString() + "-" + startDate.Day.ToString();
+			string dateFrom = endDate.Year.ToString() + "-" + endDate.Month.ToString() + "-" + endDate.Day.ToString();
+			foreach (EmployeeDTO e in list)
+			{
+				DataRow row = dt.NewRow();
+				row["ID"] = e.ID;
+				row["Name"] = e.Name;
+				row["Job"] = e.JobName;
+				row["Department"] = e.DepartmentName;
+				row["Required Day"] = e.RequiredDay;
+				row["Day of work"] = workEntryBUS.getDayOfWork(dateTo, dateFrom, e.ID);
+				row["Base Pay"] = e.base_pay;
+				row["Bonus"] = bonusAndFinesBUS.getAllBonusOfEmployee(e.ID, dateTo);
+				row["Fines"] = bonusAndFinesBUS.getAllFinesOfEmployee(e.ID, dateTo);
+				row["Real Salary"] = workEntryBUS.getDayOfWork(dateTo, dateFrom, e.ID) * (e.base_pay / e.RequiredDay);
+				row["Total"] = e.Total;
+				dt.Rows.Add(row);
+			}
+			dataGridView1.DataSource = dt;
+		}
+
+		private void CapNhatThoiGian()
+		{
+			string selectedThang = cbThang.SelectedItem.ToString();
+			int selectedNam = Convert.ToInt32(cbNam.SelectedItem);
+
+			int indexThang = lcbThang.IndexOf(selectedThang);
+
+			startDate = new DateTime(selectedNam, indexThang + 1, 1);
+			endDate = new DateTime(selectedNam, indexThang + 1, DateTime.DaysInMonth(selectedNam, indexThang + 1));
+		}
+
+			private void loadChart()
+		{
 			cartesianChart1.Series = new SeriesCollection
 			{
 				new LineSeries
@@ -73,22 +152,6 @@ namespace HR_Manager
 
 			//modifying any series values will also animate and update the chart
 			cartesianChart1.Series[2].Values.Add(5d);
-
-		}
-
-		private void mainLoad()
-		{
-			loadPanel();
-			cbNam.DataSource = lcbNam;
-			cbNam.SelectedItem = 2023;
-			cbThang.DataSource = lcbThang;
-		}
-
-		private void loadPanel()
-		{
-			lblCountDepartment.Text = statisticalBUS.GetCountDepartment().ToString();
-			lblCountContract.Text = statisticalBUS.GetCountContract().ToString();
-			lblCountActiveEmployee.Text = statisticalBUS.GetCountActiveEmployee().ToString();
 		}
 		
 	}

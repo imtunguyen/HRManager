@@ -36,5 +36,21 @@ namespace DTO
             this.img_path = img_path;
             this.base_pay = base_pay;
         }
+
+        public string JobName { get; set; }
+        public string DepartmentName { get; set; }
+        public int RequiredDay { get; set; }
+        public Decimal Total { get; set; }
+
+        public EmployeeDTO(int iD, string name, string job_name, string department_name, int required_day, decimal basepay, decimal total)
+        {
+            ID= iD;
+            Name = name;
+            JobName = job_name; 
+            DepartmentName = department_name;
+            RequiredDay = required_day; 
+            base_pay = basepay;
+            Total = total;
+        }
     }
 }
