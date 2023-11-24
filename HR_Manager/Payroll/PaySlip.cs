@@ -34,7 +34,9 @@ namespace HR_Manager.Payroll
         int dayOfWork;
         public PaySlip()
         {
-            InitializeComponent();
+            InitializeComponent(); 
+            dataGridView1.MultiSelect = true;
+            dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -150,7 +152,7 @@ namespace HR_Manager.Payroll
                     paySlip.to_date = Convert.ToDateTime(dateTo);
                     paySlip.employee_id = eId;
                     paySlip.total = total;
-                    paySlip.status = "Paid";
+                    paySlip.status = "Done";
                     paySlip.Contract_ID = contractID;
                     slipBUS.Add(paySlip);
 
@@ -176,7 +178,7 @@ namespace HR_Manager.Payroll
                     graphics.DrawString(feeFines + " VND", new System.Drawing.Font("Arial", 11, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 410)); ;
                     graphics.DrawString(total + " VND", new System.Drawing.Font("Arial", 11, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 450));
 
-                    string filename = @"D:\Payslip\" + listEmployee[i].Name + " from " + dateFrom + " to " + dateTo +".pdf";
+                    string filename = @"D:\Payslip\" + listEmployee[i].Name + " from " + dateFrom + " to " + dateTo + ".pdf";
 
                     iTextSharp.text.Document document = new iTextSharp.text.Document();
                     PdfWriter.GetInstance(document, new FileStream(filename, FileMode.Create));
@@ -207,6 +209,23 @@ namespace HR_Manager.Payroll
         }
         private void button3_Click(object sender, EventArgs e)
         {
+            paySlips = slipBUS.getAll();
+            render(paySlips);
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var selectedRows = dataGridView1.SelectedRows
+           .OfType<DataGridViewRow>()
+           .Where(row => !row.IsNewRow)
+           .ToArray();
+
+            foreach (var row in selectedRows)
+            {
+                int id = Convert.ToInt32(row.Cells["ID"].Value);
+                slipBUS.Update("Paid", id);
+            }
+
             paySlips = slipBUS.getAll();
             render(paySlips);
         }

@@ -76,10 +76,28 @@ namespace DAO
             throw new NotImplementedException();
         }
 
-        public bool Update(PaySlipDTO t)
+        public bool Update(string status, int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (SqlConnection connection = DbConnection.GetSqlConnection())
+                {
+                    string query = "UPDATE PAYSLIP SET status = @status where id = " + id;
+                    using (SqlCommand command = new SqlCommand(query, connection))
+                    {
+                        command.Parameters.AddWithValue("@status", status);
+                        int rowsChanged = command.ExecuteNonQuery();
+                        return rowsChanged > 0;
+                    }
+                }
+            }
+            catch (SqlException ex)
+            {
+                Console.WriteLine(ex.ToString());
+                return false;
+            }
         }
+
         public List<PaySlipDTO> SearchByName(string name) 
         {
             List<PaySlipDTO> list = new List<PaySlipDTO>();
@@ -165,6 +183,11 @@ namespace DAO
                 }
             }
             return list;
+        }
+
+        public bool Update(PaySlipDTO t)
+        {
+            throw new NotImplementedException();
         }
     }
 }
