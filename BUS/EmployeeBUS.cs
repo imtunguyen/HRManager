@@ -45,6 +45,11 @@ namespace BUS
         {
             return edao.GetEmployeeHaveContractRunning();
         }
+
+        public List<EmployeeDTO> SearchByName(string name)
+        {
+            return edao.searchByName(name);
+        }
     }
 
 }

@@ -26,20 +26,21 @@ namespace HR_Manager.Employee
 
         private void WorkEntryForm_Load(object sender, EventArgs e)
         {
-            render();
-        }
-        private void render()
-        {
-            label1.Text = date;
-
             workEntryBUS = new WorkEntryBUS();
             employeeBUS = new EmployeeBUS();
             employees = employeeBUS.GetAll();
+            render(employees);
+        }
+        private void render(List<EmployeeDTO> eList)
+        {
+            label1.Text = date;
 
-            for (int i = 0; i < employees.Count; i++)
+            checkedListBox1.Items.Clear();
+
+            for (int i = 0; i < eList.Count; i++)
             {
-                checkedListBox1.Items.Add(employees[i].ID + "_" + employees[i].Name);
-                if (workEntryBUS.IsEmployeeDone(date, employees[i].ID))
+                checkedListBox1.Items.Add(eList[i].Name + "_" + eList[i].ID);
+                if (workEntryBUS.IsEmployeeDone(date, eList[i].ID))
                 {
                     checkedListBox1.SetItemCheckState(i, CheckState.Checked);
                 }
@@ -53,43 +54,63 @@ namespace HR_Manager.Employee
                 checkedListBox1.SetItemChecked(i, true);
             }
             button1.Visible = true;
+            button3.Visible = true;
+            button2.Visible = false;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             for (int i = 0; i < checkedListBox1.Items.Count; i++)
             {
-                if (checkedListBox1.GetItemCheckState(i) == CheckState.Checked && !workEntryBUS.IsEmployeeExistInDatabase(date, employees[i].ID))
+                int employee_id = Convert.ToInt32(checkedListBox1.Items[i].ToString().Substring(checkedListBox1.Items[i].ToString().IndexOf("_") + 1));
+                if (checkedListBox1.GetItemCheckState(i) == CheckState.Checked && !workEntryBUS.IsEmployeeExistInDatabase(date, employee_id))
                 {
                     DTO.WorkEntry workEntry = new DTO.WorkEntry();
-                    workEntry.employeeId = employees[i].ID;
+                    workEntry.employeeId = employee_id;
                     workEntry.input_date = date;
                     workEntry.status = "done";
-                    bool add = workEntryBUS.Add(workEntry);
+                    workEntryBUS.Add(workEntry);
                 }
-                if(checkedListBox1.GetItemCheckState(i) == CheckState.Unchecked && workEntryBUS.IsEmployeeExistInDatabase(date, employees[i].ID))
+                if (checkedListBox1.GetItemCheckState(i) == CheckState.Unchecked && workEntryBUS.IsEmployeeExistInDatabase(date, employee_id))
                 {
                     DTO.WorkEntry workEntry = new DTO.WorkEntry();
-                    workEntry.employeeId = employees[i].ID;
+                    workEntry.employeeId = employee_id;
                     workEntry.input_date = date;
                     workEntry.status = "undone";
-                    bool update = workEntryBUS.Update(workEntry);
+                    workEntryBUS.Update(workEntry);
                 }
-                if (checkedListBox1.GetItemCheckState(i) == CheckState.Checked && workEntryBUS.IsEmployeeExistInDatabase(date, employees[i].ID))
+                if (checkedListBox1.GetItemCheckState(i) == CheckState.Checked && workEntryBUS.IsEmployeeExistInDatabase(date, employee_id))
                 {
                     DTO.WorkEntry workEntry = new DTO.WorkEntry();
-                    workEntry.employeeId = employees[i].ID;
+                    workEntry.employeeId = employee_id;
                     workEntry.input_date = date;
                     workEntry.status = "done";
-                    bool add = workEntryBUS.Update(workEntry);
+                    workEntryBUS.Update(workEntry);
                 }
             }
-            button1.Visible = false;
+            MessageBox.Show("Saved");
         }
 
         private void checkedListBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
             button1.Visible = true;
+        }
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            for (int i = 0; i < checkedListBox1.Items.Count; i++)
+            {
+                checkedListBox1.SetItemChecked(i, false);
+            }
+            button1.Visible = true;
+            button2.Visible = true;
+            button3.Visible = false;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            List<EmployeeDTO> list = employeeBUS.SearchByName(textBox1.Text.Trim());
+            render(list);
         }
     }
 }
