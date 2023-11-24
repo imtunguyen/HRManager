@@ -42,7 +42,11 @@ namespace DTO
         public int RequiredDay { get; set; }
         public Decimal Total { get; set; }
 
-        public EmployeeDTO(int iD, string name, string job_name, string department_name, int required_day, decimal basepay, decimal total)
+        public int PaySlipID { get; set; }
+        public DateTime PaySlipDateFrom { get; set; }
+        public DateTime PaySlipDateTo { get; set; }
+
+        public EmployeeDTO(int iD, string name, string job_name, string department_name, int required_day, decimal basepay, decimal total, int payslip_id, DateTime payslipDateFrom, DateTime paySlipDateTo)
         {
             ID= iD;
             Name = name;
@@ -51,6 +55,9 @@ namespace DTO
             RequiredDay = required_day; 
             base_pay = basepay;
             Total = total;
+            PaySlipID = payslip_id;
+            PaySlipDateTo = paySlipDateTo;
+            PaySlipDateFrom = payslipDateFrom;
         }
     }
 }

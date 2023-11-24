@@ -32,6 +32,11 @@ namespace BUS
             }
         }
 
+        public PaySlipDTO GetById(int id)
+        {
+            return paySlipDAO.GetById(id);
+        }
+
         public List<PaySlipDTO> SearchByEmployeeName(string name)
         {
             return paySlipDAO.SearchByName(name);

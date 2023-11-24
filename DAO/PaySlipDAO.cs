@@ -73,8 +73,31 @@ namespace DAO
 
         public PaySlipDTO GetById(int id)
         {
-            throw new NotImplementedException();
-        }
+            PaySlipDTO result = new PaySlipDTO();
+			using (SqlConnection connection = DbConnection.GetSqlConnection())
+			{
+				string query = "select * from Payslip where id = @id";
+				using (SqlCommand command = new SqlCommand(query, connection))
+				{
+					command.Parameters.AddWithValue("@id", id);
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							result.id = Convert.ToInt32(reader["id"]);
+							result.employee_id = Convert.ToInt32(reader["employee_id"]);
+							result.status = reader["status"].ToString();
+							result.from_date = Convert.ToDateTime(reader["from_date"]);
+							result.to_date = Convert.ToDateTime(reader["to_date"]);
+							result.total = Convert.ToDecimal(reader["total"]);
+							result.Contract_ID = Convert.ToInt32(reader["contract_id"]);
+						}
+					}
+				}
+			}
+			return result;
+
+		}
 
         public bool Update(PaySlipDTO t)
         {

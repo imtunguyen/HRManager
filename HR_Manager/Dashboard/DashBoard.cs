@@ -26,17 +26,21 @@ namespace HR_Manager
 		private DateTime endDate;
 		private BonusAndFinesBUS bonusAndFinesBUS;
 		private WorkEntryBUS workEntryBUS;
+		private PaySlipBUS paySlipBUS;
 		public DashBoard()
 		{
 			InitializeComponent();
 			statisticalBUS = new StatisticalBUS();
 			bonusAndFinesBUS = new BonusAndFinesBUS();
 			workEntryBUS = new WorkEntryBUS();
+			paySlipBUS = new PaySlipBUS();
 			dt = new DataTable();
 			dt.Columns.Add("ID", typeof(int));
 			dt.Columns.Add("Name", typeof(string));
 			dt.Columns.Add("Job", typeof(string));
 			dt.Columns.Add("Department", typeof(string));
+			dt.Columns.Add("From Date", typeof(string));
+			dt.Columns.Add("To Date", typeof (string));
 			dt.Columns.Add("Required Day", typeof(int));
 			dt.Columns.Add("Day of work", typeof(int));
 			dt.Columns.Add("Base Pay", typeof(decimal));
@@ -79,12 +83,17 @@ namespace HR_Manager
 				row["Name"] = e.Name;
 				row["Job"] = e.JobName;
 				row["Department"] = e.DepartmentName;
+				row["From Date"] = e.PaySlipDateFrom.ToShortDateString();
+				row["To Date"] = e.PaySlipDateTo.ToShortDateString();
 				row["Required Day"] = e.RequiredDay;
-				row["Day of work"] = workEntryBUS.getDayOfWork(dateTo, dateFrom, e.ID);
+				PaySlipDTO p = paySlipBUS.GetById(e.PaySlipID);
+				string datefromE = p.from_date.Year.ToString() + "-" + p.from_date.Month.ToString() + "-" + p.from_date.Day.ToString();
+				string datetoE = p.to_date.Year.ToString() + "-" + p.to_date.Month.ToString() + "-" + p.to_date.Day.ToString();
+				row["Day of work"] = workEntryBUS.getDayOfWork(datefromE, datetoE, e.ID);
 				row["Base Pay"] = e.base_pay;
-				row["Bonus"] = bonusAndFinesBUS.getAllBonusOfEmployee(e.ID, dateTo);
-				row["Fines"] = bonusAndFinesBUS.getAllFinesOfEmployee(e.ID, dateTo);
-				row["Real Salary"] = workEntryBUS.getDayOfWork(dateTo, dateFrom, e.ID) * (e.base_pay / e.RequiredDay);
+				row["Bonus"] = bonusAndFinesBUS.getAllBonusOfEmployee(e.ID, datetoE);
+				row["Fines"] = bonusAndFinesBUS.getAllFinesOfEmployee(e.ID, datetoE);
+				row["Real Salary"] = workEntryBUS.getDayOfWork(datefromE, datetoE, e.ID) * (e.base_pay / e.RequiredDay);
 				row["Total"] = e.Total;
 				dt.Rows.Add(row);
 			}

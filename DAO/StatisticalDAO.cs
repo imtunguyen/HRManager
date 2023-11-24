@@ -62,7 +62,8 @@ namespace DAO
 			List<EmployeeDTO> list = new List<EmployeeDTO>();
 			using (SqlConnection conn = DbConnection.GetSqlConnection())
 			{
-				string query = "select e.id, e.name, j.job_name, d.name as department_name,c.requiredDay,c.basePay," +
+				string query = "select e.id, e.name, j.job_name, d.name as department_name,c.requiredDay,c.basePay, p.id as payslip_id, " +
+					"p.from_date, p.to_date, " +
 					" p.total from EMPLOYEE e join CONTRACT c on e.id = c.employee_id " +
 					"join JOB j on j.id = c.job_id join PAYSLIP p on p.contract_id = c.id " +
 					"join DEPARTMENT d on d.id = e.department_id where c.status = 'Running' " +
@@ -80,7 +81,10 @@ namespace DAO
 							int required_day = Convert.ToInt32(reader["requiredDay"]);
 							decimal basepay = Convert.ToDecimal(reader["basePay"]);
 							decimal total = Convert.ToDecimal(reader["total"]);
-							EmployeeDTO e = new EmployeeDTO(id, name, job_name, department_name, required_day, basepay, total);
+							int payslipID = Convert.ToInt32(reader["payslip_id"]);
+							DateTime payslipdatefrom = Convert.ToDateTime(reader["from_date"]);
+							DateTime payslipdateto = Convert.ToDateTime(reader["to_date"]);
+							EmployeeDTO e = new EmployeeDTO(id, name, job_name, department_name, required_day, basepay, total, payslipID, payslipdatefrom, payslipdateto);
 							list.Add(e);
 						}
 					}
