@@ -19,16 +19,15 @@ namespace BUS
         {
             jobDAO = JobDAO.getInstance();
         }
-        public string Add(Job job)
+        public bool Add(Job job)
         {
-            if (jobDAO.Add(job)) return "Add Job Success";
-            return "Add Job fail";
+           
+            return jobDAO.Add(job);
         }
 
-        public string Update(Job t)
+        public bool Update(int id, Job job)
         {
-            if (jobDAO.Update(t)) return " Update Job Success";
-            return "Update Job Fail";
+            return jobDAO.Update(id, job);
         }
         public string Delete(int id)
         {

@@ -4,27 +4,27 @@ using HR_Manager.Management;
 
 namespace HR_Manager
 {
-	partial class MainForm
-	{
-		/// <summary>
-		/// Required designer variable.
-		/// </summary>
-		private System.ComponentModel.IContainer components = null;
+    partial class MainForm
+    {
+        /// <summary>
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
-		/// <summary>
-		/// Clean up any resources being used.
-		/// </summary>
-		/// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
-		protected override void Dispose(bool disposing)
-		{
-			if (disposing && (components != null))
-			{
-				components.Dispose();
-			}
-			base.Dispose(disposing);
-		}
+        /// <summary>
+        /// Clean up any resources being used.
+        /// </summary>
+        /// <param name="disposing">true if managed resources should be disposed; otherwise, false.</param>
+        protected override void Dispose(bool disposing)
+        {
+            if (disposing && (components != null))
+            {
+                components.Dispose();
+            }
+            base.Dispose(disposing);
+        }
 
-		#region Windows Form Designer generated code
+        #region Windows Form Designer generated code
 
 		/// <summary>
 		/// Required method for Designer support - do not modify
@@ -196,6 +196,14 @@ namespace HR_Manager
 			btnManagement.Text = "Management";
 			btnManagement.UseVisualStyleBackColor = false;
 			btnManagement.Click += btnManagement_Click;
+			// 
+			// management
+			// 
+			management.Location = new Point(235, 0);
+			management.Margin = new Padding(3, 5, 3, 5);
+			management.Name = "management";
+			management.Size = new Size(1143, 800);
+			management.TabIndex = 3;
 			// 
 			// btnDepartment
 			// 

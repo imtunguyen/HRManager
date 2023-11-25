@@ -36,10 +36,7 @@ namespace BUS
             return edao.Delete(id);
         }
 
-        public List<EmployeeDTO> GetByDepartmentId(int id)
-        {
-            return edao.GetByDepartmentId(id);
-        }
+
 
         public List<EmployeeDTO> GetEmployeeHaveContractRunning()
         {

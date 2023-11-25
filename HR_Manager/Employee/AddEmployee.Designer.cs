@@ -47,8 +47,6 @@
             btnCancel = new Button();
             lblTitle = new Label();
             btnChoose = new Button();
-            label5 = new Label();
-            cbDepartment = new ComboBox();
             departmentBindingSource = new BindingSource(components);
             ((System.ComponentModel.ISupportInitialize)pictureBox1).BeginInit();
             ((System.ComponentModel.ISupportInitialize)departmentBindingSource).BeginInit();
@@ -216,25 +214,6 @@
             btnChoose.UseVisualStyleBackColor = true;
             btnChoose.Click += btnChoose_Click;
             // 
-            // label5
-            // 
-            label5.AutoSize = true;
-            label5.Location = new Point(88, 206);
-            label5.Name = "label5";
-            label5.Size = new Size(73, 15);
-            label5.TabIndex = 10;
-            label5.Text = "Department:";
-            // 
-            // cbDepartment
-            // 
-            cbDepartment.DataSource = departmentBindingSource;
-            cbDepartment.DropDownStyle = ComboBoxStyle.DropDownList;
-            cbDepartment.FormattingEnabled = true;
-            cbDepartment.Location = new Point(166, 206);
-            cbDepartment.Name = "cbDepartment";
-            cbDepartment.Size = new Size(200, 23);
-            cbDepartment.TabIndex = 11;
-            // 
             // departmentBindingSource
             // 
             departmentBindingSource.DataSource = typeof(DTO.Department);
@@ -245,8 +224,6 @@
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(800, 450);
             Controls.Add(pictureBox1);
-            Controls.Add(cbDepartment);
-            Controls.Add(label5);
             Controls.Add(btnChoose);
             Controls.Add(lblTitle);
             Controls.Add(btnCancel);
@@ -291,8 +268,6 @@
         private Button btnCancel;
         public Label lblTitle;
         private Button btnChoose;
-        private Label label5;
-        private ComboBox cbDepartment;
         private BindingSource departmentBindingSource;
     }
 }

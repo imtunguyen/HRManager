@@ -47,6 +47,7 @@ namespace HR_Manager.Payroll
                 row["Expired Date"] = b.expired_date.ToShortDateString();
                 dt.Rows.Add(row);
             }
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
             dataGridView1.DataSource = dt;
         }
 
@@ -62,7 +63,7 @@ namespace HR_Manager.Payroll
             dateTo = dateTimeTo.Value.Year.ToString() + "-" + dateTimeTo.Value.Month.ToString() + "-" + dateTimeTo.Value.Day.ToString();
             dateFrom = dateTimeFrom.Value.Year.ToString() + "-" + dateTimeFrom.Value.Month.ToString() + "-" + dateTimeFrom.Value.Day.ToString();
 
-            lblDraft.Visible = true;
+            lblStatus.Visible = true;
 
             employeeBUS = new EmployeeBUS();
             employees = employeeBUS.GetAll();
@@ -97,8 +98,7 @@ namespace HR_Manager.Payroll
                 feeBonus = bonusAndFinesBUS.getAllBonusOfEmployee(employee_id, dateTo);
                 feeFines = bonusAndFinesBUS.getAllFinesOfEmployee(employee_id, dateTo);
 
-                lblDraft.Visible = false;
-                lblRunning.Visible = true;
+                lblStatus.Text = "Running";
 
                 textBox1.Text = dayOfWork + "";
                 Decimal attachment = feeBonus - feeFines;
@@ -143,13 +143,14 @@ namespace HR_Manager.Payroll
 
         private void btnDone_Click(object sender, EventArgs e)
         {
+            lblStatus.Text = "Done";
             slipBUS = new PaySlipBUS();
             PaySlipDTO paySlip = new PaySlipDTO();
             paySlip.from_date = Convert.ToDateTime(dateFrom);
             paySlip.to_date = Convert.ToDateTime(dateTo);
             paySlip.employee_id = employee_id;
             paySlip.total = Convert.ToDecimal(textBox2.Text);
-            paySlip.status = lblPaid.Text;
+            paySlip.status = "Done";
             int contractID = 0;
             List<Contract> list = contractBUS.GetByEmployeeId(employee_id);
             foreach (Contract contract in list)
@@ -161,9 +162,6 @@ namespace HR_Manager.Payroll
             }
             paySlip.Contract_ID = contractID;
             MessageBox.Show(slipBUS.Add(paySlip));
-
-            lblRunning.Visible = false;
-            lblPaid.Visible = true;
 
             printPayslip();
         }
@@ -185,6 +183,10 @@ namespace HR_Manager.Payroll
 
         private void reload()
         {
+            dt.Clear();
+            dataGridView1.AutoSizeColumnsMode = DataGridViewAutoSizeColumnsMode.Fill;
+            dataGridView1.DataSource = dt;
+
             btnDone.Visible = false;
             btnSubmit.Visible = true;
             textBox1.Text = string.Empty;
@@ -199,14 +201,20 @@ namespace HR_Manager.Payroll
 
             button2.Visible = true;
 
-            lblDraft.Visible = true;
-            lblPaid.Visible = false;
-            lblRunning.Visible = false;
+            lblStatus.Text = "Draft";
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
             reload();
+        }
+
+        private void Form1_KeyPress(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F5)
+            {
+                reload();
+            }
         }
 
         private void button2_Click(object sender, EventArgs e)
@@ -260,6 +268,5 @@ namespace HR_Manager.Payroll
 
 
         }
-
     }
 }

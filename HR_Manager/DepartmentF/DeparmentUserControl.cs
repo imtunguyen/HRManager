@@ -89,7 +89,7 @@ namespace HR_Manager.DepartmentF
         }
         public void loadEmployee(int id)
         {
-            eList = eBus.GetByDepartmentId(id);
+            //eList = eBus.GetByDepartmentId(id);
             dtEmployee.Clear();
             dtEmployee.Columns.Clear();
             dtEmployee.Columns.Add("ID");
