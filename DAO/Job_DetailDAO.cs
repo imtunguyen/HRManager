@@ -84,7 +84,7 @@ namespace DAO
 				{
 					Job_Detail jobDetail = new Job_Detail();
 					jobDetail.ID = (int)reader["id"];
-					jobDetail.Position = (string)reader["position"];
+					//jobDetail.Position = (string)reader["position"];
 					jobDetail.EmployeeID = (int)reader["employee_id"];
 					jobDetail.DepartmentID = (int)reader["department_id"];
 					jobDetail.JobID = (int)reader["job_id"];
