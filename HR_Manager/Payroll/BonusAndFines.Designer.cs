@@ -34,8 +34,8 @@
             comboBox1 = new ComboBox();
             button2 = new Button();
             button1 = new Button();
-            dataGridView1 = new DataGridView();
             button3 = new Button();
+            dataGridView1 = new DataGridView();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -54,34 +54,34 @@
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 15.5F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Percent, 84.5F));
             tableLayoutPanel1.RowStyles.Add(new RowStyle(SizeType.Absolute, 96F));
-            tableLayoutPanel1.Size = new Size(1000, 600);
+            tableLayoutPanel1.Size = new Size(941, 600);
             tableLayoutPanel1.TabIndex = 1;
             // 
             // tableLayoutPanel2
             // 
-            tableLayoutPanel2.ColumnCount = 6;
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 20.09804F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 23.0392151F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 23.3660126F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 33.49673F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 245F));
-            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 135F));
-            tableLayoutPanel2.Controls.Add(textBox1, 4, 0);
-            tableLayoutPanel2.Controls.Add(comboBox1, 3, 0);
-            tableLayoutPanel2.Controls.Add(button2, 2, 0);
-            tableLayoutPanel2.Controls.Add(button1, 1, 0);
-            tableLayoutPanel2.Controls.Add(button3, 5, 0);
+            tableLayoutPanel2.ColumnCount = 5;
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 26.7148018F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 30.1444035F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Percent, 43.1407928F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 254F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 139F));
+            tableLayoutPanel2.ColumnStyles.Add(new ColumnStyle(SizeType.Absolute, 20F));
+            tableLayoutPanel2.Controls.Add(textBox1, 3, 0);
+            tableLayoutPanel2.Controls.Add(comboBox1, 2, 0);
+            tableLayoutPanel2.Controls.Add(button2, 1, 0);
+            tableLayoutPanel2.Controls.Add(button1, 0, 0);
+            tableLayoutPanel2.Controls.Add(button3, 4, 0);
             tableLayoutPanel2.Location = new Point(3, 3);
             tableLayoutPanel2.Name = "tableLayoutPanel2";
             tableLayoutPanel2.RowCount = 1;
             tableLayoutPanel2.RowStyles.Add(new RowStyle(SizeType.Percent, 100F));
-            tableLayoutPanel2.Size = new Size(994, 72);
+            tableLayoutPanel2.Size = new Size(935, 72);
             tableLayoutPanel2.TabIndex = 0;
             // 
             // textBox1
             // 
             textBox1.Anchor = AnchorStyles.None;
-            textBox1.Location = new Point(629, 24);
+            textBox1.Location = new Point(561, 24);
             textBox1.Name = "textBox1";
             textBox1.Size = new Size(211, 23);
             textBox1.TabIndex = 2;
@@ -92,7 +92,7 @@
             comboBox1.Anchor = AnchorStyles.None;
             comboBox1.FormattingEnabled = true;
             comboBox1.Items.AddRange(new object[] { "employee", "type", "both" });
-            comboBox1.Location = new Point(429, 24);
+            comboBox1.Location = new Point(343, 24);
             comboBox1.Name = "comboBox1";
             comboBox1.Size = new Size(160, 23);
             comboBox1.TabIndex = 0;
@@ -100,9 +100,9 @@
             // button2
             // 
             button2.Anchor = AnchorStyles.None;
-            button2.BackColor = Color.LimeGreen;
+            button2.BackColor = Color.OrangeRed;
             button2.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button2.Location = new Point(279, 12);
+            button2.Location = new Point(169, 12);
             button2.Name = "button2";
             button2.Size = new Size(113, 48);
             button2.TabIndex = 3;
@@ -115,7 +115,7 @@
             button1.Anchor = AnchorStyles.None;
             button1.BackColor = Color.LimeGreen;
             button1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button1.Location = new Point(137, 12);
+            button1.Location = new Point(15, 12);
             button1.Name = "button1";
             button1.Size = new Size(113, 48);
             button1.TabIndex = 0;
@@ -123,23 +123,12 @@
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
             // 
-            // dataGridView1
-            // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Location = new Point(3, 81);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.RowTemplate.Height = 25;
-            dataGridView1.Size = new Size(994, 419);
-            dataGridView1.TabIndex = 1;
-            dataGridView1.CellClick += dataGridView1_CellClick;
-            dataGridView1.CellDoubleClick += dataGridView1_DoubleCellClick;
-            // 
             // button3
             // 
             button3.Anchor = AnchorStyles.None;
-            button3.BackColor = Color.LimeGreen;
+            button3.BackColor = Color.DodgerBlue;
             button3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button3.Location = new Point(869, 12);
+            button3.Location = new Point(808, 12);
             button3.Name = "button3";
             button3.Size = new Size(113, 48);
             button3.TabIndex = 4;
@@ -147,13 +136,24 @@
             button3.UseVisualStyleBackColor = false;
             button3.Click += button3_Click;
             // 
+            // dataGridView1
+            // 
+            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dataGridView1.Location = new Point(3, 81);
+            dataGridView1.Name = "dataGridView1";
+            dataGridView1.RowTemplate.Height = 25;
+            dataGridView1.Size = new Size(935, 419);
+            dataGridView1.TabIndex = 1;
+            dataGridView1.CellClick += dataGridView1_CellClick;
+            dataGridView1.CellDoubleClick += dataGridView1_DoubleCellClick;
+            // 
             // BonusAndFines
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             Controls.Add(tableLayoutPanel1);
             Name = "BonusAndFines";
-            Size = new Size(1000, 600);
+            Size = new Size(941, 600);
             Load += BonusAndFines_Load;
             tableLayoutPanel1.ResumeLayout(false);
             tableLayoutPanel2.ResumeLayout(false);

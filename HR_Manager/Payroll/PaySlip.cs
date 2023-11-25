@@ -34,7 +34,7 @@ namespace HR_Manager.Payroll
         int dayOfWork;
         public PaySlip()
         {
-            InitializeComponent(); 
+            InitializeComponent();
             dataGridView1.MultiSelect = true;
             dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
         }
