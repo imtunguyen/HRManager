@@ -11,7 +11,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HR_Manager.Employee
+namespace HR_Manager.DepartmentF
 {
 	public partial class JobDetailUserControl : UserControl
 	{
@@ -20,10 +20,9 @@ namespace HR_Manager.Employee
 		private JobBUS jobBUS;
 		private DepartmentBUS departmentBUS;
 		private EmployeeBUS employeeBUS;
-		private List<string> listCbTk = new List<string> { "Employee Name", "Department Name", "Job Position" };
+		private List<string> listCbTk = new List<string> { "Employee Name", "Department Name", "Job", "Position" };
 		private int idSelected; // id của row được select
 		private int index; // row được select
-		private DateTime defaultDate = new DateTime(1950, 1, 1);
 		private string currentStatus = "All";
 		public JobDetailUserControl()
 		{
@@ -45,6 +44,7 @@ namespace HR_Manager.Employee
 			dataGridView1.Columns["Employee"].Width = 180;
 			dataGridView1.Columns["Department"].Width = 180;
 			dataGridView1.Columns["Job"].Width = 180;
+			dataGridView1.Columns["Position"].Width = 180;
 			dataGridView1.Columns["Description"].Width = 300;
 		}
 
@@ -96,8 +96,6 @@ namespace HR_Manager.Employee
 			LoadData();
 			txtTimKiem.Text = string.Empty;
 			loadCbTk();
-			dtpNgayBatDau.Value = defaultDate;
-			dtpNgayKetThuc.Value = defaultDate;
 		}
 
 		private void loadCbTk()
@@ -116,17 +114,25 @@ namespace HR_Manager.Employee
 			// Kiểm tra xem cột là "Status" và giá trị của ô là "Validated"
 			if (dataGridView1.Columns[e.ColumnIndex].Name == "Status" && e.Value != null)
 			{
-				if (e.Value.ToString() == SD.jd_validated)
+				if (e.Value.ToString() == SD.jd_onGoing)
 				{
 					// Đổi màu chữ của ô thành màu xanh
 					e.CellStyle.ForeColor = System.Drawing.ColorTranslator.FromHtml(SD.textGreen);
 				}
-				else if (e.Value.ToString() == SD.jd_draft)
+				else if (e.Value.ToString() == SD.jd_postPone)
 				{
 					e.CellStyle.ForeColor = System.Drawing.ColorTranslator.FromHtml(SD.textOrange);
 				}
 				// Đặt định dạng font chữ là bold
 				e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+			}
+			// Kiểm tra xem cột là "Status" và giá trị của ô là "Validated"
+			if (dataGridView1.Columns[e.ColumnIndex].Name == "Position" && e.Value != null)
+			{
+				if (e.Value.ToString() == SD.positionTruongP)
+				{
+					e.CellStyle.Font = new Font(e.CellStyle.Font, FontStyle.Bold);
+				}
 			}
 		}
 
@@ -136,11 +142,6 @@ namespace HR_Manager.Employee
 			if (j == null)
 			{
 				MessageBox.Show("The item to be edited is not selected", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				return;
-			}
-			if (j.Status.Equals(SD.jd_validated))
-			{
-				MessageBox.Show("Job detail with validated status cannot be edited", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return;
 			}
 			fCRUDJobDetail f = new fCRUDJobDetail(this, j);
@@ -182,36 +183,36 @@ namespace HR_Manager.Employee
 
 		private void rbDraft_CheckedChanged(object sender, EventArgs e)
 		{
-			if (rbDraft.Checked)
+			if (rbPostpone.Checked)
 			{
 				List<Job_Detail> list = jobDetailBUS.GetAll();
 				List<Job_Detail> drafts = new List<Job_Detail>();
 				foreach (Job_Detail detail in list)
 				{
-					if (detail.Status.Equals(SD.jd_draft))
+					if (detail.Status.Equals(SD.jd_postPone))
 					{
 						drafts.Add(detail);
 					}
 				}
-				currentStatus = rbDraft.Text;
+				currentStatus = rbPostpone.Text;
 				LoadData(drafts);
 			}
 		}
 
 		private void rbValidated_CheckedChanged(object sender, EventArgs e)
 		{
-			if (rbValidated.Checked)
+			if (rbOnGoing.Checked)
 			{
 				List<Job_Detail> list = jobDetailBUS.GetAll();
 				List<Job_Detail> validates = new List<Job_Detail>();
 				foreach (Job_Detail detail in list)
 				{
-					if (detail.Status.Equals(SD.jd_validated))
+					if (detail.Status.Equals(SD.jd_onGoing))
 					{
 						validates.Add(detail);
 					}
 				}
-				currentStatus = rbValidated.Text;
+				currentStatus = rbOnGoing.Text;
 				LoadData(validates);
 			}
 		}
@@ -258,7 +259,7 @@ namespace HR_Manager.Employee
 					 (jobDetail, employee) => new { Job_Detail = jobDetail, Employee = employee }).Select(x => x.Job_Detail).ToList();
 					LoadData(jobDetailsSearch);
 					break;
-				case "Job Position":
+				case "Job":
 					List<Job> jobsList = jobBUS.GetAll();
 					List<Job> jobsSearch = jobsList
 						.Where(job => job.Job_Name.ToLower().Contains(txtTimKiem.Text.ToLower()))
@@ -268,23 +269,18 @@ namespace HR_Manager.Employee
 					 (jobDetail, job) => new { Job_Detail = jobDetail, Job = job }).Select(x => x.Job_Detail).ToList();
 					LoadData(jobDetailsSearch);
 					break;
+				case "Position":
+					jobDetailsSearch = jobDetailsSearch.Where(c => c.Position.ToLower().Contains(txtTimKiem.Text.ToLower())).ToList();
+					LoadData(jobDetailsSearch);
+					break;
 			}
-			
+
 
 		}
 
 		private void btnTimKiem_Click(object sender, EventArgs e)
 		{
 			TimKiem();
-		}
-
-
-		private void dtpNgayKetThuc_ValueChanged(object sender, EventArgs e)
-		{
-		}
-
-		private void dtpNgayBatDau_ValueChanged(object sender, EventArgs e)
-		{
 		}
 
 		private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)
@@ -297,5 +293,6 @@ namespace HR_Manager.Employee
 				e.Handled = true; // This line prevents the beep sound
 			}
 		}
+
 	}
 }

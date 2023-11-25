@@ -36,11 +36,9 @@
             tableLayoutPanel2 = new TableLayoutPanel();
             tabControl1 = new TabControl();
             tabPage3 = new TabPage();
-            department = new DepartmentUserControl();
             tabPage2 = new TabPage();
             tabPage4 = new TabPage();
             tabPage5 = new TabPage();
-            jobDetailUserControl2 = new JobDetailUserControl();
             tabPage1.SuspendLayout();
             tableLayoutPanel1.SuspendLayout();
             panel1.SuspendLayout();
@@ -123,7 +121,6 @@
             // 
             // tabPage3
             // 
-            tabPage3.Controls.Add(department);
             tabPage3.Location = new Point(4, 34);
             tabPage3.Name = "tabPage3";
             tabPage3.Padding = new Padding(3);
@@ -131,15 +128,6 @@
             tabPage3.TabIndex = 5;
             tabPage3.Text = "Department";
             tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // department
-            // 
-            department.BackColor = SystemColors.ButtonHighlight;
-            department.Location = new Point(-4, 0);
-            department.Margin = new Padding(3, 4, 3, 4);
-            department.Name = "department";
-            department.Size = new Size(997, 562);
-            department.TabIndex = 0;
             // 
             // tabPage2
             // 
@@ -163,7 +151,6 @@
             // 
             // tabPage5
             // 
-            tabPage5.Controls.Add(jobDetailUserControl2);
             tabPage5.Location = new Point(4, 34);
             tabPage5.Name = "tabPage5";
             tabPage5.Padding = new Padding(3);
@@ -171,16 +158,6 @@
             tabPage5.TabIndex = 8;
             tabPage5.Text = "Job Detail";
             tabPage5.UseVisualStyleBackColor = true;
-            // 
-            // jobDetailUserControl2
-            // 
-            jobDetailUserControl2.BackColor = Color.FromArgb(240, 238, 240);
-            jobDetailUserControl2.Dock = DockStyle.Fill;
-            jobDetailUserControl2.Location = new Point(3, 3);
-            jobDetailUserControl2.Margin = new Padding(3, 4, 3, 4);
-            jobDetailUserControl2.Name = "jobDetailUserControl2";
-            jobDetailUserControl2.Size = new Size(986, 556);
-            jobDetailUserControl2.TabIndex = 0;
             // 
             // Employee
             // 
@@ -200,12 +177,10 @@
         private TabPage tabPage1;
         private TabControl tabControl1;
         private TabPage tabPage3;
-        private DepartmentUserControl department;
         private TabPage tabPage2;
         private TableLayoutPanel tableLayoutPanel2;
         private TabPage tabPage4;
         private TabPage tabPage5;
-        private JobDetailUserControl jobDetailUserControl2;
         private TableLayoutPanel tableLayoutPanel1;
         private Panel panel1;
         private CRUDEmployees crudEmployees1;

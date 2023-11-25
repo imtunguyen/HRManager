@@ -1,6 +1,6 @@
 ﻿using System.ComponentModel;
 
-namespace HR_Manager
+namespace HR_Manager.DepartmentF
 {
     partial class DepartmentUserControl
     {

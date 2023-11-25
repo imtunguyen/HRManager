@@ -1,4 +1,4 @@
-﻿namespace HR_Manager.Employee
+﻿namespace HR_Manager.DepartmentF
 {
 	partial class JobDetailUserControl
 	{
@@ -37,14 +37,10 @@
 			txtTimKiem = new TextBox();
 			btnTimKiem = new Button();
 			gbStatus = new GroupBox();
-			rbValidated = new RadioButton();
+			rbOnGoing = new RadioButton();
 			rbAll = new RadioButton();
-			rbDraft = new RadioButton();
+			rbPostpone = new RadioButton();
 			btnLamMoi = new Button();
-			dtpNgayKetThuc = new DateTimePicker();
-			label1 = new Label();
-			label2 = new Label();
-			dtpNgayBatDau = new DateTimePicker();
 			((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
 			gbStatus.SuspendLayout();
 			SuspendLayout();
@@ -73,7 +69,7 @@
 			dataGridView1.RowHeadersVisible = false;
 			dataGridView1.RowHeadersWidth = 51;
 			dataGridView1.RowTemplate.Height = 29;
-			dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+			dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
 			dataGridView1.Size = new Size(1091, 593);
 			dataGridView1.TabIndex = 0;
 			dataGridView1.CellClick += dataGridView1_CellClick;
@@ -161,29 +157,29 @@
 			// 
 			// gbStatus
 			// 
-			gbStatus.Controls.Add(rbValidated);
+			gbStatus.Controls.Add(rbOnGoing);
 			gbStatus.Controls.Add(rbAll);
-			gbStatus.Controls.Add(rbDraft);
+			gbStatus.Controls.Add(rbPostpone);
 			gbStatus.Cursor = Cursors.Hand;
-			gbStatus.Location = new Point(732, 47);
+			gbStatus.Location = new Point(13, 54);
 			gbStatus.Name = "gbStatus";
-			gbStatus.Size = new Size(247, 51);
+			gbStatus.Size = new Size(273, 51);
 			gbStatus.TabIndex = 5;
 			gbStatus.TabStop = false;
 			// 
-			// rbValidated
+			// rbOnGoing
 			// 
-			rbValidated.AutoSize = true;
-			rbValidated.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			rbValidated.ForeColor = Color.FromArgb(9, 146, 104);
-			rbValidated.Location = new Point(142, 18);
-			rbValidated.Name = "rbValidated";
-			rbValidated.Size = new Size(95, 24);
-			rbValidated.TabIndex = 1;
-			rbValidated.TabStop = true;
-			rbValidated.Text = "Validated";
-			rbValidated.UseVisualStyleBackColor = true;
-			rbValidated.CheckedChanged += rbValidated_CheckedChanged;
+			rbOnGoing.AutoSize = true;
+			rbOnGoing.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+			rbOnGoing.ForeColor = Color.FromArgb(9, 146, 104);
+			rbOnGoing.Location = new Point(62, 18);
+			rbOnGoing.Name = "rbOnGoing";
+			rbOnGoing.Size = new Size(96, 24);
+			rbOnGoing.TabIndex = 1;
+			rbOnGoing.TabStop = true;
+			rbOnGoing.Text = "On Going";
+			rbOnGoing.UseVisualStyleBackColor = true;
+			rbOnGoing.CheckedChanged += rbValidated_CheckedChanged;
 			// 
 			// rbAll
 			// 
@@ -199,19 +195,19 @@
 			rbAll.UseVisualStyleBackColor = true;
 			rbAll.CheckedChanged += rbAll_CheckedChanged;
 			// 
-			// rbDraft
+			// rbPostpone
 			// 
-			rbDraft.AutoSize = true;
-			rbDraft.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			rbDraft.ForeColor = Color.FromArgb(255, 172, 0);
-			rbDraft.Location = new Point(69, 18);
-			rbDraft.Name = "rbDraft";
-			rbDraft.Size = new Size(67, 24);
-			rbDraft.TabIndex = 0;
-			rbDraft.TabStop = true;
-			rbDraft.Text = "Draft";
-			rbDraft.UseVisualStyleBackColor = true;
-			rbDraft.CheckedChanged += rbDraft_CheckedChanged;
+			rbPostpone.AutoSize = true;
+			rbPostpone.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+			rbPostpone.ForeColor = Color.FromArgb(255, 172, 0);
+			rbPostpone.Location = new Point(164, 18);
+			rbPostpone.Name = "rbPostpone";
+			rbPostpone.Size = new Size(96, 24);
+			rbPostpone.TabIndex = 0;
+			rbPostpone.TabStop = true;
+			rbPostpone.Text = "Postpone";
+			rbPostpone.UseVisualStyleBackColor = true;
+			rbPostpone.CheckedChanged += rbDraft_CheckedChanged;
 			// 
 			// btnLamMoi
 			// 
@@ -233,54 +229,11 @@
 			btnLamMoi.UseVisualStyleBackColor = false;
 			btnLamMoi.Click += btnLamMoi_Click;
 			// 
-			// dtpNgayKetThuc
-			// 
-			dtpNgayKetThuc.Cursor = Cursors.Hand;
-			dtpNgayKetThuc.Location = new Point(458, 65);
-			dtpNgayKetThuc.Name = "dtpNgayKetThuc";
-			dtpNgayKetThuc.Size = new Size(263, 27);
-			dtpNgayKetThuc.TabIndex = 6;
-			dtpNgayKetThuc.ValueChanged += dtpNgayKetThuc_ValueChanged;
-			// 
-			// label1
-			// 
-			label1.AutoSize = true;
-			label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label1.Location = new Point(13, 70);
-			label1.Name = "label1";
-			label1.Size = new Size(91, 20);
-			label1.TabIndex = 7;
-			label1.Text = "From Date: ";
-			// 
-			// label2
-			// 
-			label2.AutoSize = true;
-			label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label2.Location = new Point(381, 70);
-			label2.Name = "label2";
-			label2.Size = new Size(71, 20);
-			label2.TabIndex = 7;
-			label2.Text = "To Date: ";
-			// 
-			// dtpNgayBatDau
-			// 
-			dtpNgayBatDau.Cursor = Cursors.Hand;
-			dtpNgayBatDau.Location = new Point(110, 66);
-			dtpNgayBatDau.Name = "dtpNgayBatDau";
-			dtpNgayBatDau.Size = new Size(263, 27);
-			dtpNgayBatDau.TabIndex = 6;
-			dtpNgayBatDau.Value = new DateTime(2023, 11, 19, 23, 17, 57, 0);
-			dtpNgayBatDau.ValueChanged += dtpNgayBatDau_ValueChanged;
-			// 
 			// JobDetailUserControl
 			// 
 			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = Color.FromArgb(240, 238, 240);
-			Controls.Add(label2);
-			Controls.Add(label1);
-			Controls.Add(dtpNgayBatDau);
-			Controls.Add(dtpNgayKetThuc);
 			Controls.Add(gbStatus);
 			Controls.Add(btnLamMoi);
 			Controls.Add(btnTimKiem);
@@ -309,13 +262,14 @@
 		private TextBox txtTimKiem;
 		private Button btnTimKiem;
 		private GroupBox gbStatus;
-		private RadioButton rbValidated;
-		private RadioButton rbDraft;
+		private RadioButton rbOnGoing;
+		private RadioButton rbPostpone;
 		private Button btnLamMoi;
 		private RadioButton rbAll;
 		private DateTimePicker dtpNgayKetThuc;
 		private Label label1;
 		private Label label2;
 		private DateTimePicker dtpNgayBatDau;
+		private RadioButton radioButton1;
 	}
 }
