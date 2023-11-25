@@ -1,3 +1,5 @@
+using HR_Manager.Management;
+
 namespace HR_Manager
 {
     internal static class Program
