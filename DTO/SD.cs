@@ -32,9 +32,6 @@ namespace DTO
 		public const string textRed = "#f24e1d";
 
 		// job_detail (quản lý công việc)
-		public const string jd_draft = "Draft";
-		public const string jd_validated = "Validated";
-		public static List<string> ListJDStatus = new List<string> { jd_draft, jd_validated };
 		// employee
 		public const string e_trial = "Trial period";
         public const string e_official = "Official employee";
