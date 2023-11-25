@@ -60,7 +60,7 @@ namespace HR_Manager
 			loadChart();
 			startDate = new DateTime(2023, 11, 1);
 			endDate = new DateTime(2023,11,30);
-			loadDataGridView();
+			//loadDataGridView();
 		}
 
 		private void loadPanel()

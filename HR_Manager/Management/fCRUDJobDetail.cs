@@ -19,6 +19,7 @@ namespace HR_Manager.Employee
 		private JobBUS jobBUS;
 		private Job_DetailBUS jobDetailBUS;
 		private List<string> listJdStatus = SD.ListJDStatus;
+		private List<string> listPostion = SD.listPosition;
 		private ContractBUS contractBUS;
 		private Job_Detail jobDetailUpdate = null;
 		private JobDetailUserControl jobDetailUserControl;
@@ -42,8 +43,6 @@ namespace HR_Manager.Employee
 				cbJob.SelectedValue = jobDetailUpdate.JobID;
 				txtDes.Text = jobDetailUpdate.Description;
 				cbStatus.SelectedItem = jobDetailUpdate.Status;
-				dtpNgayBatDau.Value = jobDetailUpdate.FromDate;
-				dtpNgayKetThuc.Value = jobDetailUpdate.ToDate;
 			}
 		}
 
@@ -53,6 +52,12 @@ namespace HR_Manager.Employee
 			LoadDepartments();
 			LoadJobs();
 			LoadStatus();
+			LoadPosition();
+		}
+
+		private void LoadPosition()
+		{
+			cbPosition.DataSource = listPostion;
 		}
 
 		private void LoadEmployees()
@@ -138,22 +143,21 @@ namespace HR_Manager.Employee
 
 		private Job_Detail getInput()
 		{
+			string position = cbPosition.SelectedValue.ToString();
 			int employeeid = (int)cbEmployee.SelectedValue;
 			int derpartmentId = (int)cbDepartment.SelectedValue;
 			int jobId = (int)cbJob.SelectedValue;
 			string des = txtDes.Text;
-			DateTime fromDate = dtpNgayBatDau.Value;
-			DateTime toDate = dtpNgayKetThuc.Value;
 			string status = cbStatus.SelectedValue.ToString();
 			Job_Detail job_Detail;
 			if (jobDetailUpdate == null)
 			{
-				job_Detail = new Job_Detail(employeeid, jobId, derpartmentId, fromDate, toDate, des, status);
+				job_Detail = new Job_Detail(position, employeeid, jobId, derpartmentId, des, status);
 			}
 			else
 			{
 				int id = jobDetailUpdate.ID;
-				job_Detail = new Job_Detail(id, employeeid, jobId, derpartmentId, fromDate, toDate, des, status);
+				job_Detail = new Job_Detail(id, position, employeeid, jobId, derpartmentId, des, status);
 
 			}
 			return job_Detail;
@@ -163,22 +167,12 @@ namespace HR_Manager.Employee
 		{
 			List<Contract> contracts = contractBUS.GetByEmployeeId((int)cbEmployee.SelectedValue);
 			bool flagFalseContract = true;
-			if (jobDetailBUS.CheckDateOverLap((int)cbEmployee.SelectedValue, dtpNgayBatDau.Value, dtpNgayKetThuc.Value) != 0)
-			{
-				MessageBox.Show("Employee work schedules overlap", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				return false;
-			}
 			foreach (Contract contract in contracts)
 			{
 				// Nếu contract có status là running thì mới đc phân việc
 				if (contract.Status.Equals(SD.Contract_Running))
 				{
-					// Kiểm tra nếu khoảng thời gian từ fromDate đến toDate nằm trong khoảng thời gian có trong hợp đồng
-					bool isWithinRange = dtpNgayBatDau.Value >= contract.FormDate && dtpNgayKetThuc.Value <= contract.ToDate;
-					if (isWithinRange)
-					{
-						flagFalseContract = false; break;
-					}
+					flagFalseContract = false; break;
 				}
 			}
 			if (flagFalseContract)
@@ -186,14 +180,6 @@ namespace HR_Manager.Employee
 				MessageBox.Show("The employee does not have a contract or the contract is not in running status or the working time is not included in the contract", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return false;
 			}
-			// Kiểm tra xem dtpThoiGianKetThuc phải lớn hơn dtpThoiGianBatDau
-			if (dtpNgayKetThuc.Value.CompareTo(dtpNgayBatDau.Value) <= 0)
-			{
-				MessageBox.Show("The end time must be greater than the start time", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-				// Trả về false nếu dtpThoiGianKetThuc nhỏ hơn hoặc bằng dtpThoiGianBatDau
-				return false;
-			}
-			// Thêm điều kiện tối thiểu bao nhiêu ngày ở đây nếu có
 			return true;
 		}
 	}

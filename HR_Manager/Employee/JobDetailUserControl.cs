@@ -37,8 +37,7 @@ namespace HR_Manager.Employee
 			dt.Columns.Add("Employee", typeof(string));
 			dt.Columns.Add("Department", typeof(string));
 			dt.Columns.Add("Job", typeof(string));
-			dt.Columns.Add("Start Date", typeof(string));
-			dt.Columns.Add("End Date", typeof(string));
+			dt.Columns.Add("Position", typeof(string));
 			dt.Columns.Add("Status", typeof(string));
 			dt.Columns.Add("Description", typeof(string));
 			MainLoad();
@@ -46,8 +45,6 @@ namespace HR_Manager.Employee
 			dataGridView1.Columns["Employee"].Width = 180;
 			dataGridView1.Columns["Department"].Width = 180;
 			dataGridView1.Columns["Job"].Width = 180;
-			dataGridView1.Columns["Start Date"].Width = 130;
-			dataGridView1.Columns["End Date"].Width = 130;
 			dataGridView1.Columns["Description"].Width = 300;
 		}
 
@@ -59,11 +56,10 @@ namespace HR_Manager.Employee
 			{
 				DataRow row = dt.NewRow();
 				row["ID"] = item.ID;
+				row["Position"] = item.Position;
 				row["Employee"] = employeeBUS.GetById(item.EmployeeID).Name;
 				row["Department"] = departmentBUS.getById(item.DepartmentID).Name;
 				row["Job"] = jobBUS.GetById(item.JobID).Job_Name;
-				row["Start Date"] = item.FromDate.ToShortDateString();
-				row["End Date"] = item.ToDate.ToShortDateString();
 				row["Status"] = item.Status;
 				row["Description"] = item.Description;
 				dt.Rows.Add(row);
@@ -78,11 +74,10 @@ namespace HR_Manager.Employee
 			{
 				DataRow row = dt.NewRow();
 				row["ID"] = item.ID;
+				row["Position"] = item.Position;
 				row["Employee"] = employeeBUS.GetById(item.EmployeeID).Name;
 				row["Department"] = departmentBUS.getById(item.DepartmentID).Name;
 				row["Job"] = jobBUS.GetById(item.JobID).Job_Name;
-				row["Start Date"] = item.FromDate.ToShortDateString();
-				row["End Date"] = item.ToDate.ToShortDateString();
 				row["Status"] = item.Status;
 				row["Description"] = item.Description;
 				dt.Rows.Add(row);
@@ -181,7 +176,6 @@ namespace HR_Manager.Employee
 			if (rbAll.Checked)
 			{
 				LoadData();
-				filterDate();
 				currentStatus = rbAll.Text;
 			}
 		}
@@ -201,7 +195,6 @@ namespace HR_Manager.Employee
 				}
 				currentStatus = rbDraft.Text;
 				LoadData(drafts);
-				filterDate();
 			}
 		}
 
@@ -220,7 +213,6 @@ namespace HR_Manager.Employee
 				}
 				currentStatus = rbValidated.Text;
 				LoadData(validates);
-				filterDate();
 			}
 		}
 
@@ -254,6 +246,7 @@ namespace HR_Manager.Employee
 					jobDetailsSearch = jobDetailsSearch
 					 .Join(departmentsSearch, jobDetail => jobDetail.DepartmentID, department => department.ID,
 					 (jobDetail, department) => new { Job_Detail = jobDetail, Department = department }).Select(x => x.Job_Detail).ToList();
+					LoadData(jobDetailsSearch);
 					break;
 				case "Employee Name":
 					List<EmployeeDTO> employeesList = employeeBUS.GetAll();
@@ -263,6 +256,7 @@ namespace HR_Manager.Employee
 					jobDetailsSearch = jobDetailsSearch
 					 .Join(employeeSearch, jobDetail => jobDetail.EmployeeID, employee => employee.ID,
 					 (jobDetail, employee) => new { Job_Detail = jobDetail, Employee = employee }).Select(x => x.Job_Detail).ToList();
+					LoadData(jobDetailsSearch);
 					break;
 				case "Job Position":
 					List<Job> jobsList = jobBUS.GetAll();
@@ -272,36 +266,10 @@ namespace HR_Manager.Employee
 					jobDetailsSearch = jobDetailsSearch
 					 .Join(jobsSearch, jobDetails => jobDetails.JobID, job => job.ID,
 					 (jobDetail, job) => new { Job_Detail = jobDetail, Job = job }).Select(x => x.Job_Detail).ToList();
+					LoadData(jobDetailsSearch);
 					break;
 			}
-
-			// sreach theo khoảng thời gian
-			// Kiểm tra người dùng đã chọn giá trị mới chưa (rồi)
-			if (dtpNgayBatDau.Value != defaultDate && dtpNgayKetThuc.Value != defaultDate)
-			{
-				// Lấy ngày tháng năm của dtpNgayBatDau và dtpNgayKetThuc
-				DateTime fromDatePicker = dtpNgayBatDau.Value.Date;
-				DateTime toDatePicker = dtpNgayKetThuc.Value.Date;
-				List<Job_Detail> result = new List<Job_Detail>();
-				foreach (Job_Detail jobDetail in jobDetailsSearch)
-				{
-					// Lấy ngày tháng năm từ FromDate và ToDate của Job_Detail
-					DateTime fromDateJobDetail = jobDetail.FromDate.Date;
-					DateTime toDateJobDetail = jobDetail.ToDate.Date;
-
-					// Kiểm tra xem khoảng thời gian từ fromDate đến toDate nằm trong khoảng thời gian có trong hợp đồng
-					bool isWithinRange = fromDatePicker >= fromDateJobDetail && toDatePicker <= toDateJobDetail;
-					if (isWithinRange)
-					{
-						result.Add(jobDetail);
-					}
-				}
-				LoadData(result);
-			}
-			else
-			{
-				LoadData(jobDetailsSearch);
-			}
+			
 
 		}
 
@@ -310,57 +278,13 @@ namespace HR_Manager.Employee
 			TimKiem();
 		}
 
-		private void filterDate()
-		{
-			if (dtpNgayKetThuc.Value != defaultDate && dtpNgayBatDau.Value != defaultDate)
-			{
-				// Lọc status
-				List<Job_Detail> jobDetails = jobDetailBUS.GetAll();
-				List<Job_Detail> jobDetailsSearch = new List<Job_Detail>();
-				if (!currentStatus.Equals("All"))
-				{
-					foreach (Job_Detail item in jobDetails)
-					{
-						if (item.Status.Equals(currentStatus))
-						{
-							jobDetailsSearch.Add(item);
-						}
-					}
-				}
-				else
-				{
-					jobDetailsSearch = jobDetails;
-				}
-
-				// Lọc Date
-				DateTime fromDatePicker = dtpNgayBatDau.Value.Date;
-				DateTime toDatePicker = dtpNgayKetThuc.Value.Date;
-				List<Job_Detail> result = new List<Job_Detail>();
-				foreach (Job_Detail jobDetail in jobDetailsSearch)
-				{
-					// Lấy ngày tháng năm từ FromDate và ToDate của Job_Detail
-					DateTime fromDateJobDetail = jobDetail.FromDate.Date;
-					DateTime toDateJobDetail = jobDetail.ToDate.Date;
-
-					// Kiểm tra xem khoảng thời gian từ fromDate đến toDate nằm trong khoảng thời gian có trong hợp đồng
-					bool isWithinRange = fromDatePicker >= fromDateJobDetail && toDatePicker <= toDateJobDetail;
-					if (isWithinRange)
-					{
-						result.Add(jobDetail);
-					}
-				}
-				LoadData(result);
-			}
-		}
 
 		private void dtpNgayKetThuc_ValueChanged(object sender, EventArgs e)
 		{
-			filterDate();
 		}
 
 		private void dtpNgayBatDau_ValueChanged(object sender, EventArgs e)
 		{
-			filterDate();
 		}
 
 		private void txtTimKiem_KeyPress(object sender, KeyPressEventArgs e)

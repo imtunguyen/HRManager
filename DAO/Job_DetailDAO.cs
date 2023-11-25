@@ -10,19 +10,21 @@ namespace DAO
 {
     public class Job_DetailDAO : InterfaceDAO<Job_Detail>
     {
+		public static Job_DetailDAO GetInstance()
+		{
+			return new Job_DetailDAO();
+		}
 		public bool Add(Job_Detail jobDetail)
 		{
 			try
 			{
 				using (SqlConnection conn = DbConnection.GetSqlConnection())
 				{
-					SqlCommand cmd = new SqlCommand("INSERT INTO JOB_DETAIL (employee_id, department_id, job_id, fromDate, toDate, description, status) VALUES (@employee_id, @department_id, @job_id, @fromDate, @toDate, @description, @status)", conn);
-
+					SqlCommand cmd = new SqlCommand("INSERT INTO JOB_DETAILS (position, employee_id, department_id, job_id, description, status) VALUES (@position, @employee_id, @department_id, @job_id, @description, @status)", conn);
+					cmd.Parameters.AddWithValue("@position", jobDetail.Position);
 					cmd.Parameters.AddWithValue("@employee_id", jobDetail.EmployeeID);
 					cmd.Parameters.AddWithValue("@department_id", jobDetail.DepartmentID);
 					cmd.Parameters.AddWithValue("@job_id", jobDetail.JobID);
-					cmd.Parameters.AddWithValue("@fromDate", jobDetail.FromDate);
-					cmd.Parameters.AddWithValue("@toDate", jobDetail.ToDate);
 					cmd.Parameters.AddWithValue("@description", jobDetail.Description);
 					cmd.Parameters.AddWithValue("@status", jobDetail.Status);
 
@@ -41,14 +43,13 @@ namespace DAO
 		{
 			using (SqlConnection conn = DbConnection.GetSqlConnection())
 			{
-				SqlCommand cmd = new SqlCommand("UPDATE JOB_DETAIL SET employee_id = @employee_id, department_id = @department_id, job_id = @job_id, fromDate = @fromDate, toDate = @toDate, description = @description, status = @status WHERE id = @id", conn);
+				SqlCommand cmd = new SqlCommand("UPDATE JOB_DETAILS SET position = @position, employee_id = @employee_id, department_id = @department_id, job_id = @job_id,  description = @description, status = @status WHERE id = @id", conn);
 
 				cmd.Parameters.AddWithValue("@id", jobDetail.ID);
+				cmd.Parameters.AddWithValue("@position", jobDetail.Position);
 				cmd.Parameters.AddWithValue("@employee_id", jobDetail.EmployeeID);
 				cmd.Parameters.AddWithValue("@department_id", jobDetail.DepartmentID);
 				cmd.Parameters.AddWithValue("@job_id", jobDetail.JobID);
-				cmd.Parameters.AddWithValue("@fromDate", jobDetail.FromDate);
-				cmd.Parameters.AddWithValue("@toDate", jobDetail.ToDate);
 				cmd.Parameters.AddWithValue("@description", jobDetail.Description);
 				cmd.Parameters.AddWithValue("@status", jobDetail.Status);
 
@@ -61,7 +62,7 @@ namespace DAO
 		{
 			using (SqlConnection conn = DbConnection.GetSqlConnection())
 			{
-				SqlCommand cmd = new SqlCommand("DELETE FROM JOB_DETAIL WHERE id = @id", conn);
+				SqlCommand cmd = new SqlCommand("DELETE FROM JOB_DETAILS WHERE id = @id", conn);
 				cmd.Parameters.AddWithValue("@id", id);
 
 				int rowsAffected = cmd.ExecuteNonQuery();
@@ -75,7 +76,7 @@ namespace DAO
 
 			using (SqlConnection conn = DbConnection.GetSqlConnection())
 			{
-				SqlCommand cmd = new SqlCommand("SELECT * FROM JOB_DETAIL", conn);
+				SqlCommand cmd = new SqlCommand("SELECT * FROM JOB_DETAILS", conn);
 
 				SqlDataReader reader = cmd.ExecuteReader();
 
@@ -83,11 +84,10 @@ namespace DAO
 				{
 					Job_Detail jobDetail = new Job_Detail();
 					jobDetail.ID = (int)reader["id"];
+					jobDetail.Position = (string)reader["position"];
 					jobDetail.EmployeeID = (int)reader["employee_id"];
 					jobDetail.DepartmentID = (int)reader["department_id"];
 					jobDetail.JobID = (int)reader["job_id"];
-					jobDetail.FromDate = Convert.ToDateTime(reader["fromDate"]);
-					jobDetail.ToDate =  Convert.ToDateTime(reader["toDate"]);
 					jobDetail.Description = (string)reader["description"];
 					jobDetail.Status = (string)reader["status"];
 					jobDetails.Add(jobDetail);
@@ -103,7 +103,7 @@ namespace DAO
 
 			using (SqlConnection conn = DbConnection.GetSqlConnection())
 			{
-				SqlCommand cmd = new SqlCommand("SELECT * FROM JOB_DETAIL WHERE id = @id", conn);
+				SqlCommand cmd = new SqlCommand("SELECT * FROM JOB_DETAILS WHERE id = @id", conn);
 				cmd.Parameters.AddWithValue("@id", id);
 
 				SqlDataReader reader = cmd.ExecuteReader();
@@ -112,11 +112,10 @@ namespace DAO
 				{
 					jobDetail = new Job_Detail();
 					jobDetail.ID = (int)reader["id"];
+					jobDetail.Position = (string)reader["position"];
 					jobDetail.EmployeeID = (int)reader["employee_id"];
 					jobDetail.DepartmentID = (int)reader["department_id"];
 					jobDetail.JobID = (int)reader["job_id"];
-					jobDetail.FromDate =Convert.ToDateTime(reader["fromDate"]);
-					jobDetail.ToDate =  Convert.ToDateTime(reader["toDate"]);
 					jobDetail.Description = (string)reader["description"];
 					jobDetail.Status = (string)reader["status"];
 				}
@@ -130,7 +129,7 @@ namespace DAO
 			int result = 0;
 			using(SqlConnection conn = DbConnection.GetSqlConnection())
 			{
-				string query = "SELECT Count(*) FROM JOB_DETAIL WHERE employee_id = " + userid + " and " +
+				string query = "SELECT Count(*) FROM JOB_DETAILS WHERE employee_id = " + userid + " and " +
 					"(FromDate >= '" + fromDate + "' AND ToDate <= '" + toDate + "');";
 				using(SqlCommand cmd = new SqlCommand(query, conn))
 				{

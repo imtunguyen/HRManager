@@ -13,34 +13,32 @@ namespace DTO
 		public int EmployeeID { get; set; }
 		public int DepartmentID { get; set; }
 		public int JobID { get; set; }
-		public DateTime FromDate { get; set; }
-		public DateTime ToDate { get; set; }
 		public string Description { get; set; }
 		public string Status { get; set; }
+		public string Position { get; set; }
 
-		public Job_Detail(int ID, int EmployeeID, int JobID, int DepartmentID,
-			DateTime FromDate, DateTime ToDate, string Description, string Status)
+		public Job_Detail(int ID, string position,int EmployeeID, int JobID, int DepartmentID,
+			 string Description, string Status)
 		{
 			this.ID = ID;
 			this.EmployeeID = EmployeeID;
 			this.JobID = JobID;
 			this.DepartmentID = DepartmentID;
-			this.FromDate = FromDate;
-			this.ToDate = ToDate;
 			this.Description = Description;
 			this.Status = Status;
+			this.Position = position;
 		}
 
-		public Job_Detail(int EmployeeID, int JobID, int DepartmentID,
-			DateTime FromDate, DateTime ToDate, string Description, string Status)
+		public Job_Detail(string position,int EmployeeID, int JobID, int DepartmentID,
+			 string Description, string Status)
 		{
 			this.EmployeeID = EmployeeID;
 			this.JobID = JobID;
 			this.DepartmentID = DepartmentID;
-			this.FromDate = FromDate;
-			this.ToDate = ToDate;
 			this.Description = Description;
 			this.Status = Status;
+			this.Position = position;
+
 		}
 	}
 }

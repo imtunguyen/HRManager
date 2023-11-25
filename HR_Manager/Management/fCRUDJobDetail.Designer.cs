@@ -31,19 +31,17 @@
 			label1 = new Label();
 			label2 = new Label();
 			lbl = new Label();
-			label4 = new Label();
 			cbEmployee = new ComboBox();
 			cbJob = new ComboBox();
 			cbDepartment = new ComboBox();
 			label3 = new Label();
 			txtDes = new TextBox();
-			dtpNgayBatDau = new DateTimePicker();
-			dtpNgayKetThuc = new DateTimePicker();
-			label5 = new Label();
 			btnLuu = new Button();
 			lblHeading = new Label();
 			label7 = new Label();
 			cbStatus = new ComboBox();
+			label4 = new Label();
+			cbPosition = new ComboBox();
 			SuspendLayout();
 			// 
 			// label1
@@ -78,17 +76,6 @@
 			lbl.Size = new Size(94, 20);
 			lbl.TabIndex = 0;
 			lbl.Text = "Department";
-			// 
-			// label4
-			// 
-			label4.AutoSize = true;
-			label4.Cursor = Cursors.Hand;
-			label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label4.Location = new Point(475, 157);
-			label4.Name = "label4";
-			label4.Size = new Size(83, 20);
-			label4.TabIndex = 0;
-			label4.Text = "From Date";
 			// 
 			// cbEmployee
 			// 
@@ -137,33 +124,6 @@
 			txtDes.Size = new Size(269, 80);
 			txtDes.TabIndex = 2;
 			// 
-			// dtpNgayBatDau
-			// 
-			dtpNgayBatDau.Cursor = Cursors.Hand;
-			dtpNgayBatDau.Location = new Point(580, 152);
-			dtpNgayBatDau.Name = "dtpNgayBatDau";
-			dtpNgayBatDau.Size = new Size(269, 27);
-			dtpNgayBatDau.TabIndex = 3;
-			// 
-			// dtpNgayKetThuc
-			// 
-			dtpNgayKetThuc.Cursor = Cursors.Hand;
-			dtpNgayKetThuc.Location = new Point(580, 223);
-			dtpNgayKetThuc.Name = "dtpNgayKetThuc";
-			dtpNgayKetThuc.Size = new Size(269, 27);
-			dtpNgayKetThuc.TabIndex = 3;
-			// 
-			// label5
-			// 
-			label5.AutoSize = true;
-			label5.Cursor = Cursors.Hand;
-			label5.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label5.Location = new Point(475, 233);
-			label5.Name = "label5";
-			label5.Size = new Size(63, 20);
-			label5.TabIndex = 0;
-			label5.Text = "To Date";
-			// 
 			// btnLuu
 			// 
 			btnLuu.BackColor = Color.FromArgb(1, 107, 112);
@@ -195,7 +155,7 @@
 			label7.AutoSize = true;
 			label7.Cursor = Cursors.Hand;
 			label7.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label7.Location = new Point(57, 359);
+			label7.Location = new Point(469, 233);
 			label7.Name = "label7";
 			label7.Size = new Size(53, 20);
 			label7.TabIndex = 0;
@@ -205,10 +165,30 @@
 			// 
 			cbStatus.Cursor = Cursors.Hand;
 			cbStatus.FormattingEnabled = true;
-			cbStatus.Location = new Point(190, 351);
+			cbStatus.Location = new Point(574, 230);
 			cbStatus.Name = "cbStatus";
 			cbStatus.Size = new Size(182, 28);
 			cbStatus.TabIndex = 1;
+			// 
+			// label4
+			// 
+			label4.AutoSize = true;
+			label4.Cursor = Cursors.Hand;
+			label4.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+			label4.Location = new Point(469, 157);
+			label4.Name = "label4";
+			label4.Size = new Size(66, 20);
+			label4.TabIndex = 0;
+			label4.Text = "Position";
+			// 
+			// cbPosition
+			// 
+			cbPosition.Cursor = Cursors.Hand;
+			cbPosition.FormattingEnabled = true;
+			cbPosition.Location = new Point(574, 149);
+			cbPosition.Name = "cbPosition";
+			cbPosition.Size = new Size(182, 28);
+			cbPosition.TabIndex = 1;
 			// 
 			// fCRUDJobDetail
 			// 
@@ -217,18 +197,16 @@
 			ClientSize = new Size(896, 475);
 			Controls.Add(lblHeading);
 			Controls.Add(btnLuu);
-			Controls.Add(dtpNgayKetThuc);
-			Controls.Add(dtpNgayBatDau);
 			Controls.Add(txtDes);
 			Controls.Add(cbStatus);
 			Controls.Add(cbDepartment);
 			Controls.Add(cbJob);
+			Controls.Add(cbPosition);
 			Controls.Add(cbEmployee);
 			Controls.Add(label7);
 			Controls.Add(lbl);
 			Controls.Add(label2);
 			Controls.Add(label3);
-			Controls.Add(label5);
 			Controls.Add(label4);
 			Controls.Add(label1);
 			MaximumSize = new Size(914, 522);
@@ -245,18 +223,16 @@
 		private Label label1;
 		private Label label2;
 		private Label lbl;
-		private Label label4;
 		private ComboBox cbEmployee;
 		private ComboBox cbJob;
 		private ComboBox cbDepartment;
 		private Label label3;
 		private TextBox txtDes;
-		private DateTimePicker dtpNgayBatDau;
-		private DateTimePicker dtpNgayKetThuc;
-		private Label label5;
 		private Button btnLuu;
 		private Label lblHeading;
 		private Label label7;
 		private ComboBox cbStatus;
+		private Label label4;
+		private ComboBox cbPosition;
 	}
 }

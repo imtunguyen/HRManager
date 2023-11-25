@@ -1,4 +1,4 @@
-﻿namespace HR_Manager
+﻿namespace HR_Manager.Management
 {
     partial class JobUserControl
     {

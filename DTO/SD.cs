@@ -40,5 +40,10 @@ namespace DTO
 		"April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
 		public static List<int> listNam = new List<int> { 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030 };
+
+		// deapartment detail
+		public const string positionTruongP = "Department head";
+		public const string positionNhanVien = "Employee";
+		public static List<string> listPosition = new List<string> { positionTruongP, positionNhanVien };
 	}
 }

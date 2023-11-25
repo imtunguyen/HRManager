@@ -12,7 +12,11 @@ namespace BUS
 {
     public class Job_DetailBUS
     {
-		private Job_DetailDAO jobDetailDAO = new Job_DetailDAO();
+		private Job_DetailDAO jobDetailDAO;
+		public Job_DetailBUS()
+		{
+			jobDetailDAO = Job_DetailDAO.GetInstance();
+		}
 
 		public bool Add(Job_Detail jobDetail)
 		{

@@ -12,7 +12,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace HR_Manager
+namespace HR_Manager.Management
 {
     public partial class JobUserControl : UserControl
     {

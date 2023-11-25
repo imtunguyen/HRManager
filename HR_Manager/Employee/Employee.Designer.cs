@@ -39,7 +39,6 @@
             department = new DepartmentUserControl();
             tabPage2 = new TabPage();
             tabPage4 = new TabPage();
-            jobUserControl1 = new JobUserControl();
             tabPage5 = new TabPage();
             jobDetailUserControl2 = new JobDetailUserControl();
             tabPage1.SuspendLayout();
@@ -154,7 +153,6 @@
             // 
             // tabPage4
             // 
-            tabPage4.Controls.Add(jobUserControl1);
             tabPage4.Location = new Point(4, 34);
             tabPage4.Name = "tabPage4";
             tabPage4.Padding = new Padding(3);
@@ -162,15 +160,6 @@
             tabPage4.TabIndex = 7;
             tabPage4.Text = "Job";
             tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // jobUserControl1
-            // 
-            jobUserControl1.Dock = DockStyle.Fill;
-            jobUserControl1.Location = new Point(3, 3);
-            jobUserControl1.Margin = new Padding(3, 4, 3, 4);
-            jobUserControl1.Name = "jobUserControl1";
-            jobUserControl1.Size = new Size(986, 556);
-            jobUserControl1.TabIndex = 0;
             // 
             // tabPage5
             // 
@@ -215,7 +204,6 @@
         private TabPage tabPage2;
         private TableLayoutPanel tableLayoutPanel2;
         private TabPage tabPage4;
-        private JobUserControl jobUserControl1;
         private TabPage tabPage5;
         private JobDetailUserControl jobDetailUserControl2;
         private TableLayoutPanel tableLayoutPanel1;

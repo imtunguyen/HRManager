@@ -70,7 +70,6 @@ namespace DAO
                         e.Phone = reader["phone"].ToString();
                         e.Email = reader["email"].ToString();
                         e.img_path = reader["img_path"].ToString();
-                        e.Department_id = Convert.ToInt32(reader["department_id"].ToString());
                         e.Status = reader["status"].ToString();
                         list.Add(e);
                     }
@@ -98,7 +97,6 @@ namespace DAO
                         e.Phone = reader["phone"].ToString();
                         e.Email = reader["email"].ToString();
                         e.img_path = reader["img_path"].ToString();
-                        e.Department_id = Convert.ToInt32(reader["department_id"].ToString());
                         e.Status = reader["status"].ToString();
                     }
                 }
