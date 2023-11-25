@@ -92,7 +92,7 @@ namespace HR_Manager.Payroll
 
                 int id = -1;
 
-                if(s != "")
+                if (s != "")
                 {
                     id = Convert.ToInt32(s.Substring(s.IndexOf("_") + 1));
                 }
@@ -125,7 +125,7 @@ namespace HR_Manager.Payroll
             if (e.RowIndex >= 0)
             {
                 DataGridViewRow row = this.dataGridView1.Rows[e.RowIndex];
-                if(row.Cells["id"].Value.ToString() != "")
+                if (row.Cells["id"].Value.ToString() != "")
                 {
                     indexSelected = Convert.ToInt32(row.Cells["id"].Value.ToString());
                 }

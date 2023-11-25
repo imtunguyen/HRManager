@@ -34,6 +34,7 @@
             textBox1 = new TextBox();
             comboBox1 = new ComboBox();
             button1 = new Button();
+            button4 = new Button();
             dataGridView1 = new DataGridView();
             tableLayoutPanel3 = new TableLayoutPanel();
             label3 = new Label();
@@ -42,7 +43,6 @@
             button2 = new Button();
             label1 = new Label();
             label2 = new Label();
-            button4 = new Button();
             tableLayoutPanel1.SuspendLayout();
             tableLayoutPanel2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
@@ -89,7 +89,7 @@
             // button3
             // 
             button3.Anchor = AnchorStyles.None;
-            button3.BackColor = Color.LimeGreen;
+            button3.BackColor = Color.DodgerBlue;
             button3.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
             button3.Location = new Point(208, 12);
             button3.Name = "button3";
@@ -123,6 +123,7 @@
             button1.Anchor = AnchorStyles.None;
             button1.BackColor = Color.LimeGreen;
             button1.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            button1.ForeColor = Color.Black;
             button1.Location = new Point(31, 12);
             button1.Name = "button1";
             button1.Size = new Size(113, 48);
@@ -130,6 +131,19 @@
             button1.Text = "ADD";
             button1.UseVisualStyleBackColor = false;
             button1.Click += button1_Click;
+            // 
+            // button4
+            // 
+            button4.Anchor = AnchorStyles.None;
+            button4.BackColor = Color.LimeGreen;
+            button4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
+            button4.Location = new Point(848, 12);
+            button4.Name = "button4";
+            button4.Size = new Size(113, 48);
+            button4.TabIndex = 4;
+            button4.Text = "Mark Paid";
+            button4.UseVisualStyleBackColor = false;
+            button4.Click += button4_Click;
             // 
             // dataGridView1
             // 
@@ -192,11 +206,12 @@
             // 
             button2.Anchor = AnchorStyles.None;
             button2.BackColor = Color.LimeGreen;
+            button2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             button2.Location = new Point(537, 52);
             button2.Name = "button2";
             button2.Size = new Size(104, 32);
             button2.TabIndex = 3;
-            button2.Text = "Submit";
+            button2.Text = "SUBMIT";
             button2.UseVisualStyleBackColor = false;
             button2.Click += button2_Click;
             // 
@@ -220,19 +235,6 @@
             label2.Size = new Size(35, 15);
             label2.TabIndex = 4;
             label2.Text = "From";
-            // 
-            // button4
-            // 
-            button4.Anchor = AnchorStyles.None;
-            button4.BackColor = Color.LimeGreen;
-            button4.Font = new Font("Segoe UI Semibold", 12F, FontStyle.Bold, GraphicsUnit.Point);
-            button4.Location = new Point(848, 12);
-            button4.Name = "button4";
-            button4.Size = new Size(113, 48);
-            button4.TabIndex = 4;
-            button4.Text = "Mark Paid";
-            button4.UseVisualStyleBackColor = false;
-            button4.Click += button4_Click;
             // 
             // PaySlip
             // 
