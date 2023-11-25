@@ -43,6 +43,7 @@ namespace HR_Manager.Employee
 				cbJob.SelectedValue = jobDetailUpdate.JobID;
 				txtDes.Text = jobDetailUpdate.Description;
 				cbStatus.SelectedItem = jobDetailUpdate.Status;
+				cbEmployee.Enabled = false;
 			}
 		}
 
@@ -117,7 +118,7 @@ namespace HR_Manager.Employee
 			}
 			else
 			{
-				if (validate())
+				if (validateUpdate())
 				{
 					try
 					{
@@ -177,9 +178,72 @@ namespace HR_Manager.Employee
 			}
 			if (flagFalseContract)
 			{
-				MessageBox.Show("The employee does not have a contract or the contract is not in running status or the working time is not included in the contract", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				MessageBox.Show("The employee does not have a contract.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return false;
 			}
+			bool daTonTaiNhanVienTrongPhongBan = false;
+			
+			List<Job_Detail> j = jobDetailBUS.GetAll();
+			foreach (Job_Detail job in j)
+			{
+				if(job.EmployeeID == (int)cbEmployee.SelectedValue
+					)
+				{ daTonTaiNhanVienTrongPhongBan = true; break; }
+			}
+				
+			if (daTonTaiNhanVienTrongPhongBan)
+			{
+				MessageBox.Show("The staff is already present in a certain department.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
+			bool daTonTaiTruongPhong = false;
+			foreach (Job_Detail job in j)
+			{
+				if (job.Position.Equals(cbPosition.SelectedValue)
+					&& job.DepartmentID == (int)cbDepartment.SelectedValue
+					&& job.Status.Equals(cbStatus.SelectedValue) && !job.Status.Equals(SD.jd_postPone))
+				{ daTonTaiTruongPhong = true; break; }
+			}
+			if(daTonTaiTruongPhong)
+			{
+				MessageBox.Show("This department already has a department head", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
+			return true;
+		}
+
+		private bool validateUpdate()
+		{
+			List<Contract> contracts = contractBUS.GetByEmployeeId((int)cbEmployee.SelectedValue);
+			bool flagFalseContract = true;
+			foreach (Contract contract in contracts)
+			{
+				// Nếu contract có status là running thì mới đc phân việc
+				if (contract.Status.Equals(SD.Contract_Running))
+				{
+					flagFalseContract = false; break;
+				}
+			}
+			if (flagFalseContract)
+			{
+				MessageBox.Show("The employee does not have a contract.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
+			List<Job_Detail> j = jobDetailBUS.GetAll();
+			bool daTonTaiTruongPhong = false;
+			foreach (Job_Detail job in j)
+			{
+				if (job.Position.Equals(cbPosition.SelectedValue)
+					&& job.DepartmentID == (int)cbDepartment.SelectedValue
+					&& job.Status.Equals(cbStatus.SelectedValue))
+				{ daTonTaiTruongPhong = true; break; }
+			}
+			if (daTonTaiTruongPhong)
+			{
+				MessageBox.Show("This department already has a department head", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
+
 			return true;
 		}
 	}

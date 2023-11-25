@@ -29,11 +29,12 @@ namespace DTO
 		// color
 		public const string textGreen = "#099268";
 		public const string textOrange = "#ffac00";
+		public const string textRed = "#f24e1d";
 
 		// job_detail (quản lý công việc)
-		public const string jd_draft = "Draft";
-		public const string jd_validated = "Validated";
-		public static List<string> ListJDStatus = new List<string> { jd_draft, jd_validated };
+		public const string jd_onGoing = "On Going";
+		public const string jd_postPone = "Postponed";
+		public static List<string> ListJDStatus = new List<string> { jd_onGoing, jd_postPone};
 
 		// statistical
 		public static List<string> listThang = new List<string> { "January", "February", "March",
