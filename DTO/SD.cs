@@ -34,9 +34,13 @@ namespace DTO
 		public const string jd_draft = "Draft";
 		public const string jd_validated = "Validated";
 		public static List<string> ListJDStatus = new List<string> { jd_draft, jd_validated };
+		// employee
+		public const string e_trial = "Trial period";
+        public const string e_official = "Official employee";
+        public const string e_resignation = "Resignation";
 
-		// statistical
-		public static List<string> listThang = new List<string> { "January", "February", "March",
+        // statistical
+        public static List<string> listThang = new List<string> { "January", "February", "March",
 		"April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
 		public static List<int> listNam = new List<int> { 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030 };

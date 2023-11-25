@@ -109,8 +109,8 @@ namespace HR_Manager.Employee
 
         private void textBox1_TextChanged(object sender, EventArgs e)
         {
-            List<EmployeeDTO> list = employeeBUS.SearchByName(textBox1.Text.Trim());
-            render(list);
+            //List<EmployeeDTO> list = employeeBUS.SearchByName(textBox1.Text.Trim());
+            //render(list);
         }
     }
 }

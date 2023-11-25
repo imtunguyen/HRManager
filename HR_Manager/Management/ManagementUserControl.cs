@@ -10,11 +10,11 @@ using System.Windows.Forms;
 
 namespace HR_Manager.Management
 {
-	public partial class ManagementUserControl : UserControl
-	{
-		public ManagementUserControl()
-		{
-			InitializeComponent();
-		}
-	}
+    public partial class ManagementUserControl : UserControl
+    {
+        public ManagementUserControl()
+        {
+            InitializeComponent();
+        }
+    }
 }

@@ -1,6 +1,6 @@
-﻿namespace HR_Manager.Employee
+﻿namespace HR_Manager.Management
 {
-    partial class CRUDEmployees
+    partial class JobUserControl1
     {
         /// <summary> 
         /// Required designer variable.
@@ -29,29 +29,23 @@
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            dgvEmployee = new DataGridView();
+            dgvJob = new DataGridView();
             btnThem = new Button();
             btnEdit = new Button();
             btnDelete = new Button();
             cbTimKiem = new ComboBox();
             txtTimKiem = new TextBox();
             btnTimKiem = new Button();
-            gbStatus = new GroupBox();
-            rbResignation = new RadioButton();
-            rbOfficial = new RadioButton();
-            rbAll = new RadioButton();
-            rbTrial = new RadioButton();
             btnLamMoi = new Button();
-            ((System.ComponentModel.ISupportInitialize)dgvEmployee).BeginInit();
-            gbStatus.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvJob).BeginInit();
             SuspendLayout();
             // 
-            // dgvEmployee
+            // dgvJob
             // 
-            dgvEmployee.AllowUserToAddRows = false;
-            dgvEmployee.BorderStyle = BorderStyle.None;
-            dgvEmployee.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            dgvEmployee.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvJob.AllowUserToAddRows = false;
+            dgvJob.BorderStyle = BorderStyle.None;
+            dgvJob.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            dgvJob.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
@@ -59,23 +53,22 @@
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvEmployee.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvEmployee.ColumnHeadersHeight = 50;
-            dgvEmployee.Cursor = Cursors.Hand;
-            dgvEmployee.GridColor = Color.White;
-            dgvEmployee.Location = new Point(11, 78);
-            dgvEmployee.Margin = new Padding(3, 2, 3, 2);
-            dgvEmployee.Name = "dgvEmployee";
-            dgvEmployee.ReadOnly = true;
-            dgvEmployee.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgvEmployee.RowHeadersVisible = false;
-            dgvEmployee.RowHeadersWidth = 51;
-            dgvEmployee.RowTemplate.Height = 29;
-            dgvEmployee.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvEmployee.Size = new Size(955, 445);
-            dgvEmployee.TabIndex = 0;
-            dgvEmployee.CellClick += dgvEmployee_CellClick;
-            dgvEmployee.CellFormatting += dgvEmployee_CellFormatting;
+            dgvJob.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dgvJob.ColumnHeadersHeight = 50;
+            dgvJob.Cursor = Cursors.Hand;
+            dgvJob.GridColor = Color.White;
+            dgvJob.Location = new Point(11, 78);
+            dgvJob.Margin = new Padding(3, 2, 3, 2);
+            dgvJob.Name = "dgvJob";
+            dgvJob.ReadOnly = true;
+            dgvJob.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvJob.RowHeadersVisible = false;
+            dgvJob.RowHeadersWidth = 51;
+            dgvJob.RowTemplate.Height = 29;
+            dgvJob.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvJob.Size = new Size(955, 445);
+            dgvJob.TabIndex = 0;
+            dgvJob.CellContentClick += dgvJob_CellContentClick;
             // 
             // btnThem
             // 
@@ -135,7 +128,6 @@
             cbTimKiem.Name = "cbTimKiem";
             cbTimKiem.Size = new Size(140, 23);
             cbTimKiem.TabIndex = 2;
-            cbTimKiem.SelectedValueChanged += cbTimKiem_SelectedValueChanged;
             // 
             // txtTimKiem
             // 
@@ -145,7 +137,6 @@
             txtTimKiem.Name = "txtTimKiem";
             txtTimKiem.Size = new Size(250, 23);
             txtTimKiem.TabIndex = 3;
-            txtTimKiem.TextChanged += txtTimKiem_TextChanged;
             // 
             // btnTimKiem
             // 
@@ -161,81 +152,6 @@
             btnTimKiem.TabIndex = 4;
             btnTimKiem.UseVisualStyleBackColor = false;
             btnTimKiem.Click += btnTimKiem_Click;
-            // 
-            // gbStatus
-            // 
-            gbStatus.Controls.Add(rbResignation);
-            gbStatus.Controls.Add(rbOfficial);
-            gbStatus.Controls.Add(rbAll);
-            gbStatus.Controls.Add(rbTrial);
-            gbStatus.Cursor = Cursors.Hand;
-            gbStatus.Location = new Point(497, 38);
-            gbStatus.Margin = new Padding(3, 2, 3, 2);
-            gbStatus.Name = "gbStatus";
-            gbStatus.Padding = new Padding(3, 2, 3, 2);
-            gbStatus.Size = new Size(359, 35);
-            gbStatus.TabIndex = 5;
-            gbStatus.TabStop = false;
-            // 
-            // rbResignation
-            // 
-            rbResignation.AutoSize = true;
-            rbResignation.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            rbResignation.ForeColor = Color.Red;
-            rbResignation.Location = new Point(269, 14);
-            rbResignation.Margin = new Padding(3, 2, 3, 2);
-            rbResignation.Name = "rbResignation";
-            rbResignation.Size = new Size(90, 19);
-            rbResignation.TabIndex = 1;
-            rbResignation.TabStop = true;
-            rbResignation.Text = "Resignation";
-            rbResignation.UseVisualStyleBackColor = true;
-            rbResignation.CheckedChanged += rbResignation_CheckedChanged;
-            // 
-            // rbOfficial
-            // 
-            rbOfficial.AutoSize = true;
-            rbOfficial.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            rbOfficial.ForeColor = Color.FromArgb(9, 146, 104);
-            rbOfficial.Location = new Point(140, 14);
-            rbOfficial.Margin = new Padding(3, 2, 3, 2);
-            rbOfficial.Name = "rbOfficial";
-            rbOfficial.Size = new Size(123, 19);
-            rbOfficial.TabIndex = 1;
-            rbOfficial.TabStop = true;
-            rbOfficial.Text = "Official employee";
-            rbOfficial.UseVisualStyleBackColor = true;
-            rbOfficial.CheckedChanged += rbOfficial_CheckedChanged;
-            // 
-            // rbAll
-            // 
-            rbAll.AutoSize = true;
-            rbAll.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            rbAll.ForeColor = Color.Black;
-            rbAll.Location = new Point(6, 14);
-            rbAll.Margin = new Padding(3, 2, 3, 2);
-            rbAll.Name = "rbAll";
-            rbAll.Size = new Size(39, 19);
-            rbAll.TabIndex = 0;
-            rbAll.TabStop = true;
-            rbAll.Text = "All";
-            rbAll.UseVisualStyleBackColor = true;
-            rbAll.CheckedChanged += rbAll_CheckedChanged;
-            // 
-            // rbTrial
-            // 
-            rbTrial.AutoSize = true;
-            rbTrial.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            rbTrial.ForeColor = Color.FromArgb(255, 172, 0);
-            rbTrial.Location = new Point(51, 14);
-            rbTrial.Margin = new Padding(3, 2, 3, 2);
-            rbTrial.Name = "rbTrial";
-            rbTrial.Size = new Size(87, 19);
-            rbTrial.TabIndex = 0;
-            rbTrial.TabStop = true;
-            rbTrial.Text = "Trial period";
-            rbTrial.UseVisualStyleBackColor = true;
-            rbTrial.CheckedChanged += rbTrial_CheckedChanged;
             // 
             // btnLamMoi
             // 
@@ -257,12 +173,11 @@
             btnLamMoi.UseVisualStyleBackColor = false;
             btnLamMoi.Click += btnLamMoi_Click;
             // 
-            // CRUDEmployees
+            // JobUserControl
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 238, 240);
-            Controls.Add(gbStatus);
             Controls.Add(btnLamMoi);
             Controls.Add(btnTimKiem);
             Controls.Add(txtTimKiem);
@@ -270,31 +185,24 @@
             Controls.Add(btnDelete);
             Controls.Add(btnEdit);
             Controls.Add(btnThem);
-            Controls.Add(dgvEmployee);
+            Controls.Add(dgvJob);
             Margin = new Padding(3, 2, 3, 2);
-            Name = "CRUDEmployees";
+            Name = "JobUserControl";
             Size = new Size(979, 538);
-            ((System.ComponentModel.ISupportInitialize)dgvEmployee).EndInit();
-            gbStatus.ResumeLayout(false);
-            gbStatus.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)dgvJob).EndInit();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private DataGridView dgvEmployee;
+        private DataGridView dgvJob;
         private Button btnThem;
         private Button btnEdit;
         private Button btnDelete;
         private ComboBox cbTimKiem;
         private TextBox txtTimKiem;
         private Button btnTimKiem;
-        private GroupBox gbStatus;
-        private RadioButton rbOfficial;
-        private RadioButton rbTrial;
         private Button btnLamMoi;
-        private RadioButton rbAll;
-        private RadioButton rbResignation;
     }
 }
