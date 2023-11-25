@@ -1,4 +1,4 @@
-﻿namespace HR_Manager.Employee
+﻿namespace HR_Manager.DepartmentF
 {
     partial class AddDepartment
     {

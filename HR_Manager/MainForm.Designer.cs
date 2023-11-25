@@ -1,4 +1,5 @@
-﻿using HR_Manager.Employee;
+﻿using HR_Manager.DepartmentF;
+using HR_Manager.Employee;
 using HR_Manager.Management;
 
 namespace HR_Manager
@@ -42,8 +43,9 @@ namespace HR_Manager
 			tableLayoutPanel1 = new TableLayoutPanel();
 			button5 = new Button();
 			btnManagement = new Button();
-			management = new ManagementUserControl();
 			btnDepartment = new Button();
+			management = new ManagementUserControl();
+			mainDepartment = new MainDepartment();
 			tableLayoutPanel1.SuspendLayout();
 			SuspendLayout();
 			// 
@@ -195,14 +197,6 @@ namespace HR_Manager
 			btnManagement.UseVisualStyleBackColor = false;
 			btnManagement.Click += btnManagement_Click;
 			// 
-			// management
-			// 
-			management.Location = new Point(235, 0);
-			management.Margin = new Padding(3, 5, 3, 5);
-			management.Name = "management";
-			management.Size = new Size(1143, 800);
-			management.TabIndex = 3;
-			// 
 			// btnDepartment
 			// 
 			btnDepartment.Anchor = AnchorStyles.None;
@@ -216,7 +210,15 @@ namespace HR_Manager
 			btnDepartment.TabIndex = 1;
 			btnDepartment.Text = "DEPARTMENT";
 			btnDepartment.UseVisualStyleBackColor = false;
-			btnDepartment.Click += btnManagement_Click;
+			btnDepartment.Click += btnDepartment_Click;
+			// 
+			// mainDepartment
+			// 
+			mainDepartment.Location = new Point(235, 0);
+			mainDepartment.Margin = new Padding(3, 5, 3, 5);
+			mainDepartment.Name = "mainDepartment";
+			mainDepartment.Size = new Size(1143, 800);
+			mainDepartment.TabIndex = 3;
 			// 
 			// MainForm
 			// 
@@ -229,6 +231,7 @@ namespace HR_Manager
 			Controls.Add(dashboard1);
 			Controls.Add(WorkEntry);
 			Controls.Add(management);
+			Controls.Add(mainDepartment);
 			Margin = new Padding(3, 4, 3, 4);
 			Name = "MainForm";
 			Text = "Form1";
@@ -251,5 +254,6 @@ namespace HR_Manager
 		private Button btnManagement;
 		private ManagementUserControl management;
 		private Button btnDepartment;
+		private MainDepartment mainDepartment;
 	}
 }

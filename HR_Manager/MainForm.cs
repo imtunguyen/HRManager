@@ -70,6 +70,11 @@ namespace HR_Manager
 		{
 			showUserControl(management);
 		}
+
+		private void btnDepartment_Click(object sender, EventArgs e)
+		{
+			showUserControl(mainDepartment);
+		}
 	}
 
 }
