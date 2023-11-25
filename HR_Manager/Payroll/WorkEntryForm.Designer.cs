@@ -32,13 +32,15 @@
             checkedListBox1 = new CheckedListBox();
             button1 = new Button();
             button2 = new Button();
+            button3 = new Button();
+            textBox1 = new TextBox();
             SuspendLayout();
             // 
             // label1
             // 
             label1.AutoSize = true;
             label1.Font = new Font("Segoe UI", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            label1.Location = new Point(244, 9);
+            label1.Location = new Point(12, 9);
             label1.Name = "label1";
             label1.Size = new Size(52, 21);
             label1.TabIndex = 1;
@@ -60,7 +62,7 @@
             button1.Name = "button1";
             button1.Size = new Size(93, 31);
             button1.TabIndex = 3;
-            button1.Text = "Lưu Thay Đổi";
+            button1.Text = "Save";
             button1.UseVisualStyleBackColor = false;
             button1.Visible = false;
             button1.Click += button1_Click;
@@ -75,11 +77,33 @@
             button2.UseVisualStyleBackColor = true;
             button2.Click += button2_Click;
             // 
+            // button3
+            // 
+            button3.Location = new Point(449, 97);
+            button3.Name = "button3";
+            button3.Size = new Size(93, 29);
+            button3.TabIndex = 5;
+            button3.Text = "Deselect All";
+            button3.UseVisualStyleBackColor = true;
+            button3.Visible = false;
+            button3.Click += button3_Click;
+            // 
+            // textBox1
+            // 
+            textBox1.Location = new Point(243, 12);
+            textBox1.Name = "textBox1";
+            textBox1.PlaceholderText = "Type Employee Name";
+            textBox1.Size = new Size(139, 23);
+            textBox1.TabIndex = 6;
+            textBox1.TextChanged += textBox1_TextChanged;
+            // 
             // WorkEntryForm
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(554, 450);
+            Controls.Add(textBox1);
+            Controls.Add(button3);
             Controls.Add(button2);
             Controls.Add(button1);
             Controls.Add(checkedListBox1);
@@ -96,5 +120,7 @@
         private CheckedListBox checkedListBox1;
         private Button button1;
         private Button button2;
+        private Button button3;
+        private TextBox textBox1;
     }
 }

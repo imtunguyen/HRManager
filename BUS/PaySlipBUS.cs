@@ -49,5 +49,10 @@ namespace BUS
         {
             return paySlipDAO.SearchByStatus(status.Trim());
         }
+
+        public bool Update(string status, int id)
+        {
+            return paySlipDAO.Update(status, id);
+        }
     }
 }
