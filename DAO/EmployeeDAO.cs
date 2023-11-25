@@ -20,7 +20,7 @@ namespace DAO
         {
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "INSERT INTO EMPLOYEE (name, gender, date_Of_Birth, phone, email, img_path, department_id, status) VALUES (@Name, @Gender, @Date_Of_Birth, @Phone, @Email, @img_path,@Department_id, @Status)";
+                string query = "INSERT INTO EMPLOYEE (name, gender, date_Of_Birth, phone, email, img_path, status) VALUES (@Name, @Gender, @Date_Of_Birth, @Phone, @Email, @img_path, @Status)";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     command.Parameters.AddWithValue("@Name", t.Name);
@@ -36,8 +36,8 @@ namespace DAO
                     {
                         command.Parameters.AddWithValue("@img_path", DBNull.Value);
                     }
-                    command.Parameters.AddWithValue("@Department_id", t.Department_id);
                     command.Parameters.AddWithValue("@Status", t.Status);
+
                     int result = command.ExecuteNonQuery();
                     return result > 0;
                 }
@@ -108,7 +108,7 @@ namespace DAO
         {
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "UPDATE EMPLOYEE SET name = @Name, gender = @Gender, date_Of_Birth = @Date_Of_Birth, phone = @Phone, email = @Email, img_path = @img_path,department_id = @Department_id, status = @Status WHERE id = @id";
+                string query = "UPDATE EMPLOYEE SET name = @Name, gender = @Gender, date_Of_Birth = @Date_Of_Birth, phone = @Phone, email = @Email, img_path = @img_path, status = @Status WHERE id = @id";
 
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
@@ -126,7 +126,6 @@ namespace DAO
                         command.Parameters.AddWithValue("@img_path", DBNull.Value);
                     }
                     command.Parameters.AddWithValue("@Status", employee.Status);
-                    command.Parameters.AddWithValue("@Department_id", employee.Department_id);
                     command.Parameters.AddWithValue("@id", id);
                     int result = command.ExecuteNonQuery();
                     return result > 0;
@@ -157,7 +156,6 @@ namespace DAO
                         e.Phone = reader["phone"].ToString();
                         e.Email = reader["email"].ToString();
                         e.img_path = reader["img_path"].ToString();
-                        e.Department_id = Convert.ToInt32(reader["Department_id"].ToString());
                         e.Status = reader["status"].ToString();
                         list.Add(e);
                     }
@@ -165,15 +163,16 @@ namespace DAO
             }
             return list;
         }
-        public List<EmployeeDTO> GetByDepartmentId(int de_id)
+       
+
+        public List<EmployeeDTO> searchByName(string name)
         {
-            List<EmployeeDTO> elist = new List<EmployeeDTO>();
+            List<EmployeeDTO> list = new List<EmployeeDTO>();
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "SELECT * FROM EMPLOYEE WHERE department_id = @Department_id";
+                string query = "select * from EMPLOYEE where name LIKE '" + name + "%'";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
-                    command.Parameters.AddWithValue("@Department_id", de_id);
                     SqlDataReader reader = command.ExecuteReader();
                     while (reader.Read())
                     {
@@ -185,45 +184,12 @@ namespace DAO
                         e.Phone = reader["phone"].ToString();
                         e.Email = reader["email"].ToString();
                         e.img_path = reader["img_path"].ToString();
-                        e.Department_id = Convert.ToInt32(reader["department_id"].ToString());
                         e.Status = reader["status"].ToString();
-                        elist.Add(e);
+                        list.Add(e);
                     }
                 }
             }
-            return elist;
+            return list;
         }
-
-		public List<EmployeeDTO> searchByName(string name)
-		{
-			List<EmployeeDTO> list = new List<EmployeeDTO>();
-			using (SqlConnection connection = DbConnection.GetSqlConnection())
-			{
-				string query = "select * from EMPLOYEE where name LIKE '" + name + "%'";
-				using (SqlCommand command = new SqlCommand(query, connection))
-				{
-					SqlDataReader reader = command.ExecuteReader();
-					while (reader.Read())
-					{
-						EmployeeDTO e = new EmployeeDTO();
-						e.ID = Convert.ToInt32(reader["id"].ToString());
-						e.Name = reader["Name"].ToString();
-						e.Gender = reader["gender"].ToString();
-						e.Date_of_Birth = DateTime.Parse(reader["date_Of_Birth"].ToString());
-						e.Phone = reader["phone"].ToString();
-						e.Email = reader["email"].ToString();
-						e.img_path = reader["img_path"].ToString();
-						e.Department_id = Convert.ToInt32(reader["Department_id"].ToString());
-						e.Status = reader["status"].ToString();
-						list.Add(e);
-					}
-				}
-			}
-			return list;
-		}
-	}
+    }
 }
-
-
-
-

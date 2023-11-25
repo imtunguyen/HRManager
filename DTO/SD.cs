@@ -32,12 +32,19 @@ namespace DTO
 		public const string textRed = "#f24e1d";
 
 		// job_detail (quản lý công việc)
+		public const string jd_draft = "Draft";
+		public const string jd_validated = "Validated";
+		public static List<string> ListJDStatus = new List<string> { jd_draft, jd_validated };
+		// employee
+		public const string e_trial = "Trial period";
+        public const string e_official = "Official employee";
+        public const string e_resignation = "Resignation";
 		public const string jd_onGoing = "On Going";
 		public const string jd_postPone = "Postponed";
 		public static List<string> ListJDStatus = new List<string> { jd_onGoing, jd_postPone};
 
-		// statistical
-		public static List<string> listThang = new List<string> { "January", "February", "March",
+        // statistical
+        public static List<string> listThang = new List<string> { "January", "February", "March",
 		"April", "May", "June", "July", "August", "September", "October", "November", "December"};
 
 		public static List<int> listNam = new List<int> { 2021, 2022, 2023, 2024, 2025, 2026, 2027, 2028, 2029, 2030 };

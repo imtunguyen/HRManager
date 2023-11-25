@@ -5,15 +5,18 @@ using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
+using System.Globalization;
 using System.Linq;
+using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace HR_Manager.Management
 {
-    public partial class JobUserControl : UserControl
+    public partial class JobUserControl1 : UserControl
     {
+
         private DataTable dt = new DataTable();
         private JobBUS jobBus;
         private Job jobDTO;
@@ -21,9 +24,8 @@ namespace HR_Manager.Management
         private List<Job> jobList;
         private int idSelected;
         private DataTable searchData = new DataTable();
-        public JobUserControl()
+        public JobUserControl1()
         {
-            jobBus = new JobBUS();
             InitializeComponent();
             loadDataGridView();
             loadcb();
@@ -47,30 +49,30 @@ namespace HR_Manager.Management
                 stt++;
             }
             dgvJob.DataSource = dt;
-            dgvJob.Columns["Job Name"].Width = 200;
-            dgvJob.Columns["Description"].Width = 600;
 
         }
         private void loadcb()
         {
             cbTimKiem.DataSource = listCb;
         }
+        private void dgvJob_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            int rowIndex = e.RowIndex;
+            if (rowIndex >= 0)
+            {
+                DataGridViewRow row = dgvJob.Rows[rowIndex];
+                idSelected = Convert.ToInt32(row.Cells["ID"].Value);
+            }
+        }
+
         private void btnThem_Click(object sender, EventArgs e)
         {
-            fCRUDjob add = new fCRUDjob(this);
-            add.Show();
+           
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            jobDTO = jobBus.GetById(idSelected);
-            fCRUDjob update = new fCRUDjob(this, jobDTO);
-            update.Show();
-        }
-
-        private void btnLamMoi_Click(object sender, EventArgs e)
-        {
-            loadDataGridView();
+          
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
@@ -100,17 +102,6 @@ namespace HR_Manager.Management
 
             loadDataGridView();
         }
-
-        private void dgvJob_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            int rowIndex = e.RowIndex;
-            if (rowIndex >= 0)
-            {
-                DataGridViewRow row = dgvJob.Rows[rowIndex];
-                idSelected = Convert.ToInt32(row.Cells["ID"].Value);
-            }
-        }
-
         private DataTable SearchByUsername(DataTable dataTable, string username)
         {
             searchData = dataTable.Clone();
@@ -165,6 +156,11 @@ namespace HR_Manager.Management
             // Gán kết quả tìm kiếm vào DataGridView
             dgvJob.DataSource = searchResult;
             dgvJob.Refresh();
+        }
+
+        private void btnLamMoi_Click(object sender, EventArgs e)
+        {
+            loadDataGridView();
         }
 
     }

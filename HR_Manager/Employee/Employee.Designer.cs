@@ -44,7 +44,6 @@
             panel1.SuspendLayout();
             tabControl1.SuspendLayout();
             tabPage3.SuspendLayout();
-            tabPage4.SuspendLayout();
             tabPage5.SuspendLayout();
             SuspendLayout();
             // 
@@ -169,7 +168,6 @@
             panel1.ResumeLayout(false);
             tabControl1.ResumeLayout(false);
             tabPage3.ResumeLayout(false);
-            tabPage4.ResumeLayout(false);
             tabPage5.ResumeLayout(false);
             ResumeLayout(false);
         }

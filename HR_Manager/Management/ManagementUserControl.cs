@@ -16,10 +16,5 @@ namespace HR_Manager.Management
         {
             InitializeComponent();
         }
-
-        private void levelUserControl_Load(object sender, EventArgs e)
-        {
-
-        }
     }
 }

@@ -23,7 +23,7 @@ namespace DTO
         {
             
         }
-        public EmployeeDTO(int iD, string name, string gender, DateTime date_of_Birth, string phone, string status, string email, int department_id, string img_path, decimal base_pay)
+        public EmployeeDTO(int iD, string name, string gender, DateTime date_of_Birth, string phone, string status, string email, string img_path)
         {
             ID = iD;
             Name = name;
@@ -32,9 +32,7 @@ namespace DTO
             Phone = phone;
             Status = status;
             Email = email;
-            Department_id = department_id;
             this.img_path = img_path;
-            this.base_pay = base_pay;
         }
 
         public string JobName { get; set; }

@@ -38,7 +38,6 @@ namespace HR_Manager
             Text = "ADD EMPLOYEE";
             lblTitle.Text = "ADD EMPLOYEE";
             btnAdd.Text = "ADD";
-            loadDepartment();
         }
         public AddEmployee(int i, string update, EmployeeDTO eDTO)
         {
@@ -50,7 +49,6 @@ namespace HR_Manager
             idSelected = eDTO.ID;
             cbStatus.Items.Add("Resignation");
             LoadFields();
-            loadDepartment();
             pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
         }
         private void textBox5_TextChanged(object sender, EventArgs e)
@@ -87,7 +85,7 @@ namespace HR_Manager
                     }
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Error" + ex, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
+                        MessageBox.Show("Error" + ex.Message, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
                     }
                 }
             }
@@ -141,7 +139,6 @@ namespace HR_Manager
             eDto.Email = txtEmail.Text;
             eDto.Phone = txtPhone.Text;
             eDto.Status = cbStatus.Text;
-            eDto.Department_id = Convert.ToInt32(cbDepartment.SelectedValue);
             if (cbGender.Checked)
             {
                 eDto.Gender = "Female";
@@ -255,18 +252,6 @@ namespace HR_Manager
             }
 
             return true;
-        }
-        private void loadDepartment()
-        {
-            DepartmentBUS deBus = new DepartmentBUS();
-            List<Department> listDe = deBus.GetID();
-
-            // Thiết lập trường hiển thị và giá trị thực cho ComboBox
-            cbDepartment.DisplayMember = "id"; // Trường hiển thị là ID của Department
-            cbDepartment.ValueMember = "id";   // Giá trị thực là ID của Department
-
-            // Đổ dữ liệu vào ComboBox từ danh sách Department
-            cbDepartment.DataSource = listDe;
         }
     }
 }
