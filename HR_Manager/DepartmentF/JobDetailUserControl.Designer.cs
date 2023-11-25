@@ -161,9 +161,9 @@
 			gbStatus.Controls.Add(rbAll);
 			gbStatus.Controls.Add(rbPostpone);
 			gbStatus.Cursor = Cursors.Hand;
-			gbStatus.Location = new Point(13, 54);
+			gbStatus.Location = new Point(13, 59);
 			gbStatus.Name = "gbStatus";
-			gbStatus.Size = new Size(273, 51);
+			gbStatus.Size = new Size(273, 39);
 			gbStatus.TabIndex = 5;
 			gbStatus.TabStop = false;
 			// 
