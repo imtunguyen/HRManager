@@ -69,7 +69,7 @@ namespace HR_Manager.Management
             skillUserControl.Dock = DockStyle.Fill;
             skillUserControl.Location = new Point(3, 2);
             skillUserControl.Name = "skillUserControl";
-            skillUserControl.Size = new Size(861, 447);
+            skillUserControl.Size = new Size(1170, 967);
             skillUserControl.TabIndex = 0;
             // 
             // tabPageLevel
@@ -89,7 +89,7 @@ namespace HR_Manager.Management
             levelUserControl.Dock = DockStyle.Fill;
             levelUserControl.Location = new Point(3, 2);
             levelUserControl.Name = "levelUserControl";
-            levelUserControl.Size = new Size(861, 447);
+            levelUserControl.Size = new Size(1170, 967);
             levelUserControl.TabIndex = 0;
             levelUserControl.Load += levelUserControl_Load;
             // 

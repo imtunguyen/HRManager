@@ -197,6 +197,14 @@ namespace HR_Manager
 			btnManagement.UseVisualStyleBackColor = false;
 			btnManagement.Click += btnManagement_Click;
 			// 
+			// management
+			// 
+			management.Location = new Point(235, 0);
+			management.Margin = new Padding(3, 5, 3, 5);
+			management.Name = "management";
+			management.Size = new Size(1143, 800);
+			management.TabIndex = 3;
+			// 
 			// btnDepartment
 			// 
 			btnDepartment.Anchor = AnchorStyles.None;
