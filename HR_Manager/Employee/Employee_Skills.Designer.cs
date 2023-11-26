@@ -1,10 +1,11 @@
-﻿using System.ComponentModel;
-
-namespace HR_Manager.DepartmentF
+﻿namespace HR_Manager.Employee
 {
-    partial class DepartmentUserControl
+    partial class Employee_Skills
     {
-        private IContainer components = null;
+        /// <summary> 
+        /// Required designer variable.
+        /// </summary>
+        private System.ComponentModel.IContainer components = null;
 
         /// <summary> 
         /// Clean up any resources being used.
@@ -28,27 +29,26 @@ namespace HR_Manager.DepartmentF
         private void InitializeComponent()
         {
             DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
-            dgvDepartment = new DataGridView();
+            dgvEmployee_Skills = new DataGridView();
             btnThem = new Button();
-            btnEdit = new Button();
-            btnDelete = new Button();
             cbTimKiem = new ComboBox();
             txtTimKiem = new TextBox();
             btnTimKiem = new Button();
             btnLamMoi = new Button();
-            dgvEmployees = new DataGridView();
-            label1 = new Label();
-            label2 = new Label();
-            ((ISupportInitialize)dgvDepartment).BeginInit();
-            ((ISupportInitialize)dgvEmployees).BeginInit();
+            gbStatus = new GroupBox();
+            rbResignation = new RadioButton();
+            rbOfficial = new RadioButton();
+            rbAll = new RadioButton();
+            ((System.ComponentModel.ISupportInitialize)dgvEmployee_Skills).BeginInit();
+            gbStatus.SuspendLayout();
             SuspendLayout();
             // 
-            // dgvDepartment
+            // dgvEmployee_Skills
             // 
-            dgvDepartment.AllowUserToAddRows = false;
-            dgvDepartment.BorderStyle = BorderStyle.None;
-            dgvDepartment.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            dgvDepartment.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvEmployee_Skills.AllowUserToAddRows = false;
+            dgvEmployee_Skills.BorderStyle = BorderStyle.None;
+            dgvEmployee_Skills.CellBorderStyle = DataGridViewCellBorderStyle.None;
+            dgvEmployee_Skills.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
             dataGridViewCellStyle1.BackColor = SystemColors.Control;
             dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
@@ -56,22 +56,22 @@ namespace HR_Manager.DepartmentF
             dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
             dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
             dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
-            dgvDepartment.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
-            dgvDepartment.ColumnHeadersHeight = 50;
-            dgvDepartment.Cursor = Cursors.Hand;
-            dgvDepartment.GridColor = Color.White;
-            dgvDepartment.Location = new Point(11, 127);
-            dgvDepartment.Margin = new Padding(3, 2, 3, 2);
-            dgvDepartment.Name = "dgvDepartment";
-            dgvDepartment.ReadOnly = true;
-            dgvDepartment.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgvDepartment.RowHeadersVisible = false;
-            dgvDepartment.RowHeadersWidth = 51;
-            dgvDepartment.RowTemplate.Height = 29;
-            dgvDepartment.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvDepartment.Size = new Size(955, 183);
-            dgvDepartment.TabIndex = 0;
-            dgvDepartment.CellClick += dgvDepartment_CellClick;
+            dgvEmployee_Skills.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+            dgvEmployee_Skills.ColumnHeadersHeight = 50;
+            dgvEmployee_Skills.Cursor = Cursors.Hand;
+            dgvEmployee_Skills.GridColor = Color.White;
+            dgvEmployee_Skills.Location = new Point(11, 78);
+            dgvEmployee_Skills.Margin = new Padding(3, 2, 3, 2);
+            dgvEmployee_Skills.Name = "dgvEmployee_Skills";
+            dgvEmployee_Skills.ReadOnly = true;
+            dgvEmployee_Skills.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+            dgvEmployee_Skills.RowHeadersVisible = false;
+            dgvEmployee_Skills.RowHeadersWidth = 51;
+            dgvEmployee_Skills.RowTemplate.Height = 29;
+            dgvEmployee_Skills.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
+            dgvEmployee_Skills.Size = new Size(955, 445);
+            dgvEmployee_Skills.TabIndex = 0;
+            dgvEmployee_Skills.CellContentClick += dgvEmployee_Skills_CellContentClick;
             // 
             // btnThem
             // 
@@ -83,50 +83,17 @@ namespace HR_Manager.DepartmentF
             btnThem.Location = new Point(11, 13);
             btnThem.Margin = new Padding(3, 2, 3, 2);
             btnThem.Name = "btnThem";
-            btnThem.Size = new Size(92, 32);
+            btnThem.Size = new Size(145, 58);
             btnThem.TabIndex = 1;
             btnThem.Text = "ADD";
             btnThem.UseVisualStyleBackColor = false;
             btnThem.Click += btnThem_Click;
-            // 
-            // btnEdit
-            // 
-            btnEdit.BackColor = Color.FromArgb(1, 107, 112);
-            btnEdit.Cursor = Cursors.Hand;
-            btnEdit.FlatStyle = FlatStyle.Flat;
-            btnEdit.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnEdit.ForeColor = Color.White;
-            btnEdit.Location = new Point(108, 13);
-            btnEdit.Margin = new Padding(3, 2, 3, 2);
-            btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(92, 32);
-            btnEdit.TabIndex = 1;
-            btnEdit.Text = "EDIT";
-            btnEdit.UseVisualStyleBackColor = false;
-            btnEdit.Click += btnEdit_Click;
-            // 
-            // btnDelete
-            // 
-            btnDelete.BackColor = Color.FromArgb(224, 49, 49);
-            btnDelete.Cursor = Cursors.Hand;
-            btnDelete.FlatStyle = FlatStyle.Flat;
-            btnDelete.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            btnDelete.ForeColor = Color.White;
-            btnDelete.Location = new Point(206, 13);
-            btnDelete.Margin = new Padding(3, 2, 3, 2);
-            btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(92, 32);
-            btnDelete.TabIndex = 1;
-            btnDelete.Text = "DELETE";
-            btnDelete.UseVisualStyleBackColor = false;
-            btnDelete.Click += btnDelete_Click;
             // 
             // cbTimKiem
             // 
             cbTimKiem.Cursor = Cursors.Hand;
             cbTimKiem.DropDownStyle = ComboBoxStyle.DropDownList;
             cbTimKiem.FormattingEnabled = true;
-            cbTimKiem.Items.AddRange(new object[] { "ID", "Name" });
             cbTimKiem.Location = new Point(529, 13);
             cbTimKiem.Margin = new Padding(3, 2, 3, 2);
             cbTimKiem.Name = "cbTimKiem";
@@ -155,6 +122,7 @@ namespace HR_Manager.DepartmentF
             btnTimKiem.Size = new Size(46, 23);
             btnTimKiem.TabIndex = 4;
             btnTimKiem.UseVisualStyleBackColor = false;
+            btnTimKiem.Click += btnTimKiem_Click;
             // 
             // btnLamMoi
             // 
@@ -176,75 +144,95 @@ namespace HR_Manager.DepartmentF
             btnLamMoi.UseVisualStyleBackColor = false;
             btnLamMoi.Click += btnLamMoi_Click;
             // 
-            // dgvEmployees
+            // gbStatus
             // 
-            dgvEmployees.AllowUserToAddRows = false;
-            dgvEmployees.BorderStyle = BorderStyle.None;
-            dgvEmployees.CellBorderStyle = DataGridViewCellBorderStyle.None;
-            dgvEmployees.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
-            dgvEmployees.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvEmployees.Location = new Point(11, 355);
-            dgvEmployees.Name = "dgvEmployees";
-            dgvEmployees.RowHeadersVisible = false;
-            dgvEmployees.RowTemplate.Height = 25;
-            dgvEmployees.Size = new Size(955, 155);
-            dgvEmployees.TabIndex = 0;
+            gbStatus.Controls.Add(rbResignation);
+            gbStatus.Controls.Add(rbOfficial);
+            gbStatus.Controls.Add(rbAll);
+            gbStatus.Cursor = Cursors.Hand;
+            gbStatus.Location = new Point(529, 40);
+            gbStatus.Margin = new Padding(3, 2, 3, 2);
+            gbStatus.Name = "gbStatus";
+            gbStatus.Padding = new Padding(3, 2, 3, 2);
+            gbStatus.Size = new Size(340, 35);
+            gbStatus.TabIndex = 6;
+            gbStatus.TabStop = false;
             // 
-            // label1
+            // rbResignation
             // 
-            label1.AutoSize = true;
-            label1.Location = new Point(11, 93);
-            label1.Name = "label1";
-            label1.Size = new Size(82, 15);
-            label1.TabIndex = 6;
-            label1.Text = "DEPARTMENT:";
+            rbResignation.AutoSize = true;
+            rbResignation.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            rbResignation.ForeColor = Color.Red;
+            rbResignation.Location = new Point(201, 12);
+            rbResignation.Margin = new Padding(3, 2, 3, 2);
+            rbResignation.Name = "rbResignation";
+            rbResignation.Size = new Size(133, 19);
+            rbResignation.TabIndex = 1;
+            rbResignation.TabStop = true;
+            rbResignation.Text = "Unskilled Employee";
+            rbResignation.UseVisualStyleBackColor = true;
             // 
-            // label2
+            // rbOfficial
             // 
-            label2.AutoSize = true;
-            label2.Location = new Point(11, 337);
-            label2.Name = "label2";
-            label2.Size = new Size(167, 15);
-            label2.TabIndex = 6;
-            label2.Text = "Employees of the Department:";
+            rbOfficial.AutoSize = true;
+            rbOfficial.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            rbOfficial.ForeColor = Color.FromArgb(9, 146, 104);
+            rbOfficial.Location = new Point(64, 12);
+            rbOfficial.Margin = new Padding(3, 2, 3, 2);
+            rbOfficial.Name = "rbOfficial";
+            rbOfficial.Size = new Size(119, 19);
+            rbOfficial.TabIndex = 1;
+            rbOfficial.TabStop = true;
+            rbOfficial.Text = "Skilled Employee";
+            rbOfficial.UseVisualStyleBackColor = true;
             // 
-            // DepartmentUserControl
+            // rbAll
+            // 
+            rbAll.AutoSize = true;
+            rbAll.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            rbAll.ForeColor = Color.Black;
+            rbAll.Location = new Point(6, 13);
+            rbAll.Margin = new Padding(3, 2, 3, 2);
+            rbAll.Name = "rbAll";
+            rbAll.Size = new Size(39, 19);
+            rbAll.TabIndex = 0;
+            rbAll.TabStop = true;
+            rbAll.Text = "All";
+            rbAll.UseVisualStyleBackColor = true;
+            // 
+            // Employee_Skills
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 238, 240);
-            Controls.Add(label2);
-            Controls.Add(label1);
-            Controls.Add(dgvEmployees);
+            Controls.Add(gbStatus);
             Controls.Add(btnLamMoi);
             Controls.Add(btnTimKiem);
             Controls.Add(txtTimKiem);
             Controls.Add(cbTimKiem);
-            Controls.Add(btnDelete);
-            Controls.Add(btnEdit);
             Controls.Add(btnThem);
-            Controls.Add(dgvDepartment);
+            Controls.Add(dgvEmployee_Skills);
             Margin = new Padding(3, 2, 3, 2);
-            Name = "DepartmentUserControl";
+            Name = "Employee_Skills";
             Size = new Size(979, 538);
-            ((ISupportInitialize)dgvDepartment).EndInit();
-            ((ISupportInitialize)dgvEmployees).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvEmployee_Skills).EndInit();
+            gbStatus.ResumeLayout(false);
+            gbStatus.PerformLayout();
             ResumeLayout(false);
             PerformLayout();
         }
 
         #endregion
 
-        private DataGridView dgvDepartment;
+        private DataGridView dgvEmployee_Skills;
         private Button btnThem;
-        private Button btnEdit;
-        private Button btnDelete;
         private ComboBox cbTimKiem;
         private TextBox txtTimKiem;
         private Button btnTimKiem;
         private Button btnLamMoi;
-        private DataGridView dgvEmployees;
-        private Label label1;
-        private Label label2;
+        private GroupBox gbStatus;
+        private RadioButton rbResignation;
+        private RadioButton rbOfficial;
+        private RadioButton rbAll;
     }
 }

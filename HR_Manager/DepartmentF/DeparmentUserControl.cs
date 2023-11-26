@@ -30,6 +30,7 @@ namespace HR_Manager.DepartmentF
         DataTable dtEmployee;   // DataTable for Employee
         BindingSource bsDepartment;
         BindingSource bsEmployee;
+        DataTable dt = new DataTable();
         public DepartmentUserControl()
         {
             InitializeComponent();
@@ -40,9 +41,20 @@ namespace HR_Manager.DepartmentF
             dtEmployee = new DataTable();
             bsDepartment = new BindingSource();
             bsEmployee = new BindingSource();
+            dtDepartment.Columns.Add("ID");
+            dtDepartment.Columns.Add("Name");
+            dtDepartment.Columns.Add("Address Detail");
+            dtEmployee.Columns.Add("ID");
+            dtEmployee.Columns.Add("Name");
+            dtEmployee.Columns.Add("Gender");
+            dtEmployee.Columns.Add("Date Of Birth");
+            dtEmployee.Columns.Add("Phone");
+            dtEmployee.Columns.Add("Email");
+            dtEmployee.Columns.Add("Image");
+            dtEmployee.Columns.Add("Status");
             loadDepartment();
+            
         }
-        private Dictionary<int, int> employeeCountByDepartment = new Dictionary<int, int>();
 
         private void loadDepartment()
         {
@@ -51,18 +63,7 @@ namespace HR_Manager.DepartmentF
 
             // Clear and reset data table
             dtDepartment.Clear();
-            dtDepartment.Columns.Clear();
-            dtDepartment.Columns.Add("ID");
-            dtDepartment.Columns.Add("Name");
-            dtDepartment.Columns.Add("Address Detail");
-            // Calculate and store employee count for each department
-            employeeCountByDepartment.Clear();
-            foreach (Department de in deList)
-            {
-                int id = de.ID;
-                int count = deBus.CountEmployee(id);
-                employeeCountByDepartment[id] = count;
-            }
+           
 
             // Add rows to data table
             int stt = 1;
@@ -72,30 +73,19 @@ namespace HR_Manager.DepartmentF
                 row["ID"] = de.ID;
                 row["Name"] = de.Name;
                 row["Address Detail"] = de.Address_Detail;
-
                 dtDepartment.Rows.Add(row);
                 stt++;
             }
 
             // Bind data table to grid
-            bsDepartment.DataSource = dtDepartment;
-            dgvDepartment.DataSource = bsDepartment;
-
-            if (!dgvDepartment.Columns.Contains("General Employees"))
-            { 
-                dgvDepartment.Columns.Add("General Employees", "General Employees");
-            }
-            dgvDepartment.Columns["General Employees"].DisplayIndex = dgvDepartment.Columns.Count - 1;
+           
+            dgvDepartment.DataSource = dtDepartment;
         }
         public void loadEmployee(int id)
         {
-            //eList = eBus.GetByDepartmentId(id);
+            eList = eBus.GetAllByDepartmentId(id);
             dtEmployee.Clear();
-            dtEmployee.Columns.Clear();
-            dtEmployee.Columns.Add("ID");
-            dtEmployee.Columns.Add("Name");
-            dtEmployee.Columns.Add("Date of Birth");
-            dtEmployee.Columns.Add("Status");
+            
 
             int stt = 1;
             foreach (EmployeeDTO e in eList)
@@ -103,38 +93,37 @@ namespace HR_Manager.DepartmentF
                 DataRow row = dtEmployee.NewRow();
                 row["ID"] = e.ID;
                 row["Name"] = e.Name;
-                row["Date of Birth"] = e.Date_of_Birth;
+                row["Gender"] = e.Gender;
+                row["Date Of Birth"] = e.Date_of_Birth.ToShortDateString();
+                row["Phone"] = e.Phone;
+                row["Email"] = e.Email;
+                row["Image"] = e.img_path;
                 row["Status"] = e.Status;
 
                 dtEmployee.Rows.Add(row);
                 stt++;
             }
-
-            bsEmployee.DataSource = dtEmployee;
-            dgvEmployees.DataSource = bsEmployee;
+            dgvEmployees.DataSource = dtEmployee;
         }
 
         private void dgvDepartment_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            if (e.RowIndex >= 0)
+            try
             {
-                id = Convert.ToInt32(dgvDepartment.Rows[e.RowIndex].Cells["ID"].Value);
-                loadEmployee(id);
+                if (e.RowIndex >= 0)
+                {
+                    // Lấy giá trị ID từ dòng được chọn
+                    int departmentId = Convert.ToInt32(dgvDepartment.Rows[e.RowIndex].Cells["ID"].Value);
+
+                    // Hiển thị danh sách nhân viên tương ứng
+                    loadEmployee(departmentId);
+                }
+            }
+            catch(Exception ex)
+            {
+
             }
         }
-
-        private void dgvDepartment_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
-        {
-            string columnName = "General Employees";
-
-            if (dgvDepartment.Columns.Contains(columnName) && e.RowIndex >= 0)
-            {
-                int id = Convert.ToInt32(dgvDepartment.Rows[e.RowIndex].Cells["ID"].Value);
-                int count = employeeCountByDepartment[id];
-                dgvDepartment.Rows[e.RowIndex].Cells[columnName].Value = count;
-            }
-        }
-
         private void btnThem_Click(object sender, EventArgs e)
         {
             AddDepartment add = new AddDepartment(this);

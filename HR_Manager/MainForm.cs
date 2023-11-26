@@ -68,15 +68,15 @@ namespace HR_Manager
             showUserControl(WorkEntry);
         }
 
-		private void btnManagement_Click(object sender, EventArgs e)
-		{
-			showUserControl(management);
-		}
+        private void btnManagement_Click(object sender, EventArgs e)
+        {
+            showUserControl(management);
+        }
 
-		private void btnDepartment_Click(object sender, EventArgs e)
-		{
-			showUserControl(mainDepartment);
-		}
-	}
+        private void btnDepartment_Click(object sender, EventArgs e)
+        {
+            showUserControl(mainDepartment);
+        }
+    }
 
 }
