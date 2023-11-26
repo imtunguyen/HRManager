@@ -14,6 +14,7 @@ using BUS;
 using DTO;
 using System.Diagnostics.Contracts;
 using LiveCharts.Helpers;
+using ClosedXML.Excel;
 
 namespace HR_Manager
 {
@@ -28,13 +29,11 @@ namespace HR_Manager
 		private DateTime startDate_5;
 		private DateTime endDate_5;
 		private WorkEntryBUS workEntryBUS;
-		private DepartmentBUS departmentBUS;
 		public DashBoard()
 		{
 			InitializeComponent();
 			statisticalBUS = new StatisticalBUS();
 			workEntryBUS = new WorkEntryBUS();
-			departmentBUS = new DepartmentBUS();
 			dt = new DataTable();
 			dt.Columns.Add("ID", typeof(int));
 			dt.Columns.Add("Name", typeof(string));
@@ -59,6 +58,7 @@ namespace HR_Manager
 			cbNam.DataSource = lcbNam;
 			cbNam.SelectedItem = 2023;
 			cbThang.DataSource = lcbThang;
+			cbThang.SelectedItem = "November";
 			loadChart();
 			startDate = new DateTime(2023, 11, 1);
 			endDate = new DateTime(2023, 11, 30);
@@ -164,6 +164,52 @@ namespace HR_Manager
 		{
 			CapNhatNam();
 			loadChart();
+		}
+
+		private void cbNam_SelectedIndexChanged(object sender, EventArgs e)
+		{
+			//CapNhatThoiGian();
+			//loadDataGridView();
+		}
+
+		private void button1_Click(object sender, EventArgs e)
+		{
+			using (SaveFileDialog sfd = new SaveFileDialog())
+			{
+				sfd.Filter = "Excel Workbook|*.xlsx";
+
+				if (sfd.ShowDialog() == DialogResult.OK)
+				{
+					try
+					{
+						using (var workbook = new XLWorkbook())
+						{
+							DataTable dt = (DataTable)dataGridView1.DataSource;
+
+							if (dt != null)
+							{
+								var worksheet = workbook.Worksheets.Add("Sheet1");
+								var title = worksheet.Cell(1, 1);
+								title.Value = "The salary information for employees in " + cbThang.SelectedValue + " " + cbNam.SelectedValue;
+								title.Style.Font.Bold = true;
+
+								worksheet.Cell(2, 1).InsertTable(dt.AsEnumerable());
+
+								workbook.SaveAs(sfd.FileName);
+								MessageBox.Show("Information exported successfully.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+							}
+							else
+							{
+								MessageBox.Show("No data to export.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+							}
+						}
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show("Error: " + ex.Message, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+				}
+			}
 		}
 	}
 }
