@@ -49,6 +49,7 @@ namespace HR_Manager
 			dataGridView1.Columns["Name"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 			dataGridView1.Columns["Required Day"].Width = 160;
 			dataGridView1.Columns["Day of work"].Width = 160;
+
 		}
 
 		private void mainLoad()
