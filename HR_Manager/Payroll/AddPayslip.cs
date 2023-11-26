@@ -56,6 +56,7 @@ namespace HR_Manager.Payroll
             contractBUS = new ContractBUS();
             workEntryBUS = new WorkEntryBUS();
             bonusAndFinesBUS = new BonusAndFinesBUS();
+            slipBUS = new PaySlipBUS();
 
             DateTime startOfTheMonth = new DateTime(DateTime.Now.Year, DateTime.Now.Month, 1);
             dateTimeFrom.Value = startOfTheMonth;
@@ -125,21 +126,38 @@ namespace HR_Manager.Payroll
         {
             if (cbEmployee.Text.Length <= 0)
             {
-                MessageBox.Show("You should click in the table!");
+                MessageBox.Show("You should click in the table!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             if (dateTimeTo.Value < dateTimeFrom.Value)
             {
-                MessageBox.Show("To date should be bigger than from date!");
+                MessageBox.Show("To date should be bigger than from date!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
             if (minimunDay() == -1)
             {
-                MessageBox.Show("Contract could be out of date or employee doesn't have contract");
+                MessageBox.Show("Contract could be out of date or employee doesn't have contract", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
                 return false;
             }
-            return true;
-        }
+			// Filter the list of pay slips for the selected employee
+			List<PaySlipDTO> employeePaySlips = slipBUS.getAll().Where(p => p.employee_id == employee_id).ToList();
+
+			foreach (PaySlipDTO p in employeePaySlips)
+			{
+				DateTime fromDate = p.from_date;
+				DateTime toDate = p.to_date;
+
+				// Check if the current pay slip overlaps with the selected date range
+				if ((dateTimeFrom.Value >= fromDate && dateTimeFrom.Value <= toDate) ||
+					(dateTimeTo.Value >= fromDate && dateTimeTo.Value <= toDate) ||
+					(dateTimeFrom.Value <= fromDate && dateTimeTo.Value >= toDate))
+				{
+					MessageBox.Show("Selected date range overlaps with an existing pay slip for the selected employee!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					return false;
+				}
+			}
+			return true;
+		}
 
         private void btnDone_Click(object sender, EventArgs e)
         {
@@ -161,7 +179,7 @@ namespace HR_Manager.Payroll
                 }
             }
             paySlip.Contract_ID = contractID;
-            MessageBox.Show(slipBUS.Add(paySlip));
+            MessageBox.Show(slipBUS.Add(paySlip), SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
 
             printPayslip();
         }

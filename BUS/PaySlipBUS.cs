@@ -24,11 +24,11 @@ namespace BUS
         {
             if(paySlipDAO.Add(paySlipDTO))
             {
-                return "thêm thành công!";
+                return SD.addSuccess;
             }
             else
             {
-                return "thêm thất bại!";
+                return SD.addFail;
             }
         }
 
