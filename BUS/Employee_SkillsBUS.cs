@@ -40,5 +40,9 @@ namespace BUS
         {
             return edao.Delete(id);
         }
+        public List<DTO.Employee_Skills> GetEmployeeID()
+        {
+            return edao.GetEmployee_ID();
+        }
     }
 }
