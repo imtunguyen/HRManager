@@ -158,21 +158,24 @@ namespace HR_Manager.DepartmentF
 			}
 		}
 
-		private void btnDelete_Click(object sender, EventArgs e)
-		{
-			// Xõa trên dtb
-			DialogResult result = MessageBox.Show(SD.tb_delete, SD.tb, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
-			if (result == DialogResult.Yes)
-			{
-				if (jobDetailBUS.Delete(idSelected))
-				{
-					MessageBox.Show(SD.deleteSuccess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
-					LoadData();
-				}
-			}
-		}
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            // Xóa trên dtb
+            
+           
+            DialogResult result = MessageBox.Show(SD.tb_delete, SD.tb, MessageBoxButtons.YesNo, MessageBoxIcon.Question);
+            if (result == DialogResult.Yes)
+            {
+                if (jobDetailBUS.Delete(idSelected))
+                {
+                    MessageBox.Show(SD.deleteSuccess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+                    LoadData();
+                }
+            }
+        }
 
-		private void rbAll_CheckedChanged(object sender, EventArgs e)
+
+        private void rbAll_CheckedChanged(object sender, EventArgs e)
 		{
 			if (rbAll.Checked)
 			{

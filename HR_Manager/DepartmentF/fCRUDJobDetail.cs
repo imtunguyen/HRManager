@@ -186,8 +186,7 @@ namespace HR_Manager.DepartmentF
 			List<Job_Detail> j = jobDetailBUS.GetAll();
 			foreach (Job_Detail job in j)
 			{
-				if(job.EmployeeID == (int)cbEmployee.SelectedValue
-					)
+				if(job.EmployeeID == (int)cbEmployee.SelectedValue)
 				{ daTonTaiNhanVienTrongPhongBan = true; break; }
 			}
 				
@@ -200,6 +199,7 @@ namespace HR_Manager.DepartmentF
 			foreach (Job_Detail job in j)
 			{
 				if (job.Position.Equals(cbPosition.SelectedValue)
+					&& job.Position.Equals(SD.positionTruongP)
 					&& job.DepartmentID == (int)cbDepartment.SelectedValue
 					&& job.Status.Equals(cbStatus.SelectedValue) && !job.Status.Equals(SD.jd_postPone))
 				{ daTonTaiTruongPhong = true; break; }
@@ -234,6 +234,7 @@ namespace HR_Manager.DepartmentF
 			foreach (Job_Detail job in j)
 			{
 				if (job.Position.Equals(cbPosition.SelectedValue)
+					&& job.Position.Equals(SD.positionTruongP)
 					&& job.DepartmentID == (int)cbDepartment.SelectedValue
 					&& job.Status.Equals(cbStatus.SelectedValue))
 				{ daTonTaiTruongPhong = true; break; }
