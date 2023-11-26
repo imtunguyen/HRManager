@@ -116,28 +116,28 @@ namespace DAO
             }
             return isExist;
         }
-        public int getDayOfWork(string dateFrom, string dateTo, int employee_id)
-        {
-            int d = 0;
-            using (SqlConnection connection = DbConnection.GetSqlConnection())
-            {
-                string query = "select count(employee_id) AS days from WORK_ENTRY where employee_id = "+employee_id+" and input_date between "+"'"+dateFrom+"'"+" and "+"'"+dateTo+"'"+" group by(employee_id)";
+		public int getDayOfWork(string dateFrom, string dateTo, int employee_id)
+		{
+			int d = 0;
+			using (SqlConnection connection = DbConnection.GetSqlConnection())
+			{
+				string query = "select count(employee_id) AS days from WORK_ENTRY where status = 'done' and employee_id = " + employee_id + " and input_date between " + "'" + dateFrom + "'" + " and " + "'" + dateTo + "'" + " group by(employee_id)";
 
-                using (SqlCommand command = new SqlCommand(query, connection))
-                {
-                    using (SqlDataReader reader = command.ExecuteReader())
-                    {
-                        while (reader.Read())
-                        {
-                            if (reader["days"].ToString() != "")
-                            {
-                                d = Convert.ToInt32(reader["days"]);
-                            }
-                        }
-                    }
-                }
-            }
-            return d;
-        }
-    }
+				using (SqlCommand command = new SqlCommand(query, connection))
+				{
+					using (SqlDataReader reader = command.ExecuteReader())
+					{
+						while (reader.Read())
+						{
+							if (reader["days"].ToString() != "")
+							{
+								d = Convert.ToInt32(reader["days"]);
+							}
+						}
+					}
+				}
+			}
+			return d;
+		}
+	}
 }

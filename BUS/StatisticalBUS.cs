@@ -3,6 +3,7 @@ using DTO;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.AccessControl;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -20,6 +21,8 @@ namespace BUS
 		public int GetCountActiveEmployee() { return statisticalDAO.GetCountActiveEmployee(); }
 
 		public List<EmployeeDTO> GetInfoSalaryEmployee(DateTime fromDate, DateTime toDate) { return statisticalDAO.GetInfoSalaryEmployee(fromDate, toDate); }
+
+		public List<EmployeeDTO> GetTop5(DateTime fromDate, DateTime toDate) { return statisticalDAO.Top5Employee(fromDate, toDate); }
 
 	}
 }
