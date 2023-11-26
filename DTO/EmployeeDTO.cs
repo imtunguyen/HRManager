@@ -35,27 +35,34 @@ namespace DTO
             this.img_path = img_path;
         }
 
-        public string JobName { get; set; }
-        public string DepartmentName { get; set; }
         public int RequiredDay { get; set; }
-        public Decimal Total { get; set; }
+        public Decimal TotalSalary { get; set; }
+        public decimal BonusTotal { get; set; }
 
-        public int PaySlipID { get; set; }
-        public DateTime PaySlipDateFrom { get; set; }
-        public DateTime PaySlipDateTo { get; set; }
+        public decimal FinesTotal { get; set; }
 
-        public EmployeeDTO(int iD, string name, string job_name, string department_name, int required_day, decimal basepay, decimal total, int payslip_id, DateTime payslipDateFrom, DateTime paySlipDateTo)
+        // chi tiết lương
+        public EmployeeDTO(int iD, string name, int requiredDay, decimal basepay, decimal bonus, decimal fines, decimal total)
         {
             ID= iD;
             Name = name;
-            JobName = job_name; 
-            DepartmentName = department_name;
-            RequiredDay = required_day; 
+            RequiredDay = requiredDay; 
             base_pay = basepay;
-            Total = total;
-            PaySlipID = payslip_id;
-            PaySlipDateTo = paySlipDateTo;
-            PaySlipDateFrom = payslipDateFrom;
+            BonusTotal = bonus;
+            FinesTotal = fines;
+            TotalSalary = total;
+        }
+
+        public string Job { get; set; }
+        public string Department { get; set; }
+        // top 5 
+        public EmployeeDTO(int id, string name, string job, string department, decimal total)
+        {
+            ID = id;
+            Name = name;
+            Job = job;
+            Department = department;
+            TotalSalary = total;
         }
     }
 }

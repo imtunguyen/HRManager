@@ -182,15 +182,14 @@ namespace HR_Manager.DepartmentF
 				return false;
 			}
 			bool daTonTaiNhanVienTrongPhongBan = false;
-			
+
 			List<Job_Detail> j = jobDetailBUS.GetAll();
 			foreach (Job_Detail job in j)
 			{
-				if(job.EmployeeID == (int)cbEmployee.SelectedValue
-					)
+				if (job.EmployeeID == (int)cbEmployee.SelectedValue)
 				{ daTonTaiNhanVienTrongPhongBan = true; break; }
 			}
-				
+
 			if (daTonTaiNhanVienTrongPhongBan)
 			{
 				MessageBox.Show("The staff is already present in a certain department.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
@@ -200,11 +199,12 @@ namespace HR_Manager.DepartmentF
 			foreach (Job_Detail job in j)
 			{
 				if (job.Position.Equals(cbPosition.SelectedValue)
+					&& job.Position.Equals(SD.positionTruongP)
 					&& job.DepartmentID == (int)cbDepartment.SelectedValue
 					&& job.Status.Equals(cbStatus.SelectedValue) && !job.Status.Equals(SD.jd_postPone))
 				{ daTonTaiTruongPhong = true; break; }
 			}
-			if(daTonTaiTruongPhong)
+			if (daTonTaiTruongPhong)
 			{
 				MessageBox.Show("This department already has a department head", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return false;
@@ -234,6 +234,7 @@ namespace HR_Manager.DepartmentF
 			foreach (Job_Detail job in j)
 			{
 				if (job.Position.Equals(cbPosition.SelectedValue)
+					&& job.Position.Equals(SD.positionTruongP)
 					&& job.DepartmentID == (int)cbDepartment.SelectedValue
 					&& job.Status.Equals(cbStatus.SelectedValue))
 				{ daTonTaiTruongPhong = true; break; }
