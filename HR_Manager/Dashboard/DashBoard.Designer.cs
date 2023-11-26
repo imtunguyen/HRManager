@@ -41,6 +41,7 @@ namespace HR_Manager
 		private void InitializeComponent()
 		{
 			ComponentResourceManager resources = new ComponentResourceManager(typeof(DashBoard));
+			DataGridViewCellStyle dataGridViewCellStyle1 = new DataGridViewCellStyle();
 			panel1 = new Panel();
 			lblCountDepartment = new Label();
 			label1 = new Label();
@@ -55,8 +56,7 @@ namespace HR_Manager
 			pictureBox3 = new PictureBox();
 			cartesianChart1 = new LiveCharts.WinForms.CartesianChart();
 			label7 = new Label();
-			label8 = new Label();
-			comboBox1 = new ComboBox();
+			cbNam1 = new ComboBox();
 			label9 = new Label();
 			dataGridView1 = new DataGridView();
 			cbNam = new ComboBox();
@@ -198,6 +198,7 @@ namespace HR_Manager
 			// 
 			// cartesianChart1
 			// 
+			cartesianChart1.Cursor = Cursors.Hand;
 			cartesianChart1.Location = new Point(8, 220);
 			cartesianChart1.Name = "cartesianChart1";
 			cartesianChart1.Size = new Size(1119, 274);
@@ -210,27 +211,20 @@ namespace HR_Manager
 			label7.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
 			label7.Location = new Point(3, 178);
 			label7.Name = "label7";
-			label7.Size = new Size(644, 28);
+			label7.Size = new Size(485, 28);
 			label7.TabIndex = 2;
-			label7.Text = "Overview of the top 5 highest-paid employees in each department\r\n";
+			label7.Text = "Top 5 employees with the highest salaries by year";
 			// 
-			// label8
+			// cbNam1
 			// 
-			label8.AutoSize = true;
-			label8.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-			label8.Location = new Point(813, 182);
-			label8.Name = "label8";
-			label8.Size = new Size(138, 28);
-			label8.TabIndex = 3;
-			label8.Text = "Department: ";
-			// 
-			// comboBox1
-			// 
-			comboBox1.FormattingEnabled = true;
-			comboBox1.Location = new Point(957, 182);
-			comboBox1.Name = "comboBox1";
-			comboBox1.Size = new Size(169, 28);
-			comboBox1.TabIndex = 4;
+			cbNam1.Cursor = Cursors.Hand;
+			cbNam1.DropDownStyle = ComboBoxStyle.DropDownList;
+			cbNam1.FormattingEnabled = true;
+			cbNam1.Location = new Point(957, 182);
+			cbNam1.Name = "cbNam1";
+			cbNam1.Size = new Size(169, 28);
+			cbNam1.TabIndex = 4;
+			cbNam1.SelectedValueChanged += cbNam1_SelectedValueChanged;
 			// 
 			// label9
 			// 
@@ -244,9 +238,23 @@ namespace HR_Manager
 			// 
 			// dataGridView1
 			// 
-			dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			dataGridView1.BorderStyle = BorderStyle.None;
+			dataGridView1.CellBorderStyle = DataGridViewCellBorderStyle.None;
+			dataGridViewCellStyle1.Alignment = DataGridViewContentAlignment.MiddleLeft;
+			dataGridViewCellStyle1.BackColor = SystemColors.Control;
+			dataGridViewCellStyle1.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
+			dataGridViewCellStyle1.ForeColor = SystemColors.WindowText;
+			dataGridViewCellStyle1.SelectionBackColor = SystemColors.Highlight;
+			dataGridViewCellStyle1.SelectionForeColor = SystemColors.HighlightText;
+			dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
+			dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
+			dataGridView1.ColumnHeadersHeight = 50;
+			dataGridView1.Cursor = Cursors.Hand;
 			dataGridView1.Location = new Point(3, 537);
 			dataGridView1.Name = "dataGridView1";
+			dataGridView1.ReadOnly = true;
+			dataGridView1.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
+			dataGridView1.RowHeadersVisible = false;
 			dataGridView1.RowHeadersWidth = 51;
 			dataGridView1.RowTemplate.Height = 29;
 			dataGridView1.Size = new Size(1123, 198);
@@ -254,6 +262,8 @@ namespace HR_Manager
 			// 
 			// cbNam
 			// 
+			cbNam.Cursor = Cursors.Hand;
+			cbNam.DropDownStyle = ComboBoxStyle.DropDownList;
 			cbNam.FormattingEnabled = true;
 			cbNam.Location = new Point(818, 497);
 			cbNam.Name = "cbNam";
@@ -262,11 +272,14 @@ namespace HR_Manager
 			// 
 			// cbThang
 			// 
+			cbThang.Cursor = Cursors.Hand;
+			cbThang.DropDownStyle = ComboBoxStyle.DropDownList;
 			cbThang.FormattingEnabled = true;
 			cbThang.Location = new Point(975, 497);
 			cbThang.Name = "cbThang";
 			cbThang.Size = new Size(151, 28);
 			cbThang.TabIndex = 6;
+			cbThang.SelectedValueChanged += cbThang_SelectedValueChanged;
 			// 
 			// DashBoard
 			// 
@@ -276,8 +289,7 @@ namespace HR_Manager
 			Controls.Add(cbThang);
 			Controls.Add(cbNam);
 			Controls.Add(dataGridView1);
-			Controls.Add(comboBox1);
-			Controls.Add(label8);
+			Controls.Add(cbNam1);
 			Controls.Add(label9);
 			Controls.Add(label7);
 			Controls.Add(cartesianChart1);
@@ -318,7 +330,7 @@ namespace HR_Manager
 		private LiveCharts.WinForms.CartesianChart cartesianChart1;
 		private Label label7;
 		private Label label8;
-		private ComboBox comboBox1;
+		private ComboBox cbNam1;
 		private Label label9;
 		private DataGridView dataGridView1;
 		private ComboBox cbNam;
