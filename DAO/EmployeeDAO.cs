@@ -191,5 +191,56 @@ namespace DAO
             }
             return list;
         }
+        public List<EmployeeDTO> GetAllByDepartmentID(int id)
+        {
+            List<EmployeeDTO> elist = new List<EmployeeDTO>();
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "SELECT * FROM EMPLOYEE em " +
+                       "JOIN JOB_DETAILS jd ON jd.employee_id = em.id " +
+                       "JOIN DEPARTMENT de ON de.id = jd.department_id " +
+                       "WHERE de.id = @DepartmentID";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@DepartmentID", id);
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        EmployeeDTO e = new EmployeeDTO();
+                        e.ID = Convert.ToInt32(reader["id"].ToString());
+                        e.Name = reader["Name"].ToString();
+                        e.Gender = reader["gender"].ToString();
+                        e.Date_of_Birth = DateTime.Parse(reader["date_Of_Birth"].ToString());
+                        e.Phone = reader["phone"].ToString();
+                        e.Email = reader["email"].ToString();
+                        e.img_path = reader["img_path"].ToString();
+                        e.Status = reader["status"].ToString();
+                        elist.Add(e);
+                    }
+                }
+            }
+            return elist;
+        }
+        public int GetIDByName(string name)
+        {
+            EmployeeDTO e = new EmployeeDTO();
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "SELECT id FROM EMPLOYEE WHERE name = @name";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    command.Parameters.AddWithValue("@name", name);
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        e.ID = Convert.ToInt32(reader["id"].ToString());
+                        //e.Name = reader["name"].ToString();
+                    }
+                }
+            }
+
+            // Trả về giá trị ID
+            return e.ID;
+        }
     }
 }

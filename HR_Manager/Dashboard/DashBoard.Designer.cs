@@ -61,6 +61,7 @@ namespace HR_Manager
 			dataGridView1 = new DataGridView();
 			cbNam = new ComboBox();
 			cbThang = new ComboBox();
+			button1 = new Button();
 			panel1.SuspendLayout();
 			((ISupportInitialize)pictureBox1).BeginInit();
 			panel2.SuspendLayout();
@@ -269,6 +270,7 @@ namespace HR_Manager
 			cbNam.Name = "cbNam";
 			cbNam.Size = new Size(151, 28);
 			cbNam.TabIndex = 6;
+			cbNam.SelectedIndexChanged += cbNam_SelectedIndexChanged;
 			// 
 			// cbThang
 			// 
@@ -281,11 +283,23 @@ namespace HR_Manager
 			cbThang.TabIndex = 6;
 			cbThang.SelectedValueChanged += cbThang_SelectedValueChanged;
 			// 
+			// button1
+			// 
+			button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+			button1.Location = new Point(246, 497);
+			button1.Name = "button1";
+			button1.Size = new Size(94, 29);
+			button1.TabIndex = 7;
+			button1.Text = "Export";
+			button1.UseVisualStyleBackColor = true;
+			button1.Click += button1_Click;
+			// 
 			// DashBoard
 			// 
 			AutoScaleDimensions = new SizeF(8F, 20F);
 			AutoScaleMode = AutoScaleMode.Font;
 			BackColor = Color.White;
+			Controls.Add(button1);
 			Controls.Add(cbThang);
 			Controls.Add(cbNam);
 			Controls.Add(dataGridView1);
@@ -335,5 +349,6 @@ namespace HR_Manager
 		private DataGridView dataGridView1;
 		private ComboBox cbNam;
 		private ComboBox cbThang;
+		private Button button1;
 	}
 }

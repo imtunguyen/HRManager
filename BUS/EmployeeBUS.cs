@@ -18,10 +18,13 @@ namespace BUS
         {
             return edao.GetAll();
         }
-
 		public EmployeeDTO GetById(int id)
         {
             return edao.GetById(id);
+        }
+        public bool Delete(int id)
+        {
+            return edao.Delete(id);
         }
         public bool Add(EmployeeDTO dto)
         {
@@ -31,21 +34,22 @@ namespace BUS
         {
             return edao.Update(id, dto);
         }
-        public bool Delete(int id)
-        {
-            return edao.Delete(id);
-        }
-
-
-
+        
         public List<EmployeeDTO> GetEmployeeHaveContractRunning()
         {
             return edao.GetEmployeeHaveContractRunning();
         }
-
         public List<EmployeeDTO> SearchByName(string name)
         {
             return edao.searchByName(name);
+        }
+        public List<EmployeeDTO> GetAllByDepartmentId(int id)
+        {
+            return edao.GetAllByDepartmentID(id);
+        }
+        public int GetIDByName(string name)
+        {
+            return edao.GetIDByName(name);
         }
     }
 
