@@ -36,8 +36,8 @@
             btnTimKiem = new Button();
             btnLamMoi = new Button();
             gbStatus = new GroupBox();
-            rbResignation = new RadioButton();
-            rbOfficial = new RadioButton();
+            rbUnskilled = new RadioButton();
+            rbSkilled = new RadioButton();
             rbAll = new RadioButton();
             ((System.ComponentModel.ISupportInitialize)dgvEmployee_Skills).BeginInit();
             gbStatus.SuspendLayout();
@@ -71,7 +71,7 @@
             dgvEmployee_Skills.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
             dgvEmployee_Skills.Size = new Size(955, 445);
             dgvEmployee_Skills.TabIndex = 0;
-            dgvEmployee_Skills.CellContentClick += dgvEmployee_Skills_CellContentClick;
+            dgvEmployee_Skills.CellClick += dgvEmployee_Skills_CellClick;
             // 
             // btnThem
             // 
@@ -146,8 +146,8 @@
             // 
             // gbStatus
             // 
-            gbStatus.Controls.Add(rbResignation);
-            gbStatus.Controls.Add(rbOfficial);
+            gbStatus.Controls.Add(rbUnskilled);
+            gbStatus.Controls.Add(rbSkilled);
             gbStatus.Controls.Add(rbAll);
             gbStatus.Cursor = Cursors.Hand;
             gbStatus.Location = new Point(529, 40);
@@ -158,33 +158,35 @@
             gbStatus.TabIndex = 6;
             gbStatus.TabStop = false;
             // 
-            // rbResignation
+            // rbUnskilled
             // 
-            rbResignation.AutoSize = true;
-            rbResignation.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            rbResignation.ForeColor = Color.Red;
-            rbResignation.Location = new Point(201, 12);
-            rbResignation.Margin = new Padding(3, 2, 3, 2);
-            rbResignation.Name = "rbResignation";
-            rbResignation.Size = new Size(133, 19);
-            rbResignation.TabIndex = 1;
-            rbResignation.TabStop = true;
-            rbResignation.Text = "Unskilled Employee";
-            rbResignation.UseVisualStyleBackColor = true;
+            rbUnskilled.AutoSize = true;
+            rbUnskilled.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            rbUnskilled.ForeColor = Color.Red;
+            rbUnskilled.Location = new Point(201, 12);
+            rbUnskilled.Margin = new Padding(3, 2, 3, 2);
+            rbUnskilled.Name = "rbUnskilled";
+            rbUnskilled.Size = new Size(133, 19);
+            rbUnskilled.TabIndex = 1;
+            rbUnskilled.TabStop = true;
+            rbUnskilled.Text = "Unskilled Employee";
+            rbUnskilled.UseVisualStyleBackColor = true;
+            rbUnskilled.CheckedChanged += rbUnskilled_CheckedChanged;
             // 
-            // rbOfficial
+            // rbSkilled
             // 
-            rbOfficial.AutoSize = true;
-            rbOfficial.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-            rbOfficial.ForeColor = Color.FromArgb(9, 146, 104);
-            rbOfficial.Location = new Point(64, 12);
-            rbOfficial.Margin = new Padding(3, 2, 3, 2);
-            rbOfficial.Name = "rbOfficial";
-            rbOfficial.Size = new Size(119, 19);
-            rbOfficial.TabIndex = 1;
-            rbOfficial.TabStop = true;
-            rbOfficial.Text = "Skilled Employee";
-            rbOfficial.UseVisualStyleBackColor = true;
+            rbSkilled.AutoSize = true;
+            rbSkilled.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
+            rbSkilled.ForeColor = Color.FromArgb(9, 146, 104);
+            rbSkilled.Location = new Point(64, 12);
+            rbSkilled.Margin = new Padding(3, 2, 3, 2);
+            rbSkilled.Name = "rbSkilled";
+            rbSkilled.Size = new Size(119, 19);
+            rbSkilled.TabIndex = 1;
+            rbSkilled.TabStop = true;
+            rbSkilled.Text = "Skilled Employee";
+            rbSkilled.UseVisualStyleBackColor = true;
+            rbSkilled.CheckedChanged += rbSkilled_CheckedChanged;
             // 
             // rbAll
             // 
@@ -199,6 +201,7 @@
             rbAll.TabStop = true;
             rbAll.Text = "All";
             rbAll.UseVisualStyleBackColor = true;
+            rbAll.CheckedChanged += rbAll_CheckedChanged;
             // 
             // Employee_Skills
             // 
@@ -231,8 +234,8 @@
         private Button btnTimKiem;
         private Button btnLamMoi;
         private GroupBox gbStatus;
-        private RadioButton rbResignation;
-        private RadioButton rbOfficial;
+        private RadioButton rbUnskilled;
+        private RadioButton rbSkilled;
         private RadioButton rbAll;
     }
 }

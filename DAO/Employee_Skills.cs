@@ -127,7 +127,25 @@ namespace DAO
                 }
             }
         }
-
+        public List<DTO.Employee_Skills> GetEmployee_ID()
+        {
+            List<DTO.Employee_Skills> elist = new List<DTO.Employee_Skills>();
+            using(SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "SELECT employee_id FROM EMPLOYEE_SKILLS";
+                using(SqlCommand command = new SqlCommand(query, connection))
+                {
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        DTO.Employee_Skills e = new DTO.Employee_Skills();
+                        e.Employee_ID = Convert.ToInt32(reader["employee_id"]);
+                        elist.Add(e);
+                    }
+                }
+            }
+            return elist;
+        }
         public bool Update(DTO.Employee_Skills t)
         {
             throw new NotImplementedException();
