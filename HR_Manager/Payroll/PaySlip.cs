@@ -174,9 +174,9 @@ namespace HR_Manager.Payroll
 					graphics.DrawString(listEmployee[i].Name, new System.Drawing.Font("Arial", 11, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 250));
 					graphics.DrawString(dateFrom + " to " + dateTo, new System.Drawing.Font("Arial", 11, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 290));
 					graphics.DrawString(dayOfWork + "", new System.Drawing.Font("Arial", 11, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 330));
-					graphics.DrawString(feeBonus + " VND", new System.Drawing.Font("Arial", 11, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 370));
-					graphics.DrawString(feeFines + " VND", new System.Drawing.Font("Arial", 11, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 410)); ;
-					graphics.DrawString(total + " VND", new System.Drawing.Font("Arial", 11, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 450));
+					graphics.DrawString(feeBonus + " $", new System.Drawing.Font("Arial", 11, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 370));
+					graphics.DrawString(feeFines + " $", new System.Drawing.Font("Arial", 11, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 410)); ;
+					graphics.DrawString(total + " $", new System.Drawing.Font("Arial", 11, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 450));
 
 					string filename = @"D:\Payslip\" + listEmployee[i].Name + " from " + dateFrom + " to " + dateTo + ".pdf";
 

@@ -287,9 +287,9 @@ namespace HR_Manager.Payroll
 			e.Graphics.DrawString(cbEmployee.Text.Substring(0, cbEmployee.Text.IndexOf("_")), new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 250));
 			e.Graphics.DrawString("from " + dateFrom + " to " + dateTo, new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 290));
 			e.Graphics.DrawString(textBox1.Text, new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 330));
-			e.Graphics.DrawString(feeBonus.ToString() + " VND", new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 370));
-			e.Graphics.DrawString(feeFines.ToString() + " VND", new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 410)); ;
-			e.Graphics.DrawString(textBox2.Text + " VND", new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 450));
+			e.Graphics.DrawString(feeBonus.ToString() + " $", new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 370));
+			e.Graphics.DrawString(feeFines.ToString() + " $", new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 410)); ;
+			e.Graphics.DrawString(textBox2.Text + " $", new System.Drawing.Font("Arial", 13, FontStyle.Regular), Brushes.Black, new System.Drawing.Point(250, 450));
 
 
 		}
