@@ -352,6 +352,10 @@ namespace HR_Manager.Payroll
 				MessageBox.Show("The item to be edited is not selected", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return;
 			}
+			if(contract.Status.Equals(SD.Contract_Cacelled))
+			{
+				MessageBox.Show("The contract with Cancelled status cannot be edited.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+			}
 			fCRUDContract f = new fCRUDContract(this, "Edit", contract);
 			f.ShowDialog();
 		}

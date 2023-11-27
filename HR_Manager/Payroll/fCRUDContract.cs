@@ -61,7 +61,7 @@ namespace HR_Manager.Payroll
 				timeStart.Value = objUpdate.FormDate;
 				timeEnd.Value = objUpdate.ToDate;
 				num.Value = objUpdate.RequiredDay;
-				if (objUpdate.Status.Equals(SD.Contract_Running))
+				if (objUpdate.Status.Equals(SD.Contract_Running) || objUpdate.Status.Equals(SD.Contract_Expired))
 				{
 					cbEmployee.Enabled = false;
 					cbJob.Enabled = false;
