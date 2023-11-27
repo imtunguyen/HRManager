@@ -170,7 +170,7 @@ namespace DAO
             List<EmployeeDTO> list = new List<EmployeeDTO>();
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "select * from EMPLOYEE where name LIKE '" + name + "%'";
+                string query = "select * from EMPLOYEE where name LIKE '%" + name + "%'";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     SqlDataReader reader = command.ExecuteReader();
