@@ -126,7 +126,7 @@ namespace DAO
             List<PaySlipDTO> list = new List<PaySlipDTO>();
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "select p.* from PAYSLIP as p join EMPLOYEE as e on e.id = p.employee_id where e.name LIKE '"+name+"%' ";
+                string query = "select p.* from PAYSLIP as p join EMPLOYEE as e on e.id = p.employee_id where e.name LIKE '%"+name+"%' ";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -154,7 +154,7 @@ namespace DAO
             List<PaySlipDTO> list = new List<PaySlipDTO>();
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "select p.* from PAYSLIP as p join EMPLOYEE as e on e.id = p.employee_id where e.name LIKE '"+name+"%' or p.status LIKE '"+status+"%';";
+                string query = "select p.* from PAYSLIP as p join EMPLOYEE as e on e.id = p.employee_id where e.name LIKE '%"+name+"%' or p.status LIKE '%"+status+"%';";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
@@ -184,7 +184,7 @@ namespace DAO
             List<PaySlipDTO> list = new List<PaySlipDTO>();
             using (SqlConnection connection = DbConnection.GetSqlConnection())
             {
-                string query = "select * from PAYSLIP where status LIKE '"+status+"%';";
+                string query = "select * from PAYSLIP where status LIKE '%"+status+"%';";
                 using (SqlCommand command = new SqlCommand(query, connection))
                 {
                     using (SqlDataReader reader = command.ExecuteReader())
