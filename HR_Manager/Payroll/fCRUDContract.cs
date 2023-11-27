@@ -121,7 +121,7 @@ namespace HR_Manager.Payroll
 				MessageBox.Show("Base salary not empty", SD.tb, ok, war);
 				return false;
 			}
-			if (Convert.ToDouble(txtBasePay.Text) < 5000000)
+			if (Convert.ToDouble(txtBasePay.Text) < 500)
 			{
 				MessageBox.Show("Minimum wage must be greater than or equal to 5.000.000 VNĐ", SD.tb, ok, war);
 				return false;
