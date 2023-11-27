@@ -33,7 +33,7 @@ namespace HR_Manager.Payroll
             cbEmployee.Text = employee.Name + "_" + employee.ID;
             string s = cbEmployee.Text;
             employee_id = Convert.ToInt32(s.Substring(s.IndexOf("_") + 1));
-
+            cbEmployee.Enabled = false;
             addPayslip = add;
         }
         private void AddBonusAndFines_Load(object sender, EventArgs e)
