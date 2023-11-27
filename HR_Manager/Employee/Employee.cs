@@ -12,13 +12,13 @@ using System.Windows.Forms;
 
 namespace HR_Manager.Employee
 {
-    public partial class Employee : UserControl
-    {
-        DataTable dt = new DataTable();
-        public Employee()
-        {
-            InitializeComponent();
+	public partial class Employee : UserControl
+	{
+		DataTable dt = new DataTable();
+		public Employee()
+		{
+			InitializeComponent();
 
-        }
-    }
+		}
+	}
 }

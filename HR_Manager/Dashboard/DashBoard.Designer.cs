@@ -79,7 +79,7 @@ namespace HR_Manager
 			panel1.Controls.Add(pictureBox1);
 			panel1.Location = new Point(3, 12);
 			panel1.Name = "panel1";
-			panel1.Size = new Size(367, 153);
+			panel1.Size = new Size(430, 160);
 			panel1.TabIndex = 0;
 			// 
 			// lblCountDepartment
@@ -87,7 +87,7 @@ namespace HR_Manager
 			lblCountDepartment.AutoSize = true;
 			lblCountDepartment.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
 			lblCountDepartment.ForeColor = Color.DimGray;
-			lblCountDepartment.Location = new Point(159, 78);
+			lblCountDepartment.Location = new Point(165, 77);
 			lblCountDepartment.Name = "lblCountDepartment";
 			lblCountDepartment.Size = new Size(60, 46);
 			lblCountDepartment.TabIndex = 2;
@@ -97,7 +97,7 @@ namespace HR_Manager
 			// 
 			label1.AutoSize = true;
 			label1.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-			label1.Location = new Point(159, 28);
+			label1.Location = new Point(165, 27);
 			label1.Name = "label1";
 			label1.Size = new Size(154, 31);
 			label1.TabIndex = 1;
@@ -108,7 +108,7 @@ namespace HR_Manager
 			pictureBox1.Image = (Image)resources.GetObject("pictureBox1.Image");
 			pictureBox1.Location = new Point(13, 3);
 			pictureBox1.Name = "pictureBox1";
-			pictureBox1.Size = new Size(140, 145);
+			pictureBox1.Size = new Size(140, 152);
 			pictureBox1.SizeMode = PictureBoxSizeMode.CenterImage;
 			pictureBox1.TabIndex = 0;
 			pictureBox1.TabStop = false;
@@ -119,9 +119,9 @@ namespace HR_Manager
 			panel2.Controls.Add(lblCountActiveEmployee);
 			panel2.Controls.Add(label4);
 			panel2.Controls.Add(pictureBox2);
-			panel2.Location = new Point(381, 12);
+			panel2.Location = new Point(459, 11);
 			panel2.Name = "panel2";
-			panel2.Size = new Size(367, 153);
+			panel2.Size = new Size(430, 160);
 			panel2.TabIndex = 0;
 			// 
 			// lblCountActiveEmployee
@@ -129,7 +129,7 @@ namespace HR_Manager
 			lblCountActiveEmployee.AutoSize = true;
 			lblCountActiveEmployee.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
 			lblCountActiveEmployee.ForeColor = Color.DimGray;
-			lblCountActiveEmployee.Location = new Point(159, 78);
+			lblCountActiveEmployee.Location = new Point(174, 78);
 			lblCountActiveEmployee.Name = "lblCountActiveEmployee";
 			lblCountActiveEmployee.Size = new Size(60, 46);
 			lblCountActiveEmployee.TabIndex = 2;
@@ -139,7 +139,7 @@ namespace HR_Manager
 			// 
 			label4.AutoSize = true;
 			label4.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-			label4.Location = new Point(159, 28);
+			label4.Location = new Point(174, 28);
 			label4.Name = "label4";
 			label4.Size = new Size(201, 31);
 			label4.TabIndex = 1;
@@ -150,7 +150,7 @@ namespace HR_Manager
 			pictureBox2.Image = (Image)resources.GetObject("pictureBox2.Image");
 			pictureBox2.Location = new Point(13, 3);
 			pictureBox2.Name = "pictureBox2";
-			pictureBox2.Size = new Size(140, 145);
+			pictureBox2.Size = new Size(140, 152);
 			pictureBox2.SizeMode = PictureBoxSizeMode.CenterImage;
 			pictureBox2.TabIndex = 0;
 			pictureBox2.TabStop = false;
@@ -161,9 +161,9 @@ namespace HR_Manager
 			panel3.Controls.Add(lblCountContract);
 			panel3.Controls.Add(label6);
 			panel3.Controls.Add(pictureBox3);
-			panel3.Location = new Point(759, 12);
+			panel3.Location = new Point(915, 11);
 			panel3.Name = "panel3";
-			panel3.Size = new Size(367, 153);
+			panel3.Size = new Size(430, 160);
 			panel3.TabIndex = 0;
 			// 
 			// lblCountContract
@@ -171,7 +171,7 @@ namespace HR_Manager
 			lblCountContract.AutoSize = true;
 			lblCountContract.Font = new Font("Segoe UI", 19.8000011F, FontStyle.Bold, GraphicsUnit.Point);
 			lblCountContract.ForeColor = Color.DimGray;
-			lblCountContract.Location = new Point(159, 78);
+			lblCountContract.Location = new Point(184, 78);
 			lblCountContract.Name = "lblCountContract";
 			lblCountContract.Size = new Size(60, 46);
 			lblCountContract.TabIndex = 2;
@@ -181,7 +181,7 @@ namespace HR_Manager
 			// 
 			label6.AutoSize = true;
 			label6.Font = new Font("Segoe UI", 13.8F, FontStyle.Bold, GraphicsUnit.Point);
-			label6.Location = new Point(159, 28);
+			label6.Location = new Point(184, 28);
 			label6.Name = "label6";
 			label6.Size = new Size(116, 31);
 			label6.TabIndex = 1;
@@ -192,7 +192,7 @@ namespace HR_Manager
 			pictureBox3.Image = (Image)resources.GetObject("pictureBox3.Image");
 			pictureBox3.Location = new Point(13, 3);
 			pictureBox3.Name = "pictureBox3";
-			pictureBox3.Size = new Size(140, 145);
+			pictureBox3.Size = new Size(140, 153);
 			pictureBox3.SizeMode = PictureBoxSizeMode.CenterImage;
 			pictureBox3.TabIndex = 0;
 			pictureBox3.TabStop = false;
@@ -202,7 +202,7 @@ namespace HR_Manager
 			cartesianChart1.Cursor = Cursors.Hand;
 			cartesianChart1.Location = new Point(8, 220);
 			cartesianChart1.Name = "cartesianChart1";
-			cartesianChart1.Size = new Size(1119, 274);
+			cartesianChart1.Size = new Size(1339, 274);
 			cartesianChart1.TabIndex = 1;
 			cartesianChart1.Text = "cartesianChart1";
 			// 
@@ -231,7 +231,7 @@ namespace HR_Manager
 			// 
 			label9.AutoSize = true;
 			label9.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
-			label9.Location = new Point(8, 497);
+			label9.Location = new Point(0, 535);
 			label9.Name = "label9";
 			label9.Size = new Size(223, 28);
 			label9.TabIndex = 2;
@@ -251,14 +251,14 @@ namespace HR_Manager
 			dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			dataGridView1.ColumnHeadersHeight = 50;
 			dataGridView1.Cursor = Cursors.Hand;
-			dataGridView1.Location = new Point(3, 537);
+			dataGridView1.Location = new Point(0, 584);
 			dataGridView1.Name = "dataGridView1";
 			dataGridView1.ReadOnly = true;
 			dataGridView1.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
 			dataGridView1.RowHeadersVisible = false;
 			dataGridView1.RowHeadersWidth = 51;
 			dataGridView1.RowTemplate.Height = 29;
-			dataGridView1.Size = new Size(1123, 198);
+			dataGridView1.Size = new Size(1347, 263);
 			dataGridView1.TabIndex = 5;
 			// 
 			// cbNam
@@ -266,7 +266,7 @@ namespace HR_Manager
 			cbNam.Cursor = Cursors.Hand;
 			cbNam.DropDownStyle = ComboBoxStyle.DropDownList;
 			cbNam.FormattingEnabled = true;
-			cbNam.Location = new Point(818, 497);
+			cbNam.Location = new Point(1039, 539);
 			cbNam.Name = "cbNam";
 			cbNam.Size = new Size(151, 28);
 			cbNam.TabIndex = 6;
@@ -277,7 +277,7 @@ namespace HR_Manager
 			cbThang.Cursor = Cursors.Hand;
 			cbThang.DropDownStyle = ComboBoxStyle.DropDownList;
 			cbThang.FormattingEnabled = true;
-			cbThang.Location = new Point(975, 497);
+			cbThang.Location = new Point(1196, 539);
 			cbThang.Name = "cbThang";
 			cbThang.Size = new Size(151, 28);
 			cbThang.TabIndex = 6;
@@ -286,7 +286,7 @@ namespace HR_Manager
 			// button1
 			// 
 			button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			button1.Location = new Point(246, 497);
+			button1.Location = new Point(229, 535);
 			button1.Name = "button1";
 			button1.Size = new Size(94, 29);
 			button1.TabIndex = 7;
@@ -312,7 +312,7 @@ namespace HR_Manager
 			Controls.Add(panel1);
 			Margin = new Padding(3, 4, 3, 4);
 			Name = "DashBoard";
-			Size = new Size(1130, 738);
+			Size = new Size(1350, 850);
 			panel1.ResumeLayout(false);
 			panel1.PerformLayout();
 			((ISupportInitialize)pictureBox1).EndInit();

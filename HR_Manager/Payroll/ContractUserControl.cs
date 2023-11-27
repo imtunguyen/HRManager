@@ -36,7 +36,7 @@ namespace HR_Manager.Payroll
 			dt.Columns.Add("Name", typeof(string));
 			dt.Columns.Add("Employee", typeof(string));
 			dt.Columns.Add("Base Pay", typeof(decimal));
-			dt.Columns.Add("Required Day", typeof(int));
+			dt.Columns.Add("Day", typeof(int));
 			dt.Columns.Add("Status", typeof(string));
 			dt.Columns.Add("From Date", typeof(string));
 			dt.Columns.Add("To Date", typeof(string));
@@ -49,8 +49,8 @@ namespace HR_Manager.Payroll
 			dataGridView1.Columns["Job"].Width = 150;
 			dataGridView1.Columns["From Date"].Width = 140;
 			dataGridView1.Columns["To Date"].Width = 130;
-			dataGridView1.Columns["Required Day"].Width = 180;
-			dataGridView1.Columns["Detail"].Width = 300;
+			dataGridView1.Columns["Day"].Width = 60;
+			dataGridView1.Columns["Detail"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 		}
 
 		public void MainLoad()
@@ -76,7 +76,7 @@ namespace HR_Manager.Payroll
 				row["From Date"] = contract.FormDate.ToShortDateString();
 				row["To Date"] = contract.ToDate.ToShortDateString();
 				row["Job"] = jBus.GetById(contract.JobId).Job_Name;
-				row["Required Day"] = contract.RequiredDay;
+				row["Day"] = contract.RequiredDay;
 				row["Base Pay"] = contract.BasePay;
 				row["Status"] = contract.Status;
 				row["Detail"] = contract.Detail;
@@ -97,7 +97,7 @@ namespace HR_Manager.Payroll
 				row["From Date"] = contract.FormDate.ToShortDateString();
 				row["To Date"] = contract.ToDate.ToShortDateString();
 				row["Job"] = jBus.GetById(contract.JobId).Job_Name;
-				row["Required Day"] = contract.RequiredDay;
+				row["Day"] = contract.RequiredDay;
 				row["Base Pay"] = contract.BasePay;
 				row["Status"] = contract.Status;
 				row["Detail"] = contract.Detail;

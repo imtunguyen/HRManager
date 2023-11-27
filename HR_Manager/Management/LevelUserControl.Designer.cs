@@ -44,7 +44,7 @@
 			btnEdit.FlatStyle = FlatStyle.Flat;
 			btnEdit.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
 			btnEdit.ForeColor = Color.White;
-			btnEdit.Location = new Point(150, 91);
+			btnEdit.Location = new Point(124, 92);
 			btnEdit.Margin = new Padding(3, 2, 3, 2);
 			btnEdit.Name = "btnEdit";
 			btnEdit.Size = new Size(105, 42);
@@ -60,7 +60,7 @@
 			btnThem.FlatStyle = FlatStyle.Flat;
 			btnThem.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
 			btnThem.ForeColor = Color.White;
-			btnThem.Location = new Point(29, 91);
+			btnThem.Location = new Point(3, 92);
 			btnThem.Margin = new Padding(3, 2, 3, 2);
 			btnThem.Name = "btnThem";
 			btnThem.Size = new Size(105, 42);
@@ -86,7 +86,7 @@
 			dataGridView1.ColumnHeadersHeight = 50;
 			dataGridView1.Cursor = Cursors.Hand;
 			dataGridView1.GridColor = Color.White;
-			dataGridView1.Location = new Point(29, 156);
+			dataGridView1.Location = new Point(3, 155);
 			dataGridView1.Margin = new Padding(3, 2, 3, 2);
 			dataGridView1.Name = "dataGridView1";
 			dataGridView1.ReadOnly = true;
@@ -95,7 +95,7 @@
 			dataGridView1.RowHeadersWidth = 51;
 			dataGridView1.RowTemplate.Height = 29;
 			dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-			dataGridView1.Size = new Size(667, 455);
+			dataGridView1.Size = new Size(1344, 693);
 			dataGridView1.TabIndex = 8;
 			// 
 			// btnLamMoi
@@ -108,7 +108,7 @@
 			btnLamMoi.ForeColor = Color.White;
 			btnLamMoi.Image = Properties.Resources.refresh_24;
 			btnLamMoi.ImageAlign = ContentAlignment.MiddleRight;
-			btnLamMoi.Location = new Point(271, 90);
+			btnLamMoi.Location = new Point(245, 91);
 			btnLamMoi.Margin = new Padding(0);
 			btnLamMoi.Name = "btnLamMoi";
 			btnLamMoi.Size = new Size(107, 44);
@@ -122,7 +122,7 @@
 			// 
 			label1.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
 			label1.ForeColor = Color.SeaGreen;
-			label1.Location = new Point(29, 22);
+			label1.Location = new Point(3, 15);
 			label1.Name = "label1";
 			label1.Size = new Size(385, 50);
 			label1.TabIndex = 16;
@@ -140,7 +140,7 @@
 			Controls.Add(btnLamMoi);
 			Margin = new Padding(3, 2, 3, 2);
 			Name = "LevelUserControl";
-			Size = new Size(1170, 967);
+			Size = new Size(1350, 850);
 			((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
 			ResumeLayout(false);
 		}

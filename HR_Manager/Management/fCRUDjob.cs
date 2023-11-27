@@ -12,105 +12,105 @@ using System.Windows.Forms;
 
 namespace HR_Manager.Management
 {
-    public partial class fCRUDjob : Form
-    {
-        private JobUserControl jobUserControl;
-        private Job jobDto;
-        private int id;
-        public fCRUDjob(JobUserControl job)
-        {
-            InitializeComponent();
-            jobUserControl = job;
-            txtName.Focus();
-        }
-        public fCRUDjob(JobUserControl job, Job jobDTO)
-        {
-            InitializeComponent();
-            lblJob.Text = "UPDATE JOB";
-            btnCreate.Text = "UPDATE";
-            jobDto = jobDTO;
-            id = jobDTO.ID;
-            LoadFields();
+	public partial class fCRUDjob : Form
+	{
+		private JobUserControl jobUserControl;
+		private Job jobDto;
+		private int id;
+		public fCRUDjob(JobUserControl job)
+		{
+			InitializeComponent();
+			jobUserControl = job;
+			txtName.Focus();
+		}
+		public fCRUDjob(JobUserControl job, Job jobDTO)
+		{
+			InitializeComponent();
+			lblJob.Text = "UPDATE JOB";
+			btnCreate.Text = "UPDATE";
+			jobDto = jobDTO;
+			id = jobDTO.ID;
+			LoadFields();
 
-        }
+		}
 
-        private void btnCreate_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (btnCreate.Text == "ADD")
-                {
-                    if (checkValidInput())
-                    {
-                        JobBUS jobBus = new JobBUS();
-                        Job job = GetJob();
-                        jobBus.Add(job);
-                        MessageBox.Show(SD.addSuccess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Dispose();
-                    }
-                    else
-                    {
-                        MessageBox.Show(SD.addFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-                else if (btnCreate.Text == "UPDATE")
-                {
-                    if (checkValidInput())
-                    {
-                        JobBUS jobBus = new JobBUS();
-                        Job job = GetJob();
-                        jobBus.Update(id, job);
-                        MessageBox.Show(SD.UpdateSucess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                        this.Dispose();
-                    }
-                    else
-                    {
-                        MessageBox.Show(SD.UpdateFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error" + ex, SD.tb);
-            }
+		private void btnCreate_Click(object sender, EventArgs e)
+		{
+			try
+			{
+				if (btnCreate.Text == "ADD")
+				{
+					if (checkValidInput())
+					{
+						JobBUS jobBus = new JobBUS();
+						Job job = GetJob();
+						jobBus.Add(job);
+						MessageBox.Show(SD.addSuccess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+						this.Dispose();
+					}
+					else
+					{
+						MessageBox.Show(SD.addFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+				}
+				else if (btnCreate.Text == "UPDATE")
+				{
+					if (checkValidInput())
+					{
+						JobBUS jobBus = new JobBUS();
+						Job job = GetJob();
+						jobBus.Update(id, job);
+						MessageBox.Show(SD.UpdateSucess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+						this.Dispose();
+					}
+					else
+					{
+						MessageBox.Show(SD.UpdateFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
+				MessageBox.Show("Error" + ex, SD.tb);
+			}
 
-        }
-        private Job GetJob()
-        {
-            Job job = new Job();
-            job.Job_Name = txtName.Text;
-            job.Description = txtDescription.Text;
-            return job;
-        }
-        private void LoadFields()
-        {
-            try
-            {
-                if (jobDto != null)
-                {
-                    txtName.Text = jobDto.Job_Name;
-                    txtDescription.Text = jobDto.Description;
-                }
-            }
-            catch (Exception ex)
-            {
+		}
+		private Job GetJob()
+		{
+			Job job = new Job();
+			job.Job_Name = txtName.Text;
+			job.Description = txtDescription.Text;
+			return job;
+		}
+		private void LoadFields()
+		{
+			try
+			{
+				if (jobDto != null)
+				{
+					txtName.Text = jobDto.Job_Name;
+					txtDescription.Text = jobDto.Description;
+				}
+			}
+			catch (Exception ex)
+			{
 
-            }
-        }
-        private bool checkValidInput()
-        {
-            if ((string.IsNullOrEmpty(txtName.Text)) || (string.IsNullOrEmpty(txtDescription.Text)))
-            {
-                MessageBox.Show("Please fill out the required information!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-            return true;
-        }
+			}
+		}
+		private bool checkValidInput()
+		{
+			if ((string.IsNullOrEmpty(txtName.Text)) || (string.IsNullOrEmpty(txtDescription.Text)))
+			{
+				MessageBox.Show("Please fill out the required information!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
+			return true;
+		}
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+		private void btnCancel_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
 
-    }
+	}
 }

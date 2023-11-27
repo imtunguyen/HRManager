@@ -41,7 +41,7 @@
 			// 
 			label1.Font = new Font("Segoe UI", 21.75F, FontStyle.Bold, GraphicsUnit.Point);
 			label1.ForeColor = Color.SeaGreen;
-			label1.Location = new Point(18, 32);
+			label1.Location = new Point(3, 22);
 			label1.Name = "label1";
 			label1.Size = new Size(385, 50);
 			label1.TabIndex = 21;
@@ -55,7 +55,7 @@
 			btnSua.FlatStyle = FlatStyle.Flat;
 			btnSua.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
 			btnSua.ForeColor = Color.White;
-			btnSua.Location = new Point(139, 101);
+			btnSua.Location = new Point(124, 91);
 			btnSua.Margin = new Padding(3, 2, 3, 2);
 			btnSua.Name = "btnSua";
 			btnSua.Size = new Size(105, 42);
@@ -71,7 +71,7 @@
 			btnAdd.FlatStyle = FlatStyle.Flat;
 			btnAdd.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
 			btnAdd.ForeColor = Color.White;
-			btnAdd.Location = new Point(18, 101);
+			btnAdd.Location = new Point(3, 91);
 			btnAdd.Margin = new Padding(3, 2, 3, 2);
 			btnAdd.Name = "btnAdd";
 			btnAdd.Size = new Size(105, 42);
@@ -97,7 +97,7 @@
 			dataGridView1.ColumnHeadersHeight = 50;
 			dataGridView1.Cursor = Cursors.Hand;
 			dataGridView1.GridColor = Color.White;
-			dataGridView1.Location = new Point(18, 166);
+			dataGridView1.Location = new Point(3, 166);
 			dataGridView1.Margin = new Padding(3, 2, 3, 2);
 			dataGridView1.Name = "dataGridView1";
 			dataGridView1.ReadOnly = true;
@@ -106,7 +106,7 @@
 			dataGridView1.RowHeadersWidth = 51;
 			dataGridView1.RowTemplate.Height = 29;
 			dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-			dataGridView1.Size = new Size(633, 414);
+			dataGridView1.Size = new Size(1344, 682);
 			dataGridView1.TabIndex = 17;
 			// 
 			// btnLamMoi
@@ -119,7 +119,7 @@
 			btnLamMoi.ForeColor = Color.White;
 			btnLamMoi.Image = Properties.Resources.refresh_24;
 			btnLamMoi.ImageAlign = ContentAlignment.MiddleRight;
-			btnLamMoi.Location = new Point(261, 100);
+			btnLamMoi.Location = new Point(246, 90);
 			btnLamMoi.Margin = new Padding(0);
 			btnLamMoi.Name = "btnLamMoi";
 			btnLamMoi.Size = new Size(107, 44);
@@ -140,7 +140,7 @@
 			Controls.Add(btnLamMoi);
 			Margin = new Padding(3, 2, 3, 2);
 			Name = "SkillUserControl";
-			Size = new Size(1170, 967);
+			Size = new Size(1350, 850);
 			((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
 			ResumeLayout(false);
 		}

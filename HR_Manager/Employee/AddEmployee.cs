@@ -20,239 +20,244 @@ using static System.Windows.Forms.VisualStyles.VisualStyleElement;
 
 namespace HR_Manager
 {
-    public partial class AddEmployee : Form
-    {
-        private EmployeeDTO eDto;
+	public partial class AddEmployee : Form
+	{
+		private EmployeeDTO eDto;
 
 
-        private int idSelected;
-        private string filepath;
-        public AddEmployee()
-        {
+		private int idSelected;
+		private string filepath;
+		public AddEmployee()
+		{
 
-            InitializeComponent();
-        }
-        public AddEmployee(int i)
-        {
-            InitializeComponent();
-            Text = "ADD EMPLOYEE";
-            lblTitle.Text = "ADD EMPLOYEE";
-            btnAdd.Text = "ADD";
-        }
-        public AddEmployee(int i, string update, EmployeeDTO eDTO)
-        {
-            InitializeComponent();
-            Text = "UPDATE EMPLOYEE";
-            lblTitle.Text = "UPDATE EMPLOYEE";
-            btnAdd.Text = "UPDATE";
-            eDto = eDTO;
-            idSelected = eDTO.ID;
-            cbStatus.Items.Add("Resignation");
-            LoadFields();
-            pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
-        }
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
+			InitializeComponent();
+		}
+		public AddEmployee(int i)
+		{
+			InitializeComponent();
+			Text = "ADD EMPLOYEE";
+			lblTitle.Text = "ADD EMPLOYEE";
+			btnAdd.Text = "ADD";
+		}
+		public AddEmployee(int i, string update, EmployeeDTO eDTO)
+		{
+			InitializeComponent();
+			Text = "UPDATE EMPLOYEE";
+			lblTitle.Text = "UPDATE EMPLOYEE";
+			btnAdd.Text = "UPDATE";
+			eDto = eDTO;
+			idSelected = eDTO.ID;
+			cbStatus.Items.Add("Resignation");
+			LoadFields();
+			pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+		}
+		private void textBox5_TextChanged(object sender, EventArgs e)
+		{
 
-        }
+		}
 
-        private void btnCancel_Click(object sender, EventArgs e)
-        {
-            this.Close();
-        }
+		private void btnCancel_Click(object sender, EventArgs e)
+		{
+			this.Close();
+		}
 
-        private void btnAdd_Click(object sender, EventArgs e)
-        {
-            if (btnAdd.Text == "ADD")
-            {
-                if (validateForm() && CheckDuplicatePhoneNumberEmail(txtPhone.Text, txtEmail.Text, 0))
-                {
-                    try
-                    {
-                        EmployeeBUS eBUS = new EmployeeBUS();
-                        EmployeeDTO eDTO = GetEmployeeFromFields();
-                        bool result = eBUS.Add(eDTO);
+		private void btnAdd_Click(object sender, EventArgs e)
+		{
+			if (btnAdd.Text == "ADD")
+			{
+				if (validateForm() && CheckDuplicatePhoneNumberEmail(txtPhone.Text, txtEmail.Text, 0))
+				{
+					try
+					{
+						EmployeeBUS eBUS = new EmployeeBUS();
+						EmployeeDTO eDTO = GetEmployeeFromFields();
+						bool result = eBUS.Add(eDTO);
 
-                        if (result)
-                        {
-                            MessageBox.Show(SD.addSuccess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show(SD.addFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error" + ex.Message, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-            else if (btnAdd.Text == "UPDATE")
-            {
+						if (result)
+						{
+							MessageBox.Show(SD.addSuccess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+							this.Close();
+						}
+						else
+						{
+							MessageBox.Show(SD.addFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
+						}
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show("Error" + ex.Message, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+				}
+			}
+			else if (btnAdd.Text == "UPDATE")
+			{
 
-                if (CheckDuplicatePhoneNumberEmail(txtPhone.Text, txtEmail.Text, idSelected))
-                {
-                    try
-                    {
-                        EmployeeBUS eBUS = new EmployeeBUS();
-                        EmployeeDTO eDTO = GetEmployeeFromFields();
-                        bool result = eBUS.Update(idSelected, eDTO);
+				if (CheckDuplicatePhoneNumberEmail(txtPhone.Text, txtEmail.Text, idSelected))
+				{
+					try
+					{
+						EmployeeBUS eBUS = new EmployeeBUS();
+						EmployeeDTO eDTO = GetEmployeeFromFields();
+						bool result = eBUS.Update(idSelected, eDTO);
 
-                        if (result)
-                        {
-                            MessageBox.Show(SD.UpdateSucess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
-                            this.Close();
-                        }
-                        else
-                        {
-                            MessageBox.Show(SD.UpdateFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                        }
-                    }
-                    catch (Exception ex)
-                    {
-                        MessageBox.Show("Error" + ex, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    }
-                }
-            }
-        }
+						if (result)
+						{
+							MessageBox.Show(SD.UpdateSucess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+							this.Close();
+						}
+						else
+						{
+							MessageBox.Show(SD.UpdateFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
+						}
+					}
+					catch (Exception ex)
+					{
+						MessageBox.Show("Error" + ex, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
+					}
+				}
+			}
+		}
 
-        private void btnChoose_Click(object sender, EventArgs e)
-        {
-            OpenFileDialog ofdImages = new OpenFileDialog();
-            ofdImages.Filter = "Ảnh (*.jpg;*.png;*.bmp)|*.jpg;*.png;*.bmp";
-            if (ofdImages.ShowDialog() == DialogResult.OK)
-            {
-                filepath = ofdImages.FileName;
+		private void btnChoose_Click(object sender, EventArgs e)
+		{
+			OpenFileDialog ofdImages = new OpenFileDialog();
+			ofdImages.Filter = "Ảnh (*.jpg;*.png;*.bmp)|*.jpg;*.png;*.bmp";
+			if (ofdImages.ShowDialog() == DialogResult.OK)
+			{
+				filepath = ofdImages.FileName;
 
-                pictureBox1.Image = Image.FromFile(filepath);
-                pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
+				pictureBox1.Image = Image.FromFile(filepath);
+				pictureBox1.SizeMode = PictureBoxSizeMode.Zoom;
 
-            }
-        }
-        private EmployeeDTO GetEmployeeFromFields()
-        {
-            EmployeeDTO eDto = new EmployeeDTO();
-            eDto.Name = txtName.Text;
-            eDto.Date_of_Birth = dtpDateofBirth.Value;
-            eDto.Email = txtEmail.Text;
-            eDto.Phone = txtPhone.Text;
-            eDto.Status = cbStatus.Text;
-            if (cbGender.Checked)
-            {
-                eDto.Gender = "Female";
-            }
-            else
-            {
-                eDto.Gender = "Male";
-            }
+			}
+		}
+		private EmployeeDTO GetEmployeeFromFields()
+		{
+			EmployeeDTO eDto = new EmployeeDTO();
+			eDto.Name = txtName.Text;
+			eDto.Date_of_Birth = dtpDateofBirth.Value;
+			eDto.Email = txtEmail.Text;
+			eDto.Phone = txtPhone.Text;
+			eDto.Status = cbStatus.Text;
+			if (cbGender.Checked)
+			{
+				eDto.Gender = "Female";
+			}
+			else
+			{
+				eDto.Gender = "Male";
+			}
 
-            if (!string.IsNullOrEmpty(filepath))
-            {
-                eDto.img_path = filepath;
-            }
-            else if (pictureBox1.Image != null && !string.IsNullOrEmpty(pictureBox1.ImageLocation))
-            {
-                eDto.img_path = pictureBox1.ImageLocation;
-            }
+			if (!string.IsNullOrEmpty(filepath))
+			{
+				eDto.img_path = filepath;
+			}
+			else if (pictureBox1.Image != null && !string.IsNullOrEmpty(pictureBox1.ImageLocation))
+			{
+				eDto.img_path = pictureBox1.ImageLocation;
+			}
 
-            return eDto;
-        }
+			return eDto;
+		}
 
-        private void LoadFields()
-        {
-            try
-            {
-                if (eDto != null)
-                {
-                    txtName.Text = eDto.Name;
-                    dtpDateofBirth.Value = eDto.Date_of_Birth;
-                    txtEmail.Text = eDto.Email;
-                    txtPhone.Text = eDto.Phone;
-                    cbStatus.Text = eDto.Status;
-                    cbGender.Checked = eDto.Gender == "Female";
+		private void LoadFields()
+		{
+			try
+			{
+				if (eDto != null)
+				{
+					txtName.Text = eDto.Name;
+					dtpDateofBirth.Value = eDto.Date_of_Birth;
+					txtEmail.Text = eDto.Email;
+					txtPhone.Text = eDto.Phone;
+					cbStatus.Text = eDto.Status;
+					cbGender.Checked = eDto.Gender == "Female";
 
 
-                    if (!string.IsNullOrEmpty(eDto.img_path))
-                    {
-                        pictureBox1.ImageLocation = Path.GetFullPath(eDto.img_path);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
+					if (!string.IsNullOrEmpty(eDto.img_path))
+					{
+						pictureBox1.ImageLocation = Path.GetFullPath(eDto.img_path);
+					}
+				}
+			}
+			catch (Exception ex)
+			{
 
-            }
-        }
-        private bool ValidatePhoneNumber()
-        {
-            string phoneNumber = txtPhone.Text;
-            return phoneNumber.Length == 10 && phoneNumber.StartsWith("0");
-        }
+			}
+		}
+		private bool ValidatePhoneNumber()
+		{
+			string phoneNumber = txtPhone.Text;
+			return phoneNumber.Length == 10 && phoneNumber.StartsWith("0");
+		}
 
-        private bool ValidateEmail()
-        {
-            string email = txtEmail.Text;
-            Regex regex = new Regex(@"^([a-zA-Z0-9_\.]+)@gmail.com$");
-            return regex.IsMatch(email);
-        }
+		private bool ValidateEmail()
+		{
+			string email = txtEmail.Text;
+			Regex regex = new Regex(@"^([a-zA-Z0-9_\.]+)@gmail.com$");
+			return regex.IsMatch(email);
+		}
 
-        private bool ValidateDateOfBirth()
-        {
-            DateTime currentDate = DateTime.Now;
-            DateTime dateOfBirth = dtpDateofBirth.Value;
-            int age = currentDate.Year - dateOfBirth.Year;
-            return age >= 16 && age <= 65;
-        }
+		private bool ValidateDateOfBirth()
+		{
+			DateTime currentDate = DateTime.Now;
+			DateTime dateOfBirth = dtpDateofBirth.Value;
+			int age = currentDate.Year - dateOfBirth.Year;
+			return age >= 16 && age <= 65;
+		}
 
-        private bool CheckDuplicatePhoneNumberEmail(string phone, string email, int currentEmployeeId)
-        {
-            EmployeeBUS eBUS = new EmployeeBUS();
-            List<EmployeeDTO> employees = eBUS.GetAll();
+		private bool CheckDuplicatePhoneNumberEmail(string phone, string email, int currentEmployeeId)
+		{
+			EmployeeBUS eBUS = new EmployeeBUS();
+			List<EmployeeDTO> employees = eBUS.GetAll();
 
-            // Kiểm tra nếu số điện thoại hoặc email trùng với một nhân viên khác (không phải nhân viên hiện tại)
-            if (employees.Any(emp => emp.Phone == phone && emp.ID != currentEmployeeId) || employees.Any(emp => emp.Email == email && emp.ID != currentEmployeeId))
-            {
-                MessageBox.Show("Phone number or Email already exists for another Employee!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
+			// Kiểm tra nếu số điện thoại hoặc email trùng với một nhân viên khác (không phải nhân viên hiện tại)
+			if (employees.Any(emp => emp.Phone == phone && emp.ID != currentEmployeeId) || employees.Any(emp => emp.Email == email && emp.ID != currentEmployeeId))
+			{
+				MessageBox.Show("Phone number or Email already exists for another Employee!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
 
-            return true;
-        }
+			return true;
+		}
 
-        private bool validateForm()
-        {
-            if (string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtPhone.Text) || string.IsNullOrEmpty(txtEmail.Text))
-            {
-                MessageBox.Show("Please fill out the required information!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
+		private bool validateForm()
+		{
+			if (string.IsNullOrEmpty(txtName.Text) || string.IsNullOrEmpty(txtPhone.Text) || string.IsNullOrEmpty(txtEmail.Text))
+			{
+				MessageBox.Show("Please fill out the required information!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
 
-            if (!ValidateDateOfBirth())
-            {
-                MessageBox.Show("Date of birth from 16 to 65!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
+			if (!ValidateDateOfBirth())
+			{
+				MessageBox.Show("Date of birth from 16 to 65!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
 
-            if (!ValidateEmail())
-            {
-                MessageBox.Show("Email must be in the form _@gmail.com", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-            if (!ValidatePhoneNumber())
-            {
-                MessageBox.Show("Phone numbers have 10 digits starting with 0", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
-            if (string.IsNullOrEmpty(cbStatus.Text))
-            {
-                MessageBox.Show("Please select a status.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return false;
-            }
+			if (!ValidateEmail())
+			{
+				MessageBox.Show("Email must be in the form _@gmail.com", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
+			if (!ValidatePhoneNumber())
+			{
+				MessageBox.Show("Phone numbers have 10 digits starting with 0", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
+			if (string.IsNullOrEmpty(cbStatus.Text))
+			{
+				MessageBox.Show("Please select a status.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
 
-            return true;
-        }
-    }
+			return true;
+		}
+
+		private void lblTitle_Click(object sender, EventArgs e)
+		{
+
+		}
+	}
 }
 

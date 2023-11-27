@@ -41,11 +41,11 @@ namespace HR_Manager.DepartmentF
 			dt.Columns.Add("Description", typeof(string));
 			MainLoad();
 			dataGridView1.Columns["ID"].Width = 60;
-			dataGridView1.Columns["Employee"].Width = 180;
-			dataGridView1.Columns["Department"].Width = 180;
-			dataGridView1.Columns["Job"].Width = 180;
+			dataGridView1.Columns["Employee"].Width = 200;
+			dataGridView1.Columns["Department"].Width = 200;
+			dataGridView1.Columns["Job"].Width = 200;
 			dataGridView1.Columns["Position"].Width = 180;
-			dataGridView1.Columns["Description"].Width = 300;
+			dataGridView1.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
 		}
 
 		public void LoadData()

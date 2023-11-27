@@ -55,7 +55,7 @@ namespace HR_Manager.Management
             tabControl.Margin = new Padding(3, 2, 3, 2);
             tabControl.Name = "tabControl";
             tabControl.SelectedIndex = 0;
-            tabControl.Size = new Size(1065, 450);
+            tabControl.Size = new Size(1350, 850);
             tabControl.TabIndex = 0;
             // 
             // tabPageSkill
@@ -65,7 +65,7 @@ namespace HR_Manager.Management
             tabPageSkill.Margin = new Padding(3, 2, 3, 2);
             tabPageSkill.Name = "tabPageSkill";
             tabPageSkill.Padding = new Padding(3, 2, 3, 2);
-            tabPageSkill.Size = new Size(867, 422);
+            tabPageSkill.Size = new Size(1350, 850);
             tabPageSkill.TabIndex = 0;
             tabPageSkill.Text = "Skill";
             tabPageSkill.UseVisualStyleBackColor = true;
@@ -76,8 +76,9 @@ namespace HR_Manager.Management
             skillUserControl.Location = new Point(3, 2);
             skillUserControl.Margin = new Padding(3, 2, 3, 2);
             skillUserControl.Name = "skillUserControl";
-            skillUserControl.Size = new Size(861, 418);
+            skillUserControl.Size = new Size(1350, 850);
             skillUserControl.TabIndex = 0;
+            skillUserControl.Dock = DockStyle.Fill;
             // 
             // tabPageLevel
             // 
@@ -86,7 +87,7 @@ namespace HR_Manager.Management
             tabPageLevel.Margin = new Padding(3, 2, 3, 2);
             tabPageLevel.Name = "tabPageLevel";
             tabPageLevel.Padding = new Padding(3, 2, 3, 2);
-            tabPageLevel.Size = new Size(867, 422);
+            tabPageLevel.Size = new Size(1350, 850);
             tabPageLevel.TabIndex = 1;
             tabPageLevel.Text = "Level";
             tabPageLevel.UseVisualStyleBackColor = true;
@@ -97,8 +98,9 @@ namespace HR_Manager.Management
             levelUserControl.Location = new Point(3, 2);
             levelUserControl.Margin = new Padding(3, 2, 3, 2);
             levelUserControl.Name = "levelUserControl";
-            levelUserControl.Size = new Size(861, 418);
+            levelUserControl.Size = new Size(1350, 850);
             levelUserControl.TabIndex = 0;
+            levelUserControl.Dock = DockStyle.Fill;
             // 
             // JobUserControl
             // 
@@ -106,14 +108,14 @@ namespace HR_Manager.Management
             JobUserControl.Location = new Point(4, 24);
             JobUserControl.Name = "JobUserControl";
             JobUserControl.Padding = new Padding(3);
-            JobUserControl.Size = new Size(1057, 422);
+            JobUserControl.Size = new Size(1350, 850);
             JobUserControl.TabIndex = 2;
             JobUserControl.Text = "Job";
             JobUserControl.UseVisualStyleBackColor = true;
-            // 
-            // panel1
-            // 
-            panel1.Controls.Add(jobUserControl1);
+			// 
+			// panel1
+			// 
+			panel1.Controls.Add(jobUserControl1);
             panel1.Dock = DockStyle.Fill;
             panel1.Location = new Point(3, 3);
             panel1.Name = "panel1";
@@ -128,6 +130,7 @@ namespace HR_Manager.Management
             jobUserControl1.Name = "jobUserControl1";
             jobUserControl1.Size = new Size(1048, 415);
             jobUserControl1.TabIndex = 0;
+            jobUserControl1.Dock = DockStyle.Fill;
             // 
             // ManagementUserControl
             // 
@@ -154,7 +157,6 @@ namespace HR_Manager.Management
         private LevelUserControl levelUserControl;
         private TabPage JobUserControl;
         private Panel panel1;
-        private JobUserControl1 jobUserControl11;
         private JobUserControl jobUserControl1;
     }
 }

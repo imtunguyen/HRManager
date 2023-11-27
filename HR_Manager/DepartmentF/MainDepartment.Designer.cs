@@ -30,10 +30,12 @@
 		{
 			tabControl1 = new TabControl();
 			tabPage1 = new TabPage();
-			tabPage2 = new TabPage();
 			departmentUserControl1 = new DepartmentUserControl();
+			tabPage2 = new TabPage();
 			jobDetailUserControl2 = new JobDetailUserControl();
 			tabControl1.SuspendLayout();
+			tabPage1.SuspendLayout();
+			tabPage2.SuspendLayout();
 			SuspendLayout();
 			// 
 			// tabControl1
@@ -44,7 +46,7 @@
 			tabControl1.Location = new Point(0, 0);
 			tabControl1.Name = "tabControl1";
 			tabControl1.SelectedIndex = 0;
-			tabControl1.Size = new Size(1143, 800);
+			tabControl1.Size = new Size(1350, 850);
 			tabControl1.TabIndex = 0;
 			// 
 			// tabPage1
@@ -53,16 +55,19 @@
 			tabPage1.Location = new Point(4, 29);
 			tabPage1.Name = "tabPage1";
 			tabPage1.Padding = new Padding(3);
-			tabPage1.Size = new Size(1135, 767);
+			tabPage1.Size = new Size(1342, 817);
 			tabPage1.TabIndex = 0;
 			tabPage1.Text = "Department Infomation";
 			tabPage1.UseVisualStyleBackColor = true;
-			//
-			// departmentUsercontrol
-			//
-			departmentUserControl1.Location = new Point(3, 3);
+			// 
+			// departmentUserControl1
+			// 
+			departmentUserControl1.BackColor = Color.FromArgb(240, 238, 240);
 			departmentUserControl1.Dock = DockStyle.Fill;
-			departmentUserControl1.Name = "departmentUserControl";
+			departmentUserControl1.Location = new Point(3, 3);
+			departmentUserControl1.Name = "departmentUserControl1";
+			departmentUserControl1.Size = new Size(1336, 811);
+			departmentUserControl1.TabIndex = 0;
 			// 
 			// tabPage2
 			// 
@@ -70,16 +75,19 @@
 			tabPage2.Location = new Point(4, 29);
 			tabPage2.Name = "tabPage2";
 			tabPage2.Padding = new Padding(3);
-			tabPage2.Size = new Size(1135, 767);
+			tabPage2.Size = new Size(1342, 817);
 			tabPage2.TabIndex = 1;
 			tabPage2.Text = "Department manager";
 			tabPage2.UseVisualStyleBackColor = true;
-			//
-			// jobDetailUserControl
-			//
-			jobDetailUserControl2.Location = new Point(3, 3);
+			// 
+			// jobDetailUserControl2
+			// 
+			jobDetailUserControl2.BackColor = Color.FromArgb(240, 238, 240);
 			jobDetailUserControl2.Dock = DockStyle.Fill;
+			jobDetailUserControl2.Location = new Point(3, 3);
 			jobDetailUserControl2.Name = "jobDetailUserControl2";
+			jobDetailUserControl2.Size = new Size(1336, 811);
+			jobDetailUserControl2.TabIndex = 0;
 			// 
 			// MainDepartment
 			// 
@@ -87,8 +95,10 @@
 			AutoScaleMode = AutoScaleMode.Font;
 			Controls.Add(tabControl1);
 			Name = "MainDepartment";
-			Size = new Size(1143, 800);
+			Size = new Size(1350, 850);
 			tabControl1.ResumeLayout(false);
+			tabPage1.ResumeLayout(false);
+			tabPage2.ResumeLayout(false);
 			ResumeLayout(false);
 		}
 

@@ -60,7 +60,7 @@
 			gbStatus.Controls.Add(rbAll);
 			gbStatus.Cursor = Cursors.Hand;
 			gbStatus.FlatStyle = FlatStyle.Flat;
-			gbStatus.Location = new Point(12, 52);
+			gbStatus.Location = new Point(3, 52);
 			gbStatus.Name = "gbStatus";
 			gbStatus.Size = new Size(403, 44);
 			gbStatus.TabIndex = 5;
@@ -142,7 +142,7 @@
 			btnThemContract.FlatStyle = FlatStyle.Flat;
 			btnThemContract.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
 			btnThemContract.ForeColor = Color.White;
-			btnThemContract.Location = new Point(12, 12);
+			btnThemContract.Location = new Point(3, 12);
 			btnThemContract.Name = "btnThemContract";
 			btnThemContract.Size = new Size(105, 43);
 			btnThemContract.TabIndex = 4;
@@ -154,7 +154,7 @@
 			// 
 			cbTimKiem.Cursor = Cursors.Hand;
 			cbTimKiem.FormattingEnabled = true;
-			cbTimKiem.Location = new Point(689, 19);
+			cbTimKiem.Location = new Point(904, 20);
 			cbTimKiem.Name = "cbTimKiem";
 			cbTimKiem.Size = new Size(161, 28);
 			cbTimKiem.TabIndex = 6;
@@ -163,7 +163,7 @@
 			// txtTimKiem
 			// 
 			txtTimKiem.Cursor = Cursors.Hand;
-			txtTimKiem.Location = new Point(853, 19);
+			txtTimKiem.Location = new Point(1068, 20);
 			txtTimKiem.Margin = new Padding(0);
 			txtTimKiem.Name = "txtTimKiem";
 			txtTimKiem.Size = new Size(216, 27);
@@ -177,7 +177,7 @@
 			btnTimKiem.FlatAppearance.BorderSize = 0;
 			btnTimKiem.FlatStyle = FlatStyle.Flat;
 			btnTimKiem.Image = Properties.Resources.search;
-			btnTimKiem.Location = new Point(1069, 18);
+			btnTimKiem.Location = new Point(1284, 19);
 			btnTimKiem.Margin = new Padding(0);
 			btnTimKiem.Name = "btnTimKiem";
 			btnTimKiem.Size = new Size(54, 29);
@@ -199,14 +199,14 @@
 			dataGridViewCellStyle1.WrapMode = DataGridViewTriState.True;
 			dataGridView1.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle1;
 			dataGridView1.ColumnHeadersHeight = 50;
-			dataGridView1.Location = new Point(12, 101);
+			dataGridView1.Location = new Point(3, 96);
 			dataGridView1.Name = "dataGridView1";
 			dataGridView1.ReadOnly = true;
 			dataGridView1.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
 			dataGridView1.RowHeadersVisible = false;
 			dataGridView1.RowHeadersWidth = 51;
 			dataGridView1.RowTemplate.Height = 29;
-			dataGridView1.Size = new Size(1111, 596);
+			dataGridView1.Size = new Size(1335, 736);
 			dataGridView1.TabIndex = 9;
 			dataGridView1.CellClick += dataGridView1_CellClick;
 			dataGridView1.CellFormatting += dataGridView1_CellFormatting;
@@ -218,7 +218,7 @@
 			btnEdit.FlatStyle = FlatStyle.Flat;
 			btnEdit.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
 			btnEdit.ForeColor = Color.White;
-			btnEdit.Location = new Point(123, 12);
+			btnEdit.Location = new Point(114, 12);
 			btnEdit.Name = "btnEdit";
 			btnEdit.Size = new Size(105, 43);
 			btnEdit.TabIndex = 4;
@@ -230,7 +230,7 @@
 			// 
 			label1.AutoSize = true;
 			label1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label1.Location = new Point(425, 68);
+			label1.Location = new Point(435, 68);
 			label1.Name = "label1";
 			label1.Size = new Size(88, 20);
 			label1.TabIndex = 10;
@@ -239,7 +239,7 @@
 			// dtpNgayBatDau
 			// 
 			dtpNgayBatDau.Cursor = Cursors.Hand;
-			dtpNgayBatDau.Location = new Point(512, 65);
+			dtpNgayBatDau.Location = new Point(522, 65);
 			dtpNgayBatDau.Name = "dtpNgayBatDau";
 			dtpNgayBatDau.Size = new Size(261, 27);
 			dtpNgayBatDau.TabIndex = 11;
@@ -248,7 +248,7 @@
 			// 
 			label2.AutoSize = true;
 			label2.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			label2.Location = new Point(789, 68);
+			label2.Location = new Point(799, 68);
 			label2.Name = "label2";
 			label2.Size = new Size(71, 20);
 			label2.TabIndex = 10;
@@ -257,7 +257,7 @@
 			// dtpNgayKetThuc
 			// 
 			dtpNgayKetThuc.Cursor = Cursors.Hand;
-			dtpNgayKetThuc.Location = new Point(861, 65);
+			dtpNgayKetThuc.Location = new Point(871, 65);
 			dtpNgayKetThuc.Name = "dtpNgayKetThuc";
 			dtpNgayKetThuc.Size = new Size(262, 27);
 			dtpNgayKetThuc.TabIndex = 11;
@@ -270,7 +270,7 @@
 			btnLamMoi.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
 			btnLamMoi.ForeColor = Color.White;
 			btnLamMoi.Image = Properties.Resources.refresh_24;
-			btnLamMoi.Location = new Point(234, 11);
+			btnLamMoi.Location = new Point(1233, 52);
 			btnLamMoi.Name = "btnLamMoi";
 			btnLamMoi.Size = new Size(105, 43);
 			btnLamMoi.TabIndex = 4;
@@ -297,7 +297,7 @@
 			Controls.Add(btnLamMoi);
 			Controls.Add(btnThemContract);
 			Name = "ContractUserControl";
-			Size = new Size(1135, 717);
+			Size = new Size(1350, 850);
 			gbStatus.ResumeLayout(false);
 			gbStatus.PerformLayout();
 			((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();

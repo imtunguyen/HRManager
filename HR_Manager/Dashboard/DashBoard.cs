@@ -66,12 +66,12 @@ namespace HR_Manager
 			loadDataGridView();
 		}
 
-        private void loadPanel()
-        {
-            lblCountDepartment.Text = statisticalBUS.GetCountDepartment().ToString();
-            lblCountContract.Text = statisticalBUS.GetCountContract().ToString();
-            lblCountActiveEmployee.Text = statisticalBUS.GetCountActiveEmployee().ToString();
-        }
+		private void loadPanel()
+		{
+			lblCountDepartment.Text = statisticalBUS.GetCountDepartment().ToString();
+			lblCountContract.Text = statisticalBUS.GetCountContract().ToString();
+			lblCountActiveEmployee.Text = statisticalBUS.GetCountActiveEmployee().ToString();
+		}
 
 		private void loadDataGridView()
 		{

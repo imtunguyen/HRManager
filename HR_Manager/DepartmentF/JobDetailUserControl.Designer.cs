@@ -70,7 +70,7 @@
 			dataGridView1.RowHeadersWidth = 51;
 			dataGridView1.RowTemplate.Height = 29;
 			dataGridView1.SelectionMode = DataGridViewSelectionMode.CellSelect;
-			dataGridView1.Size = new Size(1091, 593);
+			dataGridView1.Size = new Size(1334, 735);
 			dataGridView1.TabIndex = 0;
 			dataGridView1.CellClick += dataGridView1_CellClick;
 			dataGridView1.CellFormatting += dataGridView1_CellFormatting;
@@ -82,7 +82,7 @@
 			btnThem.FlatStyle = FlatStyle.Flat;
 			btnThem.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
 			btnThem.ForeColor = Color.White;
-			btnThem.Location = new Point(13, 17);
+			btnThem.Location = new Point(3, 9);
 			btnThem.Name = "btnThem";
 			btnThem.Size = new Size(105, 43);
 			btnThem.TabIndex = 1;
@@ -97,7 +97,7 @@
 			btnEdit.FlatStyle = FlatStyle.Flat;
 			btnEdit.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
 			btnEdit.ForeColor = Color.White;
-			btnEdit.Location = new Point(124, 17);
+			btnEdit.Location = new Point(114, 9);
 			btnEdit.Name = "btnEdit";
 			btnEdit.Size = new Size(105, 43);
 			btnEdit.TabIndex = 1;
@@ -112,7 +112,7 @@
 			btnDelete.FlatStyle = FlatStyle.Flat;
 			btnDelete.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
 			btnDelete.ForeColor = Color.White;
-			btnDelete.Location = new Point(235, 17);
+			btnDelete.Location = new Point(225, 9);
 			btnDelete.Name = "btnDelete";
 			btnDelete.Size = new Size(105, 43);
 			btnDelete.TabIndex = 1;
@@ -125,7 +125,7 @@
 			cbTimKiem.Cursor = Cursors.Hand;
 			cbTimKiem.DropDownStyle = ComboBoxStyle.DropDownList;
 			cbTimKiem.FormattingEnabled = true;
-			cbTimKiem.Location = new Point(605, 17);
+			cbTimKiem.Location = new Point(838, 17);
 			cbTimKiem.Name = "cbTimKiem";
 			cbTimKiem.Size = new Size(159, 28);
 			cbTimKiem.TabIndex = 2;
@@ -133,7 +133,7 @@
 			// txtTimKiem
 			// 
 			txtTimKiem.Cursor = Cursors.Hand;
-			txtTimKiem.Location = new Point(767, 17);
+			txtTimKiem.Location = new Point(1000, 17);
 			txtTimKiem.Margin = new Padding(0);
 			txtTimKiem.Name = "txtTimKiem";
 			txtTimKiem.Size = new Size(285, 27);
@@ -147,7 +147,7 @@
 			btnTimKiem.FlatAppearance.BorderSize = 0;
 			btnTimKiem.FlatStyle = FlatStyle.Flat;
 			btnTimKiem.Image = Properties.Resources.search;
-			btnTimKiem.Location = new Point(1052, 17);
+			btnTimKiem.Location = new Point(1285, 17);
 			btnTimKiem.Margin = new Padding(0);
 			btnTimKiem.Name = "btnTimKiem";
 			btnTimKiem.Size = new Size(52, 27);
@@ -161,9 +161,9 @@
 			gbStatus.Controls.Add(rbAll);
 			gbStatus.Controls.Add(rbPostpone);
 			gbStatus.Cursor = Cursors.Hand;
-			gbStatus.Location = new Point(13, 59);
+			gbStatus.Location = new Point(3, 51);
 			gbStatus.Name = "gbStatus";
-			gbStatus.Size = new Size(273, 39);
+			gbStatus.Size = new Size(273, 47);
 			gbStatus.TabIndex = 5;
 			gbStatus.TabStop = false;
 			// 
@@ -219,7 +219,7 @@
 			btnLamMoi.ForeColor = Color.White;
 			btnLamMoi.Image = Properties.Resources.refresh_24;
 			btnLamMoi.ImageAlign = ContentAlignment.MiddleRight;
-			btnLamMoi.Location = new Point(996, 54);
+			btnLamMoi.Location = new Point(1229, 54);
 			btnLamMoi.Margin = new Padding(0);
 			btnLamMoi.Name = "btnLamMoi";
 			btnLamMoi.Size = new Size(108, 44);
@@ -244,7 +244,7 @@
 			Controls.Add(btnThem);
 			Controls.Add(dataGridView1);
 			Name = "JobDetailUserControl";
-			Size = new Size(1119, 718);
+			Size = new Size(1350, 850);
 			((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
 			gbStatus.ResumeLayout(false);
 			gbStatus.PerformLayout();
