@@ -23,7 +23,7 @@ namespace HR_Manager.Payroll
         string dateFrom;
         string dateTo;
         int dayOfWork;
-        int employee_id;
+        int employee_id = -1;
         Decimal feeBonus;
         Decimal feeFines;
         private DataTable dt;
@@ -33,10 +33,10 @@ namespace HR_Manager.Payroll
 
         }
 
-        private void loadBonus()
+        public void loadBonusAndFines()
         {
             dt.Clear();
-            List<DTO.BonusAndFines> list = bonusAndFinesBUS.getAllListBonusOfEmployee(employee_id, dateTo);
+            List<DTO.BonusAndFines> list = bonusAndFinesBUS.getListBonusAndFinesOfEmployee(employee_id, dateTo);
             foreach (DTO.BonusAndFines b in list)
             {
                 DataRow row = dt.NewRow();
@@ -88,7 +88,7 @@ namespace HR_Manager.Payroll
         {
             string s = cbEmployee.Text;
             employee_id = Convert.ToInt32(s.Substring(s.IndexOf("_") + 1));
-            loadBonus();
+            loadBonusAndFines();
         }
 
         private void btnSubmit_Click(object sender, EventArgs e)
@@ -237,8 +237,15 @@ namespace HR_Manager.Payroll
 
         private void button2_Click(object sender, EventArgs e)
         {
-            AddBonusAndFines add = new AddBonusAndFines();
-            add.ShowDialog();
+            if (employee_id != -1)
+            {
+                AddBonusAndFines add = new AddBonusAndFines(employee_id, this);
+                add.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("You don't choose employee!");
+            }
         }
 
         private void printPayslip()

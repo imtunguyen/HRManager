@@ -337,5 +337,35 @@ namespace DAO
             }
             return list;
         }
+
+        public List<BonusAndFines> getListBonusAndFinesOfEmployee(int employee_id, string date)
+        {
+            List<BonusAndFines> list = new List<BonusAndFines>();
+            using (SqlConnection connection = DbConnection.GetSqlConnection())
+            {
+                string query = "select * from BONUS_AND_FINES where employee_id = " + employee_id + " and expired_date >= " + "'" + date + "'";
+                using (SqlCommand command = new SqlCommand(query, connection))
+                {
+                    using (SqlDataReader reader = command.ExecuteReader())
+                    {
+                        while (reader.Read())
+                        {
+                            BonusAndFines obj = new BonusAndFines
+                            {
+                                id = Convert.ToInt32(reader["id"]),
+                                employee_id = Convert.ToInt32(reader["employee_id"]),
+                                amount = Convert.ToDecimal(reader["amount"]),
+                                type = reader["type"].ToString(),
+                                reason = reader["reason"].ToString(),
+                                expired_date = Convert.ToDateTime(reader["expired_date"])
+                            };
+                            list.Add(obj);
+                        }
+                    }
+
+                }
+            }
+            return list;
+        }
     }
 }

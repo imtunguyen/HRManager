@@ -52,8 +52,12 @@ namespace BUS
 			return bonusAndFinesDAO.getAllListFinesOfEmployee(employeeID, date);
 		}
 
+        public List<BonusAndFines> getListBonusAndFinesOfEmployee(int employeeID, string date)
+        {
+            return bonusAndFinesDAO.getListBonusAndFinesOfEmployee(employeeID, date);
+        }
 
-		public List<BonusAndFines> Search(string type, string name)
+        public List<BonusAndFines> Search(string type, string name)
         {
             return bonusAndFinesDAO.Search(type.Trim(), name.Trim());
         }

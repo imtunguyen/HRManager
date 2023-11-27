@@ -19,11 +19,23 @@ namespace HR_Manager.Payroll
         List<EmployeeDTO> employees;
         BonusAndFinesBUS bus;
         int employee_id;
+        AddPayslip addPayslip = null;
         public AddBonusAndFines()
         {
             InitializeComponent();
         }
 
+        public AddBonusAndFines(int eId, AddPayslip add)
+        {
+            InitializeComponent();
+            employeeBUS = new EmployeeBUS();
+            EmployeeDTO employee = employeeBUS.GetById(eId);
+            cbEmployee.Text = employee.Name + "_" + employee.ID;
+            string s = cbEmployee.Text;
+            employee_id = Convert.ToInt32(s.Substring(s.IndexOf("_") + 1));
+
+            addPayslip = add;
+        }
         private void AddBonusAndFines_Load(object sender, EventArgs e)
         {
             bus = new BonusAndFinesBUS();
@@ -50,6 +62,11 @@ namespace HR_Manager.Payroll
                 baf.employee_id = employee_id;
 
                 MessageBox.Show(bus.Add(baf));
+
+                if(addPayslip != null)
+                {
+                    addPayslip.loadBonusAndFines();
+                }
 
                 this.Dispose();
             }

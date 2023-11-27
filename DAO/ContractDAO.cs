@@ -18,7 +18,7 @@ namespace DAO
 			{
 				using (SqlConnection conn = DbConnection.GetSqlConnection())
 				{
-					string query = "insert into Contract (name, employee_id, fromDate, toDate, status, job_id, detail, requiredDay, basePay)" +
+					string query = "insert into CONTRACT (name, employee_id, fromDate, toDate, status, job_id, detail, requiredDay, basePay)" +
 						" values (@name, @employee_id, @fromDate, @toDate, @status, @job_id, @detail, @requiredDay, @basePay)";
 					using (SqlCommand cmd = new SqlCommand(query, conn))
 					{
