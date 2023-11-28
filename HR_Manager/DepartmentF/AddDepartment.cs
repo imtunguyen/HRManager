@@ -26,6 +26,7 @@ namespace HR_Manager.DepartmentF
 		public AddDepartment(DepartmentUserControl de, Department deDTO)
 		{
 			InitializeComponent();
+			department = de;
 			label1.Text = "Update Department";
 			btnCreate.Text = "UPDATE";
 			deDto = deDTO;
@@ -44,9 +45,15 @@ namespace HR_Manager.DepartmentF
 					{
 						DepartmentBUS deBus = new DepartmentBUS();
 						Department de = GetDepartment();
-						deBus.Add(de);
-						MessageBox.Show(SD.addSuccess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
-						this.Dispose();
+						if (deBus.Add(de))
+						{
+							MessageBox.Show(SD.addSuccess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+							department.loadDepartment();
+							this.Dispose();
+						} else
+						{
+							MessageBox.Show(SD.addFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+						}
 					}
 					else
 					{
@@ -65,8 +72,11 @@ namespace HR_Manager.DepartmentF
 						if (deBus.Update(id, de))
 						{
 							MessageBox.Show(SD.UpdateSucess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+							department.loadDepartment();
 							this.Dispose();
+						} else
+						{
+							MessageBox.Show(SD.UpdateFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
 						}
 					}
 					else

@@ -61,7 +61,7 @@ namespace HR_Manager.DepartmentF
 
 		}
 
-		private void loadDepartment()
+		public void loadDepartment()
 		{
 			// Load department data from database
 			deList = deBus.GetAll();
