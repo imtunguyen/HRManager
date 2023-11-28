@@ -22,6 +22,8 @@ namespace HR_Manager.Employee
 		DataTable searchData = new DataTable();
 		private List<string> listCb = new List<string> { "ID", "Name" };
 		private int idSelected;
+		private DataTable originalDataTable; // Lưu trữ DataTable ban đầu
+		private DataTable currentDataTable;  // Lưu trữ DataTable hiện tại
 		public CRUDEmployees()
 		{
 			eBUS = new EmployeeBUS();
@@ -88,9 +90,18 @@ namespace HR_Manager.Employee
 
 		private void btnEdit_Click(object sender, EventArgs e)
 		{
-			eDTO = eBUS.GetById(idSelected);
-			AddEmployee update = new AddEmployee(2, "update", eDTO);
-			update.ShowDialog();
+			if (dgvEmployee.SelectedRows.Count > 0)
+			{
+				int idSelected = Convert.ToInt32(dgvEmployee.SelectedRows[0].Cells["ID"].Value);
+				eDTO = eBUS.GetById(idSelected);
+				AddEmployee update = new AddEmployee(2, "update", eDTO);
+				update.Show();
+			}
+			else
+			{
+				MessageBox.Show("Please select a row to edit!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
 		}
 
 		private void btnDelete_Click(object sender, EventArgs e)
@@ -157,6 +168,8 @@ namespace HR_Manager.Employee
 		}
 		private void btnLamMoi_Click(object sender, EventArgs e)
 		{
+			txtTimKiem.Text = string.Empty;
+			rbAll.Checked = true;
 			loadDataGridView();
 		}
 
@@ -174,30 +187,127 @@ namespace HR_Manager.Employee
 			}
 			return searchData;
 		}
+		private DataTable initialSearchResult = null;
+
+		private void btnTimKiem_Click(object sender, EventArgs e)
+		{
+			string searchValue = txtTimKiem.Text.Trim();
+			DataTable searchResult = null;
+
+			try
+			{
+				if (string.IsNullOrEmpty(searchValue))
+				{
+					MessageBox.Show("Please enter search content.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					return;
+				}
+
+				if (cbTimKiem.SelectedValue.ToString() == "Name")
+				{
+					initialSearchResult = SearchByUsername(originalDataTable, searchValue);
+				}
+				else if (cbTimKiem.SelectedValue.ToString() == "ID")
+				{
+					if (!int.TryParse(searchValue, out int searchID))
+					{
+						MessageBox.Show("Please enter a valid numeric ID.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						return;
+					}
+
+					searchResult = SearchByID(originalDataTable, searchID);
+				}
+
+				if (rbTrial.Checked)
+				{
+					searchResult = SearchByStatus(initialSearchResult, SD.e_trial);
+				}
+				else if (rbOfficial.Checked)
+				{
+					searchResult = SearchByStatus(initialSearchResult, SD.e_official);
+				}
+				else if (rbResignation.Checked)
+				{
+					searchResult = SearchByStatus(initialSearchResult, SD.e_resignation);
+				}
+				else
+				{
+					// If no radio button is checked, keep the initial search result unchanged
+					searchResult = initialSearchResult;
+				}
+			}
+			catch (Exception ex)
+			{
+			}
+			currentDataTable = searchResult;
+			dgvEmployee.DataSource = currentDataTable;
+			dgvEmployee.Refresh();
+		}
+
 		private void rbAll_CheckedChanged(object sender, EventArgs e)
 		{
-			loadDataGridView();
+			if (string.IsNullOrEmpty(txtTimKiem.Text.Trim()))
+			{
+				// Nếu không có tìm kiếm, hiển thị toàn bộ dữ liệu từ DataTable ban đầu
+				dgvEmployee.DataSource = originalDataTable;
+				dgvEmployee.Refresh();
+			}
+			else
+			{
+				// Nếu có tìm kiếm, hiển thị kết quả tìm kiếm từ DataTable hiện tại
+				dgvEmployee.DataSource = initialSearchResult;
+				dgvEmployee.Refresh();
+			}
 		}
 
 		private void rbTrial_CheckedChanged(object sender, EventArgs e)
 		{
-			DataTable searchResult = SearchByStatus(dt, SD.e_trial);
-			dgvEmployee.DataSource = searchResult;
-			dgvEmployee.Refresh();
+			if (string.IsNullOrEmpty(txtTimKiem.Text.Trim()))
+			{
+				DataTable searchResult = SearchByStatus(originalDataTable, SD.e_trial);
+				dgvEmployee.DataSource = searchResult;
+				dgvEmployee.Refresh();
+			}
+			else
+			{
+				// Ngược lại, lọc theo status từ DataTable hiện tại và hiển thị
+				DataTable searchResult = SearchByStatus(initialSearchResult, SD.e_trial);
+				dgvEmployee.DataSource = searchResult;
+				dgvEmployee.Refresh();
+			}
 		}
 
 		private void rbOfficial_CheckedChanged(object sender, EventArgs e)
 		{
-			DataTable searchResult = SearchByStatus(dt, SD.e_official);
-			dgvEmployee.DataSource = searchResult;
-			dgvEmployee.Refresh();
+			if (string.IsNullOrEmpty(txtTimKiem.Text.Trim()))
+			{
+				DataTable searchResult = SearchByStatus(originalDataTable, SD.e_official);
+				dgvEmployee.DataSource = searchResult;
+				dgvEmployee.Refresh();
+			}
+			else
+			{
+				// Ngược lại, lọc theo status từ DataTable hiện tại và hiển thị
+				DataTable searchResult = SearchByStatus(initialSearchResult, SD.e_official);
+				dgvEmployee.DataSource = searchResult;
+				dgvEmployee.Refresh();
+			}
 		}
 
 		private void rbResignation_CheckedChanged(object sender, EventArgs e)
 		{
-			DataTable searchResult = SearchByStatus(dt, SD.e_resignation);
-			dgvEmployee.DataSource = searchResult;
-			dgvEmployee.Refresh();
+			if (string.IsNullOrEmpty(txtTimKiem.Text.Trim()))
+			{
+				DataTable searchResult = SearchByStatus(originalDataTable, SD.e_resignation);
+				dgvEmployee.DataSource = searchResult;
+				dgvEmployee.Refresh();
+			}
+			else
+			{
+				// Ngược lại, lọc theo status từ DataTable hiện tại và hiển thị
+				DataTable searchResult = SearchByStatus(initialSearchResult, SD.e_resignation);
+				dgvEmployee.DataSource = searchResult;
+				dgvEmployee.Refresh();
+			}
 		}
 
 		private void dgvEmployee_CellFormatting(object sender, DataGridViewCellFormattingEventArgs e)
@@ -212,33 +322,29 @@ namespace HR_Manager.Employee
 				}
 			}
 		}
-		private void btnTimKiem_Click(object sender, EventArgs e)
-		{
-			string searchValue = txtTimKiem.Text.Trim();
-			DataTable searchResult = null;
-			try
-			{
-				if (cbTimKiem.SelectedValue.ToString() == "Name")
-				{
-					searchResult = SearchByUsername(dt, searchValue);
-				}
-				else if (cbTimKiem.SelectedValue.ToString() == "ID")
-				{
-					searchResult = SearchByID(dt, Convert.ToInt32(searchValue));
-				}
 
-			}
-			catch (Exception ex)
-			{
-
-			}
-			// Gán kết quả tìm kiếm vào DataGridView
-			dgvEmployee.DataSource = searchResult;
-			dgvEmployee.Refresh();
-		}
 		private void cbTimKiem_SelectedValueChanged(object sender, EventArgs e)
 		{
 
+		}
+
+		private void CRUDEmployees_Load(object sender, EventArgs e)
+		{
+			originalDataTable = dt; // Thay LoadData() bằng phương thức nạp dữ liệu của bạn
+			currentDataTable = originalDataTable.Clone();
+
+			// Hiển thị dữ liệu ban đầu
+			dgvEmployee.DataSource = originalDataTable;
+			rbAll.Checked = true;
+		}
+
+		private void txtTimKiem_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				e.SuppressKeyPress = true;
+				btnTimKiem.PerformClick();
+			}
 		}
 	}
 }
