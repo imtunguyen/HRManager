@@ -60,6 +60,11 @@ namespace HR_Manager.Management
                 MessageBox.Show("Skill name is required");
                 return;
             }
+            if (skillsBUS.IsSkillNameDuplicate(skillsName, description))
+            {
+                MessageBox.Show("Skill name or description already exists. Please choose a different data.", "Duplicate Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
 
             Skills skill = new Skills();
 

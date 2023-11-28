@@ -47,6 +47,14 @@ namespace BUS
         {
             return levelDAO.GetMaxLevelId();
         }
+        public bool IsLevelNameDuplicate(string levelName)
+        {
+            List<Level> allLevels = levelDAO.GetAll();
+            return allLevels.Exists(level =>
+                level.Level_Name.Trim().Equals(levelName.Trim(), StringComparison.OrdinalIgnoreCase)
+            );
+        }
+
 
     }
 }

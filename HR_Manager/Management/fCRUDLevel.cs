@@ -58,7 +58,7 @@ namespace HR_Manager.Management
 
         private void btnLuu_Click(object sender, EventArgs e)
         {
-                string levelName = txtLevel.Text;
+                string levelName = txtLevel.Text.Trim();
 
                 if (string.IsNullOrWhiteSpace(levelName))
                 {
@@ -66,6 +66,11 @@ namespace HR_Manager.Management
                     return;
                 }
 
+                if (levelBUS.IsLevelNameDuplicate(levelName))
+                {
+                    MessageBox.Show("Level name already exists. Please choose a different name.", "Duplicate Data", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    return;
+                }
                 Level level = new Level();
 
                 if (levelUpdate == null)

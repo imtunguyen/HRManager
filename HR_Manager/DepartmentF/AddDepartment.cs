@@ -29,7 +29,7 @@ namespace HR_Manager.DepartmentF
             label1.Text = "Update Department";
             btnCreate.Text = "UPDATE";
             deDto = deDTO;
-            id = deDTO.ID;
+            deDTO.ID = id;
             LoadFields();
 
         }

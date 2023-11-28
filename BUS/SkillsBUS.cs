@@ -38,7 +38,12 @@ namespace BUS
         {
             return skillsDAO.GetMaxSkillId();
         }
-
+        public bool IsSkillNameDuplicate(string skillName,string description)
+        {
+            List<Skills> allSkills = skillsDAO.GetAll();
+            return allSkills.Exists(skill =>
+                skill.Skills_Name.Trim().Equals(skillName.Trim(), StringComparison.OrdinalIgnoreCase) || skill.description.Trim().Equals(description.Trim(),StringComparison.OrdinalIgnoreCase));
+        }
 
 
     }

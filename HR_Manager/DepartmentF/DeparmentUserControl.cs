@@ -22,6 +22,7 @@ namespace HR_Manager.DepartmentF
         private int counter = 1;
         private int id;
         DepartmentBUS deBus;
+        DTO.Department deDTO;
         List<Department> deList;
         List<EmployeeDTO> eList;
         EmployeeBUS eBus;
@@ -53,7 +54,7 @@ namespace HR_Manager.DepartmentF
             dtEmployee.Columns.Add("Image");
             dtEmployee.Columns.Add("Status");
             loadDepartment();
-            
+
         }
 
         private void loadDepartment()
@@ -63,7 +64,7 @@ namespace HR_Manager.DepartmentF
 
             // Clear and reset data table
             dtDepartment.Clear();
-           
+
 
             // Add rows to data table
             int stt = 1;
@@ -78,14 +79,14 @@ namespace HR_Manager.DepartmentF
             }
 
             // Bind data table to grid
-           
+
             dgvDepartment.DataSource = dtDepartment;
         }
         public void loadEmployee(int id)
         {
             eList = eBus.GetAllByDepartmentId(id);
             dtEmployee.Clear();
-            
+
 
             int stt = 1;
             foreach (EmployeeDTO e in eList)
@@ -113,13 +114,13 @@ namespace HR_Manager.DepartmentF
                 if (e.RowIndex >= 0)
                 {
                     // Lấy giá trị ID từ dòng được chọn
-                    int departmentId = Convert.ToInt32(dgvDepartment.Rows[e.RowIndex].Cells["ID"].Value);
+                    id = Convert.ToInt32(dgvDepartment.Rows[e.RowIndex].Cells["ID"].Value);
 
                     // Hiển thị danh sách nhân viên tương ứng
-                    loadEmployee(departmentId);
+                    loadEmployee(id);
                 }
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
 
             }
@@ -132,7 +133,7 @@ namespace HR_Manager.DepartmentF
 
         private void btnEdit_Click(object sender, EventArgs e)
         {
-            Department deDTO = deBus.getById(id);
+            deDTO = deBus.getById(id);
             AddDepartment update = new AddDepartment(this, deDTO);
             update.Show();
         }

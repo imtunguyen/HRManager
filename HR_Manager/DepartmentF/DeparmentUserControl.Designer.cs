@@ -60,7 +60,7 @@ namespace HR_Manager.DepartmentF
             dgvDepartment.ColumnHeadersHeight = 50;
             dgvDepartment.Cursor = Cursors.Hand;
             dgvDepartment.GridColor = Color.White;
-            dgvDepartment.Location = new Point(11, 127);
+            dgvDepartment.Location = new Point(11, 135);
             dgvDepartment.Margin = new Padding(3, 2, 3, 2);
             dgvDepartment.Name = "dgvDepartment";
             dgvDepartment.ReadOnly = true;
@@ -69,7 +69,7 @@ namespace HR_Manager.DepartmentF
             dgvDepartment.RowHeadersWidth = 51;
             dgvDepartment.RowTemplate.Height = 29;
             dgvDepartment.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-            dgvDepartment.Size = new Size(955, 183);
+            dgvDepartment.Size = new Size(955, 195);
             dgvDepartment.TabIndex = 0;
             dgvDepartment.CellClick += dgvDepartment_CellClick;
             // 
@@ -80,10 +80,10 @@ namespace HR_Manager.DepartmentF
             btnThem.FlatStyle = FlatStyle.Flat;
             btnThem.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnThem.ForeColor = Color.White;
-            btnThem.Location = new Point(11, 13);
+            btnThem.Location = new Point(11, 14);
             btnThem.Margin = new Padding(3, 2, 3, 2);
             btnThem.Name = "btnThem";
-            btnThem.Size = new Size(92, 32);
+            btnThem.Size = new Size(92, 34);
             btnThem.TabIndex = 1;
             btnThem.Text = "ADD";
             btnThem.UseVisualStyleBackColor = false;
@@ -96,10 +96,10 @@ namespace HR_Manager.DepartmentF
             btnEdit.FlatStyle = FlatStyle.Flat;
             btnEdit.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnEdit.ForeColor = Color.White;
-            btnEdit.Location = new Point(108, 13);
+            btnEdit.Location = new Point(108, 14);
             btnEdit.Margin = new Padding(3, 2, 3, 2);
             btnEdit.Name = "btnEdit";
-            btnEdit.Size = new Size(92, 32);
+            btnEdit.Size = new Size(92, 34);
             btnEdit.TabIndex = 1;
             btnEdit.Text = "EDIT";
             btnEdit.UseVisualStyleBackColor = false;
@@ -112,10 +112,10 @@ namespace HR_Manager.DepartmentF
             btnDelete.FlatStyle = FlatStyle.Flat;
             btnDelete.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
             btnDelete.ForeColor = Color.White;
-            btnDelete.Location = new Point(206, 13);
+            btnDelete.Location = new Point(206, 14);
             btnDelete.Margin = new Padding(3, 2, 3, 2);
             btnDelete.Name = "btnDelete";
-            btnDelete.Size = new Size(92, 32);
+            btnDelete.Size = new Size(92, 34);
             btnDelete.TabIndex = 1;
             btnDelete.Text = "DELETE";
             btnDelete.UseVisualStyleBackColor = false;
@@ -127,16 +127,16 @@ namespace HR_Manager.DepartmentF
             cbTimKiem.DropDownStyle = ComboBoxStyle.DropDownList;
             cbTimKiem.FormattingEnabled = true;
             cbTimKiem.Items.AddRange(new object[] { "ID", "Name" });
-            cbTimKiem.Location = new Point(529, 13);
+            cbTimKiem.Location = new Point(529, 14);
             cbTimKiem.Margin = new Padding(3, 2, 3, 2);
             cbTimKiem.Name = "cbTimKiem";
-            cbTimKiem.Size = new Size(140, 23);
+            cbTimKiem.Size = new Size(140, 24);
             cbTimKiem.TabIndex = 2;
             // 
             // txtTimKiem
             // 
             txtTimKiem.Cursor = Cursors.Hand;
-            txtTimKiem.Location = new Point(671, 13);
+            txtTimKiem.Location = new Point(671, 14);
             txtTimKiem.Margin = new Padding(0);
             txtTimKiem.Name = "txtTimKiem";
             txtTimKiem.Size = new Size(250, 23);
@@ -149,10 +149,10 @@ namespace HR_Manager.DepartmentF
             btnTimKiem.FlatAppearance.BorderSize = 0;
             btnTimKiem.FlatStyle = FlatStyle.Flat;
             btnTimKiem.Image = Properties.Resources.search;
-            btnTimKiem.Location = new Point(920, 13);
+            btnTimKiem.Location = new Point(920, 14);
             btnTimKiem.Margin = new Padding(0);
             btnTimKiem.Name = "btnTimKiem";
-            btnTimKiem.Size = new Size(46, 23);
+            btnTimKiem.Size = new Size(46, 25);
             btnTimKiem.TabIndex = 4;
             btnTimKiem.UseVisualStyleBackColor = false;
             // 
@@ -166,10 +166,10 @@ namespace HR_Manager.DepartmentF
             btnLamMoi.ForeColor = Color.White;
             btnLamMoi.Image = Properties.Resources.refresh_24;
             btnLamMoi.ImageAlign = ContentAlignment.MiddleRight;
-            btnLamMoi.Location = new Point(872, 40);
+            btnLamMoi.Location = new Point(872, 43);
             btnLamMoi.Margin = new Padding(0);
             btnLamMoi.Name = "btnLamMoi";
-            btnLamMoi.Size = new Size(94, 33);
+            btnLamMoi.Size = new Size(94, 35);
             btnLamMoi.TabIndex = 4;
             btnLamMoi.Text = "Refesh";
             btnLamMoi.TextImageRelation = TextImageRelation.ImageBeforeText;
@@ -183,34 +183,34 @@ namespace HR_Manager.DepartmentF
             dgvEmployees.CellBorderStyle = DataGridViewCellBorderStyle.None;
             dgvEmployees.ColumnHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
             dgvEmployees.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dgvEmployees.Location = new Point(11, 355);
+            dgvEmployees.Location = new Point(11, 379);
             dgvEmployees.Name = "dgvEmployees";
             dgvEmployees.RowHeadersVisible = false;
             dgvEmployees.RowTemplate.Height = 25;
-            dgvEmployees.Size = new Size(955, 155);
+            dgvEmployees.Size = new Size(955, 165);
             dgvEmployees.TabIndex = 0;
             // 
             // label1
             // 
             label1.AutoSize = true;
-            label1.Location = new Point(11, 93);
+            label1.Location = new Point(11, 99);
             label1.Name = "label1";
-            label1.Size = new Size(82, 15);
+            label1.Size = new Size(83, 16);
             label1.TabIndex = 6;
             label1.Text = "DEPARTMENT:";
             // 
             // label2
             // 
             label2.AutoSize = true;
-            label2.Location = new Point(11, 337);
+            label2.Location = new Point(11, 359);
             label2.Name = "label2";
-            label2.Size = new Size(167, 15);
+            label2.Size = new Size(173, 16);
             label2.TabIndex = 6;
             label2.Text = "Employees of the Department:";
             // 
             // DepartmentUserControl
             // 
-            AutoScaleDimensions = new SizeF(7F, 15F);
+            AutoScaleDimensions = new SizeF(7F, 16F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = Color.FromArgb(240, 238, 240);
             Controls.Add(label2);
@@ -226,7 +226,7 @@ namespace HR_Manager.DepartmentF
             Controls.Add(dgvDepartment);
             Margin = new Padding(3, 2, 3, 2);
             Name = "DepartmentUserControl";
-            Size = new Size(979, 538);
+            Size = new Size(979, 574);
             ((ISupportInitialize)dgvDepartment).EndInit();
             ((ISupportInitialize)dgvEmployees).EndInit();
             ResumeLayout(false);
