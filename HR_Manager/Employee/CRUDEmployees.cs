@@ -18,8 +18,8 @@ namespace HR_Manager.Employee
 		EmployeeDTO eDTO;
 		EmployeeBUS eBUS;
 		List<EmployeeDTO> eList;
-		DataTable dt = new DataTable();
-		DataTable searchData = new DataTable();
+		DataTable dt ;
+		DataTable searchData ;
 		private List<string> listCb = new List<string> { "ID", "Name" };
 		private int idSelected;
 		private DataTable originalDataTable; // Lưu trữ DataTable ban đầu
@@ -30,6 +30,14 @@ namespace HR_Manager.Employee
 			eDTO = new EmployeeDTO();
 			eList = new List<EmployeeDTO>();
 			InitializeComponent();
+			dt = new DataTable();
+			searchData = new DataTable();
+			originalDataTable = dt; // Thay LoadData() bằng phương thức nạp dữ liệu của bạn
+			currentDataTable = originalDataTable.Clone();
+
+			// Hiển thị dữ liệu ban đầu
+			dgvEmployee.DataSource = originalDataTable;
+			rbAll.Checked = true;
 			loadDataGridView();
 			loadcb();
 		}
@@ -214,7 +222,7 @@ namespace HR_Manager.Employee
 						return;
 					}
 
-					searchResult = SearchByID(originalDataTable, searchID);
+					initialSearchResult = SearchByID(originalDataTable, searchID);
 				}
 
 				if (rbTrial.Checked)
@@ -330,12 +338,7 @@ namespace HR_Manager.Employee
 
 		private void CRUDEmployees_Load(object sender, EventArgs e)
 		{
-			originalDataTable = dt; // Thay LoadData() bằng phương thức nạp dữ liệu của bạn
-			currentDataTable = originalDataTable.Clone();
-
-			// Hiển thị dữ liệu ban đầu
-			dgvEmployee.DataSource = originalDataTable;
-			rbAll.Checked = true;
+			
 		}
 
 		private void txtTimKiem_KeyDown(object sender, KeyEventArgs e)
