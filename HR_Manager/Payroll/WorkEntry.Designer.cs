@@ -211,6 +211,7 @@
             button2.TabIndex = 1;
             button2.Text = "Next";
             button2.UseVisualStyleBackColor = true;
+            button2.Click += button2_Click;
             // 
             // button1
             // 
@@ -222,6 +223,7 @@
             button1.TabIndex = 0;
             button1.Text = "Prev";
             button1.UseVisualStyleBackColor = true;
+            button1.Click += button1_Click;
             // 
             // dayContainer
             // 
