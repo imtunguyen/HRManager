@@ -221,7 +221,7 @@ namespace HR_Manager
 			cbNam1.Cursor = Cursors.Hand;
 			cbNam1.DropDownStyle = ComboBoxStyle.DropDownList;
 			cbNam1.FormattingEnabled = true;
-			cbNam1.Location = new Point(957, 182);
+			cbNam1.Location = new Point(1176, 186);
 			cbNam1.Name = "cbNam1";
 			cbNam1.Size = new Size(169, 28);
 			cbNam1.TabIndex = 4;
@@ -233,9 +233,9 @@ namespace HR_Manager
 			label9.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point);
 			label9.Location = new Point(0, 535);
 			label9.Name = "label9";
-			label9.Size = new Size(223, 28);
+			label9.Size = new Size(286, 28);
 			label9.TabIndex = 2;
-			label9.Text = "Employee information\r\n";
+			label9.Text = "Employee salary information";
 			// 
 			// dataGridView1
 			// 
@@ -285,8 +285,9 @@ namespace HR_Manager
 			// 
 			// button1
 			// 
+			button1.Cursor = Cursors.Hand;
 			button1.Font = new Font("Segoe UI", 9F, FontStyle.Bold, GraphicsUnit.Point);
-			button1.Location = new Point(229, 535);
+			button1.Location = new Point(301, 538);
 			button1.Name = "button1";
 			button1.Size = new Size(94, 29);
 			button1.TabIndex = 7;
