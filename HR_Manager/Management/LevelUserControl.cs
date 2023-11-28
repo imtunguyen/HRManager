@@ -115,5 +115,10 @@ namespace HR_Manager.Management
 		{
 			LoadData();
 		}
+
+		private void dataGridView1_CellContentClick(object sender, DataGridViewCellEventArgs e)
+		{
+
+		}
 	}
 }

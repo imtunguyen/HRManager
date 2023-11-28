@@ -28,7 +28,8 @@ namespace HR_Manager.Management
 			loadDataGridView();
 			loadcb();
 		}
-		private void loadDataGridView()
+
+		public void loadDataGridView()
 		{
 			jobList = jobBus.GetAll();
 			dt.Clear();

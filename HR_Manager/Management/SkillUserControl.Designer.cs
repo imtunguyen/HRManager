@@ -97,7 +97,7 @@
 			dataGridView1.ColumnHeadersHeight = 50;
 			dataGridView1.Cursor = Cursors.Hand;
 			dataGridView1.GridColor = Color.White;
-			dataGridView1.Location = new Point(3, 166);
+			dataGridView1.Location = new Point(3, 161);
 			dataGridView1.Margin = new Padding(3, 2, 3, 2);
 			dataGridView1.Name = "dataGridView1";
 			dataGridView1.ReadOnly = true;
@@ -106,7 +106,7 @@
 			dataGridView1.RowHeadersWidth = 51;
 			dataGridView1.RowTemplate.Height = 29;
 			dataGridView1.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-			dataGridView1.Size = new Size(1344, 682);
+			dataGridView1.Size = new Size(1344, 647);
 			dataGridView1.TabIndex = 17;
 			// 
 			// btnLamMoi

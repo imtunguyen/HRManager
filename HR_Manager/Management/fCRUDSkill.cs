@@ -57,7 +57,7 @@ namespace HR_Manager.Management
 
 			if (string.IsNullOrWhiteSpace(skillsName))
 			{
-				MessageBox.Show("Skill name is required");
+				MessageBox.Show("Skill name is required",SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return;
 			}
 
@@ -71,12 +71,12 @@ namespace HR_Manager.Management
 
 				if (skillsBUS.AddSkill(skill))
 				{
-					MessageBox.Show("Add new skill successfully!");
+					MessageBox.Show(SD.addSuccess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
 					skillUserControl.LoadData();
 				}
 				else
 				{
-					MessageBox.Show("Error when adding new skill!");
+					MessageBox.Show(SD.addFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
 				}
 			}
 			else
@@ -88,12 +88,14 @@ namespace HR_Manager.Management
 
 				if (skillsBUS.UpdateSkill(skill))
 				{
-					MessageBox.Show("Update skill successfully!");
+					MessageBox.Show(SD.UpdateSucess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 					skillUserControl.LoadData();
 				}
 				else
 				{
-					MessageBox.Show("Error when updating skill!");
+					MessageBox.Show(SD.UpdateFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 				}
 			}
 

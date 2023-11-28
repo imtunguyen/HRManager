@@ -26,6 +26,7 @@ namespace HR_Manager.Management
 		public fCRUDjob(JobUserControl job, Job jobDTO)
 		{
 			InitializeComponent();
+			jobUserControl = job;
 			lblJob.Text = "UPDATE JOB";
 			btnCreate.Text = "UPDATE";
 			jobDto = jobDTO;
@@ -44,13 +45,17 @@ namespace HR_Manager.Management
 					{
 						JobBUS jobBus = new JobBUS();
 						Job job = GetJob();
-						jobBus.Add(job);
-						MessageBox.Show(SD.addSuccess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
-						this.Dispose();
-					}
-					else
-					{
-						MessageBox.Show(SD.addFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
+						if (jobBus.Add(job))
+						{
+							MessageBox.Show(SD.addSuccess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+							jobUserControl.loadDataGridView();
+							this.Dispose();
+						}
+						else
+						{
+							MessageBox.Show(SD.addFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+						}
 					}
 				}
 				else if (btnCreate.Text == "UPDATE")
@@ -59,13 +64,17 @@ namespace HR_Manager.Management
 					{
 						JobBUS jobBus = new JobBUS();
 						Job job = GetJob();
-						jobBus.Update(id, job);
-						MessageBox.Show(SD.UpdateSucess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
-						this.Dispose();
-					}
-					else
-					{
-						MessageBox.Show(SD.UpdateFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
+						if (jobBus.Update(id, job))
+						{
+							MessageBox.Show(SD.UpdateSucess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+							jobUserControl.loadDataGridView();
+							this.Dispose();
+						}
+						else
+						{
+							MessageBox.Show(SD.UpdateFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
+						}
 					}
 				}
 			}

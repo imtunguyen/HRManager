@@ -187,13 +187,13 @@ namespace HR_Manager.DepartmentF
 			dataGridViewCellStyle2.WrapMode = DataGridViewTriState.True;
 			dgvEmployees.ColumnHeadersDefaultCellStyle = dataGridViewCellStyle2;
 			dgvEmployees.ColumnHeadersHeight = 50;
-			dgvEmployees.Location = new Point(13, 473);
+			dgvEmployees.Location = new Point(13, 463);
 			dgvEmployees.Margin = new Padding(3, 4, 3, 4);
 			dgvEmployees.Name = "dgvEmployees";
 			dgvEmployees.RowHeadersVisible = false;
 			dgvEmployees.RowHeadersWidth = 51;
 			dgvEmployees.RowTemplate.Height = 25;
-			dgvEmployees.Size = new Size(1322, 373);
+			dgvEmployees.Size = new Size(1322, 326);
 			dgvEmployees.TabIndex = 0;
 			// 
 			// label1

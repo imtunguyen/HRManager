@@ -62,7 +62,7 @@ namespace HR_Manager.Management
 
 			if (string.IsNullOrWhiteSpace(levelName))
 			{
-				MessageBox.Show("Level name is required");
+				MessageBox.Show("Level name is required", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning );
 				return;
 			}
 
@@ -74,12 +74,14 @@ namespace HR_Manager.Management
 				level.Level_Name = levelName;
 				if (levelBUS.AddLevel(level))
 				{
-					MessageBox.Show("Add new level successfully!");
+					MessageBox.Show(SD.addSuccess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 					levelUserControl.LoadData();
 				}
 				else
 				{
-					MessageBox.Show("Error when adding new level!");
+					MessageBox.Show(SD.addFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 				}
 			}
 			else
@@ -90,12 +92,14 @@ namespace HR_Manager.Management
 
 				if (levelBUS.UpdateLevel(level))
 				{
-					MessageBox.Show("Update level successfully!");
+					MessageBox.Show(SD.UpdateSucess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 					levelUserControl.LoadData();
 				}
 				else
 				{
-					MessageBox.Show("Error when updating level!");
+					MessageBox.Show(SD.UpdateFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+
 				}
 			}
 
