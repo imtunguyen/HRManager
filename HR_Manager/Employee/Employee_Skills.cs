@@ -163,6 +163,7 @@ namespace HR_Manager.Employee
 		}
 		private void btnTimKiem_Click(object sender, EventArgs e)
 		{
+			loadDataGridView();
 			string searchValue = txtTimKiem.Text.Trim();
 			DataTable searchResult = null;
 			try
