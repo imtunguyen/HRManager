@@ -73,7 +73,7 @@ namespace HR_Manager
 			lblCountActiveEmployee.Text = statisticalBUS.GetCountActiveEmployee().ToString();
 		}
 
-		private void loadDataGridView()
+		public void loadDataGridView()
 		{
 			dt.Clear();
 			List<EmployeeDTO> list = statisticalBUS.GetInfoSalaryEmployee(startDate, endDate);

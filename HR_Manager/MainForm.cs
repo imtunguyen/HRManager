@@ -39,6 +39,7 @@ namespace HR_Manager
 		private void button3_Click(object sender, EventArgs e)
 		{
 			showUserControl(dashboard1);
+			dashboard1.loadDataGridView();
 		}
 
 		private void button4_Click(object sender, EventArgs e)
