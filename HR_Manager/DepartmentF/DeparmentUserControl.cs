@@ -22,6 +22,7 @@ namespace HR_Manager.DepartmentF
 		private int counter = 1;
 		private int id;
 		DepartmentBUS deBus;
+		DTO.Department deDTO;
 		List<Department> deList;
 		List<EmployeeDTO> eList;
 		EmployeeBUS eBus;
@@ -64,12 +65,8 @@ namespace HR_Manager.DepartmentF
 		{
 			// Load department data from database
 			deList = deBus.GetAll();
-
-			// Clear and reset data table
 			dtDepartment.Clear();
 
-
-			// Add rows to data table
 			int stt = 1;
 			foreach (Department de in deList)
 			{
@@ -80,8 +77,6 @@ namespace HR_Manager.DepartmentF
 				dtDepartment.Rows.Add(row);
 				stt++;
 			}
-
-			// Bind data table to grid
 
 			dgvDepartment.DataSource = dtDepartment;
 		}
@@ -121,11 +116,10 @@ namespace HR_Manager.DepartmentF
 			{
 				if (e.RowIndex >= 0)
 				{
-					// Lấy giá trị ID từ dòng được chọn
-					int departmentId = Convert.ToInt32(dgvDepartment.Rows[e.RowIndex].Cells["ID"].Value);
+					id = Convert.ToInt32(dgvDepartment.Rows[e.RowIndex].Cells["ID"].Value);
 
 					// Hiển thị danh sách nhân viên tương ứng
-					loadEmployee(departmentId);
+					loadEmployee(id);
 				}
 			}
 			catch (Exception ex)
@@ -136,14 +130,18 @@ namespace HR_Manager.DepartmentF
 		private void btnThem_Click(object sender, EventArgs e)
 		{
 			AddDepartment add = new AddDepartment(this);
-			add.ShowDialog();
+			add.Show();
 		}
 
 		private void btnEdit_Click(object sender, EventArgs e)
 		{
-			Department deDTO = deBus.getById(id);
-			AddDepartment update = new AddDepartment(this, deDTO);
-			update.ShowDialog();
+			if (dgvDepartment.SelectedRows.Count > 0)
+			{
+				int idSelected = Convert.ToInt32(dgvDepartment.SelectedRows[0].Cells["ID"].Value);
+				deDTO = deBus.getById(idSelected);
+				AddDepartment update = new AddDepartment(this, deDTO);
+				update.Show();
+			}
 		}
 
 		private void btnDelete_Click(object sender, EventArgs e)
