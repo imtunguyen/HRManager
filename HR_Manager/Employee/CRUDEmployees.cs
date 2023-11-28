@@ -18,8 +18,8 @@ namespace HR_Manager.Employee
 		EmployeeDTO eDTO;
 		EmployeeBUS eBUS;
 		List<EmployeeDTO> eList;
-		DataTable dt ;
-		DataTable searchData ;
+		DataTable dt;
+		DataTable searchData;
 		private List<string> listCb = new List<string> { "ID", "Name" };
 		private int idSelected;
 		private DataTable originalDataTable; // Lưu trữ DataTable ban đầu
@@ -338,7 +338,7 @@ namespace HR_Manager.Employee
 
 		private void CRUDEmployees_Load(object sender, EventArgs e)
 		{
-			
+
 		}
 
 		private void txtTimKiem_KeyDown(object sender, KeyEventArgs e)

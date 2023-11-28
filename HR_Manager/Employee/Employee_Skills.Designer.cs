@@ -60,7 +60,7 @@
 			dgvEmployee_Skills.ColumnHeadersHeight = 50;
 			dgvEmployee_Skills.Cursor = Cursors.Hand;
 			dgvEmployee_Skills.GridColor = Color.White;
-			dgvEmployee_Skills.Location = new Point(3, 104);
+			dgvEmployee_Skills.Location = new Point(0, 103);
 			dgvEmployee_Skills.Name = "dgvEmployee_Skills";
 			dgvEmployee_Skills.ReadOnly = true;
 			dgvEmployee_Skills.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -68,7 +68,7 @@
 			dgvEmployee_Skills.RowHeadersWidth = 51;
 			dgvEmployee_Skills.RowTemplate.Height = 29;
 			dgvEmployee_Skills.SelectionMode = DataGridViewSelectionMode.CellSelect;
-			dgvEmployee_Skills.Size = new Size(1328, 699);
+			dgvEmployee_Skills.Size = new Size(1328, 672);
 			dgvEmployee_Skills.TabIndex = 0;
 			dgvEmployee_Skills.CellClick += dgvEmployee_Skills_CellClick;
 			// 

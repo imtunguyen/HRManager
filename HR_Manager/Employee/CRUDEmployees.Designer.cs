@@ -63,7 +63,7 @@
 			dgvEmployee.ColumnHeadersHeight = 50;
 			dgvEmployee.Cursor = Cursors.Hand;
 			dgvEmployee.GridColor = Color.White;
-			dgvEmployee.Location = new Point(3, 104);
+			dgvEmployee.Location = new Point(0, 106);
 			dgvEmployee.Name = "dgvEmployee";
 			dgvEmployee.ReadOnly = true;
 			dgvEmployee.RowHeadersBorderStyle = DataGridViewHeaderBorderStyle.None;
@@ -71,7 +71,7 @@
 			dgvEmployee.RowHeadersWidth = 51;
 			dgvEmployee.RowTemplate.Height = 29;
 			dgvEmployee.SelectionMode = DataGridViewSelectionMode.FullRowSelect;
-			dgvEmployee.Size = new Size(1334, 743);
+			dgvEmployee.Size = new Size(1334, 715);
 			dgvEmployee.TabIndex = 0;
 			dgvEmployee.CellClick += dgvEmployee_CellClick;
 			dgvEmployee.CellFormatting += dgvEmployee_CellFormatting;
