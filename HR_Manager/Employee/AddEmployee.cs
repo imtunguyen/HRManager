@@ -1,4 +1,5 @@
 ﻿using BUS;
+using DocumentFormat.OpenXml.Wordprocessing;
 using DTO;
 using HR_Manager.Employee;
 using Microsoft.VisualBasic.ApplicationServices;
@@ -29,7 +30,6 @@ namespace HR_Manager
 		private string filepath;
 		public AddEmployee()
 		{
-
 			InitializeComponent();
 		}
 		public AddEmployee(int i)
@@ -92,7 +92,7 @@ namespace HR_Manager
 			else if (btnAdd.Text == "UPDATE")
 			{
 
-				if (CheckDuplicatePhoneNumberEmail(txtPhone.Text, txtEmail.Text, idSelected))
+				if (validateForm() && CheckDuplicatePhoneNumberEmail(txtPhone.Text, txtEmail.Text, idSelected))
 				{
 					try
 					{
@@ -179,10 +179,12 @@ namespace HR_Manager
 						pictureBox1.ImageLocation = Path.GetFullPath(eDto.img_path);
 					}
 				}
+
 			}
 			catch (Exception ex)
 			{
-
+				MessageBox.Show("Please select a row to edit!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
 			}
 		}
 		private bool ValidatePhoneNumber()
@@ -228,6 +230,11 @@ namespace HR_Manager
 				MessageBox.Show("Please fill out the required information!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return false;
 			}
+			if (!Regex.IsMatch(txtName.Text, @"^[\p{L}\s]+$"))
+			{
+				MessageBox.Show("Please enter correct full name!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
 
 			if (!ValidateDateOfBirth())
 			{
@@ -252,11 +259,6 @@ namespace HR_Manager
 			}
 
 			return true;
-		}
-
-		private void lblTitle_Click(object sender, EventArgs e)
-		{
-
 		}
 	}
 }

@@ -229,7 +229,6 @@
 			lblTitle.Size = new Size(320, 54);
 			lblTitle.TabIndex = 7;
 			lblTitle.Text = "ADD EMPLOYEE";
-			lblTitle.Click += lblTitle_Click;
 			// 
 			// btnChoose
 			// 
