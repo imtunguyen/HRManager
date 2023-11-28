@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.DirectoryServices;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -24,6 +25,7 @@ namespace HR_Manager.Employee
 		private DataTable dt = new DataTable();
 		private List<string> listCb = new List<string> { "ID", "Name" };
 		private string name;
+		private string currentStatus = "All";
 		DataTable searchData = new DataTable();
 
 		public Employee_Skills()
@@ -35,6 +37,7 @@ namespace HR_Manager.Employee
 			InitializeComponent();
 			loadDataGridView();
 			loadcb();
+			rbAll.Checked = true;
 		}
 		private void loadcb()
 		{
@@ -79,6 +82,7 @@ namespace HR_Manager.Employee
 
 		private void btnLamMoi_Click(object sender, EventArgs e)
 		{
+			txtTimKiem.Text = string.Empty;
 			loadDataGridView();
 			rbAll.Checked = true;
 		}
@@ -110,89 +114,116 @@ namespace HR_Manager.Employee
 					}
 				}
 			}
-
 			return searchData;
 		}
 		private void btnTimKiem_Click(object sender, EventArgs e)
 		{
+			loadDataGridView();
 			string searchValue = txtTimKiem.Text.Trim();
 			DataTable searchResult = null;
 			try
 			{
+				bool isSkilled = currentStatus.Equals("Skilled Employee");
+				bool isUnskilled = currentStatus.Equals("Unskilled Employee");
+				if (currentStatus.Equals("All"))
+				{
+					DataTable skilledData = FilterBySkill(true);
+					DataTable unskilledData = FilterBySkill(false);
+
+					searchResult = skilledData.Copy();
+					searchResult.Merge(unskilledData);
+				}
+				else
+				{
+					searchResult = FilterBySkill(isSkilled || isUnskilled);
+				}
 				if (cbTimKiem.SelectedValue.ToString() == "Name")
 				{
-					searchResult = SearchByUsername(dt, searchValue);
+					searchResult = SearchByUsername(searchResult, searchValue);
 				}
 				else if (cbTimKiem.SelectedValue.ToString() == "ID")
 				{
-					searchResult = SearchByID(dt, Convert.ToInt32(searchValue));
+					searchResult = SearchByID(searchResult, Convert.ToInt32(searchValue));
 				}
-
 			}
 			catch (Exception ex)
 			{
-
 			}
-			// Gán kết quả tìm kiếm vào DataGridView
+
 			dgvEmployee_Skills.DataSource = searchResult;
 			dgvEmployee_Skills.Refresh();
 		}
 
 
-
-		private void rbSkilled_CheckedChanged(object sender, EventArgs e)
+		private DataTable FilterBySkill(bool isSkilled)
 		{
-			loadDataGridView();
 			eSkills = esBus.GetEmployeeID();
 
-			DataTable Skilled = new DataTable();
+			DataTable filteredDataTable = new DataTable();
 			foreach (DataGridViewColumn column in dgvEmployee_Skills.Columns)
 			{
-				Skilled.Columns.Add(column.Name, column.ValueType);
+				filteredDataTable.Columns.Add(column.Name, column.ValueType);
 			}
-
 			foreach (DataGridViewRow row in dgvEmployee_Skills.Rows)
 			{
 				string name = row.Cells["Name"].Value.ToString();
 				int employeeID = eBus.GetIDByName(name);
 
-				if (eSkills.Any(es => es.Employee_ID == employeeID))
+				bool hasSkill = eSkills.Any(es => es.Employee_ID == employeeID);
+
+				if (isSkilled && hasSkill)
 				{
-					Skilled.Rows.Add(row.Cells.Cast<DataGridViewCell>().Select(cell => cell.Value).ToArray());
+					filteredDataTable.Rows.Add(row.Cells.Cast<DataGridViewCell>().Select(cell => cell.Value).ToArray());
+				}
+				else if (!isSkilled && !hasSkill)
+				{
+					filteredDataTable.Rows.Add(row.Cells.Cast<DataGridViewCell>().Select(cell => cell.Value).ToArray());
 				}
 			}
 
-			dgvEmployee_Skills.DataSource = Skilled;
+			return filteredDataTable;
+		}
+
+		private void SetDataGridViewDataSource(bool isSkilled)
+		{
+			loadDataGridView();
+
+			string searchValue = txtTimKiem.Text.Trim();
+			DataTable data = FilterBySkill(isSkilled);
+
+			if (!string.IsNullOrEmpty(searchValue))
+			{
+				if (cbTimKiem.SelectedValue.ToString() == "Name")
+				{
+					data = SearchByUsername(data, searchValue);
+				}
+				else if (cbTimKiem.SelectedValue.ToString() == "ID")
+				{
+					data = SearchByID(data, Convert.ToInt32(searchValue));
+				}
+			}
+
+			dgvEmployee_Skills.DataSource = data;
+
+			currentStatus = isSkilled ? rbSkilled.Text : rbUnskilled.Text;
+		}
+
+		private void rbSkilled_CheckedChanged(object sender, EventArgs e)
+		{
+			SetDataGridViewDataSource(true);
 		}
 
 		private void rbUnskilled_CheckedChanged(object sender, EventArgs e)
 		{
-			loadDataGridView();
-			eSkills = esBus.GetEmployeeID();
-
-			DataTable unskilledDataTable = new DataTable();
-			foreach (DataGridViewColumn column in dgvEmployee_Skills.Columns)
-			{
-				unskilledDataTable.Columns.Add(column.Name, column.ValueType);
-			}
-			foreach (DataGridViewRow row in dgvEmployee_Skills.Rows)
-			{
-				string name = row.Cells["Name"].Value.ToString();
-				int employeeIDFromRow = eBus.GetIDByName(name);
-				if (!eSkills.Any(es => es.Employee_ID == employeeIDFromRow))
-				{
-					unskilledDataTable.Rows.Add(row.Cells.Cast<DataGridViewCell>().Select(cell => cell.Value).ToArray());
-				}
-			}
-
-			dgvEmployee_Skills.DataSource = unskilledDataTable;
+			SetDataGridViewDataSource(false);
 		}
 
 		private void rbAll_CheckedChanged(object sender, EventArgs e)
 		{
 			loadDataGridView();
+			currentStatus = rbAll.Text;
+			btnTimKiem_Click(sender, e);
 		}
-
 		private void dgvEmployee_Skills_CellClick(object sender, DataGridViewCellEventArgs e)
 		{
 			if (e.RowIndex >= 0 && e.ColumnIndex == dgvEmployee_Skills.Columns["Skill"].Index)
@@ -201,6 +232,15 @@ namespace HR_Manager.Employee
 				name = dgvEmployee_Skills.Rows[e.RowIndex].Cells["Name"].Value.ToString();
 				Show_Skills s = new Show_Skills(name);
 				s.ShowDialog();
+			}
+		}
+
+		private void txtTimKiem_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				e.SuppressKeyPress = true;
+				btnTimKiem.PerformClick();
 			}
 		}
 	}

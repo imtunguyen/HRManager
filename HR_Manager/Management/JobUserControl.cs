@@ -28,7 +28,6 @@ namespace HR_Manager.Management
 			loadDataGridView();
 			loadcb();
 		}
-
 		public void loadDataGridView()
 		{
 			jobList = jobBus.GetAll();
@@ -48,8 +47,8 @@ namespace HR_Manager.Management
 				stt++;
 			}
 			dgvJob.DataSource = dt;
-			dgvJob.Columns["Job Name"].Width = 300;
-			dgvJob.Columns["Description"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
+			dgvJob.Columns["Job Name"].Width = 200;
+			dgvJob.Columns["Description"].Width = 600;
 
 		}
 		private void loadcb()
@@ -59,14 +58,18 @@ namespace HR_Manager.Management
 		private void btnThem_Click(object sender, EventArgs e)
 		{
 			fCRUDjob add = new fCRUDjob(this);
-			add.ShowDialog();
+			add.Show();
 		}
 
 		private void btnEdit_Click(object sender, EventArgs e)
 		{
-			jobDTO = jobBus.GetById(idSelected);
-			fCRUDjob update = new fCRUDjob(this, jobDTO);
-			update.ShowDialog();
+			if (dgvJob.SelectedRows.Count > 0)
+			{
+				int idSelected = Convert.ToInt32(dgvJob.SelectedRows[0].Cells["ID"].Value);
+				jobDTO = jobBus.GetById(idSelected);
+				fCRUDjob update = new fCRUDjob(this, jobDTO);
+				update.Show();
+			}
 		}
 
 		private void btnLamMoi_Click(object sender, EventArgs e)
@@ -118,7 +121,7 @@ namespace HR_Manager.Management
 			// Lặp qua từng dòng trong DataTable để tìm kiếm
 			foreach (DataRow row in dataTable.Rows)
 			{
-				string currentUsername = row["Name"].ToString();
+				string currentUsername = row["Job Name"].ToString();
 				if (currentUsername.ToLower().Contains(username.ToLower()))
 				{
 					searchData.ImportRow(row);
@@ -149,12 +152,22 @@ namespace HR_Manager.Management
 			DataTable searchResult = null;
 			try
 			{
+				if (string.IsNullOrEmpty(searchValue))
+				{
+					MessageBox.Show("Please enter search content.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					return;
+				}
 				if (cbTimKiem.SelectedValue.ToString() == "Name")
 				{
 					searchResult = SearchByUsername(dt, searchValue);
 				}
 				else if (cbTimKiem.SelectedValue.ToString() == "ID")
 				{
+					if (!int.TryParse(searchValue, out int searchID))
+					{
+						MessageBox.Show("Please enter a valid numeric ID.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						return;
+					}
 					searchResult = SearchByID(dt, Convert.ToInt32(searchValue));
 				}
 
@@ -168,5 +181,13 @@ namespace HR_Manager.Management
 			dgvJob.Refresh();
 		}
 
+		private void txtTimKiem_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				e.SuppressKeyPress = true;
+				btnTimKiem.PerformClick();
+			}
+		}
 	}
 }

@@ -45,7 +45,7 @@ namespace HR_Manager.Management
 					{
 						JobBUS jobBus = new JobBUS();
 						Job job = GetJob();
-						if (jobBus.Add(job))
+						if(jobBus.Add(job))
 						{
 							MessageBox.Show(SD.addSuccess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
 							jobUserControl.loadDataGridView();
@@ -53,10 +53,10 @@ namespace HR_Manager.Management
 						}
 						else
 						{
-							MessageBox.Show(SD.addFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+							MessageBox.Show(SD.addFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
 						}
 					}
+					
 				}
 				else if (btnCreate.Text == "UPDATE")
 				{
@@ -64,7 +64,7 @@ namespace HR_Manager.Management
 					{
 						JobBUS jobBus = new JobBUS();
 						Job job = GetJob();
-						if (jobBus.Update(id, job))
+						if(jobBus.Update(id, job))
 						{
 							MessageBox.Show(SD.UpdateSucess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
 							jobUserControl.loadDataGridView();
@@ -72,10 +72,11 @@ namespace HR_Manager.Management
 						}
 						else
 						{
-							MessageBox.Show(SD.UpdateFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+							MessageBox.Show(SD.UpdateFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
 						}
+
 					}
+					
 				}
 			}
 			catch (Exception ex)
@@ -111,6 +112,13 @@ namespace HR_Manager.Management
 			if ((string.IsNullOrEmpty(txtName.Text)) || (string.IsNullOrEmpty(txtDescription.Text)))
 			{
 				MessageBox.Show("Please fill out the required information!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
+			JobBUS jBus = new JobBUS();
+			List<Job> job = jBus.GetAll();
+			if (job.Any(j => j.Job_Name.ToLower().Trim() == txtName.Text.ToLower().Trim()))
+			{
+				MessageBox.Show("Name already exists for the current Job!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return false;
 			}
 			return true;

@@ -29,9 +29,9 @@ namespace HR_Manager.DepartmentF
 		EmployeeDTO eDTO;
 		DataTable dtDepartment; // DataTable for Department
 		DataTable dtEmployee;   // DataTable for Employee
-		BindingSource bsDepartment;
-		BindingSource bsEmployee;
-		DataTable dt = new DataTable();
+		List<string> cb = new List<string> { "ID", "Name" };
+		DataTable searchData = new DataTable();
+
 		public DepartmentUserControl()
 		{
 			InitializeComponent();
@@ -40,8 +40,6 @@ namespace HR_Manager.DepartmentF
 			eDTO = new EmployeeDTO();
 			dtDepartment = new DataTable();
 			dtEmployee = new DataTable();
-			bsDepartment = new BindingSource();
-			bsEmployee = new BindingSource();
 			dtDepartment.Columns.Add("ID");
 			dtDepartment.Columns.Add("Name");
 			dtDepartment.Columns.Add("Address Detail");
@@ -57,8 +55,7 @@ namespace HR_Manager.DepartmentF
 			dgvDepartment.Columns["ID"].Width = 60;
 			dgvDepartment.Columns["Name"].Width = 200;
 			dgvDepartment.Columns["Address Detail"].AutoSizeMode = DataGridViewAutoSizeColumnMode.Fill;
-
-
+			loadcb();
 		}
 
 		public void loadDepartment()
@@ -79,6 +76,10 @@ namespace HR_Manager.DepartmentF
 			}
 
 			dgvDepartment.DataSource = dtDepartment;
+		}
+		private void loadcb()
+		{
+			cbTimKiem.DataSource = cb;
 		}
 		public void loadEmployee(int id)
 		{
@@ -175,6 +176,80 @@ namespace HR_Manager.DepartmentF
 		private void btnLamMoi_Click(object sender, EventArgs e)
 		{
 			loadDepartment();
+		}
+		private DataTable SearchByUsername(DataTable dataTable, string username)
+		{
+			searchData = dataTable.Clone();
+			// Lặp qua từng dòng trong DataTable để tìm kiếm
+			foreach (DataRow row in dataTable.Rows)
+			{
+				string currentUsername = row["Name"].ToString();
+				if (currentUsername.ToLower().Contains(username.ToLower()))
+				{
+					searchData.ImportRow(row);
+				}
+			}
+			return searchData;
+		}
+		private DataTable SearchByID(DataTable dataTable, int id)
+		{
+			DataTable searchData = dataTable.Clone();
+			foreach (DataRow row in dataTable.Rows)
+			{
+				int currentID;
+				if (int.TryParse(row["ID"].ToString(), out currentID))
+				{
+					if (currentID == id)
+					{
+						searchData.ImportRow(row);
+					}
+				}
+			}
+
+			return searchData;
+		}
+		private void btnTimKiem_Click(object sender, EventArgs e)
+		{
+			string searchValue = txtTimKiem.Text.Trim();
+			DataTable searchResult = null;
+			try
+			{
+				if (string.IsNullOrEmpty(searchValue))
+				{
+					MessageBox.Show("Please enter search content.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+					return;
+				}
+				if (cbTimKiem.SelectedValue.ToString() == "Name")
+				{
+					searchResult = SearchByUsername(dtDepartment, searchValue);
+				}
+				else if (cbTimKiem.SelectedValue.ToString() == "ID")
+				{
+					if (!int.TryParse(searchValue, out int searchID))
+					{
+						MessageBox.Show("Please enter a valid numeric ID.", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+						return;
+					}
+					searchResult = SearchByID(dtDepartment, Convert.ToInt32(searchValue));
+				}
+
+			}
+			catch (Exception ex)
+			{
+
+			}
+			// Gán kết quả tìm kiếm vào DataGridView
+			dgvDepartment.DataSource = searchResult;
+			dgvDepartment.Refresh();
+		}
+
+		private void txtTimKiem_KeyDown(object sender, KeyEventArgs e)
+		{
+			if (e.KeyCode == Keys.Enter)
+			{
+				e.SuppressKeyPress = true;
+				btnTimKiem.PerformClick();
+			}
 		}
 	}
 }

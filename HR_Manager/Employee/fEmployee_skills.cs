@@ -62,7 +62,7 @@ namespace HR_Manager.Employee
 		}
 		private void btnAdd_Click(object sender, EventArgs e)
 		{
-			if (lblTitle.Text == "ADD" && checkValidInput())
+			if (lblTitle.Text == "ADD" && checkValidInput((int)cbSkill.SelectedValue, (int)cbName.SelectedValue))
 			{
 				try
 				{
@@ -85,7 +85,7 @@ namespace HR_Manager.Employee
 					MessageBox.Show("Error" + ex.Message, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
 				}
 			}
-			else if (lblTitle.Text == "UPDATE" && checkValidInput())
+			else if (lblTitle.Text == "UPDATE" && checkValidInput((int)cbSkill.SelectedValue, (int)cbName.SelectedValue))
 			{
 				try
 				{
@@ -118,13 +118,21 @@ namespace HR_Manager.Employee
 			eDTO.description = txtDecription.Text;
 			return eDTO;
 		}
-		private bool checkValidInput()
+		private bool checkValidInput(int skillID, int currentEmployeeID)
 		{
 			if (string.IsNullOrEmpty(txtDecription.Text))
 			{
 				MessageBox.Show("Please fill out the required information!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return false;
 			}
+			Employee_SkillsBUS esBus = new Employee_SkillsBUS();
+			List<DTO.Employee_Skills> eslist = esBus.GetByEmployeeId(currentEmployeeID);
+			if (eslist.Any(ems => ems.Skill_ID == skillID))
+			{
+				MessageBox.Show("Skill already exists for the current Employee!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
+
 			return true;
 		}
 		private void LoadFields()

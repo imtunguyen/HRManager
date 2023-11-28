@@ -62,9 +62,17 @@ namespace HR_Manager.Management
 
 			if (string.IsNullOrWhiteSpace(levelName))
 			{
-				MessageBox.Show("Level name is required", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning );
+				MessageBox.Show("Level name is required");
 				return;
 			}
+			LevelBUS lBus = new LevelBUS();
+			List<Level> levelDTO = lBus.GetAllLevels();
+			if (levelDTO.Any(le => le.Level_Name.ToLower().Trim() == txtLevel.Text.ToLower().Trim()))
+			{
+				MessageBox.Show("Name already exists for the current Level!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return;
+			}
+
 
 			Level level = new Level();
 
@@ -74,14 +82,12 @@ namespace HR_Manager.Management
 				level.Level_Name = levelName;
 				if (levelBUS.AddLevel(level))
 				{
-					MessageBox.Show(SD.addSuccess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+					MessageBox.Show("Add new level successfully!");
 					levelUserControl.LoadData();
 				}
 				else
 				{
-					MessageBox.Show(SD.addFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+					MessageBox.Show("Error when adding new level!");
 				}
 			}
 			else
@@ -92,14 +98,12 @@ namespace HR_Manager.Management
 
 				if (levelBUS.UpdateLevel(level))
 				{
-					MessageBox.Show(SD.UpdateSucess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+					MessageBox.Show("Update level successfully!");
 					levelUserControl.LoadData();
 				}
 				else
 				{
-					MessageBox.Show(SD.UpdateFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+					MessageBox.Show("Error when updating level!");
 				}
 			}
 

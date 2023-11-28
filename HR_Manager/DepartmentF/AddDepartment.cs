@@ -55,10 +55,6 @@ namespace HR_Manager.DepartmentF
 							MessageBox.Show(SD.addFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
 						}
 					}
-					else
-					{
-						MessageBox.Show(SD.addFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
-					}
 				}
 				else if (btnCreate.Text == "UPDATE")
 				{
@@ -78,10 +74,6 @@ namespace HR_Manager.DepartmentF
 						{
 							MessageBox.Show(SD.UpdateFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
 						}
-					}
-					else
-					{
-						MessageBox.Show(SD.UpdateFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Error);
 					}
 				}
 			}
@@ -118,6 +110,13 @@ namespace HR_Manager.DepartmentF
 			if ((string.IsNullOrEmpty(txtName.Text)) || (string.IsNullOrEmpty(txtAddressDetail.Text)))
 			{
 				MessageBox.Show("Please fill out the required information!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				return false;
+			}
+			DepartmentBUS deBus = new DepartmentBUS();
+			List<DTO.Department> delist = deBus.GetAll();
+			if (delist.Any(de => de.Name.ToLower().Trim() == txtName.Text.ToLower().Trim()))
+			{
+				MessageBox.Show("Name already exists for the current Department!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return false;
 			}
 			return true;

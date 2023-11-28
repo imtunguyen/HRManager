@@ -57,7 +57,14 @@ namespace HR_Manager.Management
 
 			if (string.IsNullOrWhiteSpace(skillsName))
 			{
-				MessageBox.Show("Skill name is required",SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
+				MessageBox.Show("Skill name is required");
+				return;
+			}
+			SkillsBUS sBus = new SkillsBUS();
+			List<Skills> slist = sBus.GetAllSkills();
+			if (slist.Any(s => s.Skills_Name.ToLower().Trim() == txtSkillsName.Text.ToLower().Trim()))
+			{
+				MessageBox.Show("Name already exists for the current Skill!", SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Warning);
 				return;
 			}
 
@@ -71,12 +78,12 @@ namespace HR_Manager.Management
 
 				if (skillsBUS.AddSkill(skill))
 				{
-					MessageBox.Show(SD.addSuccess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show("Add new skill successfully!");
 					skillUserControl.LoadData();
 				}
 				else
 				{
-					MessageBox.Show(SD.addFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
+					MessageBox.Show("Error when adding new skill!");
 				}
 			}
 			else
@@ -88,14 +95,12 @@ namespace HR_Manager.Management
 
 				if (skillsBUS.UpdateSkill(skill))
 				{
-					MessageBox.Show(SD.UpdateSucess, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+					MessageBox.Show("Update skill successfully!");
 					skillUserControl.LoadData();
 				}
 				else
 				{
-					MessageBox.Show(SD.UpdateFail, SD.tb, MessageBoxButtons.OK, MessageBoxIcon.Information);
-
+					MessageBox.Show("Error when updating skill!");
 				}
 			}
 
