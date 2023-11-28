@@ -45,7 +45,6 @@ namespace HR_Manager.Payroll
 			listEmployee = new List<EmployeeDTO>();
 			listJob = new List<Job>();
 			listDe = new List<Department>();
-			load();
 			if (up != null)
 			{
 				this.Text = "Contract - Update";
@@ -73,6 +72,8 @@ namespace HR_Manager.Payroll
 					timeEnd.Enabled = false;
 				}
 			}
+			load();
+			
 		}
 
 		public void load()
@@ -241,7 +242,24 @@ namespace HR_Manager.Payroll
 				// Nếu không tồn tại contract trước đó
 				if (flag == -1)
 					selectedStatus = cb.SelectedValue.ToString();
+
+
+				// Neu co status la running va expired thi khong cho sua thanh new
+				if(objUpdate!= null)
+				{
+					if ((objUpdate.Status.Equals(SD.Contract_Running) && cb.SelectedValue.ToString().Equals(SD.Contract_New))
+					|| (objUpdate.Status.Equals(SD.Contract_Expired) && cb.SelectedValue.ToString().Equals(SD.Contract_New)))
+					{
+						
+							MessageBox.Show("Do not change the status from running or expired to new.", SD.tb, ok, war);
+							cb.SelectedItem = objUpdate.Status;
+							selectedStatus = cb.SelectedItem.ToString();
+						
+					}
+				}
+				
 			}
+			
 		}
 
 		private void txtBasePay_KeyPress(object sender, KeyPressEventArgs e)
