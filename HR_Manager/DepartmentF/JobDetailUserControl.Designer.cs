@@ -202,10 +202,10 @@
 			rbPostpone.ForeColor = Color.FromArgb(255, 172, 0);
 			rbPostpone.Location = new Point(164, 18);
 			rbPostpone.Name = "rbPostpone";
-			rbPostpone.Size = new Size(96, 24);
+			rbPostpone.Size = new Size(105, 24);
 			rbPostpone.TabIndex = 0;
 			rbPostpone.TabStop = true;
-			rbPostpone.Text = "Postpone";
+			rbPostpone.Text = "Postponed";
 			rbPostpone.UseVisualStyleBackColor = true;
 			rbPostpone.CheckedChanged += rbDraft_CheckedChanged;
 			// 
